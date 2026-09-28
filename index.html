@@ -1211,103 +1211,996 @@ footer{
 <!-- =====================================================
      REAL PLAYABLE GAME
 ===================================================== -->
+   
+<section class="challenge-area">
 
-<section class="challenge-area" id="challenge">
+  <div class="challenge nijok-game">
 
-<div class="challenge">
-
-  <div class="challenge-small">
-    🌿 &nbsp; TODAY'S CHALLENGE
-  </div>
-
-  <div id="gameBox">
-
-    <h2 id="question"></h2>
-
-    <div class="answers">
-
-      <button class="answer"></button>
-      <button class="answer"></button>
-      <button class="answer"></button>
-      <button class="answer"></button>
-
+    <div class="challenge-small">
+      🌿 &nbsp; NIJOK FOOD QUEST
     </div>
+
+    <div class="game-top">
+      <div>
+        <span class="game-label">FOOD AROUND THE WORLD</span>
+        <h2 id="question">Loading your food quest...</h2>
+      </div>
+
+      <div class="game-counter">
+        <strong id="questionNumber">1</strong>
+        <span>/ 20 today</span>
+      </div>
+    </div>
+
+    <div class="progress-track">
+      <div id="progressBar"></div>
+    </div>
+
+    <div id="categoryBadge">🌍 World Food</div>
+
+    <div id="answers" class="answers"></div>
 
     <div id="gameMessage"></div>
 
-    <div id="scoreBox">
-      ⭐ Score: <strong id="score">0</strong>
+    <div class="game-stats">
+      <div>
+        <span>⭐ Score</span>
+        <strong id="score">0</strong>
+      </div>
+
+      <div>
+        <span>🔥 Streak</span>
+        <strong id="streak">0</strong>
+      </div>
+
+      <div>
+        <span>🏆 Best</span>
+        <strong id="bestScore">0</strong>
+      </div>
     </div>
 
-    <button id="nextButton">
+    <button id="nextButton" onclick="nextQuestion()">
       Next Question →
     </button>
 
-  </div>
+    <button id="restartButton" onclick="restartToday()">
+      🔄 Restart today's game
+    </button>
 
-
-  <img
-    class="sushi"
-    src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=1000&q=90"
-    alt="Sushi"
-  >
-
-  <div class="think">
-    Think<br>
-    Explore<br>
-    Learn →
-  </div>
-
-</div>
-
-
-<!-- PROFILE -->
-
-<div class="profile">
-
-  <h2>
-    🌿 &nbsp; Your Food Journey
-  </h2>
-
-  <div class="avatar">
-    👨🏻
-  </div>
-
-  <div class="profile-name">
-    Boske Shivadas
-  </div>
-
-  <div class="profile-role">
-    Food Explorer
-  </div>
-
-  <div class="stats">
-
-    <div>
-      <strong id="gamesPlayed">12</strong>
-      <span>Games Played</span>
-    </div>
-
-    <div>
-      <strong id="correctAnswers">8</strong>
-      <span>Correct Answers</span>
-    </div>
-
-    <div>
-      <strong>4</strong>
-      <span>Badges Earned</span>
+    <div id="dailyLimit" class="daily-limit">
+      🎉 Today's 20 questions are complete!
+      <br>
+      <small>Come back tomorrow for a new Food Quest.</small>
     </div>
 
   </div>
 
-  <a class="profile-btn" href="#">
-    View Profile →
-  </a>
 
-</div>
+  <!-- PROFILE -->
+
+  <div class="profile">
+
+    <h2>
+      🌿 &nbsp; Your Food Journey
+    </h2>
+
+    <div class="avatar">
+      👨🏻
+    </div>
+
+    <div class="profile-name">
+      Boske Shivadas
+    </div>
+
+    <div class="profile-role">
+      Food Explorer
+    </div>
+
+    <div class="stats">
+
+      <div>
+        <strong id="profilePlayed">0</strong>
+        <span>Games Played</span>
+      </div>
+
+      <div>
+        <strong id="profileCorrect">0</strong>
+        <span>Correct Answers</span>
+      </div>
+
+      <div>
+        <strong id="profileBadges">0</strong>
+        <span>Badges Earned</span>
+      </div>
+
+    </div>
+
+    <a class="profile-btn" href="#">
+      View Profile &nbsp; →
+    </a>
+
+  </div>
 
 </section>
 
+
+<style>
+
+/* =====================================================
+   NIJOK FOOD QUEST
+===================================================== */
+
+.nijok-game{
+  background:
+    radial-gradient(circle at 90% 10%,rgba(166,195,133,.18),transparent 28%),
+    var(--green);
+  min-height:390px;
+  padding:30px;
+}
+
+.game-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:20px;
+  position:relative;
+  z-index:5;
+}
+
+.game-label{
+  display:inline-block;
+  color:#d7e5c6;
+  font-size:9px;
+  letter-spacing:2px;
+  font-weight:700;
+  margin-top:12px;
+}
+
+#question{
+  color:white;
+  font-family:"Playfair Display",serif;
+  font-size:clamp(25px,3vw,39px);
+  line-height:1.05;
+  margin-top:10px;
+  max-width:620px;
+}
+
+.game-counter{
+  min-width:82px;
+  padding:10px;
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:18px;
+  text-align:center;
+  color:white;
+}
+
+.game-counter strong{
+  display:block;
+  font-family:"Playfair Display",serif;
+  font-size:25px;
+}
+
+.game-counter span{
+  display:block;
+  font-size:8px;
+  opacity:.75;
+}
+
+.progress-track{
+  width:100%;
+  height:5px;
+  background:rgba(255,255,255,.16);
+  border-radius:10px;
+  margin:20px 0 15px;
+  overflow:hidden;
+}
+
+#progressBar{
+  height:100%;
+  width:5%;
+  background:#d7b73e;
+  border-radius:10px;
+  transition:.35s;
+}
+
+#categoryBadge{
+  display:inline-block;
+  color:#e6efd9;
+  background:rgba(255,255,255,.09);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:20px;
+  padding:6px 11px;
+  font-size:8px;
+  margin-bottom:13px;
+}
+
+.nijok-game .answers{
+  width:100%;
+  max-width:650px;
+  margin-top:0;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.nijok-game .answer{
+  width:100%;
+  text-align:left;
+  color:white;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.32);
+  cursor:pointer;
+  transition:.2s;
+}
+
+.nijok-game .answer:hover{
+  background:rgba(255,255,255,.13);
+  transform:translateY(-2px);
+}
+
+.nijok-game .answer.correct{
+  background:#3f9660;
+  border-color:#6bc27f;
+}
+
+.nijok-game .answer.wrong{
+  background:#9c4439;
+  border-color:#d06b5e;
+}
+
+.nijok-game .answer.disabled{
+  pointer-events:none;
+}
+
+#gameMessage{
+  min-height:24px;
+  margin-top:10px;
+  color:#fff;
+  font-size:10px;
+  font-weight:600;
+}
+
+.game-stats{
+  display:flex;
+  gap:20px;
+  margin-top:7px;
+}
+
+.game-stats div{
+  min-width:72px;
+}
+
+.game-stats span{
+  display:block;
+  color:#b9cbbf;
+  font-size:7px;
+}
+
+.game-stats strong{
+  display:block;
+  color:white;
+  font-family:"Playfair Display",serif;
+  font-size:19px;
+}
+
+#nextButton,
+#restartButton{
+  border:0;
+  cursor:pointer;
+  border-radius:22px;
+  padding:10px 17px;
+  font-size:9px;
+  font-weight:700;
+  margin-top:12px;
+}
+
+#nextButton{
+  background:#d7b73e;
+  color:#183d2e;
+}
+
+#restartButton{
+  display:none;
+  background:rgba(255,255,255,.12);
+  color:white;
+  border:1px solid rgba(255,255,255,.25);
+}
+
+.daily-limit{
+  display:none;
+  margin-top:20px;
+  padding:17px;
+  border-radius:20px;
+  background:rgba(255,255,255,.1);
+  color:white;
+  text-align:center;
+  font-family:"Playfair Display",serif;
+  font-size:18px;
+}
+
+.daily-limit small{
+  font-family:"DM Sans",sans-serif;
+  font-size:9px;
+  opacity:.7;
+}
+
+
+/* MOBILE */
+
+@media(max-width:550px){
+
+  .nijok-game{
+    padding:23px;
+    min-height:430px;
+  }
+
+  .game-top{
+    gap:10px;
+  }
+
+  .game-counter{
+    min-width:65px;
+  }
+
+  #question{
+    font-size:25px;
+  }
+
+  .nijok-game .answers{
+    grid-template-columns:1fr;
+  }
+
+  .game-stats{
+    gap:12px;
+  }
+
+  .game-stats div{
+    min-width:60px;
+  }
+
+}
+
+</style>
+
+
+<script>
+
+/* =====================================================
+   NIJOK FOOD QUEST ENGINE
+   20 QUESTIONS / DAY
+===================================================== */
+
+
+/*
+   QUESTION BANK
+
+   The engine supports hundreds of questions.
+   Add questions in this exact format:
+
+   {
+     q:"Question?",
+     a:["Option 1","Option 2","Option 3","Option 4"],
+     correct:0,
+     category:"🌍 World Food"
+   }
+*/
+
+const nijokQuestions = [
+
+  {
+    q:"Which country is traditionally associated with sushi?",
+    a:["China","Japan","Korea","Thailand"],
+    correct:1,
+    category:"🍣 Japan"
+  },
+
+  {
+    q:"Which fruit is known as the 'king of fruits' in many parts of Southeast Asia?",
+    a:["Mango","Durian","Apple","Orange"],
+    correct:1,
+    category:"🌏 Southeast Asia"
+  },
+
+  {
+    q:"Guacamole is traditionally made mainly from which fruit?",
+    a:["Avocado","Papaya","Banana","Pineapple"],
+    correct:0,
+    category:"🥑 Mexico"
+  },
+
+  {
+    q:"Which country is famous for pizza's traditional origin?",
+    a:["France","Italy","Spain","Greece"],
+    correct:1,
+    category:"🍕 Italy"
+  },
+
+  {
+    q:"What is the main ingredient in hummus?",
+    a:["Chickpeas","Rice","Potato","Corn"],
+    correct:0,
+    category:"🫘 Middle East"
+  },
+
+  {
+    q:"Which spice gives many curries a bright yellow colour?",
+    a:["Turmeric","Cinnamon","Cardamom","Clove"],
+    correct:0,
+    category:"🌿 Spices"
+  },
+
+  {
+    q:"Biryani is primarily a dish based on which staple grain?",
+    a:["Wheat","Rice","Corn","Barley"],
+    correct:1,
+    category:"🍚 South Asia"
+  },
+
+  {
+    q:"Which country is strongly associated with tacos?",
+    a:["Mexico","Brazil","Japan","Egypt"],
+    correct:0,
+    category:"🌮 Mexico"
+  },
+
+  {
+    q:"What is the main ingredient in traditional miso?",
+    a:["Soybeans","Potatoes","Wheat","Tomatoes"],
+    correct:0,
+    category:"🥢 Japan"
+  },
+
+  {
+    q:"Which fruit is commonly used to make traditional cider?",
+    a:["Apple","Mango","Grape","Lemon"],
+    correct:0,
+    category:"🍎 Food & Drink"
+  },
+
+  {
+    q:"Which country is famous for kimchi?",
+    a:["South Korea","India","Italy","Turkey"],
+    correct:0,
+    category:"🥬 Korea"
+  },
+
+  {
+    q:"What is tofu traditionally made from?",
+    a:["Soybeans","Rice","Milk","Corn"],
+    correct:0,
+    category:"🌱 Plant Foods"
+  },
+
+  {
+    q:"Which grain is traditionally used to make risotto?",
+    a:["Rice","Barley","Oats","Rye"],
+    correct:0,
+    category:"🍚 Italy"
+  },
+
+  {
+    q:"Which fruit is traditionally used in many Indian aamras preparations?",
+    a:["Mango","Apple","Guava","Papaya"],
+    correct:0,
+    category:"🥭 India"
+  },
+
+  {
+    q:"Falafel is commonly made from chickpeas or which other legume?",
+    a:["Fava beans","Soybeans","Peanuts","Lentils"],
+    correct:0,
+    category:"🫘 Middle East"
+  },
+
+  {
+    q:"Which country is especially famous for croissants?",
+    a:["France","India","China","Brazil"],
+    correct:0,
+    category:"🥐 France"
+  },
+
+  {
+    q:"What is the main ingredient in traditional popcorn?",
+    a:["Corn kernels","Rice","Wheat","Oats"],
+    correct:0,
+    category:"🌽 Grains"
+  },
+
+  {
+    q:"Which nut is commonly used to make marzipan?",
+    a:["Almond","Cashew","Walnut","Pistachio"],
+    correct:0,
+    category:"🥜 Nuts"
+  },
+
+  {
+    q:"Which country is famous for paella?",
+    a:["Spain","Portugal","Italy","France"],
+    correct:0,
+    category:"🥘 Spain"
+  },
+
+  {
+    q:"What is the main ingredient of traditional Japanese mochi?",
+    a:["Glutinous rice","Wheat","Corn","Potato"],
+    correct:0,
+    category:"🍡 Japan"
+  },
+
+  {
+    q:"Which fruit is dried to make raisins?",
+    a:["Grape","Plum","Apple","Fig"],
+    correct:0,
+    category:"🍇 Fruits"
+  },
+
+  {
+    q:"Which Indian spice is obtained from the dried stigma of a flower?",
+    a:["Saffron","Turmeric","Cumin","Pepper"],
+    correct:0,
+    category:"🌸 Spices"
+  },
+
+  {
+    q:"Which country is associated with the traditional dish moussaka?",
+    a:["Greece","Japan","Mexico","Canada"],
+    correct:0,
+    category:"🇬🇷 Greece"
+  },
+
+  {
+    q:"What is the main ingredient in traditional French ratatouille?",
+    a:["Vegetables","Rice","Fish","Bread"],
+    correct:0,
+    category:"🥕 France"
+  },
+
+  {
+    q:"Which fruit is commonly used to make traditional jam?",
+    a:["Many fruits can be used","Only apples","Only bananas","Only lemons"],
+    correct:0,
+    category:"🍓 Food Basics"
+  },
+
+  {
+    q:"Which ingredient is essential in traditional bread making?",
+    a:["Flour","Ice","Vinegar","Chocolate"],
+    correct:0,
+    category:"🍞 Baking"
+  },
+
+  {
+    q:"Which country is associated with traditional pho?",
+    a:["Vietnam","China","India","Japan"],
+    correct:0,
+    category:"🍜 Vietnam"
+  },
+
+  {
+    q:"What is paneer?",
+    a:["Fresh cheese","A spice","A grain","A fruit"],
+    correct:0,
+    category:"🥛 India"
+  },
+
+  {
+    q:"Which fruit has its seeds on the outside of the flesh?",
+    a:["Strawberry","Mango","Banana","Orange"],
+    correct:0,
+    category:"🍓 Fruits"
+  },
+
+  {
+    q:"Which legume is commonly used to make dal?",
+    a:["Lentils","Coffee beans","Cocoa beans","Sesame only"],
+    correct:0,
+    category:"🫘 India"
+  }
+
+];
+
+
+/* =====================================================
+   CREATE ADDITIONAL QUESTION VARIATIONS
+   ===================================================== */
+
+const extraQuestions = [];
+
+
+/*
+   These are generated from the knowledge set so
+   the game can scale without making the HTML enormous.
+*/
+
+const foodFacts = [
+
+  ["Mango","fruit","India"],
+  ["Sushi","dish","Japan"],
+  ["Kimchi","fermented food","Korea"],
+  ["Pizza","dish","Italy"],
+  ["Tacos","dish","Mexico"],
+  ["Paella","dish","Spain"],
+  ["Pho","dish","Vietnam"],
+  ["Miso","fermented food","Japan"],
+  ["Hummus","dish","Middle East"],
+  ["Falafel","dish","Middle East"],
+  ["Ratatouille","dish","France"],
+  ["Mochi","rice cake","Japan"],
+  ["Biryani","rice dish","South Asia"],
+  ["Paneer","fresh cheese","India"],
+  ["Tofu","soy food","East Asia"],
+  ["Guacamole","dish","Mexico"],
+  ["Croissant","pastry","France"],
+  ["Risotto","rice dish","Italy"],
+  ["Moussaka","dish","Greece"],
+  ["Aamras","mango preparation","India"],
+  ["Durian","fruit","Southeast Asia"],
+  ["Raisin","dried fruit","many regions"],
+  ["Saffron","spice","many regions"],
+  ["Turmeric","spice","South Asia"],
+  ["Strawberry","fruit","many regions"]
+];
+
+foodFacts.forEach((item,index)=>{
+
+  const name=item[0];
+  const type=item[1];
+  const place=item[2];
+
+  extraQuestions.push({
+    q:`${name} is best described as which of the following?`,
+    a:[
+      type.charAt(0).toUpperCase()+type.slice(1),
+      "A type of musical instrument",
+      "A building material",
+      "A type of vehicle"
+    ],
+    correct:0,
+    category:"📚 Food Knowledge"
+  });
+
+  extraQuestions.push({
+    q:`Which place or region is associated with ${name}?`,
+    a:[
+      place,
+      "Antarctica",
+      "The Moon",
+      "The Arctic Ocean"
+    ],
+    correct:0,
+    category:"🌍 Food Around the World"
+  });
+
+  extraQuestions.push({
+    q:`Which category does ${name} belong to?`,
+    a:[
+      type.charAt(0).toUpperCase()+type.slice(1),
+      "Electronic device",
+      "Sports equipment",
+      "Building tool"
+    ],
+    correct:0,
+    category:"🧠 Food Quiz"
+  });
+
+  extraQuestions.push({
+    q:`Which statement about ${name} is most appropriate?`,
+    a:[
+      `${name} is connected with food culture.`,
+      `${name} is a type of aircraft.`,
+      `${name} is a planet.`,
+      `${name} is a computer language.`
+    ],
+    correct:0,
+    category:"🌿 Food Culture"
+  });
+
+});
+
+
+/* Combine question bank */
+
+const allQuestions = [
+  ...nijokQuestions,
+  ...extraQuestions
+];
+
+
+/* =====================================================
+   GAME STATE
+===================================================== */
+
+let currentQuestion = 0;
+let score = 0;
+let streak = 0;
+let correctAnswers = 0;
+let answered = false;
+
+const DAILY_LIMIT = 20;
+
+let today = new Date().toISOString().split("T")[0];
+
+let savedDay = localStorage.getItem("nijokGameDay");
+
+if(savedDay !== today){
+
+  localStorage.setItem("nijokGameDay",today);
+  localStorage.setItem("nijokPlayedToday","0");
+  localStorage.setItem("nijokScoreToday","0");
+  localStorage.setItem("nijokCorrectToday","0");
+
+}
+
+let playedToday =
+  Number(localStorage.getItem("nijokPlayedToday")) || 0;
+
+let savedScore =
+  Number(localStorage.getItem("nijokScoreToday")) || 0;
+
+let savedCorrect =
+  Number(localStorage.getItem("nijokCorrectToday")) || 0;
+
+
+/* =====================================================
+   SHUFFLE
+===================================================== */
+
+function shuffle(array){
+
+  return array
+    .map(value=>({value,sort:Math.random()}))
+    .sort((a,b)=>a.sort-b.sort)
+    .map(({value})=>value);
+
+}
+
+
+/* =====================================================
+   CREATE TODAY'S QUESTIONS
+===================================================== */
+
+let todayQuestions =
+  shuffle([...allQuestions]).slice(0,DAILY_LIMIT);
+
+
+/* =====================================================
+   LOAD QUESTION
+===================================================== */
+
+function loadQuestion(){
+
+  if(playedToday >= DAILY_LIMIT){
+
+    showDailyLimit();
+    return;
+
+  }
+
+  answered=false;
+
+  const data=todayQuestions[currentQuestion];
+
+  document.getElementById("question").textContent=data.q;
+
+  document.getElementById("categoryBadge").textContent=data.category;
+
+  document.getElementById("questionNumber").textContent=
+    currentQuestion+1;
+
+  document.getElementById("progressBar").style.width=
+    ((currentQuestion+1)/DAILY_LIMIT*100)+"%";
+
+  const answers=document.getElementById("answers");
+
+  answers.innerHTML="";
+
+  data.a.forEach((option,index)=>{
+
+    const button=document.createElement("button");
+
+    button.className="answer";
+
+    button.innerHTML=
+      String.fromCharCode(65+index)+". &nbsp; "+option;
+
+    button.onclick=()=>checkAnswer(button,index);
+
+    answers.appendChild(button);
+
+  });
+
+  document.getElementById("gameMessage").textContent="";
+
+  document.getElementById("nextButton").style.display="none";
+
+}
+
+
+/* =====================================================
+   ANSWER
+===================================================== */
+
+function checkAnswer(button,index){
+
+  if(answered) return;
+
+  answered=true;
+
+  const data=todayQuestions[currentQuestion];
+
+  const buttons=document.querySelectorAll(".nijok-game .answer");
+
+  buttons.forEach(b=>b.classList.add("disabled"));
+
+  playedToday++;
+
+  localStorage.setItem("nijokPlayedToday",playedToday);
+
+  if(index===data.correct){
+
+    button.classList.add("correct");
+
+    score+=10;
+
+    correctAnswers++;
+
+    streak++;
+
+    document.getElementById("gameMessage").textContent=
+      "✓ Correct! +10 points — keep exploring 🌿";
+
+  }else{
+
+    button.classList.add("wrong");
+
+    buttons[data.correct].classList.add("correct");
+
+    streak=0;
+
+    document.getElementById("gameMessage").textContent=
+      "Not quite. The correct answer is highlighted above.";
+
+  }
+
+  localStorage.setItem("nijokScoreToday",score);
+
+  localStorage.setItem("nijokCorrectToday",correctAnswers);
+
+  updateStats();
+
+  document.getElementById("nextButton").style.display=
+    playedToday>=DAILY_LIMIT ? "none" : "inline-block";
+
+  if(playedToday>=DAILY_LIMIT){
+
+    setTimeout(showDailyLimit,700);
+
+  }
+
+}
+
+
+/* =====================================================
+   NEXT
+===================================================== */
+
+function nextQuestion(){
+
+  currentQuestion++;
+
+  if(currentQuestion>=DAILY_LIMIT){
+
+    showDailyLimit();
+
+    return;
+
+  }
+
+  loadQuestion();
+
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+function updateStats(){
+
+  document.getElementById("score").textContent=score;
+
+  document.getElementById("streak").textContent=streak;
+
+  const best=
+    Number(localStorage.getItem("nijokBestScore")) || 0;
+
+  if(score>best){
+
+    localStorage.setItem("nijokBestScore",score);
+
+  }
+
+  document.getElementById("bestScore").textContent=
+    Math.max(score,best);
+
+  document.getElementById("profilePlayed").textContent=
+    playedToday;
+
+  document.getElementById("profileCorrect").textContent=
+    correctAnswers;
+
+  let badges=0;
+
+  if(correctAnswers>=5) badges=1;
+
+  if(correctAnswers>=10) badges=2;
+
+  if(correctAnswers>=15) badges=3;
+
+  if(correctAnswers>=20) badges=4;
+
+  document.getElementById("profileBadges").textContent=badges;
+
+}
+
+
+/* =====================================================
+   DAILY LIMIT
+===================================================== */
+
+function showDailyLimit(){
+
+  document.getElementById("answers").style.display="none";
+
+  document.getElementById("nextButton").style.display="none";
+
+  document.getElementById("dailyLimit").style.display="block";
+
+  document.getElementById("question").textContent=
+    "Quest complete for today!";
+
+  document.getElementById("categoryBadge").textContent=
+    "🏆 20 / 20 COMPLETED";
+
+  document.getElementById("progressBar").style.width="100%";
+
+}
+
+
+/* =====================================================
+   RESTART
+===================================================== */
+
+function restartToday(){
+
+  if(!confirm("Restart today's Food Quest? Your current score will reset.")){
+    return;
+  }
+
+  localStorage.setItem("nijokPlayedToday","0");
+
+  localStorage.setItem("nijokScoreToday","0");
+
+  localStorage.setItem("nijokCorrectToday","0");
+
+  location.reload();
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+score=savedScore;
+
+correctAnswers=savedCorrect;
+
+updateStats();
+
+loadQuestion();
+
+</script>
 
 <!-- =====================================================
      LEADERBOARD

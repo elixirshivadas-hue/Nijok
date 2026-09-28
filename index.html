@@ -3168,6 +3168,1053 @@ function restartGame(){
 loadQuestion();
 
 </script>
+<style>
+/* =====================================================
+   NIJOK — GAME ENGINE
+===================================================== */
 
+.nijok-game-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(4,59,43,.72);
+  backdrop-filter:blur(8px);
+  z-index:99999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
+
+.nijok-game-modal.show{
+  display:flex;
+}
+
+.nijok-game-panel{
+  width:min(620px,100%);
+  max-height:92vh;
+  overflow:auto;
+  background:#f7f5e9;
+  border-radius:30px;
+  padding:25px;
+  position:relative;
+  box-shadow:0 25px 80px rgba(0,0,0,.25);
+}
+
+.nijok-game-close{
+  position:absolute;
+  right:18px;
+  top:16px;
+  width:38px;
+  height:38px;
+  border:0;
+  border-radius:50%;
+  background:#e1e9d1;
+  color:#064a35;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.nijok-game-label{
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:20px;
+  background:#e1e9d1;
+  color:#60784e;
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:1.5px;
+}
+
+.nijok-game-title{
+  font-family:"Playfair Display",serif;
+  color:#064a35;
+  font-size:32px;
+  margin:15px 0 6px;
+}
+
+.nijok-game-sub{
+  color:#718178;
+  font-size:11px;
+  line-height:1.5;
+}
+
+.nijok-game-status{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin:20px 0;
+}
+
+.nijok-stat{
+  flex:1;
+  background:#fffdf5;
+  border:1px solid #d9ddce;
+  border-radius:16px;
+  padding:11px;
+  text-align:center;
+}
+
+.nijok-stat strong{
+  display:block;
+  color:#064a35;
+  font-family:"Playfair Display",serif;
+  font-size:20px;
+}
+
+.nijok-stat span{
+  display:block;
+  color:#718178;
+  font-size:8px;
+  margin-top:2px;
+}
+
+.nijok-question{
+  font-family:"Playfair Display",serif;
+  color:#163f32;
+  font-size:25px;
+  line-height:1.15;
+  margin:20px 0;
+}
+
+.nijok-options{
+  display:grid;
+  gap:10px;
+}
+
+.nijok-option{
+  width:100%;
+  text-align:left;
+  border:1px solid #cfd6c7;
+  background:#fffdf5;
+  color:#163f32;
+  border-radius:18px;
+  padding:14px;
+  font-size:11px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.nijok-option:hover{
+  transform:translateY(-2px);
+  border-color:#064a35;
+}
+
+.nijok-option.correct{
+  background:#dcebd7;
+  border-color:#40945c;
+}
+
+.nijok-option.wrong{
+  background:#f3dcd5;
+  border-color:#c65b48;
+}
+
+.nijok-message{
+  min-height:25px;
+  margin-top:13px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.nijok-next{
+  width:100%;
+  border:0;
+  border-radius:22px;
+  padding:13px;
+  margin-top:12px;
+  background:#064a35;
+  color:white;
+  font-size:11px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.nijok-next:disabled{
+  opacity:.35;
+  cursor:not-allowed;
+}
+
+.nijok-pair-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.nijok-pair{
+  aspect-ratio:1;
+  border:0;
+  border-radius:18px;
+  background:#dfe9cd;
+  font-size:25px;
+  cursor:pointer;
+}
+
+.nijok-pair.open{
+  background:#fffdf5;
+}
+
+.nijok-pair.matched{
+  background:#cfe3c5;
+}
+
+.nijok-food-image{
+  width:100%;
+  min-height:150px;
+  border-radius:24px;
+  background:#e1e9d1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:80px;
+  margin-bottom:18px;
+}
+
+.nijok-timer{
+  text-align:center;
+  font-family:"Playfair Display",serif;
+  font-size:42px;
+  color:#064a35;
+  margin:10px 0 20px;
+}
+
+.nijok-result{
+  text-align:center;
+  padding:25px 5px;
+}
+
+.nijok-result h3{
+  font-family:"Playfair Display",serif;
+  color:#064a35;
+  font-size:30px;
+}
+
+.nijok-result-score{
+  font-family:"Playfair Display",serif;
+  color:#d7b73e;
+  font-size:50px;
+  margin:10px;
+}
+
+@media(max-width:550px){
+  .nijok-game-panel{
+    padding:20px;
+    border-radius:24px;
+  }
+
+  .nijok-game-title{
+    font-size:27px;
+  }
+
+  .nijok-question{
+    font-size:22px;
+  }
+
+  .nijok-pair-grid{
+    gap:7px;
+  }
+
+  .nijok-pair{
+    border-radius:14px;
+    font-size:21px;
+  }
+}
+</style>
+
+
+<script>
+/* =====================================================
+   NIJOK GAME ENGINE
+===================================================== */
+
+(function(){
+
+  const LIMITS = {
+    quiz:20,
+    pair:10,
+    time:5,
+    guess:10
+  };
+
+  const quizQuestions = [
+    {
+      q:"Which country is the origin of Sushi?",
+      options:["China","Japan","Korea","Thailand"],
+      answer:1
+    },
+    {
+      q:"Which spice is known as the King of Spices?",
+      options:["Black Pepper","Turmeric","Cumin","Cardamom"],
+      answer:0
+    },
+    {
+      q:"Biryani is especially associated with which cuisine?",
+      options:["Indian","Mexican","Japanese","French"],
+      answer:0
+    },
+    {
+      q:"Which fruit is traditionally associated with Kashmir?",
+      options:["Apple","Banana","Papaya","Pineapple"],
+      answer:0
+    },
+    {
+      q:"Which country is famous for Kimchi?",
+      options:["India","South Korea","Italy","Egypt"],
+      answer:1
+    },
+    {
+      q:"What is the main ingredient of traditional hummus?",
+      options:["Chickpeas","Rice","Potato","Corn"],
+      answer:0
+    },
+    {
+      q:"Which drink is traditionally made from tea leaves?",
+      options:["Tea","Lassi","Coconut water","Lemonade"],
+      answer:0
+    },
+    {
+      q:"Which grain is used to make traditional dosa?",
+      options:["Rice","Wheat","Barley","Oats"],
+      answer:0
+    },
+    {
+      q:"Which country is famous for pizza?",
+      options:["Italy","India","China","Brazil"],
+      answer:0
+    },
+    {
+      q:"What gives turmeric its famous yellow colour?",
+      options:["Curcumin","Caffeine","Lycopene","Chlorophyll"],
+      answer:0
+    }
+  ];
+
+  const guessQuestions = [
+    {
+      emoji:"🍕",
+      q:"Which food is this?",
+      options:["Pizza","Sushi","Taco","Curry"],
+      answer:0
+    },
+    {
+      emoji:"🍣",
+      q:"Which food is this?",
+      options:["Biryani","Sushi","Pasta","Ramen"],
+      answer:1
+    },
+    {
+      emoji:"🌮",
+      q:"Which food is this?",
+      options:["Taco","Dosa","Samosa","Kimchi"],
+      answer:0
+    },
+    {
+      emoji:"🥭",
+      q:"Which fruit is this?",
+      options:["Apple","Mango","Orange","Pear"],
+      answer:1
+    },
+    {
+      emoji:"🥟",
+      q:"Which food is represented here?",
+      options:["Dumpling","Pizza","Salad","Bread"],
+      answer:0
+    }
+  ];
+
+  const pairItems = [
+    ["🇯🇵","Sushi"],
+    ["🇮🇹","Pizza"],
+    ["🇮🇳","Biryani"],
+    ["🇰🇷","Kimchi"]
+  ];
+
+  let modal;
+  let currentGame = "";
+  let currentIndex = 0;
+  let score = 0;
+  let answered = false;
+  let timeLeft = 30;
+  let timer = null;
+
+  function todayKey(game){
+    const d = new Date();
+    return "nijok_"+game+"_"+d.getFullYear()+"_"+(d.getMonth()+1)+"_"+d.getDate();
+  }
+
+  function getPlayed(game){
+    return Number(localStorage.getItem(todayKey(game)) || 0);
+  }
+
+  function addPlayed(game){
+    localStorage.setItem(
+      todayKey(game),
+      getPlayed(game)+1
+    );
+  }
+
+  function remaining(game){
+    return Math.max(0, LIMITS[game]-getPlayed(game));
+  }
+
+  function createModal(){
+
+    modal = document.createElement("div");
+    modal.className = "nijok-game-modal";
+
+    modal.innerHTML = `
+      <div class="nijok-game-panel">
+
+        <button class="nijok-game-close" aria-label="Close">×</button>
+
+        <div id="nijokGameContent"></div>
+
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    modal.querySelector(".nijok-game-close")
+      .addEventListener("click", closeGame);
+
+    modal.addEventListener("click",function(e){
+      if(e.target === modal){
+        closeGame();
+      }
+    });
+  }
+
+  function openGame(game){
+
+    if(!modal) createModal();
+
+    currentGame = game;
+    currentIndex = 0;
+    score = 0;
+    answered = false;
+
+    if(timer){
+      clearInterval(timer);
+      timer = null;
+    }
+
+    if(remaining(game) <= 0){
+      showLimit();
+      return;
+    }
+
+    modal.classList.add("show");
+
+    if(game === "quiz"){
+      renderQuiz();
+    }
+
+    if(game === "guess"){
+      renderGuess();
+    }
+
+    if(game === "pair"){
+      renderPair();
+    }
+
+    if(game === "time"){
+      renderTime();
+    }
+  }
+
+  function closeGame(){
+
+    if(timer){
+      clearInterval(timer);
+      timer = null;
+    }
+
+    if(modal){
+      modal.classList.remove("show");
+    }
+  }
+
+  function header(title,sub){
+
+    return `
+      <div class="nijok-game-label">
+        NIJOK • FOOD QUEST
+      </div>
+
+      <h2 class="nijok-game-title">${title}</h2>
+
+      <p class="nijok-game-sub">${sub}</p>
+
+      <div class="nijok-game-status">
+
+        <div class="nijok-stat">
+          <strong>${score}</strong>
+          <span>Score</span>
+        </div>
+
+        <div class="nijok-stat">
+          <strong>${remaining(currentGame)}</strong>
+          <span>Today Left</span>
+        </div>
+
+      </div>
+    `;
+  }
+
+  function showLimit(){
+
+    modal.classList.add("show");
+
+    document.getElementById("nijokGameContent").innerHTML = `
+
+      <div class="nijok-result">
+
+        <div class="nijok-game-label">
+          DAILY LIMIT
+        </div>
+
+        <h3>You've completed today's games 🎉</h3>
+
+        <p class="nijok-game-sub">
+          Come back tomorrow for a fresh set of NIJOK challenges.
+        </p>
+
+        <button class="nijok-next" onclick="document.querySelector('.nijok-game-close').click()">
+          Back to NIJOK
+        </button>
+
+      </div>
+    `;
+  }
+
+  function renderQuiz(){
+
+    const item = quizQuestions[
+      currentIndex % quizQuestions.length
+    ];
+
+    answered = false;
+
+    document.getElementById("nijokGameContent").innerHTML = `
+
+      ${header(
+        "Food Quiz",
+        "Think carefully. Learn something new."
+      )}
+
+      <div class="nijok-question">
+        ${item.q}
+      </div>
+
+      <div class="nijok-options">
+
+        ${item.options.map((option,i)=>`
+
+          <button
+            class="nijok-option"
+            data-index="${i}"
+          >
+            ${String.fromCharCode(65+i)}. ${option}
+          </button>
+
+        `).join("")}
+
+      </div>
+
+      <div class="nijok-message" id="nijokMessage"></div>
+
+      <button class="nijok-next" id="nijokNext" disabled>
+        Next Question →
+      </button>
+    `;
+
+    document.querySelectorAll(".nijok-option")
+      .forEach(btn=>{
+        btn.addEventListener("click",()=>{
+          answerQuiz(
+            Number(btn.dataset.index),
+            item.answer,
+            btn
+          );
+        });
+      });
+
+    document.getElementById("nijokNext")
+      .addEventListener("click",()=>{
+        currentIndex++;
+        renderQuiz();
+      });
+  }
+
+  function answerQuiz(selected,correct,button){
+
+    if(answered) return;
+
+    answered = true;
+    addPlayed("quiz");
+
+    const buttons =
+      document.querySelectorAll(".nijok-option");
+
+    buttons.forEach((b,i)=>{
+      b.disabled = true;
+
+      if(i === correct){
+        b.classList.add("correct");
+      }
+    });
+
+    const message =
+      document.getElementById("nijokMessage");
+
+    if(selected === correct){
+
+      score += 10;
+
+      button.classList.add("correct");
+
+      message.textContent =
+        "✓ Correct! +10 points";
+
+    }else{
+
+      button.classList.add("wrong");
+
+      message.textContent =
+        "Not quite. The correct answer is highlighted.";
+    }
+
+    document.querySelector(".nijok-stat strong")
+      .textContent = score;
+
+    document.querySelectorAll(".nijok-stat")[1]
+      .querySelector("strong")
+      .textContent = remaining("quiz");
+
+    document.getElementById("nijokNext")
+      .disabled = false;
+  }
+
+
+  function renderGuess(){
+
+    const item =
+      guessQuestions[
+        currentIndex % guessQuestions.length
+      ];
+
+    answered = false;
+
+    document.getElementById("nijokGameContent").innerHTML = `
+
+      ${header(
+        "Guess the Food",
+        "Identify the food and test your food knowledge."
+      )}
+
+      <div class="nijok-food-image">
+        ${item.emoji}
+      </div>
+
+      <div class="nijok-question">
+        ${item.q}
+      </div>
+
+      <div class="nijok-options">
+
+        ${item.options.map((option,i)=>`
+
+          <button
+            class="nijok-option"
+            data-index="${i}"
+          >
+            ${String.fromCharCode(65+i)}. ${option}
+          </button>
+
+        `).join("")}
+
+      </div>
+
+      <div class="nijok-message" id="nijokMessage"></div>
+
+      <button class="nijok-next" id="nijokNext" disabled>
+        Next →
+      </button>
+    `;
+
+    document.querySelectorAll(".nijok-option")
+      .forEach(btn=>{
+        btn.addEventListener("click",()=>{
+          answerGuess(
+            Number(btn.dataset.index),
+            item.answer,
+            btn
+          );
+        });
+      });
+
+    document.getElementById("nijokNext")
+      .addEventListener("click",()=>{
+        currentIndex++;
+        renderGuess();
+      });
+  }
+
+  function answerGuess(selected,correct,button){
+
+    if(answered) return;
+
+    answered = true;
+    addPlayed("guess");
+
+    document.querySelectorAll(".nijok-option")
+      .forEach((b,i)=>{
+        b.disabled = true;
+
+        if(i === correct){
+          b.classList.add("correct");
+        }
+      });
+
+    const message =
+      document.getElementById("nijokMessage");
+
+    if(selected === correct){
+
+      score += 10;
+      button.classList.add("correct");
+
+      message.textContent =
+        "✓ Correct! +10 points";
+
+    }else{
+
+      button.classList.add("wrong");
+
+      message.textContent =
+        "Keep exploring! The answer is highlighted.";
+    }
+
+    document.getElementById("nijokNext")
+      .disabled = false;
+  }
+
+
+  function renderPair(){
+
+    const shuffled = [
+      ...pairItems,
+      ...pairItems
+    ].sort(()=>Math.random()-.5);
+
+    let first = null;
+    let locked = false;
+    let matches = 0;
+
+    document.getElementById("nijokGameContent").innerHTML = `
+
+      ${header(
+        "Match the Pair",
+        "Match each food with its country."
+      )}
+
+      <div class="nijok-pair-grid">
+
+        ${shuffled.map((item,i)=>`
+
+          <button
+            class="nijok-pair"
+            data-value="${item[1]}"
+            data-index="${i}"
+          >
+            ?
+          </button>
+
+        `).join("")}
+
+      </div>
+
+      <div class="nijok-message" id="nijokMessage">
+        Find all four pairs.
+      </div>
+
+      <button class="nijok-next" id="nijokNext" disabled>
+        New Puzzle →
+      </button>
+    `;
+
+    const cards =
+      document.querySelectorAll(".nijok-pair");
+
+    cards.forEach(card=>{
+
+      card.addEventListener("click",function(){
+
+        if(
+          locked ||
+          this.classList.contains("open") ||
+          this.classList.contains("matched")
+        ) return;
+
+        this.classList.add("open");
+
+        const item =
+          pairItems.find(x=>x[1]===this.dataset.value);
+
+        this.textContent = item ? item[0] : "🍴";
+
+        if(!first){
+
+          first = this;
+
+        }else{
+
+          if(first.dataset.value === this.dataset.value){
+
+            first.classList.add("matched");
+            this.classList.add("matched");
+
+            matches++;
+            score += 10;
+
+            first = null;
+
+            if(matches === pairItems.length){
+
+              addPlayed("pair");
+
+              document.getElementById("nijokMessage")
+                .textContent =
+                "🎉 All pairs matched! +40 points";
+
+              document.getElementById("nijokNext")
+                .disabled = false;
+            }
+
+          }else{
+
+            locked = true;
+
+            setTimeout(()=>{
+
+              first.classList.remove("open");
+              this.classList.remove("open");
+
+              first.textContent = "?";
+              this.textContent = "?";
+
+              first = null;
+              locked = false;
+
+            },700);
+          }
+        }
+      });
+    });
+
+    document.getElementById("nijokNext")
+      .addEventListener("click",()=>{
+        renderPair();
+      });
+  }
+
+
+  function renderTime(){
+
+    timeLeft = 30;
+
+    document.getElementById("nijokGameContent").innerHTML = `
+
+      ${header(
+        "Time Challenge",
+        "Answer as many food questions as you can."
+      )}
+
+      <div class="nijok-timer" id="nijokTimer">
+        30
+      </div>
+
+      <div class="nijok-question" id="timeQuestion"></div>
+
+      <div class="nijok-options" id="timeOptions"></div>
+
+      <div class="nijok-message" id="timeMessage">
+        You have 30 seconds.
+      </div>
+    `;
+
+    let timeScore = 0;
+    let qIndex = 0;
+
+    function nextTimeQuestion(){
+
+      const item =
+        quizQuestions[
+          qIndex % quizQuestions.length
+        ];
+
+      document.getElementById("timeQuestion")
+        .textContent = item.q;
+
+      document.getElementById("timeOptions")
+        .innerHTML = item.options.map((o,i)=>`
+
+          <button
+            class="nijok-option"
+            data-index="${i}"
+          >
+            ${String.fromCharCode(65+i)}. ${o}
+          </button>
+
+        `).join("");
+
+      document.querySelectorAll("#timeOptions .nijok-option")
+        .forEach(btn=>{
+
+          btn.addEventListener("click",()=>{
+
+            if(Number(btn.dataset.index) === item.answer){
+
+              timeScore += 10;
+
+              document.getElementById("timeMessage")
+                .textContent =
+                "✓ Correct! +10";
+
+            }else{
+
+              document.getElementById("timeMessage")
+                .textContent =
+                "Keep going!";
+            }
+
+            qIndex++;
+            nextTimeQuestion();
+
+          });
+
+        });
+    }
+
+    nextTimeQuestion();
+
+    timer = setInterval(()=>{
+
+      timeLeft--;
+
+      document.getElementById("nijokTimer")
+        .textContent = timeLeft;
+
+      if(timeLeft <= 0){
+
+        clearInterval(timer);
+        timer = null;
+
+        addPlayed("time");
+
+        document.getElementById("nijokGameContent")
+          .innerHTML = `
+
+            <div class="nijok-result">
+
+              <div class="nijok-game-label">
+                TIME COMPLETE
+              </div>
+
+              <h3>Challenge Complete 🎉</h3>
+
+              <div class="nijok-result-score">
+                ${timeScore}
+              </div>
+
+              <p class="nijok-game-sub">
+                Points earned in this round
+              </p>
+
+              <button class="nijok-next"
+                onclick="document.querySelector('.nijok-game-close').click()">
+                Back to Games
+              </button>
+
+            </div>
+          `;
+
+      }
+
+    },1000);
+  }
+
+
+  /* =====================================================
+     CONNECT EXISTING GAME CARDS
+  ===================================================== */
+
+  function detectGame(card){
+
+    const text =
+      card.innerText.toLowerCase();
+
+    if(text.includes("match the pair")){
+      return "pair";
+    }
+
+    if(text.includes("time challenge")){
+      return "time";
+    }
+
+    if(text.includes("guess the food")){
+      return "guess";
+    }
+
+    if(
+      text.includes("food quiz") ||
+      text.includes("food around")
+    ){
+      return "quiz";
+    }
+
+    return null;
+  }
+
+  function connectCards(){
+
+    document.querySelectorAll(".game-card")
+      .forEach(card=>{
+
+        const game = detectGame(card);
+
+        if(!game) return;
+
+        const play =
+          card.querySelector(".play-now");
+
+        if(!play) return;
+
+        play.addEventListener("click",function(e){
+
+          e.preventDefault();
+
+          openGame(game);
+
+        });
+
+      });
+  }
+
+  if(document.readyState === "loading"){
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      connectCards
+    );
+
+  }else{
+
+    connectCards();
+
+  }
+
+})();
+                       </script>
 </body>
 </html>

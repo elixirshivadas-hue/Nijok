@@ -1,303 +1,568 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>NIJOK — Tomato</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>NIJOK — Know Your Food</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fffaf5;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    header {
+      text-align: center;
+      padding: 35px 20px 25px;
+    }
+
+    .logo {
+      color: #d62828;
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      margin-bottom: 10px;
+    }
+
+    header h1 {
+      font-size: 34px;
+      margin: 10px 0;
+    }
+
+    .tagline {
+      font-size: 18px;
+      color: #666;
+      font-style: italic;
+    }
+
+    .hero-image {
+      width: 100%;
+      max-width: 430px;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 22px;
+      display: block;
+      margin: 20px auto;
+    }
+
+    .hero-title {
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      color: #d62828;
+      text-transform: uppercase;
+    }
+
+    main {
+      max-width: 800px;
+      margin: auto;
+      padding: 0 18px 40px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 24px;
+      margin: 20px 0;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+    }
+
+    .label {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      color: #d62828;
+      margin-bottom: 8px;
+    }
+
+    .card h2 {
+      margin-top: 5px;
+      font-size: 25px;
+    }
+
+    .card h3 {
+      margin-bottom: 5px;
+    }
+
+    .topics {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .topics div {
+      background: #fff3e8;
+      padding: 18px 10px;
+      border-radius: 15px;
+      text-align: center;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .nutrition-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .nutrition-grid div {
+      background: #f8f8f8;
+      border-radius: 15px;
+      padding: 16px;
+    }
+
+    .nutrition-grid strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .nutrition-grid span {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .nijok-note {
+      margin-top: 20px;
+      padding: 18px;
+      background: #fff3e8;
+      border-radius: 15px;
+    }
+
+    .food-search {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 25px;
+      margin: 20px 0;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+    }
+
+    .food-search input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      font-size: 16px;
+      margin: 10px 0;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: #d62828;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .scan {
+      background: #222;
+      color: white;
+      text-align: center;
+      border-radius: 20px;
+      padding: 30px 22px;
+      margin: 20px 0;
+    }
+
+    .scan button {
+      background: white;
+      color: #222;
+      margin-top: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: #777;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+
+      header h1 {
+        font-size: 29px;
+      }
+
+      .logo {
+        font-size: 34px;
+      }
+
+      .nutrition-grid {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+  </style>
 </head>
 
 <body>
 
-  <header class="hero">
-    <p class="brand">NIJOK</p>
+  <header>
 
-    <h1>Know Your Food.</h1>
+    <div class="logo">NIJOK</div>
+
+    <h1>Know Your Tomato</h1>
 
     <p class="tagline">
-      Facts first. You decide.
+      Fact first, you decide.
     </p>
 
-    <div class="tomato">
-      🍅
-    </div>
+    <img
+      class="hero-image"
+      src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?auto=format&fit=crop&w=900&q=80"
+      alt="Fresh tomatoes"
+    >
 
-    <h2>Hero Product of the Week</h2>
+    <div class="hero-title">
+      Hero Food of the Week
+    </div>
 
     <p>
       Meet the tomato — a simple food with a fascinating story.
     </p>
+
   </header>
 
 
-  <section class="card">
-
-    <span class="label">FOOD FACT</span>
-
-    <h2>Fruit or Vegetable?</h2>
-
-    <p>
-      Botanically, tomato is a fruit because it develops from the
-      flower of the plant and contains seeds.
-    </p>
-
-    <p>
-      In everyday cooking, however, we commonly use it like a vegetable.
-    </p>
-
-  </section>
+  <main>
 
 
-  <section class="card">
+    <section class="card">
 
-    <span class="label">LEARN</span>
+      <span class="label">FOOD FACT</span>
 
-    <h2>More Than Just a Tomato</h2>
+      <h2>Fruit or Vegetable?</h2>
 
-    <p>
-      Explore its journey from seed to farm, market and finally
-      to your plate.
-    </p>
-<div class="fact-box">
+      <p>
+        Botanically, tomato is a fruit because it develops from the
+        flower of the plant and contains seeds.
+      </p>
 
-  <h3>🍅 A Natural Source of Lycopene</h3>
+      <p>
+        In everyday cooking, however, we commonly use it like a vegetable.
+      </p>
 
-  <p>
-    Tomatoes contain lycopene, a naturally occurring compound
-    responsible for much of their red colour.
-  </p>
+    </section>
 
-  <p>
-    The amount can vary depending on the tomato variety,
-    ripeness and how it is prepared.
-  </p>
 
-</div>
-    <div class="topics">
-      <div>🌱<br>Growing</div>
-    <div onclick="document.getElementById('nutrition').scrollIntoView({behavior:'smooth'})">
-  🧪<br>Nutrition
-    </div>
-      <div>🚜<br>Farming</div>
-      <div>🍽️<br>Food</div>
-    </div>
+    <section class="card">
 
-  </section>
-<section class="card" id="nutrition">
+      <span class="label">LEARN</span>
 
-  <span class="label">NUTRITION</span>
+      <h2>More Than Just a Tomato</h2>
 
-  <h2>What's Inside a Tomato?</h2>
+      <p>
+        Explore its journey from seed to farm, market and finally
+        to your plate.
+      </p>
 
-  <p>
-    Tomatoes are mostly water and provide a range of nutrients
-    and naturally occurring plant compounds.
-  </p>
+      <div class="topics">
 
-  <div class="nutrition-grid">
+        <div>
+          🌱<br>
+          Growing
+        </div>
 
-    <div>
-      <strong>💧 Water</strong>
-      <span>Tomatoes have a high water content.</span>
-    </div>
+        <div onclick="document.getElementById('nutrition').scrollIntoView({behavior:'smooth'})">
+          🧪<br>
+          Nutrition
+        </div>
 
-    <div>
-      <strong>🍊 Vitamin C</strong>
-      <span>Contributes to normal immune system function.</span>
-    </div>
+        <div>
+          🚜<br>
+          Farming
+        </div>
 
-    <div>
-      <strong>🌿 Potassium</strong>
-      <span>A mineral naturally present in tomatoes.</span>
-    </div>
+        <div>
+          🍽️<br>
+          Food
+        </div>
 
-    <div>
-      <strong>🔴 Lycopene</strong>
-      <span>A naturally occurring plant compound that gives many tomatoes their red colour.</span>
-    </div>
+      </div>
 
-  </div>
+    </section>
 
-  <div class="nijok-note">
-    <strong>NIJOK NOTE</strong>
-    <p>
-      Nutrition can vary with tomato variety, size, ripeness
-      and preparation. Facts help you understand your food —
-      you decide what is right for you.
-    </p>
-  </div>
 
-</section>
+    <section class="card" id="nutrition">
 
-  <section class="scan">
-<div class="food-search">
+      <span class="label">NUTRITION</span>
 
-  <h2>🔎 Know Your Food</h2>
+      <h2>What's Inside a Tomato?</h2>
 
-  <p>Search a food to start learning.</p>
+      <p>
+        Tomatoes are mostly water and provide a range of nutrients
+        and naturally occurring plant compounds.
+      </p>
 
-  <input
-    type="text"
-    id="foodInput"
-    placeholder="Try: Tomato"
-  >
+      <div class="nutrition-grid">
 
-  <button onclick="searchFood()">Search</button>
+        <div>
+          <strong>💧 Water</strong>
+          <span>
+            Tomatoes have a high water content.
+          </span>
+        </div>
 
-  <div id="foodResult"></div>
+        <div>
+          <strong>🍊 Vitamin C</strong>
+          <span>
+            Contributes to normal immune system function.
+          </span>
+        </div>
 
-</div>
-    <h2>Scan it before you eat it.</h2>
+        <div>
+          <strong>🌿 Potassium</strong>
+          <span>
+            A mineral naturally present in tomatoes.
+          </span>
+        </div>
 
-    <p>
-      NIJOK helps people understand food through simple,
-      accessible knowledge.
-    </p>
+        <div>
+          <strong>🔴 Lycopene</strong>
+          <span>
+            A naturally occurring plant compound that gives
+            many tomatoes their red colour.
+          </span>
+        </div>
 
-    <button>Explore NIJOK</button>
+      </div>
 
-  </section>
+      <div class="nijok-note">
+
+        <strong>NIJOK NOTE</strong>
+
+        <p>
+          Nutrition can vary with tomato variety, size, ripeness
+          and preparation. Facts help you understand your food —
+          you decide what is right for you.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section class="food-search">
+
+      <span class="label">NIJOK FOOD SEARCH</span>
+
+      <h2>🔎 Know Your Food</h2>
+
+      <p>
+        Search a food to start learning.
+      </p>
+
+      <input
+        type="text"
+        id="foodInput"
+        placeholder="Try: Tomato, Apple or Carrot"
+      >
+
+      <button onclick="searchFood()">
+        Search
+      </button>
+
+      <div id="foodResult"></div>
+
+    </section>
+
+
+    <section class="scan">
+
+      <h2>Scan it before you eat it.</h2>
+
+      <p>
+        NIJOK helps people understand food through simple,
+        accessible knowledge.
+      </p>
+
+      <button onclick="document.getElementById('foodInput').focus()">
+        Explore NIJOK
+      </button>
+
+    </section>
+
+
+  </main>
 
 
   <footer>
+
     <p>© 2026 NIJOK</p>
-    <p>Learn • Understand • Decide</p>
+
+    <p>
+      Learn • Understand • Decide
+    </p>
+
   </footer>
-<script>
+
+
   <script>
 
-function searchFood() {
+    function searchFood() {
 
-  const food = document.getElementById("foodInput").value.trim().toLowerCase();
-  const result = document.getElementById("foodResult");
+      const food =
+        document.getElementById("foodInput").value.trim().toLowerCase();
 
-  if (food === "") {
-    result.innerHTML = "<p>Please enter a food name.</p>";
-    return;
-  }
+      const result =
+        document.getElementById("foodResult");
 
-  if (food.includes("tomato")) {
 
-    result.innerHTML = `
-      <div class="card">
-        <span class="label">NIJOK FOOD FACT</span>
-        <h2>🍅 Tomato</h2>
-        <p>
-          Botanically, tomato is a fruit, although it is commonly
-          used like a vegetable in cooking.
-        </p>
-        <h3>🧪 Nutrition</h3>
-        <p>
-          Tomatoes provide vitamin C, potassium and naturally
-          occurring lycopene.
-        </p>
-        <p><strong>NIJOK:</strong> Facts first. You decide.</p>
-      </div>
-    `;
+      if (food === "") {
 
-  } else if (food.includes("apple")) {
+        result.innerHTML =
+          "<p>Please enter a food name.</p>";
 
-    result.innerHTML = `
-      <div class="card">
-        <span class="label">NIJOK FOOD FACT</span>
-        <h2>🍎 Apple</h2>
-        <p>
-          Apples are fruits that contain water, carbohydrates
-          and dietary fibre.
-        </p>
-        <h3>🧪 Nutrition</h3>
-        <p>
-          Apples provide dietary fibre and vitamin C, with the
-          amount varying by variety and size.
-        </p>
-        <p><strong>NIJOK:</strong> Facts first. You decide.</p>
-      </div>
-    `;
+        return;
+      }
 
-  } else if (food.includes("carrot")) {
 
-    result.innerHTML = `
-      <div class="card">
-        <span class="label">NIJOK FOOD FACT</span>
-        <h2>🥕 Carrot</h2>
-        <p>
-          Carrots are root vegetables known for their orange
-          colour and naturally occurring carotenoids.
-        </p>
-        <h3>🧪 Nutrition</h3>
-        <p>
-          Carrots provide dietary fibre and carotenoids,
-          including beta-carotene.
-        </p>
-        <p><strong>NIJOK:</strong> Facts first. You decide.</p>
-      </div>
-    `;
+      if (food.includes("tomato")) {
 
-  } else {
+        result.innerHTML = `
 
-    result.innerHTML = `
-      <div class="card">
-        <h3>🔍 Food not added yet</h3>
-        <p>
-          NIJOK is still building its food knowledge library.
-          Try <strong>Tomato</strong>, <strong>Apple</strong>
-          or <strong>Carrot</strong>.
-        </p>
-      </div>
-    `;
-  }
-}
+          <div class="card">
 
-</script>) {
+            <span class="label">
+              NIJOK FOOD FACT
+            </span>
 
-  const food = document.getElementById("foodInput").value.trim().toLowerCase();
-  const result = document.getElementById("foodResult");
+            <h2>🍅 Tomato</h2>
 
-  if (food === "") {
-    result.innerHTML = "<p>Please enter a food name.</p>";
-    return;
-  }
+            <p>
+              Botanically, tomato is a fruit, although it is commonly
+              used like a vegetable in cooking.
+            </p>
 
-  if (food.includes("tomato")) {
+            <h3>🧪 Nutrition</h3>
 
-    result.innerHTML = `
-      <div class="card">
+            <p>
+              Tomatoes provide nutrients including vitamin C and
+              potassium, and contain naturally occurring lycopene.
+            </p>
 
-        <span class="label">NIJOK FOOD FACT</span>
+            <p>
+              <strong>NIJOK:</strong>
+              Facts first. You decide.
+            </p>
 
-        <h2>🍅 Tomato</h2>
+          </div>
 
-        <p>
-          Tomato is botanically a fruit, although it is commonly
-          used as a vegetable in cooking.
-        </p>
+        `;
 
-        <h3>🧪 Nutrition</h3>
 
-        <p>
-          Tomatoes provide nutrients including vitamin C and
-          potassium, and contain naturally occurring lycopene.
-        </p>
+      } else if (food.includes("apple")) {
 
-        <p>
-          <strong>NIJOK:</strong> Facts first. You decide.
-        </p>
+        result.innerHTML = `
 
-      </div>
-    `;
+          <div class="card">
 
-  } else {
+            <span class="label">
+              NIJOK FOOD FACT
+            </span>
 
-    result.innerHTML = `
-      <div class="card">
-        <h3>🔍 Food not added yet</h3>
-        <p>
-          NIJOK is still building its food knowledge library.
-          Try searching for <strong>Tomato</strong>.
-        </p>
-      </div>
-    `;
-  }
-}
+            <h2>🍎 Apple</h2>
 
-</script>
+            <p>
+              Apples are fruits that contain water,
+              carbohydrates and dietary fibre.
+            </p>
+
+            <h3>🧪 Nutrition</h3>
+
+            <p>
+              Apples provide dietary fibre and vitamin C,
+              with amounts varying by variety and size.
+            </p>
+
+            <p>
+              <strong>NIJOK:</strong>
+              Facts first. You decide.
+            </p>
+
+          </div>
+
+        `;
+
+
+      } else if (food.includes("carrot")) {
+
+        result.innerHTML = `
+
+          <div class="card">
+
+            <span class="label">
+              NIJOK FOOD FACT
+            </span>
+
+            <h2>🥕 Carrot</h2>
+
+            <p>
+              Carrots are root vegetables known for their
+              orange colour and naturally occurring carotenoids.
+            </p>
+
+            <h3>🧪 Nutrition</h3>
+
+            <p>
+              Carrots provide dietary fibre and carotenoids,
+              including beta-carotene.
+            </p>
+
+            <p>
+              <strong>NIJOK:</strong>
+              Facts first. You decide.
+            </p>
+
+          </div>
+
+        `;
+
+
+      } else {
+
+        result.innerHTML = `
+
+          <div class="card">
+
+            <h3>🔍 Food not added yet</h3>
+
+            <p>
+              NIJOK is still building its food knowledge library.
+              Try <strong>Tomato</strong>,
+              <strong>Apple</strong> or
+              <strong>Carrot</strong>.
+            </p>
+
+          </div>
+
+        `;
+
+      }
+
+    }
+
+  </script>
+
 </body>
 </html>

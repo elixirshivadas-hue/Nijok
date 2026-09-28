@@ -1192,8 +1192,115 @@ footer{
    NIJOK SIGNATURE FLOWER
 ===================================================== */
 
-/* MERA FLOWER CSS YAHAN */
+.nijok-signature-flower{
+  position:absolute;
+  width:100px;
+  height:120px;
+  right:4%;
+  top:8%;
+  z-index:8;
+  pointer-events:none;
+  animation:nijokFlowerFloat 5s ease-in-out infinite;
+}
 
+.nijok-flower-petal{
+  position:absolute;
+  width:34px;
+  height:58px;
+  background:#78995a;
+  border-radius:100% 0 100% 0;
+  left:33px;
+  top:5px;
+  transform-origin:17px 48px;
+  opacity:.92;
+}
+
+.nijok-flower-petal:nth-child(1){
+  transform:rotate(0deg);
+}
+
+.nijok-flower-petal:nth-child(2){
+  transform:rotate(72deg);
+}
+
+.nijok-flower-petal:nth-child(3){
+  transform:rotate(144deg);
+}
+
+.nijok-flower-petal:nth-child(4){
+  transform:rotate(216deg);
+}
+
+.nijok-flower-petal:nth-child(5){
+  transform:rotate(288deg);
+}
+
+.nijok-flower-center{
+  position:absolute;
+  width:21px;
+  height:21px;
+  left:40px;
+  top:42px;
+  border-radius:50%;
+  background:#d7b73e;
+  z-index:5;
+  box-shadow:0 0 0 5px rgba(215,183,62,.12);
+}
+
+.nijok-flower-stem{
+  position:absolute;
+  width:3px;
+  height:65px;
+  background:#668452;
+  left:48px;
+  top:57px;
+  transform:rotate(18deg);
+  transform-origin:top;
+  border-radius:5px;
+}
+
+.nijok-flower-leaf{
+  position:absolute;
+  width:42px;
+  height:22px;
+  background:#91aa6e;
+  border-radius:100% 0 100% 0;
+  left:20px;
+  top:91px;
+  transform:rotate(-25deg);
+}
+
+@keyframes nijokFlowerFloat{
+  0%,100%{
+    transform:translateY(0) rotate(-3deg);
+  }
+  50%{
+    transform:translateY(-7px) rotate(3deg);
+  }
+}
+
+/* MOBILE */
+@media(max-width:950px){
+
+  .nijok-signature-flower{
+    width:75px;
+    height:90px;
+    right:3%;
+    top:5%;
+    transform:scale(.75);
+  }
+
+}
+
+@media(max-width:550px){
+
+  .nijok-signature-flower{
+    right:1%;
+    top:3%;
+    transform:scale(.58);
+  }
+
+}
 </style>
 </head>
 </style>

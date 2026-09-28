@@ -1673,8 +1673,8 @@ footer{
 
 <!-- ================= CHALLENGE ================= -->
 
-<section class="challenge-area">
 
+<section class="challenge-area">
 
   <div class="challenge">
 
@@ -1682,40 +1682,50 @@ footer{
       🌿 &nbsp; TODAY'S CHALLENGE
     </div>
 
+    <div id="gameBox">
 
-    <h2>
-      Which country is<br>
-      the origin of Sushi?
-    </h2>
+      <h2 id="question">
+        Which country is<br>
+        the origin of Sushi?
+      </h2>
 
+      <div class="answers">
 
-    <div class="answers">
+        <button class="answer" onclick="checkAnswer(this, false)">
+          A. &nbsp; China
+        </button>
 
-      <div class="answer">
-        A. &nbsp; China
+        <button class="answer" onclick="checkAnswer(this, true)">
+          B. &nbsp; Japan
+        </button>
+
+        <button class="answer" onclick="checkAnswer(this, false)">
+          C. &nbsp; Korea
+        </button>
+
+        <button class="answer" onclick="checkAnswer(this, false)">
+          D. &nbsp; Thailand
+        </button>
+
       </div>
 
-      <div class="answer selected">
-        B. &nbsp; Japan &nbsp; ✓
+      <div id="gameMessage"></div>
+
+      <div id="scoreBox">
+        ⭐ Score: <strong id="score">0</strong>
       </div>
 
-      <div class="answer">
-        C. &nbsp; Korea
-      </div>
-
-      <div class="answer">
-        D. &nbsp; Thailand
-      </div>
+      <button id="nextButton" onclick="nextQuestion()">
+        Next Question →
+      </button>
 
     </div>
-
 
     <img
       class="sushi"
       src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=1000&q=90"
       alt="Sushi"
     >
-
 
     <div class="think">
       Think<br>
@@ -1734,21 +1744,17 @@ footer{
       🌿 &nbsp; Your Food Journey
     </h2>
 
-
     <div class="avatar">
       👨🏻
     </div>
-
 
     <div class="profile-name">
       Boske Shivadas
     </div>
 
-
     <div class="profile-role">
       Food Explorer
     </div>
-
 
     <div class="stats">
 
@@ -1769,7 +1775,6 @@ footer{
 
     </div>
 
-
     <a class="profile-btn" href="#">
       View Profile &nbsp; →
     </a>
@@ -1777,7 +1782,6 @@ footer{
   </div>
 
 </section>
-
 
 <!-- ================= LEADERBOARD ================= -->
 

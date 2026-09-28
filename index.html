@@ -2202,6 +2202,633 @@ loadQuestion();
 
 </script>
 
+<!-- ================= NIJOK PUZZLE MODE ================= -->
+
+<section class="nijok-puzzle-section">
+
+  <div class="puzzle-header">
+
+    <div>
+      <div class="puzzle-label">🌿 NIJOK PUZZLE MODE</div>
+
+      <h2>
+        Think. Connect.<br>
+        Discover Food.
+      </h2>
+
+      <p>
+        Solve the clue and discover something new about
+        food, culture and the world.
+      </p>
+    </div>
+
+    <div class="puzzle-score">
+      <span>⭐ Puzzle Score</span>
+      <strong id="puzzleScore">0</strong>
+    </div>
+
+  </div>
+
+
+  <div class="puzzle-card">
+
+    <div class="puzzle-top">
+      <span id="puzzleCategory">🌍 FOOD & CULTURE</span>
+      <span id="puzzleNumber">Puzzle 1</span>
+    </div>
+
+
+    <div class="puzzle-question">
+
+      <div class="puzzle-icon">🧩</div>
+
+      <h3 id="puzzleQuestion">
+        I am a fruit.
+        <br>
+        I am yellow when ripe.
+        <br>
+        Monkeys are often associated with me.
+        <br><br>
+        What am I?
+      </h3>
+
+    </div>
+
+
+    <div id="puzzleAnswers" class="puzzle-answers">
+
+      <button onclick="answerPuzzle(0)">
+        🍎 Apple
+      </button>
+
+      <button onclick="answerPuzzle(1)">
+        🍌 Banana
+      </button>
+
+      <button onclick="answerPuzzle(2)">
+        🍊 Orange
+      </button>
+
+      <button onclick="answerPuzzle(3)">
+        🍇 Grape
+      </button>
+
+    </div>
+
+
+    <div id="puzzleMessage" class="puzzle-message"></div>
+
+
+    <div class="puzzle-bottom">
+
+      <div class="puzzle-streak">
+        🔥 Streak:
+        <strong id="puzzleStreak">0</strong>
+      </div>
+
+      <button
+        id="nextPuzzle"
+        class="next-puzzle"
+        onclick="nextPuzzle()"
+      >
+        Next Puzzle →
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="puzzle-tip">
+    🌱 <strong>NIJOK idea:</strong>
+    Every puzzle should teach something — not just test memory.
+  </div>
+
+</section>
+
+
+<style>
+
+/* =====================================================
+   NIJOK PUZZLE MODE
+===================================================== */
+
+.nijok-puzzle-section{
+  padding:10px 4% 55px;
+  position:relative;
+}
+
+.puzzle-header{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:30px;
+  align-items:end;
+  margin-bottom:20px;
+}
+
+.puzzle-label{
+  color:#60784e;
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:2px;
+  margin-bottom:9px;
+}
+
+.puzzle-header h2{
+  font-family:"Playfair Display",serif;
+  font-size:38px;
+  line-height:.98;
+  color:var(--text);
+}
+
+.puzzle-header p{
+  max-width:430px;
+  color:#718178;
+  font-size:10px;
+  line-height:1.5;
+  margin-top:10px;
+}
+
+.puzzle-score{
+  min-width:125px;
+  padding:16px;
+  border-radius:22px;
+  background:#e5ecd6;
+  text-align:center;
+}
+
+.puzzle-score span{
+  display:block;
+  color:#60784e;
+  font-size:8px;
+  font-weight:700;
+}
+
+.puzzle-score strong{
+  display:block;
+  color:var(--green);
+  font-family:"Playfair Display",serif;
+  font-size:30px;
+  margin-top:3px;
+}
+
+
+/* CARD */
+
+.puzzle-card{
+  position:relative;
+  overflow:hidden;
+  background:#f5edcf;
+  border-radius:30px;
+  padding:27px;
+  border:1px solid #e0dcc4;
+}
+
+.puzzle-card:after{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:130px;
+  right:-35px;
+  top:-35px;
+  background:#d6b338;
+  opacity:.22;
+  border-radius:100% 0 100% 0;
+  transform:rotate(15deg);
+}
+
+.puzzle-top{
+  position:relative;
+  z-index:2;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  color:#60784e;
+  font-size:8px;
+  font-weight:700;
+  letter-spacing:1.3px;
+}
+
+.puzzle-question{
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:flex-start;
+  gap:18px;
+  margin-top:24px;
+}
+
+.puzzle-icon{
+  width:58px;
+  height:58px;
+  min-width:58px;
+  border-radius:50%;
+  background:#dfe9cd;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+}
+
+.puzzle-question h3{
+  max-width:650px;
+  color:#183f31;
+  font-family:"Playfair Display",serif;
+  font-size:24px;
+  line-height:1.15;
+}
+
+
+/* ANSWERS */
+
+.puzzle-answers{
+  position:relative;
+  z-index:3;
+  max-width:700px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:25px;
+}
+
+.puzzle-answers button{
+  border:1px solid #c8ceb9;
+  background:rgba(255,255,255,.62);
+  color:#24493b;
+  border-radius:18px;
+  padding:12px 15px;
+  text-align:left;
+  font-size:10px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.puzzle-answers button:hover{
+  transform:translateY(-2px);
+  background:white;
+}
+
+.puzzle-answers button.correct{
+  background:#40945c;
+  border-color:#40945c;
+  color:white;
+}
+
+.puzzle-answers button.wrong{
+  background:#9c4439;
+  border-color:#9c4439;
+  color:white;
+}
+
+.puzzle-answers button.disabled{
+  pointer-events:none;
+}
+
+
+/* MESSAGE */
+
+.puzzle-message{
+  min-height:23px;
+  margin-top:12px;
+  color:#315847;
+  font-size:10px;
+  font-weight:700;
+}
+
+
+/* BOTTOM */
+
+.puzzle-bottom{
+  position:relative;
+  z-index:3;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  max-width:700px;
+  margin-top:5px;
+}
+
+.puzzle-streak{
+  color:#60776c;
+  font-size:9px;
+}
+
+.puzzle-streak strong{
+  color:#9c4439;
+  font-size:15px;
+}
+
+.next-puzzle{
+  display:none;
+  border:0;
+  border-radius:22px;
+  padding:10px 17px;
+  background:var(--green);
+  color:white;
+  font-size:9px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.puzzle-tip{
+  margin-top:12px;
+  color:#718178;
+  font-family:"Caveat",cursive;
+  font-size:17px;
+  transform:rotate(-1deg);
+}
+
+
+/* MOBILE */
+
+@media(max-width:550px){
+
+  .nijok-puzzle-section{
+    padding-left:6%;
+    padding-right:6%;
+  }
+
+  .puzzle-header{
+    grid-template-columns:1fr;
+    gap:15px;
+  }
+
+  .puzzle-header h2{
+    font-size:32px;
+  }
+
+  .puzzle-score{
+    width:130px;
+  }
+
+  .puzzle-card{
+    padding:21px;
+  }
+
+  .puzzle-question{
+    gap:12px;
+  }
+
+  .puzzle-icon{
+    width:45px;
+    height:45px;
+    min-width:45px;
+    font-size:22px;
+  }
+
+  .puzzle-question h3{
+    font-size:20px;
+  }
+
+  .puzzle-answers{
+    grid-template-columns:1fr;
+  }
+
+  .puzzle-bottom{
+    align-items:flex-end;
+  }
+
+}
+
+</style>
+
+
+<script>
+
+/* =====================================================
+   NIJOK PUZZLE ENGINE
+===================================================== */
+
+const nijokPuzzles = [
+
+  {
+    category:"🍌 FOOD BASICS",
+    question:
+      "I am a fruit.<br>I am yellow when ripe.<br>Monkeys are often associated with me.<br><br>What am I?",
+    answers:[
+      "🍎 Apple",
+      "🍌 Banana",
+      "🍊 Orange",
+      "🍇 Grape"
+    ],
+    correct:1,
+    fact:"Bananas are one of the world's widely cultivated tropical fruits."
+  },
+
+  {
+    category:"🍣 FOOD AROUND THE WORLD",
+    question:
+      "I am a famous Japanese food.<br>Rice is one of my important components.<br>What am I?",
+    answers:[
+      "🍕 Pizza",
+      "🌮 Taco",
+      "🍣 Sushi",
+      "🥐 Croissant"
+    ],
+    correct:2,
+    fact:"Sushi is a Japanese food tradition with many different styles."
+  },
+
+  {
+    category:"🌿 SPICES",
+    question:
+      "I am a spice.<br>I can give food a bright yellow colour.<br>What am I?",
+    answers:[
+      "🌿 Turmeric",
+      "🌶️ Chilli",
+      "🧂 Salt",
+      "🍃 Mint"
+    ],
+    correct:0,
+    fact:"Turmeric contains curcumin, a compound responsible for much of its yellow colour."
+  },
+
+  {
+    category:"🥑 WORLD FOOD",
+    question:
+      "I am the main ingredient in traditional guacamole.<br>What am I?",
+    answers:[
+      "🥑 Avocado",
+      "🍌 Banana",
+      "🥕 Carrot",
+      "🍎 Apple"
+    ],
+    correct:0,
+    fact:"Traditional guacamole is based on mashed avocado."
+  },
+
+  {
+    category:"🥬 FOOD CULTURE",
+    question:
+      "I am a Korean fermented food made mainly from vegetables.<br>What am I?",
+    answers:[
+      "🍣 Sushi",
+      "🥬 Kimchi",
+      "🥖 Baguette",
+      "🥟 Ravioli"
+    ],
+    correct:1,
+    fact:"Kimchi refers to a broad family of traditional Korean fermented vegetable foods."
+  },
+
+  {
+    category:"🍕 FOOD AROUND THE WORLD",
+    question:
+      "Which country is traditionally associated with the origin of modern pizza?",
+    answers:[
+      "🇮🇹 Italy",
+      "🇯🇵 Japan",
+      "🇮🇳 India",
+      "🇲🇽 Mexico"
+    ],
+    correct:0,
+    fact:"Modern pizza developed in Naples, Italy."
+  },
+
+  {
+    category:"🥭 INDIA",
+    question:
+      "Which fruit is commonly called the 'king of fruits' in India?",
+    answers:[
+      "🍎 Apple",
+      "🥭 Mango",
+      "🍊 Orange",
+      "🍉 Watermelon"
+    ],
+    correct:1,
+    fact:"Mango has a long cultural and culinary history across South Asia."
+  },
+
+  {
+    category:"🫘 FOOD KNOWLEDGE",
+    question:
+      "Hummus is traditionally made mainly from which legume?",
+    answers:[
+      "🫘 Chickpeas",
+      "🌽 Corn",
+      "🍚 Rice",
+      "🥔 Potato"
+    ],
+    correct:0,
+    fact:"Traditional hummus is made from cooked and mashed chickpeas with ingredients such as tahini."
+  }
+
+];
+
+let puzzleIndex=0;
+let puzzleScore=0;
+let puzzleStreak=0;
+let puzzleAnswered=false;
+
+function loadPuzzle(){
+
+  const puzzle=nijokPuzzles[puzzleIndex];
+
+  document.getElementById("puzzleCategory").textContent=
+    puzzle.category;
+
+  document.getElementById("puzzleNumber").textContent=
+    "Puzzle "+(puzzleIndex+1);
+
+  document.getElementById("puzzleQuestion").innerHTML=
+    puzzle.question;
+
+  const area=document.getElementById("puzzleAnswers");
+
+  area.innerHTML="";
+
+  puzzle.answers.forEach((answer,index)=>{
+
+    const button=document.createElement("button");
+
+    button.innerHTML=answer;
+
+    button.onclick=()=>answerPuzzle(index);
+
+    area.appendChild(button);
+
+  });
+
+  document.getElementById("puzzleMessage").textContent="";
+
+  document.getElementById("nextPuzzle").style.display="none";
+
+  puzzleAnswered=false;
+
+}
+
+
+function answerPuzzle(index){
+
+  if(puzzleAnswered) return;
+
+  puzzleAnswered=true;
+
+  const puzzle=nijokPuzzles[puzzleIndex];
+
+  const buttons=
+    document.querySelectorAll("#puzzleAnswers button");
+
+  buttons.forEach(button=>{
+    button.classList.add("disabled");
+  });
+
+  if(index===puzzle.correct){
+
+    buttons[index].classList.add("correct");
+
+    puzzleScore+=20;
+
+    puzzleStreak++;
+
+    document.getElementById("puzzleMessage").textContent=
+      "✓ Correct! +20 points. "+puzzle.fact;
+
+  }else{
+
+    buttons[index].classList.add("wrong");
+
+    buttons[puzzle.correct].classList.add("correct");
+
+    puzzleStreak=0;
+
+    document.getElementById("puzzleMessage").textContent=
+      "Not quite! "+puzzle.fact;
+
+  }
+
+  document.getElementById("puzzleScore").textContent=
+    puzzleScore;
+
+  document.getElementById("puzzleStreak").textContent=
+    puzzleStreak;
+
+  document.getElementById("nextPuzzle").style.display=
+    "inline-block";
+
+}
+
+
+function nextPuzzle(){
+
+  puzzleIndex++;
+
+  if(puzzleIndex>=nijokPuzzles.length){
+
+    puzzleIndex=0;
+
+  }
+
+  loadPuzzle();
+
+}
+
+
+loadPuzzle();
+
+</script>
+
 <!-- =====================================================
      LEADERBOARD
 ===================================================== -->

@@ -11,6 +11,7 @@
 
     * {
       box-sizing: border-box;
+      scroll-behavior: smooth;
     }
 
     body {
@@ -19,31 +20,46 @@
       background: #fffaf5;
       color: #222;
       line-height: 1.6;
+      overflow-x: hidden;
     }
+
+
+    /* =========================
+       HEADER
+    ========================= */
 
     header {
       text-align: center;
       padding: 35px 20px 25px;
+      animation: fadeDown 1s ease both;
     }
 
     .logo {
       color: #d62828;
-      font-size: 38px;
+      font-size: 40px;
       font-weight: 800;
-      letter-spacing: 3px;
+      letter-spacing: 4px;
       margin-bottom: 10px;
+      animation: logoPulse 3s ease-in-out infinite;
     }
 
     header h1 {
       font-size: 34px;
       margin: 10px 0;
+      animation: fadeUp 1s ease .2s both;
     }
 
     .tagline {
       font-size: 18px;
       color: #666;
       font-style: italic;
+      animation: fadeUp 1s ease .4s both;
     }
+
+
+    /* =========================
+       HERO IMAGE
+    ========================= */
 
     .hero-image {
       width: 100%;
@@ -53,6 +69,12 @@
       border-radius: 22px;
       display: block;
       margin: 20px auto;
+      animation: heroAppear 1.2s ease .3s both;
+      transition: transform .5s ease;
+    }
+
+    .hero-image:hover {
+      transform: scale(1.03);
     }
 
     .hero-title {
@@ -61,7 +83,17 @@
       letter-spacing: 1px;
       color: #d62828;
       text-transform: uppercase;
+      animation: fadeUp 1s ease .6s both;
     }
+
+    header > p:last-child {
+      animation: fadeUp 1s ease .8s both;
+    }
+
+
+    /* =========================
+       MAIN
+    ========================= */
 
     main {
       max-width: 800px;
@@ -69,12 +101,28 @@
       padding: 0 18px 40px;
     }
 
+
+    /* =========================
+       CARDS
+    ========================= */
+
     .card {
       background: white;
       border-radius: 20px;
       padding: 24px;
       margin: 20px 0;
       box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+
+      animation: cardReveal .8s ease both;
+
+      transition:
+        transform .35s ease,
+        box-shadow .35s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.10);
     }
 
     .label {
@@ -95,6 +143,11 @@
       margin-bottom: 5px;
     }
 
+
+    /* =========================
+       TOPICS
+    ========================= */
+
     .topics {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -109,7 +162,21 @@
       text-align: center;
       font-weight: bold;
       cursor: pointer;
+
+      transition:
+        transform .3s ease,
+        background .3s ease;
     }
+
+    .topics div:hover {
+      transform: translateY(-5px) scale(1.02);
+      background: #ffe6d2;
+    }
+
+
+    /* =========================
+       NUTRITION
+    ========================= */
 
     .nutrition-grid {
       display: grid;
@@ -122,6 +189,15 @@
       background: #f8f8f8;
       border-radius: 15px;
       padding: 16px;
+
+      transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+    }
+
+    .nutrition-grid div:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     }
 
     .nutrition-grid strong {
@@ -139,14 +215,22 @@
       padding: 18px;
       background: #fff3e8;
       border-radius: 15px;
+      border-left: 4px solid #d62828;
     }
 
+
+    /* =========================
+       FOOD SEARCH
+    ========================= */
+
     .food-search {
-      background: #ffffff;
+      background: white;
       border-radius: 20px;
       padding: 25px;
       margin: 20px 0;
       box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+
+      animation: cardReveal .8s ease both;
     }
 
     .food-search input {
@@ -156,6 +240,16 @@
       border-radius: 12px;
       font-size: 16px;
       margin: 10px 0;
+
+      transition:
+        border .3s ease,
+        box-shadow .3s ease;
+    }
+
+    .food-search input:focus {
+      outline: none;
+      border-color: #d62828;
+      box-shadow: 0 0 0 4px rgba(214,40,40,0.08);
     }
 
     button {
@@ -168,19 +262,73 @@
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
+
+      transition:
+        transform .2s ease,
+        box-shadow .3s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(214,40,40,0.25);
     }
 
     button:active {
-      transform: scale(0.98);
+      transform: scale(.97);
     }
+
+
+    /* =========================
+       SCAN SECTION
+    ========================= */
 
     .scan {
       background: #222;
       color: white;
       text-align: center;
       border-radius: 20px;
-      padding: 30px 22px;
+      padding: 35px 22px;
       margin: 20px 0;
+
+      position: relative;
+      overflow: hidden;
+
+      animation: cardReveal .8s ease both;
+    }
+
+    .scan::before {
+      content: "";
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+      top: -70px;
+      left: -70px;
+      animation: floatCircle 5s ease-in-out infinite;
+    }
+
+    .scan::after {
+      content: "";
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+      bottom: -60px;
+      right: -40px;
+      animation: floatCircle 6s ease-in-out infinite reverse;
+    }
+
+    .scan h2,
+    .scan p,
+    .scan button {
+      position: relative;
+      z-index: 1;
+    }
+
+    .scan h2 {
+      animation: softPulse 3s ease-in-out infinite;
     }
 
     .scan button {
@@ -189,12 +337,126 @@
       margin-top: 10px;
     }
 
+
+    /* =========================
+       FOOTER
+    ========================= */
+
     footer {
       text-align: center;
       padding: 30px 20px;
       color: #777;
       font-size: 14px;
+      animation: fadeUp 1s ease both;
     }
+
+
+    /* =========================
+       ANIMATIONS
+    ========================= */
+
+    @keyframes fadeDown {
+
+      from {
+        opacity: 0;
+        transform: translateY(-25px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+    }
+
+
+    @keyframes fadeUp {
+
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+    }
+
+
+    @keyframes heroAppear {
+
+      from {
+        opacity: 0;
+        transform: scale(.92);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+    }
+
+
+    @keyframes cardReveal {
+
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+    }
+
+
+    @keyframes logoPulse {
+
+      0%, 100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.04);
+      }
+
+    }
+
+
+    @keyframes softPulse {
+
+      0%, 100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: .75;
+      }
+
+    }
+
+
+    @keyframes floatCircle {
+
+      0%, 100% {
+        transform: translate(0,0);
+      }
+
+      50% {
+        transform: translate(25px,20px);
+      }
+
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
 
     @media (max-width: 600px) {
 
@@ -206,8 +468,16 @@
         font-size: 34px;
       }
 
+      .hero-image {
+        height: 250px;
+      }
+
       .nutrition-grid {
         grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 20px;
       }
 
     }
@@ -215,13 +485,19 @@
   </style>
 </head>
 
+
 <body>
+
 
   <header>
 
-    <div class="logo">NIJOK</div>
+    <div class="logo">
+      NIJOK
+    </div>
 
-    <h1>Know Your Tomato</h1>
+    <h1>
+      Know Your Tomato
+    </h1>
 
     <p class="tagline">
       Fact first, you decide.
@@ -249,9 +525,13 @@
 
     <section class="card">
 
-      <span class="label">FOOD FACT</span>
+      <span class="label">
+        FOOD FACT
+      </span>
 
-      <h2>Fruit or Vegetable?</h2>
+      <h2>
+        Fruit or Vegetable?
+      </h2>
 
       <p>
         Botanically, tomato is a fruit because it develops from the
@@ -267,9 +547,13 @@
 
     <section class="card">
 
-      <span class="label">LEARN</span>
+      <span class="label">
+        LEARN
+      </span>
 
-      <h2>More Than Just a Tomato</h2>
+      <h2>
+        More Than Just a Tomato
+      </h2>
 
       <p>
         Explore its journey from seed to farm, market and finally
@@ -283,7 +567,9 @@
           Growing
         </div>
 
-        <div onclick="document.getElementById('nutrition').scrollIntoView({behavior:'smooth'})">
+        <div
+          onclick="document.getElementById('nutrition').scrollIntoView({behavior:'smooth'})"
+        >
           🧪<br>
           Nutrition
         </div>
@@ -305,9 +591,13 @@
 
     <section class="card" id="nutrition">
 
-      <span class="label">NUTRITION</span>
+      <span class="label">
+        NUTRITION
+      </span>
 
-      <h2>What's Inside a Tomato?</h2>
+      <h2>
+        What's Inside a Tomato?
+      </h2>
 
       <p>
         Tomatoes are mostly water and provide a range of nutrients
@@ -349,7 +639,9 @@
 
       <div class="nijok-note">
 
-        <strong>NIJOK NOTE</strong>
+        <strong>
+          NIJOK NOTE
+        </strong>
 
         <p>
           Nutrition can vary with tomato variety, size, ripeness
@@ -364,9 +656,13 @@
 
     <section class="food-search">
 
-      <span class="label">NIJOK FOOD SEARCH</span>
+      <span class="label">
+        NIJOK FOOD SEARCH
+      </span>
 
-      <h2>🔎 Know Your Food</h2>
+      <h2>
+        🔎 Know Your Food
+      </h2>
 
       <p>
         Search a food to start learning.
@@ -389,14 +685,18 @@
 
     <section class="scan">
 
-      <h2>Scan it before you eat it.</h2>
+      <h2>
+        Scan it before you eat it.
+      </h2>
 
       <p>
         NIJOK helps people understand food through simple,
         accessible knowledge.
       </p>
 
-      <button onclick="document.getElementById('foodInput').focus()">
+      <button
+        onclick="document.getElementById('foodInput').focus()"
+      >
         Explore NIJOK
       </button>
 
@@ -408,7 +708,9 @@
 
   <footer>
 
-    <p>© 2026 NIJOK</p>
+    <p>
+      © 2026 NIJOK
+    </p>
 
     <p>
       Learn • Understand • Decide
@@ -422,7 +724,11 @@
     function searchFood() {
 
       const food =
-        document.getElementById("foodInput").value.trim().toLowerCase();
+        document
+          .getElementById("foodInput")
+          .value
+          .trim()
+          .toLowerCase();
 
       const result =
         document.getElementById("foodResult");
@@ -434,6 +740,7 @@
           "<p>Please enter a food name.</p>";
 
         return;
+
       }
 
 
@@ -447,14 +754,18 @@
               NIJOK FOOD FACT
             </span>
 
-            <h2>🍅 Tomato</h2>
+            <h2>
+              🍅 Tomato
+            </h2>
 
             <p>
               Botanically, tomato is a fruit, although it is commonly
               used like a vegetable in cooking.
             </p>
 
-            <h3>🧪 Nutrition</h3>
+            <h3>
+              🧪 Nutrition
+            </h3>
 
             <p>
               Tomatoes provide nutrients including vitamin C and
@@ -462,7 +773,9 @@
             </p>
 
             <p>
-              <strong>NIJOK:</strong>
+              <strong>
+                NIJOK:
+              </strong>
               Facts first. You decide.
             </p>
 
@@ -481,14 +794,18 @@
               NIJOK FOOD FACT
             </span>
 
-            <h2>🍎 Apple</h2>
+            <h2>
+              🍎 Apple
+            </h2>
 
             <p>
               Apples are fruits that contain water,
               carbohydrates and dietary fibre.
             </p>
 
-            <h3>🧪 Nutrition</h3>
+            <h3>
+              🧪 Nutrition
+            </h3>
 
             <p>
               Apples provide dietary fibre and vitamin C,
@@ -496,7 +813,9 @@
             </p>
 
             <p>
-              <strong>NIJOK:</strong>
+              <strong>
+                NIJOK:
+              </strong>
               Facts first. You decide.
             </p>
 
@@ -515,14 +834,18 @@
               NIJOK FOOD FACT
             </span>
 
-            <h2>🥕 Carrot</h2>
+            <h2>
+              🥕 Carrot
+            </h2>
 
             <p>
               Carrots are root vegetables known for their
               orange colour and naturally occurring carotenoids.
             </p>
 
-            <h3>🧪 Nutrition</h3>
+            <h3>
+              🧪 Nutrition
+            </h3>
 
             <p>
               Carrots provide dietary fibre and carotenoids,
@@ -530,7 +853,9 @@
             </p>
 
             <p>
-              <strong>NIJOK:</strong>
+              <strong>
+                NIJOK:
+              </strong>
               Facts first. You decide.
             </p>
 
@@ -545,7 +870,9 @@
 
           <div class="card">
 
-            <h3>🔍 Food not added yet</h3>
+            <h3>
+              🔍 Food not added yet
+            </h3>
 
             <p>
               NIJOK is still building its food knowledge library.
@@ -564,5 +891,6 @@
 
   </script>
 
+
 </body>
-</html>
+  </html>

@@ -24,14 +24,11 @@
     }
 
 
-    /* =========================
-       HEADER
-    ========================= */
+    /* HEADER */
 
     header {
       text-align: center;
       padding: 35px 20px 25px;
-      animation: fadeDown 1s ease both;
     }
 
     .logo {
@@ -39,27 +36,22 @@
       font-size: 40px;
       font-weight: 800;
       letter-spacing: 4px;
-      margin-bottom: 10px;
       animation: logoPulse 3s ease-in-out infinite;
     }
 
     header h1 {
       font-size: 34px;
       margin: 10px 0;
-      animation: fadeUp 1s ease .2s both;
     }
 
     .tagline {
       font-size: 18px;
       color: #666;
       font-style: italic;
-      animation: fadeUp 1s ease .4s both;
     }
 
 
-    /* =========================
-       HERO IMAGE
-    ========================= */
+    /* HERO */
 
     .hero-image {
       width: 100%;
@@ -69,12 +61,15 @@
       border-radius: 22px;
       display: block;
       margin: 20px auto;
-      animation: heroAppear 1.2s ease .3s both;
-      transition: transform .5s ease;
+
+      opacity: 0;
+      transform: scale(.92);
+      animation: heroIn 1s ease forwards;
     }
 
     .hero-image:hover {
       transform: scale(1.03);
+      transition: transform .5s ease;
     }
 
     .hero-title {
@@ -83,17 +78,10 @@
       letter-spacing: 1px;
       color: #d62828;
       text-transform: uppercase;
-      animation: fadeUp 1s ease .6s both;
-    }
-
-    header > p:last-child {
-      animation: fadeUp 1s ease .8s both;
     }
 
 
-    /* =========================
-       MAIN
-    ========================= */
+    /* MAIN */
 
     main {
       max-width: 800px;
@@ -102,9 +90,23 @@
     }
 
 
-    /* =========================
-       CARDS
-    ========================= */
+    /* SCROLL REVEAL */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(55px);
+      transition:
+        opacity .8s ease,
+        transform .8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+
+    /* CARDS */
 
     .card {
       background: white;
@@ -112,8 +114,6 @@
       padding: 24px;
       margin: 20px 0;
       box-shadow: 0 5px 20px rgba(0,0,0,0.07);
-
-      animation: cardReveal .8s ease both;
 
       transition:
         transform .35s ease,
@@ -139,14 +139,8 @@
       font-size: 25px;
     }
 
-    .card h3 {
-      margin-bottom: 5px;
-    }
 
-
-    /* =========================
-       TOPICS
-    ========================= */
+    /* TOPICS */
 
     .topics {
       display: grid;
@@ -163,9 +157,33 @@
       font-weight: bold;
       cursor: pointer;
 
+      opacity: 0;
+      transform: translateY(25px);
       transition:
-        transform .3s ease,
+        opacity .6s ease,
+        transform .6s ease,
         background .3s ease;
+    }
+
+    .topics.active div {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .topics.active div:nth-child(1) {
+      transition-delay: .1s;
+    }
+
+    .topics.active div:nth-child(2) {
+      transition-delay: .2s;
+    }
+
+    .topics.active div:nth-child(3) {
+      transition-delay: .3s;
+    }
+
+    .topics.active div:nth-child(4) {
+      transition-delay: .4s;
     }
 
     .topics div:hover {
@@ -174,9 +192,7 @@
     }
 
 
-    /* =========================
-       NUTRITION
-    ========================= */
+    /* NUTRITION */
 
     .nutrition-grid {
       display: grid;
@@ -190,9 +206,34 @@
       border-radius: 15px;
       padding: 16px;
 
+      opacity: 0;
+      transform: translateY(25px);
+
       transition:
-        transform .3s ease,
+        opacity .6s ease,
+        transform .6s ease,
         box-shadow .3s ease;
+    }
+
+    .nutrition-grid.active div {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .nutrition-grid.active div:nth-child(1) {
+      transition-delay: .1s;
+    }
+
+    .nutrition-grid.active div:nth-child(2) {
+      transition-delay: .2s;
+    }
+
+    .nutrition-grid.active div:nth-child(3) {
+      transition-delay: .3s;
+    }
+
+    .nutrition-grid.active div:nth-child(4) {
+      transition-delay: .4s;
     }
 
     .nutrition-grid div:hover {
@@ -219,9 +260,7 @@
     }
 
 
-    /* =========================
-       FOOD SEARCH
-    ========================= */
+    /* SEARCH */
 
     .food-search {
       background: white;
@@ -229,8 +268,6 @@
       padding: 25px;
       margin: 20px 0;
       box-shadow: 0 5px 20px rgba(0,0,0,0.07);
-
-      animation: cardReveal .8s ease both;
     }
 
     .food-search input {
@@ -278,9 +315,7 @@
     }
 
 
-    /* =========================
-       SCAN SECTION
-    ========================= */
+    /* SCAN */
 
     .scan {
       background: #222;
@@ -292,8 +327,6 @@
 
       position: relative;
       overflow: hidden;
-
-      animation: cardReveal .8s ease both;
     }
 
     .scan::before {
@@ -303,8 +336,10 @@
       height: 160px;
       border-radius: 50%;
       background: rgba(255,255,255,0.05);
+
       top: -70px;
       left: -70px;
+
       animation: floatCircle 5s ease-in-out infinite;
     }
 
@@ -315,8 +350,10 @@
       height: 120px;
       border-radius: 50%;
       background: rgba(255,255,255,0.04);
+
       bottom: -60px;
       right: -40px;
+
       animation: floatCircle 6s ease-in-out infinite reverse;
     }
 
@@ -338,82 +375,17 @@
     }
 
 
-    /* =========================
-       FOOTER
-    ========================= */
+    /* FOOTER */
 
     footer {
       text-align: center;
       padding: 30px 20px;
       color: #777;
       font-size: 14px;
-      animation: fadeUp 1s ease both;
     }
 
 
-    /* =========================
-       ANIMATIONS
-    ========================= */
-
-    @keyframes fadeDown {
-
-      from {
-        opacity: 0;
-        transform: translateY(-25px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-    }
-
-
-    @keyframes fadeUp {
-
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-    }
-
-
-    @keyframes heroAppear {
-
-      from {
-        opacity: 0;
-        transform: scale(.92);
-      }
-
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-
-    }
-
-
-    @keyframes cardReveal {
-
-      from {
-        opacity: 0;
-        transform: translateY(25px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-    }
-
+    /* ANIMATIONS */
 
     @keyframes logoPulse {
 
@@ -423,6 +395,21 @@
 
       50% {
         transform: scale(1.04);
+      }
+
+    }
+
+
+    @keyframes heroIn {
+
+      from {
+        opacity: 0;
+        transform: scale(.92);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
       }
 
     }
@@ -454,9 +441,7 @@
     }
 
 
-    /* =========================
-       MOBILE
-    ========================= */
+    /* MOBILE */
 
     @media (max-width: 600px) {
 
@@ -523,7 +508,7 @@
   <main>
 
 
-    <section class="card">
+    <section class="card reveal">
 
       <span class="label">
         FOOD FACT
@@ -545,7 +530,7 @@
     </section>
 
 
-    <section class="card">
+    <section class="card reveal">
 
       <span class="label">
         LEARN
@@ -560,7 +545,7 @@
         to your plate.
       </p>
 
-      <div class="topics">
+      <div class="topics reveal">
 
         <div>
           🌱<br>
@@ -589,7 +574,7 @@
     </section>
 
 
-    <section class="card" id="nutrition">
+    <section class="card reveal" id="nutrition">
 
       <span class="label">
         NUTRITION
@@ -604,7 +589,7 @@
         and naturally occurring plant compounds.
       </p>
 
-      <div class="nutrition-grid">
+      <div class="nutrition-grid reveal">
 
         <div>
           <strong>💧 Water</strong>
@@ -638,7 +623,6 @@
       </div>
 
       <div class="nijok-note">
-
         <strong>
           NIJOK NOTE
         </strong>
@@ -648,13 +632,12 @@
           and preparation. Facts help you understand your food —
           you decide what is right for you.
         </p>
-
       </div>
 
     </section>
 
 
-    <section class="food-search">
+    <section class="food-search reveal">
 
       <span class="label">
         NIJOK FOOD SEARCH
@@ -683,7 +666,7 @@
     </section>
 
 
-    <section class="scan">
+    <section class="scan reveal">
 
       <h2>
         Scan it before you eat it.
@@ -720,6 +703,49 @@
 
 
   <script>
+
+
+    /* =========================
+       SCROLL ANIMATION
+    ========================= */
+
+    const observer = new IntersectionObserver(
+
+      (entries) => {
+
+        entries.forEach((entry) => {
+
+          if (entry.isIntersecting) {
+
+            entry.target.classList.add("active");
+
+            observer.unobserve(entry.target);
+
+          }
+
+        });
+
+      },
+
+      {
+        threshold: 0.15
+      }
+
+    );
+
+
+    document
+      .querySelectorAll(".reveal, .topics, .nutrition-grid")
+      .forEach((element) => {
+
+        observer.observe(element);
+
+      });
+
+
+    /* =========================
+       FOOD SEARCH
+    ========================= */
 
     function searchFood() {
 
@@ -893,4 +919,4 @@
 
 
 </body>
-  </html>
+</html>

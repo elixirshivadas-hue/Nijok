@@ -3254,59 +3254,25 @@ loadPuzzle();
     time:5,
     guess:10
   };
+   const quizQuestions = [
 
-  const quizQuestions = [
-    {
-      q:"Which country is the origin of Sushi?",
-      options:["China","Japan","Korea","Thailand"],
-      answer:1
-    },
-    {
-      q:"Which spice is known as the King of Spices?",
-      options:["Black Pepper","Turmeric","Cumin","Cardamom"],
-      answer:0
-    },
-    {
-      q:"Biryani is especially associated with which cuisine?",
-      options:["Indian","Mexican","Japanese","French"],
-      answer:0
-    },
-    {
-      q:"Which fruit is traditionally associated with Kashmir?",
-      options:["Apple","Banana","Papaya","Pineapple"],
-      answer:0
-    },
-    {
-      q:"Which country is famous for Kimchi?",
-      options:["India","South Korea","Italy","Egypt"],
-      answer:1
-    },
-    {
-      q:"What is the main ingredient of traditional hummus?",
-      options:["Chickpeas","Rice","Potato","Corn"],
-      answer:0
-    },
-    {
-      q:"Which drink is traditionally made from tea leaves?",
-      options:["Tea","Lassi","Coconut water","Lemonade"],
-      answer:0
-    },
-    {
-      q:"Which grain is used to make traditional dosa?",
-      options:["Rice","Wheat","Barley","Oats"],
-      answer:0
-    },
-    {
-      q:"Which country is famous for pizza?",
-      options:["Italy","India","China","Brazil"],
-      answer:0
-    },
-    {
-      q:"What gives turmeric its famous yellow colour?",
-      options:["Curcumin","Caffeine","Lycopene","Chlorophyll"],
-      answer:0
-    }
-  ];
+  // Q001
+  {
+    id: 1,
+    category: "Indian Food",
+    difficulty: "easy",
+    q: "Biryani is primarily a dish based on which staple?",
+    options: ["Rice", "Wheat", "Corn", "Barley"],
+    answer: 0,
+    fact: "Biryani is a rice-based dish with many regional variations."
+  },
+
+  // ...
+  
+  // Q100
+];
+
+const guessQuestions = [
 
   const guessQuestions = [
     {

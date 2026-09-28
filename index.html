@@ -6,11 +6,30 @@
 
 <title>NIJOK — Food. Culture. People. Places.</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
 <style>
 
 /* =====================================================
-   NIJOK — SIGNATURE EDITORIAL STYLE
+   NIJOK — REFERENCE DESIGN
 ===================================================== */
+
+:root{
+  --paper:#f7f5e9;
+  --paper2:#fbfaf2;
+  --green:#064a35;
+  --green-dark:#043b2b;
+  --green-light:#dfe9cd;
+  --sage:#a9bd88;
+  --gold:#d7b73e;
+  --orange:#d96843;
+  --red:#9c4439;
+  --text:#163f32;
+  --muted:#60776c;
+  --line:#d9ddce;
+}
 
 *{
   margin:0;
@@ -23,9 +42,9 @@ html{
 }
 
 body{
-  background:#f7f6ed;
-  color:#123b2c;
-  font-family:Arial,Helvetica,sans-serif;
+  background:var(--paper);
+  color:var(--text);
+  font-family:"DM Sans",sans-serif;
   overflow-x:hidden;
 }
 
@@ -34,470 +53,453 @@ a{
   color:inherit;
 }
 
-button{
+button,
+input{
   font-family:inherit;
 }
 
-
 /* =====================================================
-   DECORATIVE LEAVES
+   BOTANICAL DECORATIONS
 ===================================================== */
+
+.botanical{
+  position:absolute;
+  pointer-events:none;
+  z-index:0;
+}
 
 .leaf{
   position:absolute;
-  width:75px;
+  width:85px;
   height:38px;
-  background:#a7bb80;
+  background:#91aa6e;
   border-radius:100% 0 100% 0;
-  opacity:.7;
-  pointer-events:none;
+  opacity:.72;
 }
 
 .leaf:after{
   content:"";
   position:absolute;
-  width:58px;
-  height:1px;
-  background:#70875a;
-  top:20px;
-  left:10px;
-  transform:rotate(18deg);
+  width:2px;
+  height:48px;
+  background:#668452;
+  left:42px;
+  top:-5px;
+  transform:rotate(-42deg);
 }
 
-.leaf.one{
-  top:80px;
-  left:-18px;
-  transform:rotate(25deg);
+.leaf-a{
+  left:-30px;
+  top:70px;
+  transform:rotate(22deg);
 }
 
-.leaf.two{
-  top:110px;
-  right:-12px;
-  transform:rotate(115deg);
+.leaf-b{
+  right:-25px;
+  top:82px;
+  transform:rotate(152deg);
 }
 
-.leaf.three{
+.leaf-c{
+  left:-28px;
+  bottom:80px;
+  transform:rotate(-25deg);
+}
+
+.leaf-d{
+  right:-28px;
   bottom:100px;
-  left:-20px;
-  transform:rotate(-15deg);
+  transform:rotate(155deg);
 }
-
-.leaf.four{
-  bottom:40px;
-  right:-20px;
-  transform:rotate(135deg);
-}
-
 
 /* =====================================================
    HEADER
 ===================================================== */
 
 header{
-  height:78px;
-  padding:0 4%;
+  height:76px;
+  padding:0 3.4%;
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  background:#f7f6ed;
+  gap:30px;
+  background:rgba(247,245,233,.97);
+  border-bottom:1px solid var(--line);
   position:sticky;
   top:0;
   z-index:1000;
-  border-bottom:1px solid #e0e1d5;
+  backdrop-filter:blur(12px);
 }
 
-.brand{
+.logo{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:12px;
+  min-width:220px;
 }
 
-.brand-mark{
+.logo-leaf{
   width:38px;
-  height:45px;
-  background:#0d5139;
+  height:50px;
+  background:var(--green);
   border-radius:100% 0 100% 0;
-  transform:rotate(25deg);
+  transform:rotate(28deg);
   position:relative;
 }
 
-.brand-mark:after{
+.logo-leaf:before{
   content:"";
-  width:2px;
-  height:40px;
-  background:#dce8d5;
   position:absolute;
+  width:2px;
+  height:45px;
+  background:var(--paper);
   left:19px;
-  top:4px;
-  transform:rotate(-25deg);
+  top:3px;
+  transform:rotate(-28deg);
 }
 
-.brand-text h1{
-  font-family:Georgia,serif;
+.logo-name{
+  font-family:"Playfair Display",serif;
   font-size:31px;
-  letter-spacing:3px;
-  color:#073d2b;
+  line-height:.9;
+  letter-spacing:2px;
 }
 
-.brand-text p{
-  font-size:10px;
-  color:#627269;
-  margin-top:-2px;
+.logo-tag{
+  font-size:9px;
+  color:var(--muted);
+  margin-top:5px;
 }
 
 nav{
   display:flex;
   align-items:center;
-  gap:27px;
-  font-size:11px;
-  font-weight:bold;
-  color:#244d3d;
+  justify-content:center;
+  gap:24px;
+  flex:1;
 }
 
 nav a{
-  padding:29px 0 26px;
+  font-size:9px;
+  font-weight:600;
+  white-space:nowrap;
+  padding:29px 0 22px;
   border-bottom:2px solid transparent;
 }
 
-nav a:hover,
 nav a.active{
-  border-color:#0c523a;
+  border-color:var(--green);
+}
+
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:17px;
 }
 
 .search{
-  border:1px solid #cdd4ca;
-  border-radius:30px;
-  padding:10px 15px;
-  width:190px;
-  font-size:10px;
+  width:185px;
+  height:34px;
+  border:1px solid #cbd2c4;
+  border-radius:20px;
   background:transparent;
+  padding:0 14px;
+  font-size:9px;
   outline:none;
 }
 
-.language{
-  font-size:11px;
-  font-weight:bold;
+.lang{
+  font-size:10px;
+  white-space:nowrap;
 }
-
 
 /* =====================================================
    HERO
 ===================================================== */
 
 .hero{
-  min-height:520px;
-  padding:50px 4%;
+  min-height:440px;
+  padding:37px 4% 20px;
   display:grid;
-  grid-template-columns:48% 52%;
-  align-items:center;
+  grid-template-columns:47% 53%;
   position:relative;
   overflow:hidden;
-  background:
-    radial-gradient(circle at 60% 30%,#fffdf4 0,#f7f6ed 55%);
 }
 
-.hero-copy{
+.hero-content{
   position:relative;
   z-index:5;
+  padding-top:28px;
 }
 
 .eyebrow{
   display:flex;
   align-items:center;
-  gap:14px;
-  font-size:12px;
+  gap:12px;
+  font-size:11px;
+  font-weight:700;
   letter-spacing:2px;
-  font-weight:bold;
-  color:#255743;
   margin-bottom:17px;
 }
 
-.eyebrow span{
-  display:block;
+.eyebrow:after{
+  content:"";
   width:52px;
   height:1px;
-  background:#47735f;
+  background:var(--green);
 }
 
-.hero h2{
-  font-family:Georgia,serif;
-  font-size:clamp(50px,6vw,76px);
-  line-height:.95;
-  letter-spacing:-3px;
-  color:#083b2b;
+.hero-title{
+  font-family:"Playfair Display",serif;
+  font-size:clamp(48px,5.2vw,67px);
+  line-height:.94;
+  letter-spacing:-2.2px;
+  max-width:530px;
 }
 
-.hero-description{
-  max-width:490px;
+.hero-text{
   margin-top:20px;
-  font-size:15px;
-  line-height:1.7;
-  color:#496157;
+  max-width:420px;
+  font-size:13px;
+  line-height:1.55;
+  color:#536c60;
 }
 
 .hero-buttons{
   display:flex;
-  gap:14px;
-  margin-top:25px;
+  gap:12px;
+  margin-top:22px;
 }
 
-.primary-btn,
-.secondary-btn{
-  padding:13px 21px;
+.btn{
   border-radius:30px;
-  font-size:11px;
-  font-weight:bold;
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
+  padding:12px 21px;
+  font-size:10px;
+  font-weight:700;
   transition:.3s;
 }
 
-.primary-btn{
-  background:#075238;
-  color:white;
-}
-
-.secondary-btn{
-  border:1px solid #174e3a;
-  color:#174e3a;
-}
-
-.primary-btn:hover,
-.secondary-btn:hover{
+.btn:hover{
   transform:translateY(-3px);
 }
 
+.btn-green{
+  color:white;
+  background:var(--green);
+}
+
+.btn-outline{
+  border:1px solid var(--green);
+}
 
 /* =====================================================
-   HERO VISUAL COLLAGE
+   HERO COLLAGE
 ===================================================== */
 
-.hero-art{
-  height:430px;
+.hero-visual{
+  height:395px;
   position:relative;
 }
 
-.art-circle{
-  width:390px;
-  height:390px;
-  border-radius:50%;
-  background:#e5ead5;
+.hero-orbit{
   position:absolute;
+  width:390px;
+  height:355px;
   left:50%;
   top:50%;
   transform:translate(-50%,-50%);
+  background:#e2e9d1;
+  border-radius:50%;
 }
 
-.photo{
+.food-photo{
   position:absolute;
   overflow:hidden;
-  background:#426c49;
-  border:6px solid #f7f6ed;
-  box-shadow:0 8px 20px rgba(30,50,35,.1);
-}
-
-.photo.one{
-  width:150px;
-  height:125px;
-  left:26%;
-  top:12%;
-  transform:rotate(-10deg);
-  border-radius:60% 8px 8px 8px;
-  background:
-    linear-gradient(rgba(30,60,20,.1),rgba(30,60,20,.1)),
-    linear-gradient(135deg,#dd7432,#7b321b 40%,#e9bd42);
-}
-
-.photo.two{
-  width:160px;
-  height:135px;
-  right:15%;
-  top:8%;
-  transform:rotate(-7deg);
-  border-radius:8px 8px 60% 8px;
-  background:
-    linear-gradient(145deg,#6d9562,#bfd29b 45%,#315e3d);
-}
-
-.photo.three{
-  width:160px;
-  height:135px;
-  left:21%;
-  bottom:12%;
-  transform:rotate(-8deg);
-  border-radius:8px 60% 8px 8px;
-  background:
-    linear-gradient(145deg,#527a47,#d48a31 45%,#f0d174);
-}
-
-.photo.four{
-  width:150px;
-  height:125px;
-  right:17%;
-  bottom:9%;
-  transform:rotate(-9deg);
-  border-radius:8px 8px 8px 60%;
-  background:
-    linear-gradient(145deg,#a54829,#e0a052 45%,#457144);
-}
-
-.food-symbol{
-  position:absolute;
-  font-size:60px;
+  border:6px solid var(--paper);
+  box-shadow:0 9px 25px rgba(30,70,48,.16);
   z-index:3;
-  filter:drop-shadow(0 8px 8px rgba(0,0,0,.15));
 }
 
-.food-symbol.one{
-  left:38%;
-  top:24%;
+.food-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
-.food-symbol.two{
-  right:29%;
-  bottom:22%;
-}
-
-.hero-note{
-  position:absolute;
-  right:1%;
-  top:40%;
-  width:145px;
-  font-family:cursive;
-  font-size:23px;
-  line-height:1.2;
-  color:#184d39;
+.fp1{
+  width:170px;
+  height:137px;
+  left:12%;
+  top:10%;
   transform:rotate(-7deg);
+  border-radius:65px 8px 8px 8px;
 }
 
-.hero-note:after{
-  content:"";
-  display:block;
-  width:70px;
-  height:2px;
-  background:#164c38;
-  margin-top:10px;
-  transform:rotate(-8deg);
+.fp2{
+  width:178px;
+  height:137px;
+  right:10%;
+  top:4%;
+  transform:rotate(7deg);
+  border-radius:8px 65px 8px 8px;
 }
 
-.hero-leaf{
+.fp3{
+  width:170px;
+  height:140px;
+  left:12%;
+  bottom:2%;
+  transform:rotate(7deg);
+  border-radius:8px 8px 8px 65px;
+}
+
+.fp4{
+  width:180px;
+  height:140px;
+  right:9%;
+  bottom:3%;
+  transform:rotate(-7deg);
+  border-radius:8px 8px 65px 8px;
+}
+
+.visual-leaf{
   position:absolute;
   width:100px;
-  height:45px;
-  background:#87a86c;
+  height:43px;
+  background:#78995a;
   border-radius:100% 0 100% 0;
-  z-index:5;
+  z-index:4;
 }
 
-.hero-leaf.a{
-  left:15%;
-  bottom:7%;
-  transform:rotate(-20deg);
+.vl1{
+  left:3%;
+  top:34%;
+  transform:rotate(-36deg);
 }
 
-.hero-leaf.b{
-  right:4%;
-  top:3%;
-  transform:rotate(130deg);
+.vl2{
+  right:1%;
+  bottom:16%;
+  transform:rotate(140deg);
 }
 
+.story{
+  position:absolute;
+  right:-1%;
+  top:41%;
+  font-family:"Caveat",cursive;
+  font-size:27px;
+  line-height:1;
+  transform:rotate(-7deg);
+  z-index:7;
+}
+
+.story:after{
+  content:"";
+  display:block;
+  width:72px;
+  height:2px;
+  background:var(--green);
+  margin:9px auto;
+  transform:rotate(-5deg);
+}
 
 /* =====================================================
    FEATURE STRIP
 ===================================================== */
 
-.feature-strip{
+.features{
   display:grid;
   grid-template-columns:repeat(5,1fr);
-  border-top:1px solid #dfe2d7;
-  border-bottom:1px solid #dfe2d7;
-  background:#faf9f1;
+  background:var(--paper2);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
 }
 
 .feature{
-  padding:25px 20px;
+  min-height:142px;
+  padding:19px 12px;
   text-align:center;
-  border-right:1px solid #dfe2d7;
+  border-right:1px solid var(--line);
 }
 
 .feature:last-child{
-  border-right:none;
+  border:0;
 }
 
 .feature-icon{
-  width:50px;
-  height:50px;
+  width:51px;
+  height:51px;
   margin:auto;
   border-radius:50%;
+  background:#e4edd5;
   display:flex;
   align-items:center;
   justify-content:center;
-  background:#e4efd6;
   font-size:24px;
 }
 
 .feature h3{
-  font-family:Georgia,serif;
+  font-family:"Playfair Display",serif;
   font-size:15px;
-  margin-top:12px;
+  margin-top:9px;
 }
 
 .feature p{
-  font-size:10px;
-  color:#698074;
-  line-height:1.5;
-  margin-top:6px;
+  color:#6c8075;
+  font-size:9px;
+  line-height:1.45;
+  margin-top:5px;
 }
-
 
 /* =====================================================
    GAME MODES
 ===================================================== */
 
 .game-section{
-  padding:65px 4%;
-  position:relative;
+  padding:52px 4% 45px;
 }
 
-.game-header{
+.game-heading{
   display:grid;
   grid-template-columns:25% 75%;
-  align-items:center;
-  margin-bottom:30px;
+  margin-bottom:23px;
 }
 
-.game-header h2{
-  font-family:Georgia,serif;
-  font-size:36px;
-  line-height:1;
+.game-heading h2{
+  font-family:"Playfair Display",serif;
+  font-size:37px;
+  line-height:.95;
 }
 
-.game-header p{
-  font-size:13px;
-  color:#61766a;
-  margin-top:10px;
+.game-description{
+  padding-top:25px;
+  color:#667b70;
+  font-size:11px;
+  line-height:1.5;
+  max-width:430px;
 }
 
 .game-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:14px;
+  gap:13px;
 }
 
 .game-card{
-  min-height:230px;
-  padding:20px;
-  border-radius:23px;
-  background:#eef3e1;
+  height:242px;
+  border-radius:28px;
   position:relative;
   overflow:hidden;
-  transition:.4s;
+  padding:22px;
+  transition:.35s;
 }
 
 .game-card:hover{
   transform:translateY(-7px);
-  box-shadow:0 18px 30px rgba(30,60,40,.12);
+}
+
+.game-card:nth-child(1){
+  background:#edf0df;
 }
 
 .game-card:nth-child(2){
@@ -505,155 +507,152 @@ nav a.active{
 }
 
 .game-card:nth-child(3){
-  background:#f8e6db;
+  background:#f5e4dd;
 }
 
 .game-card:nth-child(4){
-  background:#dceee7;
+  background:#deede5;
 }
 
-.game-shape{
+.card-blob{
   position:absolute;
-  width:130px;
-  height:90px;
-  right:-20px;
-  top:-10px;
-  border-radius:70% 0 70% 0;
-  background:#7fa943;
-  opacity:.85;
+  width:160px;
+  height:112px;
+  right:-16px;
+  top:-17px;
+  border-radius:100% 0 100% 0;
+  transform:rotate(8deg);
 }
 
-.game-card:nth-child(2) .game-shape{
-  background:#d8ae27;
+.game-card:nth-child(1) .card-blob{
+  background:#8eaf48;
 }
 
-.game-card:nth-child(3) .game-shape{
-  background:#d95e3f;
+.game-card:nth-child(2) .card-blob{
+  background:#d6b338;
 }
 
-.game-card:nth-child(4) .game-shape{
-  background:#24806c;
+.game-card:nth-child(3) .card-blob{
+  background:#d76b4b;
 }
 
-.game-icon{
+.game-card:nth-child(4) .card-blob{
+  background:#418c70;
+}
+
+.card-icon{
   position:relative;
-  z-index:2;
-  font-size:34px;
-  margin-bottom:35px;
+  z-index:4;
+  font-size:35px;
+  margin-bottom:48px;
 }
 
 .game-card h3{
-  font-family:Georgia,serif;
+  font-family:"Playfair Display",serif;
   font-size:20px;
 }
 
 .game-card p{
-  font-size:11px;
-  color:#61736b;
-  margin-top:7px;
-  line-height:1.5;
+  margin-top:5px;
+  color:#667b70;
+  font-size:10px;
+  line-height:1.45;
 }
 
-.play{
+.play-now{
   position:absolute;
-  bottom:20px;
-  font-size:11px;
-  font-weight:bold;
+  left:22px;
+  bottom:17px;
+  font-size:10px;
+  font-weight:700;
 }
-
 
 /* =====================================================
-   CHALLENGE + PROFILE
+   CHALLENGE
 ===================================================== */
 
-.challenge-section{
-  padding:30px 4% 70px;
+.challenge-area{
+  padding:0 4% 54px;
   display:grid;
   grid-template-columns:1.55fr .85fr;
-  gap:25px;
+  gap:19px;
 }
 
 .challenge{
-  min-height:290px;
-  border-radius:28px;
-  background:#075238;
+  min-height:310px;
+  background:var(--green);
   color:white;
-  padding:30px;
+  border-radius:30px;
   position:relative;
   overflow:hidden;
+  padding:28px;
 }
 
-.challenge:after{
-  content:"";
-  position:absolute;
-  width:290px;
-  height:290px;
-  border-radius:50%;
-  background:#0c6445;
-  right:-100px;
-  top:-70px;
+.challenge-small{
+  font-size:9px;
+  letter-spacing:2px;
 }
 
 .challenge h2{
-  font-family:Georgia,serif;
+  font-family:"Playfair Display",serif;
   font-size:29px;
-  max-width:370px;
   line-height:1.05;
+  margin-top:13px;
   position:relative;
-  z-index:3;
-}
-
-.challenge small{
-  letter-spacing:2px;
-  font-size:9px;
+  z-index:6;
 }
 
 .answers{
+  width:51%;
   margin-top:22px;
-  width:55%;
   position:relative;
-  z-index:5;
+  z-index:7;
 }
 
 .answer{
-  border:1px solid rgba(255,255,255,.6);
-  border-radius:25px;
-  padding:10px 14px;
-  margin-bottom:8px;
-  font-size:11px;
+  border:1px solid rgba(255,255,255,.65);
+  border-radius:20px;
+  padding:8px 13px;
+  margin-bottom:7px;
+  font-size:10px;
 }
 
-.answer.correct{
-  background:#55a768;
-  border-color:#55a768;
+.answer.selected{
+  background:#40945c;
+  border-color:#40945c;
 }
 
 .sushi{
   position:absolute;
-  right:9%;
-  bottom:20px;
-  font-size:90px;
-  z-index:4;
+  width:48%;
+  height:82%;
+  right:0;
+  bottom:0;
+  object-fit:cover;
+  border-radius:50% 0 0 50%;
 }
 
-.hand-note{
+.think{
   position:absolute;
-  right:10%;
-  bottom:20px;
-  font-family:cursive;
-  font-size:22px;
+  right:13%;
+  bottom:18px;
+  z-index:8;
+  font-family:"Caveat",cursive;
+  font-size:23px;
+  line-height:.9;
   transform:rotate(-8deg);
-  z-index:6;
 }
 
-
-/* PROFILE */
+/* =====================================================
+   PROFILE
+===================================================== */
 
 .profile{
-  border:1px solid #d3dbd0;
-  border-radius:25px;
-  background:#fbfaf2;
-  padding:28px;
+  min-height:310px;
+  background:var(--paper2);
+  border:1px solid var(--line);
+  border-radius:28px;
+  padding:26px;
   position:relative;
   overflow:hidden;
 }
@@ -661,123 +660,129 @@ nav a.active{
 .profile:after{
   content:"";
   position:absolute;
-  width:90px;
-  height:90px;
-  background:#dbe8ce;
-  border-radius:100% 0 100% 0;
+  width:95px;
+  height:70px;
   right:-15px;
-  top:-10px;
+  top:-13px;
+  background:#dce8cc;
+  border-radius:100% 0 100% 0;
 }
 
-.profile-title{
-  font-family:Georgia,serif;
+.profile h2{
+  font-family:"Playfair Display",serif;
   font-size:20px;
 }
 
 .avatar{
-  width:52px;
-  height:52px;
+  width:54px;
+  height:54px;
   border-radius:50%;
-  background:#c99d76;
-  margin:20px 0 10px;
+  margin-top:18px;
+  background:#ad8768;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:24px;
+  font-size:27px;
 }
 
 .profile-name{
-  font-family:Georgia,serif;
+  font-family:"Playfair Display",serif;
   font-size:16px;
+  margin-top:8px;
 }
 
 .profile-role{
-  color:#738077;
-  font-size:10px;
+  font-size:9px;
+  color:#718178;
 }
 
 .stats{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  border-top:1px solid #d7ddd4;
-  border-bottom:1px solid #d7ddd4;
-  margin-top:20px;
-  padding:18px 0;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  margin-top:18px;
+  padding:13px 0;
   text-align:center;
 }
 
 .stats strong{
-  font-family:Georgia,serif;
-  font-size:22px;
   display:block;
+  font-family:"Playfair Display",serif;
+  font-size:22px;
 }
 
 .stats span{
-  font-size:8px;
-  color:#718078;
+  display:block;
+  font-size:7px;
+  color:#718178;
+  margin-top:2px;
 }
 
 .profile-btn{
   display:inline-block;
-  margin-top:17px;
-  background:#075238;
   color:white;
-  padding:10px 17px;
-  border-radius:25px;
-  font-size:10px;
-  font-weight:bold;
+  background:var(--green);
+  border-radius:22px;
+  padding:10px 16px;
+  font-size:9px;
+  font-weight:700;
+  margin-top:14px;
 }
-
 
 /* =====================================================
-   LOWER GRID
+   LEADERBOARD / DAILY
 ===================================================== */
 
-.lower{
-  padding:0 4% 70px;
+.bottom-grid{
+  padding:0 4% 55px;
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:25px;
+  grid-template-columns:1fr .9fr;
+  gap:20px;
 }
 
-.leaderboard,
-.daily{
-  background:#faf9f0;
-  border:1px solid #dce0d6;
-  border-radius:25px;
+.box{
+  border:1px solid var(--line);
+  background:var(--paper2);
+  border-radius:28px;
   padding:25px;
 }
 
-.lower h2{
-  font-family:Georgia,serif;
+.box.green-box{
+  background:#e1e9d1;
+}
+
+.box-title{
+  font-family:"Playfair Display",serif;
   font-size:25px;
 }
 
-.leader{
+.box-sub{
+  font-size:10px;
+  color:#718178;
+  margin-top:5px;
+}
+
+.player{
   display:grid;
-  grid-template-columns:30px 1fr 60px;
+  grid-template-columns:28px 1fr 50px;
   align-items:center;
-  padding:12px 0;
-  border-bottom:1px solid #e1e4dc;
-  font-size:11px;
+  border-bottom:1px solid #e1e4da;
+  padding:9px 0;
+  font-size:10px;
 }
 
-.rank{
-  font-family:Georgia,serif;
-  color:#526e60;
-}
-
-.person{
+.player-info{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:9px;
 }
 
-.person-icon{
-  width:30px;
-  height:30px;
+.player-avatar{
+  width:28px;
+  height:28px;
   border-radius:50%;
-  background:#c9a481;
+  background:#a98468;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -785,151 +790,175 @@ nav a.active{
 
 .score{
   text-align:right;
-  font-weight:bold;
-}
-
-.daily{
-  background:#e4ecd7;
+  font-weight:700;
 }
 
 .timer{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  margin-top:25px;
+  gap:9px;
+  margin-top:24px;
 }
 
-.time-box{
-  background:#f7f7ef;
-  border-radius:14px;
-  padding:14px;
+.time{
+  background:#faf8ef;
+  border-radius:13px;
   text-align:center;
+  padding:13px 5px;
 }
 
-.time-box strong{
-  font-family:Georgia,serif;
-  font-size:25px;
+.time strong{
   display:block;
+  font-family:"Playfair Display",serif;
+  font-size:23px;
 }
 
-.time-box span{
-  font-size:9px;
-  color:#6b7b70;
+.time span{
+  font-size:8px;
+  color:#718178;
 }
-
 
 /* =====================================================
-   BRAND STATEMENT
+   KNOWLEDGE
 ===================================================== */
 
-.statement{
+.knowledge{
+  min-height:260px;
+  padding:10px 4% 65px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+}
+
+.knowledge-blob{
+  width:310px;
+  height:180px;
+  margin:auto;
+  background:var(--green);
+  border-radius:65% 35% 55% 45%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   text-align:center;
-  padding:80px 20px;
-  position:relative;
+  transform:rotate(-7deg);
+  box-shadow:0 15px 30px rgba(8,74,53,.12);
 }
 
-.statement h2{
-  font-family:Georgia,serif;
-  font-size:clamp(45px,7vw,80px);
-  line-height:.95;
-  color:#0b402f;
+.knowledge-blob span{
+  font-family:"Caveat",cursive;
+  color:white;
+  font-size:28px;
+  line-height:1.02;
+  transform:rotate(7deg);
 }
 
-.statement h2 span{
-  color:#6c913e;
-  font-style:italic;
+.knowledge-copy{
+  text-align:center;
 }
 
-.statement p{
-  max-width:520px;
-  margin:22px auto;
-  color:#627269;
-  line-height:1.7;
+.knowledge-copy h2{
+  font-family:"Playfair Display",serif;
+  font-size:38px;
+  line-height:1;
 }
 
+.knowledge-copy p{
+  max-width:390px;
+  margin:13px auto 18px;
+  font-size:10px;
+  line-height:1.6;
+  color:#6b7e74;
+}
 
 /* =====================================================
    FOOTER
 ===================================================== */
 
 footer{
-  background:#064631;
+  background:var(--green-dark);
   color:white;
-  padding:45px 5% 25px;
-  position:relative;
-  overflow:hidden;
+  padding:35px 4% 18px;
 }
 
 .footer-top{
   display:grid;
-  grid-template-columns:1.5fr 2fr;
-  gap:50px;
+  grid-template-columns:1fr 2fr;
+  gap:30px;
 }
 
-.footer-brand h2{
-  font-family:Georgia,serif;
-  font-size:32px;
-  letter-spacing:3px;
+.footer-logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
-.footer-brand p{
-  font-size:10px;
-  color:#b9cdbd;
-  margin-top:5px;
+.footer-leaf{
+  width:32px;
+  height:41px;
+  background:#e4ecd0;
+  border-radius:100% 0 100% 0;
+  transform:rotate(28deg);
+}
+
+.footer-name{
+  font-family:"Playfair Display",serif;
+  font-size:25px;
+  letter-spacing:2px;
+}
+
+.footer-tag{
+  font-size:8px;
+  color:#b8cbbb;
 }
 
 .footer-links{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:15px;
+  grid-template-columns:repeat(5,1fr);
 }
 
 .footer-links strong{
-  font-size:10px;
-  display:block;
-  margin-bottom:15px;
+  font-size:8px;
+  letter-spacing:1px;
 }
 
 .footer-links a{
   display:block;
-  font-size:9px;
-  color:#b9cdbd;
-  margin-bottom:9px;
+  margin-top:9px;
+  color:#b9cbbf;
+  font-size:8px;
 }
 
 .footer-bottom{
-  border-top:1px solid rgba(255,255,255,.18);
-  margin-top:35px;
-  padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.2);
+  margin-top:28px;
+  padding-top:14px;
   display:flex;
   justify-content:space-between;
-  font-size:9px;
-  color:#adc5b4;
+  font-size:8px;
+  color:#afc3b5;
 }
-
 
 /* =====================================================
-   ANIMATIONS
+   ANIMATION
 ===================================================== */
 
-.hero-copy{
-  animation:fadeLeft 1s ease;
+.hero-content{
+  animation:heroLeft .8s ease both;
 }
 
-.hero-art{
-  animation:fadeRight 1.2s ease;
+.hero-visual{
+  animation:heroRight .9s ease both;
 }
 
 .game-card,
+.feature,
 .challenge,
 .profile,
-.feature,
-.leaderboard,
-.daily{
-  animation:fadeUp .8s ease both;
+.box{
+  animation:rise .8s ease both;
 }
 
-@keyframes fadeLeft{
+@keyframes heroLeft{
   from{
     opacity:0;
     transform:translateX(-30px);
@@ -940,7 +969,7 @@ footer{
   }
 }
 
-@keyframes fadeRight{
+@keyframes heroRight{
   from{
     opacity:0;
     transform:translateX(30px);
@@ -951,7 +980,7 @@ footer{
   }
 }
 
-@keyframes fadeUp{
+@keyframes rise{
   from{
     opacity:0;
     transform:translateY(20px);
@@ -962,194 +991,161 @@ footer{
   }
 }
 
-.art-circle{
-  animation:breathe 5s ease-in-out infinite;
+.food-photo{
+  animation:floatPhoto 6s ease-in-out infinite;
 }
 
-@keyframes breathe{
+@keyframes floatPhoto{
   0%,100%{
-    transform:translate(-50%,-50%) scale(1);
+    margin-top:0;
   }
   50%{
-    transform:translate(-50%,-50%) scale(1.025);
+    margin-top:-5px;
   }
 }
-
 
 /* =====================================================
    MOBILE
 ===================================================== */
 
-@media(max-width:900px){
+@media(max-width:950px){
 
   header{
-    height:70px;
+    height:68px;
+    padding:0 5%;
   }
 
-  nav{
+  nav,
+  .search,
+  .lang{
     display:none;
   }
 
-  .search{
-    display:none;
+  .header-right{
+    margin-left:auto;
   }
 
   .hero{
     display:block;
-    padding:45px 6% 25px;
+    padding:34px 6% 20px;
   }
 
-  .hero-copy{
-    text-align:left;
+  .hero-title{
+    font-size:49px;
   }
 
-  .hero h2{
-    font-size:53px;
+  .hero-visual{
+    height:330px;
+    margin-top:15px;
   }
 
-  .hero-art{
-    height:390px;
-    margin-top:20px;
+  .hero-orbit{
+    width:310px;
+    height:290px;
   }
 
-  .art-circle{
-    width:320px;
-    height:320px;
-  }
-
-  .photo.one{
-    width:115px;
-    height:95px;
-  }
-
-  .photo.two{
-    width:120px;
+  .fp1,
+  .fp2,
+  .fp3,
+  .fp4{
+    width:125px;
     height:100px;
   }
 
-  .photo.three{
-    width:120px;
-    height:100px;
+  .story{
+    font-size:21px;
   }
 
-  .photo.four{
-    width:115px;
-    height:95px;
-  }
-
-  .hero-note{
-    font-size:18px;
-    right:0;
-  }
-
-  .feature-strip{
+  .features{
     grid-template-columns:repeat(2,1fr);
   }
 
-  .feature{
-    border-bottom:1px solid #dfe2d7;
+  .feature:nth-child(2n){
+    border-right:0;
   }
 
-  .feature:nth-child(2),
-  .feature:nth-child(4){
-    border-right:none;
-  }
-
-  .game-header{
+  .game-heading{
     grid-template-columns:1fr;
+  }
+
+  .game-description{
+    padding-top:15px;
   }
 
   .game-grid{
     grid-template-columns:1fr 1fr;
   }
 
-  .challenge-section{
+  .challenge-area{
     grid-template-columns:1fr;
   }
 
-  .lower{
+  .bottom-grid,
+  .knowledge{
     grid-template-columns:1fr;
   }
 
   .footer-top{
     grid-template-columns:1fr;
   }
-
-  .footer-links{
-    grid-template-columns:repeat(2,1fr);
-  }
 }
-
 
 @media(max-width:550px){
 
-  .brand-text h1{
-    font-size:25px;
+  .logo{
+    min-width:0;
   }
 
-  .brand-mark{
-    width:30px;
-    height:37px;
+  .logo-name{
+    font-size:26px;
   }
 
-  .brand-text p{
-    font-size:8px;
+  .logo-leaf{
+    width:32px;
+    height:42px;
   }
 
-  .hero{
-    padding-top:35px;
+  .hero-title{
+    font-size:43px;
   }
 
-  .hero h2{
-    font-size:48px;
-  }
-
-  .hero-description{
-    font-size:13px;
+  .hero-text{
+    font-size:12px;
   }
 
   .hero-buttons{
     flex-wrap:wrap;
   }
 
-  .hero-art{
-    height:350px;
+  .hero-visual{
+    height:290px;
   }
 
-  .art-circle{
-    width:275px;
-    height:275px;
+  .hero-orbit{
+    width:250px;
+    height:235px;
   }
 
-  .photo.one{
-    left:19%;
-    top:10%;
+  .fp1,
+  .fp2,
+  .fp3,
+  .fp4{
+    width:100px;
+    height:82px;
+    border-width:4px;
   }
 
-  .photo.two{
-    right:8%;
+  .story{
+    right:0;
+    font-size:18px;
   }
 
-  .photo.three{
-    left:14%;
-  }
-
-  .photo.four{
-    right:9%;
-  }
-
-  .food-symbol{
-    font-size:45px;
-  }
-
-  .hero-note{
-    right:-5px;
-    font-size:16px;
-    width:110px;
-  }
-
-  .feature-strip{
+  .features{
     grid-template-columns:1fr 1fr;
+  }
+
+  .feature{
+    min-height:130px;
   }
 
   .game-grid{
@@ -1157,7 +1153,7 @@ footer{
   }
 
   .challenge{
-    padding:25px;
+    min-height:410px;
   }
 
   .answers{
@@ -1165,21 +1161,28 @@ footer{
   }
 
   .sushi{
-    opacity:.3;
+    width:60%;
+    height:45%;
+    opacity:.35;
   }
 
-  .hand-note{
+  .think{
     display:none;
   }
 
-  .lower{
-    padding-left:5%;
-    padding-right:5%;
+  .knowledge-blob{
+    width:270px;
+    height:160px;
+  }
+
+  .footer-links{
+    grid-template-columns:1fr 1fr;
+    gap:20px;
   }
 
   .footer-bottom{
     flex-direction:column;
-    gap:10px;
+    gap:8px;
     text-align:center;
   }
 }
@@ -1191,87 +1194,89 @@ footer{
 <body>
 
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
+<!-- ================= HEADER ================= -->
 
 <header>
 
-  <div class="brand">
+  <a href="#" class="logo">
 
-    <div class="brand-mark"></div>
+    <div class="logo-leaf"></div>
 
-    <div class="brand-text">
-      <h1>NIJOK</h1>
-      <p>Food · Culture · People · Places.</p>
+    <div>
+      <div class="logo-name">NIJOK</div>
+      <div class="logo-tag">
+        Food · Culture · People · Places
+      </div>
     </div>
 
-  </div>
+  </a>
 
 
   <nav>
 
-    <a href="#" class="active">Home</a>
-    <a href="#passport">Food Passport</a>
-    <a href="#museum">Food Museum</a>
-    <a href="#map">Food Map</a>
-    <a href="#countries">Countries</a>
+    <a class="active" href="#">Home</a>
+    <a href="#games">Food Passport</a>
+    <a href="#games">Food Museum</a>
+    <a href="#games">Food Map</a>
+    <a href="#">Countries</a>
     <a href="#learn">Learn</a>
     <a href="#about">About</a>
 
   </nav>
 
 
-  <input
-    class="search"
-    placeholder="Search food, region, country..."
-  >
+  <div class="header-right">
 
-  <div class="language">
-    🌐 EN⌄
+    <input
+      class="search"
+      type="text"
+      placeholder="⌕  Search food, region, country..."
+    >
+
+    <div class="lang">
+      ◉ &nbsp; EN⌄
+    </div>
+
   </div>
 
 </header>
 
 
-
-<!-- =====================================================
-     HERO
-===================================================== -->
+<!-- ================= HERO ================= -->
 
 <section class="hero">
 
-  <div class="leaf one"></div>
-  <div class="leaf two"></div>
+  <div class="leaf leaf-a"></div>
+  <div class="leaf leaf-b"></div>
 
-  <div class="hero-copy">
+
+  <div class="hero-content">
 
     <div class="eyebrow">
       FOOD KNOWLEDGE GAME
-      <span></span>
     </div>
 
-    <h2>
+
+    <h1 class="hero-title">
       Play. Learn.<br>
       Discover Food.
-    </h2>
+    </h1>
 
-    <p class="hero-description">
 
-      Test your knowledge, explore new cultures
-      and unlock the stories behind every dish.
-      The Food Knowledge Game makes learning
-      about food fun, interactive and rewarding.
-
+    <p class="hero-text">
+      Test your knowledge, explore new cultures and unlock
+      the stories behind every dish. The Food Knowledge Game
+      makes learning about food fun, interactive and rewarding.
     </p>
+
 
     <div class="hero-buttons">
 
-      <a class="primary-btn" href="#games">
-        🌿 &nbsp; Start Playing →
+      <a href="#games" class="btn btn-green">
+        🌿 &nbsp; Start Playing &nbsp; →
       </a>
 
-      <a class="secondary-btn" href="#how">
+      <a href="#learn" class="btn btn-outline">
         How It Works &nbsp; ▷
       </a>
 
@@ -1280,24 +1285,58 @@ footer{
   </div>
 
 
-  <!-- VISUAL COLLAGE -->
+  <!-- FOOD COLLAGE -->
 
-  <div class="hero-art">
+  <div class="hero-visual">
 
-    <div class="art-circle"></div>
+    <div class="hero-orbit"></div>
 
-    <div class="photo one"></div>
-    <div class="photo two"></div>
-    <div class="photo three"></div>
-    <div class="photo four"></div>
 
-    <div class="food-symbol one">🍛</div>
-    <div class="food-symbol two">🍚</div>
+    <div class="food-photo fp1">
 
-    <div class="hero-leaf a"></div>
-    <div class="hero-leaf b"></div>
+      <img
+        src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=700&q=90"
+        alt="Indian spices"
+      >
 
-    <div class="hero-note">
+    </div>
+
+
+    <div class="food-photo fp2">
+
+      <img
+        src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=700&q=90"
+        alt="Food landscape"
+      >
+
+    </div>
+
+
+    <div class="food-photo fp3">
+
+      <img
+        src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=700&q=90"
+        alt="Sushi"
+      >
+
+    </div>
+
+
+    <div class="food-photo fp4">
+
+      <img
+        src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=700&q=90"
+        alt="Indian food"
+      >
+
+    </div>
+
+
+    <div class="visual-leaf vl1"></div>
+    <div class="visual-leaf vl2"></div>
+
+
+    <div class="story">
       Every<br>
       Food Has<br>
       a Story
@@ -1308,12 +1347,9 @@ footer{
 </section>
 
 
+<!-- ================= FEATURES ================= -->
 
-<!-- =====================================================
-     FEATURE STRIP
-===================================================== -->
-
-<section class="feature-strip">
+<section class="features">
 
   <div class="feature">
 
@@ -1331,7 +1367,7 @@ footer{
 
   <div class="feature">
 
-    <div class="feature-icon">🌐</div>
+    <div class="feature-icon">🌍</div>
 
     <h3>Global & Local</h3>
 
@@ -1365,7 +1401,7 @@ footer{
 
     <p>
       Collect points, badges<br>
-      and unlocklevels.
+      and unlock levels.
     </p>
 
   </div>
@@ -1387,20 +1423,16 @@ footer{
 </section>
 
 
-
-<!-- =====================================================
-     GAME MODES
-===================================================== -->
+<!-- ================= GAME MODES ================= -->
 
 <section class="game-section" id="games">
 
-  <div class="game-header">
+  <div class="game-heading">
 
     <div>
 
       <div class="eyebrow">
         GAME MODES
-        <span></span>
       </div>
 
       <h2>
@@ -1410,30 +1442,35 @@ footer{
 
     </div>
 
-    <p>
+
+    <div class="game-description">
+
       Different ways to play. Same goal —
       become a food expert!
-    </p>
+
+    </div>
 
   </div>
 
 
   <div class="game-grid">
 
+
     <div class="game-card">
 
-      <div class="game-shape"></div>
+      <div class="card-blob"></div>
 
-      <div class="game-icon">📍</div>
+      <div class="card-icon">📍</div>
 
       <h3>Guess the Food</h3>
 
       <p>
-        Identify the dish from the image.
+        Identify the dish<br>
+        from the image.
       </p>
 
-      <div class="play">
-        Play Now →
+      <div class="play-now">
+        Play Now &nbsp; →
       </div>
 
     </div>
@@ -1441,18 +1478,19 @@ footer{
 
     <div class="game-card">
 
-      <div class="game-shape"></div>
+      <div class="card-blob"></div>
 
-      <div class="game-icon">❓</div>
+      <div class="card-icon">❓</div>
 
       <h3>Food Quiz</h3>
 
       <p>
-        Test your knowledge with tricky questions.
+        Test your knowledge<br>
+        with tricky questions.
       </p>
 
-      <div class="play">
-        Play Now →
+      <div class="play-now">
+        Play Now &nbsp; →
       </div>
 
     </div>
@@ -1460,18 +1498,19 @@ footer{
 
     <div class="game-card">
 
-      <div class="game-shape"></div>
+      <div class="card-blob"></div>
 
-      <div class="game-icon">🧩</div>
+      <div class="card-icon">🧩</div>
 
       <h3>Match the Pair</h3>
 
       <p>
-        Match food with region, ingredient or culture.
+        Match food with region,<br>
+        ingredient or culture.
       </p>
 
-      <div class="play">
-        Play Now →
+      <div class="play-now">
+        Play Now &nbsp; →
       </div>
 
     </div>
@@ -1479,18 +1518,19 @@ footer{
 
     <div class="game-card">
 
-      <div class="game-shape"></div>
+      <div class="card-blob"></div>
 
-      <div class="game-icon">🏆</div>
+      <div class="card-icon">🏆</div>
 
       <h3>Time Challenge</h3>
 
       <p>
-        Answer fast. Score higher.
+        Answer fast.<br>
+        Score higher.
       </p>
 
-      <div class="play">
-        Play Now →
+      <div class="play-now">
+        Play Now &nbsp; →
       </div>
 
     </div>
@@ -1500,21 +1540,23 @@ footer{
 </section>
 
 
+<!-- ================= CHALLENGE ================= -->
 
-<!-- =====================================================
-     TODAY'S CHALLENGE + PROFILE
-===================================================== -->
+<section class="challenge-area">
 
-<section class="challenge-section">
 
   <div class="challenge">
 
-    <small>🌿 &nbsp; TODAY'S CHALLENGE</small>
+    <div class="challenge-small">
+      🌿 &nbsp; TODAY'S CHALLENGE
+    </div>
+
 
     <h2>
-      Which country is the
-      origin of Sushi?
+      Which country is<br>
+      the origin of Sushi?
     </h2>
+
 
     <div class="answers">
 
@@ -1522,8 +1564,8 @@ footer{
         A. &nbsp; China
       </div>
 
-      <div class="answer correct">
-        B. &nbsp; Japan ✓
+      <div class="answer selected">
+        B. &nbsp; Japan &nbsp; ✓
       </div>
 
       <div class="answer">
@@ -1536,36 +1578,46 @@ footer{
 
     </div>
 
-    <div class="sushi">
-      🍣
-    </div>
 
-    <div class="hand-note">
-      Think.<br>
-      Explore.<br>
-      Learn.
+    <img
+      class="sushi"
+      src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=1000&q=90"
+      alt="Sushi"
+    >
+
+
+    <div class="think">
+      Think<br>
+      Explore<br>
+      Learn →
     </div>
 
   </div>
 
 
+  <!-- PROFILE -->
+
   <div class="profile">
 
-    <div class="profile-title">
+    <h2>
       🌿 &nbsp; Your Food Journey
-    </div>
+    </h2>
+
 
     <div class="avatar">
       👨🏻
     </div>
 
+
     <div class="profile-name">
       Boske Shivadas
     </div>
 
+
     <div class="profile-role">
       Food Explorer
     </div>
+
 
     <div class="stats">
 
@@ -1586,8 +1638,9 @@ footer{
 
     </div>
 
+
     <a class="profile-btn" href="#">
-      View Profile →
+      View Profile &nbsp; →
     </a>
 
   </div>
@@ -1595,188 +1648,198 @@ footer{
 </section>
 
 
+<!-- ================= LEADERBOARD ================= -->
 
-<!--
-   =====================================================
-     LEADERBOARD + DAILY
-===================================================== -->
+<section class="bottom-grid">
 
-<section class="lower">
 
-  <div class="leaderboard">
+  <div class="box">
 
     <div class="eyebrow">
-      👑 TOP FOOD EXPLORERS
-      <span></span>
+      👑 &nbsp; TOP FOOD EXPLORERS
     </div>
 
-    <p style="font-size:10px;color:#728077;margin-bottom:12px;">
+    <h2 class="box-title">
       See who knows food the best!
-    </p>
+    </h2>
 
 
-    <div class="leader">
+    <div class="player">
 
-      <div class="rank">1</div>
+      <span>1</span>
 
-      <div class="person">
-        <div class="person-icon">👩🏻</div>
+      <div class="player-info">
+        <div class="player-avatar">👩🏻</div>
         FoodieRiya
       </div>
 
-      <div class="score">1420</div>
+      <span class="score">1420</span>
 
     </div>
 
 
-    <div class="leader">
+    <div class="player">
 
-      <div class="rank">2</div>
+      <span>2</span>
 
-      <div class="person">
-        <div class="person-icon">👨🏽</div>
+      <div class="player-info">
+        <div class="player-avatar">👨🏻</div>
         NomadChef
       </div>
 
-      <div class="score">1360</div>
+      <span class="score">1360</span>
 
     </div>
 
 
-    <div class="leader">
+    <div class="player">
 
-      <div class="rank">3</div>
+      <span>3</span>
 
-      <div class="person">
-        <div class="person-icon">👩🏽</div>
+      <div class="player-info">
+        <div class="player-avatar">👩🏽</div>
         SpiceHunter
       </div>
 
-      <div class="score">1280</div>
+      <span class="score">1280</span>
 
     </div>
 
 
-    <div class="leader">
+    <div class="player">
 
-      <div class="rank">4</div>
+      <span>4</span>
 
-      <div class="person">
-        <div class="person-icon">👨🏻</div>
+      <div class="player-info">
+        <div class="player-avatar">👨🏽</div>
         TasteTraveler
       </div>
 
-      <div class="score">1210</div>
+      <span class="score">1210</span>
 
     </div>
 
 
-    <div class="leader">
+    <div class="player">
 
-      <div class="rank">5</div>
+      <span>5</span>
 
-      <div class="person">
-        <div class="person-icon">👨🏽</div>
+      <div class="player-info">
+        <div class="player-avatar">👩🏻</div>
         KulinarikKid
       </div>
 
-      <div class="score">1180</div>
+      <span class="score">1180</span>
 
     </div>
 
   </div>
 
 
+  <!-- DAILY -->
 
-  <div class="daily">
+  <div class="box green-box">
 
     <div class="eyebrow">
-      📅 DAILY CHALLENGE
-      <span></span>
+      📅 &nbsp; DAILY CHALLENGE
     </div>
 
-    <p style="font-size:11px;color:#64776b;">
+    <h2 class="box-title">
       New questions every day!
+    </h2>
+
+    <p class="box-sub">
+      Play daily. Earn rewards. Stay curious.
     </p>
 
 
     <div class="timer">
 
-      <div class="time-box">
+      <div class="time">
         <strong>12</strong>
-        <span>Hours</span>
+        <span>HOURS</span>
       </div>
 
-      <div class="time-box">
+      <div class="time">
         <strong>36</strong>
-        <span>Minutes</span>
+        <span>MINUTES</span>
       </div>
 
-      <div class="time-box">
+      <div class="time">
         <strong>18</strong>
-        <span>Seconds</span>
+        <span>SECONDS</span>
       </div>
 
     </div>
-
-
-    <p style="
-      margin-top:25px;
-      font-size:11px;
-      color:#61756a;
-      line-height:1.6;
-    ">
-      🌿 &nbsp; Play daily. Earn rewards.
-      Stay curious.
-    </p>
 
   </div>
 
 </section>
 
 
+<!-- ================= KNOWLEDGE ================= -->
 
-<!-- =====================================================
-     STATEMENT
-===================================================== -->
+<section class="knowledge" id="learn">
 
-<section class="statement">
+  <div class="knowledge-blob">
 
-  <div class="leaf three"></div>
+    <span>
+      Small<br>
+      Bites of Knowledge<br>
+      Make Big<br>
+      Journeys.
+    </span>
 
-  <h2>
-    Small Bites of Knowledge<br>
-    <span>Make Big Journeys.</span>
-  </h2>
+  </div>
 
-  <p>
-    Food connects people, places, cultures and stories.
-    NIJOK is building a place where curiosity becomes knowledge.
-  </p>
 
-  <a class="primary-btn" href="#games">
-    Start Exploring →
-  </a>
+  <div class="knowledge-copy">
+
+    <div class="eyebrow">
+      FOOD KNOWLEDGE
+    </div>
+
+    <h2>
+      Every food<br>
+      has a story.
+    </h2>
+
+    <p>
+      Discover ingredients, cultures, places and
+      the stories behind the food we eat.
+    </p>
+
+    <a href="#" class="btn btn-green">
+      Start Exploring &nbsp; →
+    </a>
+
+  </div>
 
 </section>
 
 
+<!-- ================= FOOTER ================= -->
 
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer>
+<footer id="about">
 
   <div class="footer-top">
 
-    <div class="footer-brand">
 
-      <h2>🌿 NIJOK</h2>
+    <div class="footer-logo">
 
-      <p>
-        Food. Culture. People. Places.
-      </p>
+      <div class="footer-leaf"></div>
+
+      <div>
+
+        <div class="footer-name">
+          NIJOK
+        </div>
+
+        <div class="footer-tag">
+          Food. Culture. People. Places.
+        </div>
+
+      </div>
 
     </div>
 
@@ -1787,28 +1850,30 @@ footer{
         <strong>EXPLORE</strong>
         <a href="#">Home</a>
         <a href="#">Food Passport</a>
-        <a href="#">Food Museum</a>
       </div>
 
       <div>
         <strong>DISCOVER</strong>
+        <a href="#">Food Museum</a>
         <a href="#">Food Map</a>
-        <a href="#">Countries</a>
-        <a href="#">Learn</a>
       </div>
 
       <div>
-        <strong>COMMUNITY</strong>
-        <a href="#">Challenges</a>
-        <a href="#">Leaderboard</a>
-        <a href="#">Profile</a>
+        <strong>WORLD</strong>
+        <a href="#">Countries</a>
+        <a href="#">Cultures</a>
+      </div>
+
+      <div>
+        <strong>LEARN</strong>
+        <a href="#">Knowledge</a>
+        <a href="#">Stories</a>
       </div>
 
       <div>
         <strong>NIJOK</strong>
         <a href="#">About</a>
         <a href="#">Contact</a>
-        <a href="#">English</a>
       </div>
 
     </div>
@@ -1823,7 +1888,7 @@ footer{
     </span>
 
     <span>
-      🌿 &nbsp; Good Food. Better Questions. A Richer World.
+      🌿 &nbsp; Good Food. Better Questions. A Richer World. &nbsp; 🌿
     </span>
 
   </div>

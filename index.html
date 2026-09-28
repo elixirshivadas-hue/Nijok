@@ -5499,7 +5499,13 @@ loadPuzzle();
       }
     });
   }
+function openGame(game){
 
+  alert("OPEN GAME: " + game);
+
+  if(!modal) createModal();
+
+  currentGame = game;
   function openGame(game){
 
     if(!modal) createModal();

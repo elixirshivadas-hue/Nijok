@@ -1,1 +1,154 @@
 
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f7f2;
+  color: #17351f;
+}
+
+.hero {
+  min-height: 90vh;
+  text-align: center;
+  padding: 70px 20px;
+  background: linear-gradient(180deg, #e9f7e8, #f5f7f2);
+}
+
+.brand {
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 5px;
+  color: #e53935;
+}
+
+.hero h1 {
+  font-size: clamp(42px, 10vw, 78px);
+  margin: 30px 0 10px;
+}
+
+.tagline {
+  font-size: 22px;
+  color: #58705d;
+}
+
+.tomato {
+  font-size: 130px;
+  margin: 35px 0 20px;
+  filter: drop-shadow(0 15px 15px rgba(0,0,0,0.15));
+}
+
+.hero h2 {
+  font-size: 28px;
+}
+
+.hero p {
+  line-height: 1.6;
+}
+
+.card {
+  max-width: 850px;
+  margin: 35px auto;
+  padding: 35px 25px;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.card h2 {
+  font-size: 32px;
+  margin: 12px 0;
+}
+
+.card p {
+  max-width: 650px;
+  margin: 12px auto;
+  font-size: 18px;
+  line-height: 1.7;
+  color: #536257;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #e53935;
+}
+
+.topics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.topics div {
+  padding: 20px 10px;
+  background: #f1f7ef;
+  border-radius: 16px;
+  font-weight: bold;
+  line-height: 1.8;
+}
+
+.scan {
+  margin-top: 60px;
+  padding: 70px 20px;
+  text-align: center;
+  background: #17351f;
+  color: white;
+}
+
+.scan h2 {
+  font-size: 36px;
+}
+
+.scan p {
+  max-width: 600px;
+  margin: 15px auto 30px;
+  line-height: 1.7;
+  color: #d8e7da;
+}
+
+button {
+  border: none;
+  padding: 15px 28px;
+  border-radius: 30px;
+  background: #e53935;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+footer {
+  padding: 30px 20px;
+  text-align: center;
+  background: #102719;
+  color: #aebdaf;
+}
+
+@media (max-width: 600px) {
+
+  .hero {
+    min-height: auto;
+    padding: 55px 18px;
+  }
+
+  .tomato {
+    font-size: 100px;
+  }
+
+  .topics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card {
+    margin: 20px 15px;
+  }
+
+  .scan h2 {
+    font-size: 29px;
+  }
+}

@@ -13,7 +13,7 @@
 <style>
 
 /* =====================================================
-   NIJOK — REFERENCE DESIGN
+   NIJOK — CORE
 ===================================================== */
 
 :root{
@@ -22,7 +22,7 @@
   --green:#064a35;
   --green-dark:#043b2b;
   --green-light:#dfe9cd;
-  --sage:#a9bd88;
+  --sage:#91aa6e;
   --gold:#d7b73e;
   --orange:#d96843;
   --red:#9c4439;
@@ -49,67 +49,12 @@ body{
 }
 
 a{
-  text-decoration:none;
   color:inherit;
+  text-decoration:none;
 }
 
-button,
-input{
+button{
   font-family:inherit;
-}
-
-/* =====================================================
-   BOTANICAL DECORATIONS
-===================================================== */
-
-.botanical{
-  position:absolute;
-  pointer-events:none;
-  z-index:0;
-}
-
-.leaf{
-  position:absolute;
-  width:85px;
-  height:38px;
-  background:#91aa6e;
-  border-radius:100% 0 100% 0;
-  opacity:.72;
-}
-
-.leaf:after{
-  content:"";
-  position:absolute;
-  width:2px;
-  height:48px;
-  background:#668452;
-  left:42px;
-  top:-5px;
-  transform:rotate(-42deg);
-}
-
-.leaf-a{
-  left:-30px;
-  top:70px;
-  transform:rotate(22deg);
-}
-
-.leaf-b{
-  right:-25px;
-  top:82px;
-  transform:rotate(152deg);
-}
-
-.leaf-c{
-  left:-28px;
-  bottom:80px;
-  transform:rotate(-25deg);
-}
-
-.leaf-d{
-  right:-28px;
-  bottom:100px;
-  transform:rotate(155deg);
 }
 
 /* =====================================================
@@ -118,11 +63,11 @@ input{
 
 header{
   height:76px;
-  padding:0 3.4%;
+  padding:0 4%;
   display:flex;
   align-items:center;
   gap:30px;
-  background:rgba(247,245,233,.97);
+  background:rgba(247,245,233,.96);
   border-bottom:1px solid var(--line);
   position:sticky;
   top:0;
@@ -146,42 +91,39 @@ header{
   position:relative;
 }
 
-.logo-leaf:before{
+.logo-leaf:after{
   content:"";
   position:absolute;
   width:2px;
-  height:45px;
+  height:43px;
   background:var(--paper);
   left:19px;
-  top:3px;
+  top:4px;
   transform:rotate(-28deg);
 }
 
 .logo-name{
   font-family:"Playfair Display",serif;
   font-size:31px;
-  line-height:.9;
   letter-spacing:2px;
 }
 
 .logo-tag{
-  font-size:9px;
   color:var(--muted);
-  margin-top:5px;
+  font-size:9px;
+  margin-top:4px;
 }
 
 nav{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:24px;
   flex:1;
+  display:flex;
+  justify-content:center;
+  gap:22px;
 }
 
 nav a{
   font-size:9px;
-  font-weight:600;
-  white-space:nowrap;
+  font-weight:700;
   padding:29px 0 22px;
   border-bottom:2px solid transparent;
 }
@@ -193,23 +135,18 @@ nav a.active{
 .header-right{
   display:flex;
   align-items:center;
-  gap:17px;
+  gap:12px;
 }
 
 .search{
-  width:185px;
+  width:180px;
   height:34px;
   border:1px solid #cbd2c4;
   border-radius:20px;
   background:transparent;
-  padding:0 14px;
-  font-size:9px;
+  padding:0 13px;
   outline:none;
-}
-
-.lang{
-  font-size:10px;
-  white-space:nowrap;
+  font-size:9px;
 }
 
 /* =====================================================
@@ -218,7 +155,7 @@ nav a.active{
 
 .hero{
   min-height:440px;
-  padding:37px 4% 20px;
+  padding:40px 4% 25px;
   display:grid;
   grid-template-columns:47% 53%;
   position:relative;
@@ -226,9 +163,8 @@ nav a.active{
 }
 
 .hero-content{
-  position:relative;
-  z-index:5;
-  padding-top:28px;
+  padding-top:30px;
+  animation:heroLeft .8s ease both;
 }
 
 .eyebrow{
@@ -238,36 +174,39 @@ nav a.active{
   font-size:11px;
   font-weight:700;
   letter-spacing:2px;
-  margin-bottom:17px;
+  margin-bottom:18px;
 }
 
 .eyebrow:after{
   content:"";
-  width:52px;
+  width:50px;
   height:1px;
   background:var(--green);
 }
 
 .hero-title{
   font-family:"Playfair Display",serif;
-  font-size:clamp(48px,5.2vw,67px);
+  font-size:clamp(48px,5vw,68px);
   line-height:.94;
-  letter-spacing:-2.2px;
-  max-width:530px;
+  letter-spacing:-2px;
+}
+
+.hero-title span{
+  color:#71904f;
 }
 
 .hero-text{
-  margin-top:20px;
   max-width:420px;
+  margin-top:20px;
+  color:#536c60;
   font-size:13px;
   line-height:1.55;
-  color:#536c60;
 }
 
 .hero-buttons{
   display:flex;
   gap:12px;
-  margin-top:22px;
+  margin-top:23px;
 }
 
 .btn{
@@ -275,7 +214,7 @@ nav a.active{
   padding:12px 21px;
   font-size:10px;
   font-weight:700;
-  transition:.3s;
+  transition:.25s;
 }
 
 .btn:hover{
@@ -283,8 +222,8 @@ nav a.active{
 }
 
 .btn-green{
-  color:white;
   background:var(--green);
+  color:white;
 }
 
 .btn-outline{
@@ -292,12 +231,13 @@ nav a.active{
 }
 
 /* =====================================================
-   HERO COLLAGE
+   HERO VISUAL
 ===================================================== */
 
 .hero-visual{
   height:395px;
   position:relative;
+  animation:heroRight .9s ease both;
 }
 
 .hero-orbit{
@@ -317,6 +257,7 @@ nav a.active{
   border:6px solid var(--paper);
   box-shadow:0 9px 25px rgba(30,70,48,.16);
   z-index:3;
+  animation:floatPhoto 6s ease-in-out infinite;
 }
 
 .food-photo img{
@@ -361,50 +302,28 @@ nav a.active{
   border-radius:8px 8px 65px 8px;
 }
 
-.visual-leaf{
-  position:absolute;
-  width:100px;
-  height:43px;
-  background:#78995a;
-  border-radius:100% 0 100% 0;
-  z-index:4;
-}
-
-.vl1{
-  left:3%;
-  top:34%;
-  transform:rotate(-36deg);
-}
-
-.vl2{
-  right:1%;
-  bottom:16%;
-  transform:rotate(140deg);
-}
-
 .story{
   position:absolute;
-  right:-1%;
-  top:41%;
+  right:0;
+  top:42%;
+  z-index:8;
   font-family:"Caveat",cursive;
   font-size:27px;
-  line-height:1;
+  line-height:.9;
   transform:rotate(-7deg);
-  z-index:7;
 }
 
 .story:after{
   content:"";
   display:block;
-  width:72px;
+  width:70px;
   height:2px;
   background:var(--green);
   margin:9px auto;
-  transform:rotate(-5deg);
 }
 
 /* =====================================================
-   FEATURE STRIP
+   FEATURES
 ===================================================== */
 
 .features{
@@ -416,7 +335,7 @@ nav a.active{
 }
 
 .feature{
-  min-height:142px;
+  min-height:140px;
   padding:19px 12px;
   text-align:center;
   border-right:1px solid var(--line);
@@ -498,21 +417,10 @@ nav a.active{
   transform:translateY(-7px);
 }
 
-.game-card:nth-child(1){
-  background:#edf0df;
-}
-
-.game-card:nth-child(2){
-  background:#f5edcf;
-}
-
-.game-card:nth-child(3){
-  background:#f5e4dd;
-}
-
-.game-card:nth-child(4){
-  background:#deede5;
-}
+.game-card:nth-child(1){background:#edf0df}
+.game-card:nth-child(2){background:#f5edcf}
+.game-card:nth-child(3){background:#f5e4dd}
+.game-card:nth-child(4){background:#deede5}
 
 .card-blob{
   position:absolute;
@@ -521,28 +429,16 @@ nav a.active{
   right:-16px;
   top:-17px;
   border-radius:100% 0 100% 0;
-  transform:rotate(8deg);
 }
 
-.game-card:nth-child(1) .card-blob{
-  background:#8eaf48;
-}
-
-.game-card:nth-child(2) .card-blob{
-  background:#d6b338;
-}
-
-.game-card:nth-child(3) .card-blob{
-  background:#d76b4b;
-}
-
-.game-card:nth-child(4) .card-blob{
-  background:#418c70;
-}
+.game-card:nth-child(1) .card-blob{background:#8eaf48}
+.game-card:nth-child(2) .card-blob{background:#d6b338}
+.game-card:nth-child(3) .card-blob{background:#d76b4b}
+.game-card:nth-child(4) .card-blob{background:#418c70}
 
 .card-icon{
   position:relative;
-  z-index:4;
+  z-index:3;
   font-size:35px;
   margin-bottom:48px;
 }
@@ -553,10 +449,10 @@ nav a.active{
 }
 
 .game-card p{
-  margin-top:5px;
   color:#667b70;
   font-size:10px;
   line-height:1.45;
+  margin-top:5px;
 }
 
 .play-now{
@@ -568,7 +464,7 @@ nav a.active{
 }
 
 /* =====================================================
-   CHALLENGE
+   CHALLENGE — PLAYABLE
 ===================================================== */
 
 .challenge-area{
@@ -579,7 +475,7 @@ nav a.active{
 }
 
 .challenge{
-  min-height:310px;
+  min-height:390px;
   background:var(--green);
   color:white;
   border-radius:30px;
@@ -591,35 +487,108 @@ nav a.active{
 .challenge-small{
   font-size:9px;
   letter-spacing:2px;
+  opacity:.9;
 }
 
-.challenge h2{
+#gameBox{
+  position:relative;
+  z-index:10;
+  width:54%;
+}
+
+#gameBox:before{
+  content:"NIJOK • FOOD QUEST";
+  display:inline-block;
+  margin-top:12px;
+  padding:6px 11px;
+  border-radius:20px;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.20);
+  font-size:8px;
+  letter-spacing:1.4px;
+}
+
+#question{
   font-family:"Playfair Display",serif;
   font-size:29px;
   line-height:1.05;
-  margin-top:13px;
-  position:relative;
-  z-index:6;
+  margin-top:14px;
 }
 
 .answers{
-  width:51%;
-  margin-top:22px;
-  position:relative;
-  z-index:7;
+  margin-top:20px;
+  display:grid;
+  gap:8px;
 }
 
 .answer{
-  border:1px solid rgba(255,255,255,.65);
+  width:100%;
+  border:1px solid rgba(255,255,255,.55);
   border-radius:20px;
-  padding:8px 13px;
-  margin-bottom:7px;
+  padding:9px 13px;
+  background:transparent;
+  color:white;
+  text-align:left;
+  font-size:10px;
+  cursor:pointer;
+  transition:.22s;
+}
+
+.answer:hover:not(:disabled){
+  background:rgba(255,255,255,.10);
+  transform:translateX(3px);
+}
+
+.answer.correct{
+  background:#40945c;
+  border-color:#70bd80;
+  animation:correctPop .4s ease;
+}
+
+.answer.wrong{
+  background:#9c4439;
+  border-color:#d77a6d;
+  animation:wrongShake .35s ease;
+}
+
+.answer:disabled{
+  cursor:default;
+}
+
+#gameMessage{
+  min-height:25px;
+  margin-top:11px;
+  font-size:10px;
+  font-weight:700;
+}
+
+#scoreBox{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  margin-top:6px;
+  padding:7px 12px;
+  border-radius:20px;
+  background:rgba(255,255,255,.11);
   font-size:10px;
 }
 
-.answer.selected{
-  background:#40945c;
-  border-color:#40945c;
+#nextButton{
+  display:none;
+  margin-top:12px;
+  border:0;
+  border-radius:22px;
+  padding:10px 16px;
+  background:#f7f5e9;
+  color:var(--green);
+  font-weight:700;
+  font-size:10px;
+  cursor:pointer;
+  transition:.25s;
+}
+
+#nextButton:hover{
+  transform:translateY(-2px);
 }
 
 .sushi{
@@ -630,11 +599,12 @@ nav a.active{
   bottom:0;
   object-fit:cover;
   border-radius:50% 0 0 50%;
+  z-index:2;
 }
 
 .think{
   position:absolute;
-  right:13%;
+  right:12%;
   bottom:18px;
   z-index:8;
   font-family:"Caveat",cursive;
@@ -648,7 +618,7 @@ nav a.active{
 ===================================================== */
 
 .profile{
-  min-height:310px;
+  min-height:390px;
   background:var(--paper2);
   border:1px solid var(--line);
   border-radius:28px;
@@ -731,7 +701,7 @@ nav a.active{
 }
 
 /* =====================================================
-   LEADERBOARD / DAILY
+   LOWER SECTION
 ===================================================== */
 
 .bottom-grid{
@@ -819,58 +789,6 @@ nav a.active{
 }
 
 /* =====================================================
-   KNOWLEDGE
-===================================================== */
-
-.knowledge{
-  min-height:260px;
-  padding:10px 4% 65px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  align-items:center;
-}
-
-.knowledge-blob{
-  width:310px;
-  height:180px;
-  margin:auto;
-  background:var(--green);
-  border-radius:65% 35% 55% 45%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  transform:rotate(-7deg);
-  box-shadow:0 15px 30px rgba(8,74,53,.12);
-}
-
-.knowledge-blob span{
-  font-family:"Caveat",cursive;
-  color:white;
-  font-size:28px;
-  line-height:1.02;
-  transform:rotate(7deg);
-}
-
-.knowledge-copy{
-  text-align:center;
-}
-
-.knowledge-copy h2{
-  font-family:"Playfair Display",serif;
-  font-size:38px;
-  line-height:1;
-}
-
-.knowledge-copy p{
-  max-width:390px;
-  margin:13px auto 18px;
-  font-size:10px;
-  line-height:1.6;
-  color:#6b7e74;
-}
-
-/* =====================================================
    FOOTER
 ===================================================== */
 
@@ -884,20 +802,6 @@ footer{
   display:grid;
   grid-template-columns:1fr 2fr;
   gap:30px;
-}
-
-.footer-logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.footer-leaf{
-  width:32px;
-  height:41px;
-  background:#e4ecd0;
-  border-radius:100% 0 100% 0;
-  transform:rotate(28deg);
 }
 
 .footer-name{
@@ -939,69 +843,34 @@ footer{
 }
 
 /* =====================================================
-   ANIMATION
+   ANIMATIONS
 ===================================================== */
 
-.hero-content{
-  animation:heroLeft .8s ease both;
-}
-
-.hero-visual{
-  animation:heroRight .9s ease both;
-}
-
-.game-card,
-.feature,
-.challenge,
-.profile,
-.box{
-  animation:rise .8s ease both;
-}
-
 @keyframes heroLeft{
-  from{
-    opacity:0;
-    transform:translateX(-30px);
-  }
-  to{
-    opacity:1;
-    transform:translateX(0);
-  }
+  from{opacity:0;transform:translateX(-30px)}
+  to{opacity:1;transform:translateX(0)}
 }
 
 @keyframes heroRight{
-  from{
-    opacity:0;
-    transform:translateX(30px);
-  }
-  to{
-    opacity:1;
-    transform:translateX(0);
-  }
-}
-
-@keyframes rise{
-  from{
-    opacity:0;
-    transform:translateY(20px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
-.food-photo{
-  animation:floatPhoto 6s ease-in-out infinite;
+  from{opacity:0;transform:translateX(30px)}
+  to{opacity:1;transform:translateX(0)}
 }
 
 @keyframes floatPhoto{
-  0%,100%{
-    margin-top:0;
-  }
-  50%{
-    margin-top:-5px;
-  }
+  0%,100%{margin-top:0}
+  50%{margin-top:-5px}
+}
+
+@keyframes correctPop{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.03)}
+  100%{transform:scale(1)}
+}
+
+@keyframes wrongShake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-5px)}
+  75%{transform:translateX(5px)}
 }
 
 /* =====================================================
@@ -1016,8 +885,7 @@ footer{
   }
 
   nav,
-  .search,
-  .lang{
+  .search{
     display:none;
   }
 
@@ -1030,10 +898,6 @@ footer{
     padding:34px 6% 20px;
   }
 
-  .hero-title{
-    font-size:49px;
-  }
-
   .hero-visual{
     height:330px;
     margin-top:15px;
@@ -1044,24 +908,8 @@ footer{
     height:290px;
   }
 
-  .fp1,
-  .fp2,
-  .fp3,
-  .fp4{
-    width:125px;
-    height:100px;
-  }
-
-  .story{
-    font-size:21px;
-  }
-
   .features{
     grid-template-columns:repeat(2,1fr);
-  }
-
-  .feature:nth-child(2n){
-    border-right:0;
   }
 
   .game-heading{
@@ -1080,8 +928,7 @@ footer{
     grid-template-columns:1fr;
   }
 
-  .bottom-grid,
-  .knowledge{
+  .bottom-grid{
     grid-template-columns:1fr;
   }
 
@@ -1100,21 +947,8 @@ footer{
     font-size:26px;
   }
 
-  .logo-leaf{
-    width:32px;
-    height:42px;
-  }
-
   .hero-title{
     font-size:43px;
-  }
-
-  .hero-text{
-    font-size:12px;
-  }
-
-  .hero-buttons{
-    flex-wrap:wrap;
   }
 
   .hero-visual{
@@ -1126,26 +960,14 @@ footer{
     height:235px;
   }
 
-  .fp1,
-  .fp2,
-  .fp3,
-  .fp4{
+  .fp1,.fp2,.fp3,.fp4{
     width:100px;
     height:82px;
     border-width:4px;
   }
 
   .story{
-    right:0;
     font-size:18px;
-  }
-
-  .features{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .feature{
-    min-height:130px;
   }
 
   .game-grid{
@@ -1153,26 +975,21 @@ footer{
   }
 
   .challenge{
-    min-height:410px;
+    min-height:480px;
   }
 
-  .answers{
+  #gameBox{
     width:100%;
   }
 
   .sushi{
     width:60%;
-    height:45%;
-    opacity:.35;
+    height:35%;
+    opacity:.22;
   }
 
   .think{
     display:none;
-  }
-
-  .knowledge-blob{
-    width:270px;
-    height:160px;
   }
 
   .footer-links{
@@ -1186,1008 +1003,474 @@ footer{
     text-align:center;
   }
 }
-}
 
-/* =====================================================
-   NIJOK SIGNATURE FLOWER
-===================================================== */
-
-.nijok-signature-flower{
-  position:absolute;
-  width:100px;
-  height:120px;
-  right:4%;
-  top:8%;
-  z-index:8;
-  pointer-events:none;
-  animation:nijokFlowerFloat 5s ease-in-out infinite;
-}
-
-.nijok-flower-petal{
-  position:absolute;
-  width:34px;
-  height:58px;
-  background:#78995a;
-  border-radius:100% 0 100% 0;
-  left:33px;
-  top:5px;
-  transform-origin:17px 48px;
-  opacity:.92;
-}
-
-.nijok-flower-petal:nth-child(1){
-  transform:rotate(0deg);
-}
-
-.nijok-flower-petal:nth-child(2){
-  transform:rotate(72deg);
-}
-
-.nijok-flower-petal:nth-child(3){
-  transform:rotate(144deg);
-}
-
-.nijok-flower-petal:nth-child(4){
-  transform:rotate(216deg);
-}
-
-.nijok-flower-petal:nth-child(5){
-  transform:rotate(288deg);
-}
-
-.nijok-flower-center{
-  position:absolute;
-  width:21px;
-  height:21px;
-  left:40px;
-  top:42px;
-  border-radius:50%;
-  background:#d7b73e;
-  z-index:5;
-  box-shadow:0 0 0 5px rgba(215,183,62,.12);
-}
-
-.nijok-flower-stem{
-  position:absolute;
-  width:3px;
-  height:65px;
-  background:#668452;
-  left:48px;
-  top:57px;
-  transform:rotate(18deg);
-  transform-origin:top;
-  border-radius:5px;
-}
-
-.nijok-flower-leaf{
-  position:absolute;
-  width:42px;
-  height:22px;
-  background:#91aa6e;
-  border-radius:100% 0 100% 0;
-  left:20px;
-  top:91px;
-  transform:rotate(-25deg);
-}
-
-@keyframes nijokFlowerFloat{
-  0%,100%{
-    transform:translateY(0) rotate(-3deg);
-  }
-  50%{
-    transform:translateY(-7px) rotate(3deg);
-  }
-}
-
-/* MOBILE */
-@media(max-width:950px){
-
-  .nijok-signature-flower{
-    width:75px;
-    height:90px;
-    right:3%;
-    top:5%;
-    transform:scale(.75);
-  }
-
-}
-
-@media(max-width:550px){
-
-  .nijok-signature-flower{
-    right:1%;
-    top:3%;
-    transform:scale(.58);
-  }
-
-}
-   /* =====================================================
-   NIJOK GAME — PROFESSIONAL UI
-===================================================== */
-
-#gameBox {
-  position: relative;
-  padding: 10px 0 5px;
-}
-
-#gameBox::before {
-  content: "NIJOK • FOOD QUEST";
-  display: inline-block;
-  margin-bottom: 14px;
-  padding: 6px 12px;
-  border: 1px solid rgba(90,120,70,.22);
-  border-radius: 30px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  color: #60784e;
-  background: rgba(255,255,255,.55);
-}
-
-#question {
-  font-size: clamp(24px, 3vw, 38px);
-  line-height: 1.2;
-  margin: 8px 0 24px;
-}
-
-.answers {
-  display: grid;
-  gap: 12px;
-}
-
-.answer {
-  width: 100%;
-  min-height: 54px;
-  padding: 14px 18px;
-  border: 1px solid rgba(80,100,60,.18);
-  border-radius: 16px;
-  background: rgba(255,255,255,.72);
-  color: inherit;
-  font: inherit;
-  font-weight: 600;
-  text-align: left;
-  cursor: pointer;
-  transition:
-    transform .2s ease,
-    box-shadow .2s ease,
-    border-color .2s ease,
-    background .2s ease;
-}
-
-.answer:hover:not(:disabled) {
-  transform: translateY(-2px);
-  border-color: rgba(90,120,70,.45);
-  box-shadow: 0 8px 20px rgba(50,70,40,.10);
-}
-
-.answer:active:not(:disabled) {
-  transform: scale(.98);
-}
-
-.answer.correct {
-  border-color: #668c55;
-  background: rgba(130,170,100,.18);
-  animation: nijokCorrect .45s ease;
-}
-
-.answer.wrong {
-  border-color: #b66a5c;
-  background: rgba(190,100,85,.12);
-  animation: nijokWrong .35s ease;
-}
-
-.answer:disabled {
-  cursor: default;
-}
-
-#gameMessage {
-  min-height: 28px;
-  margin: 18px 0 8px;
-  font-weight: 700;
-  letter-spacing: .2px;
-}
-
-#scoreBox {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  margin-top: 8px;
-  padding: 8px 14px;
-  border-radius: 30px;
-  background: rgba(215,183,62,.12);
-  color: #776323;
-  font-size: 14px;
-}
-
-#nextButton {
-  display: none;
-  margin-top: 18px;
-  padding: 13px 22px;
-  border: 0;
-  border-radius: 30px;
-  background: #587448;
-  color: white;
-  font: inherit;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 8px 20px rgba(60,90,45,.20);
-  transition: transform .2s ease, box-shadow .2s ease;
-}
-
-#nextButton:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 11px 25px rgba(60,90,45,.25);
-}
-
-#nextButton:active {
-  transform: scale(.97);
-}
-
-@keyframes nijokCorrect {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.025); }
-  100% { transform: scale(1); }
-}
-
-@keyframes nijokWrong {
-  0%,100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
-}
-
-@media (max-width: 600px) {
-
-  #gameBox {
-    padding-top: 4px;
-  }
-
-  #question {
-    font-size: 25px;
-    margin-bottom: 20px;
-  }
-
-  .answer {
-    min-height: 52px;
-    padding: 13px 15px;
-    border-radius: 14px;
-  }
-
-  #nextButton {
-    width: 100%;
-  }
-}
 </style>
 </head>
 
-
 <body>
 
-
-<!-- ================= HEADER ================= -->
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
 <header>
 
-  <a href="#" class="logo">
+<a href="#" class="logo">
+  <div class="logo-leaf"></div>
 
-    <div class="logo-leaf"></div>
-
-    <div>
-      <div class="logo-name">NIJOK</div>
-      <div class="logo-tag">
-        Food · Culture · People · Places
-      </div>
+  <div>
+    <div class="logo-name">NIJOK</div>
+    <div class="logo-tag">
+      Food · Culture · People · Places
     </div>
-
-  </a>
-
-
-  <nav>
-
-    <a class="active" href="#">Home</a>
-    <a href="#games">Food Passport</a>
-    <a href="#games">Food Museum</a>
-    <a href="#games">Food Map</a>
-    <a href="#">Countries</a>
-    <a href="#learn">Learn</a>
-    <a href="#about">About</a>
-
-  </nav>
-
-
-  <div class="header-right">
-
-    <input
-      class="search"
-      type="text"
-      placeholder="⌕  Search food, region, country..."
-    >
-
-    <div class="lang">
-      ◉ &nbsp; EN⌄
-    </div>
-
   </div>
+</a>
+
+<nav>
+  <a class="active" href="#">Home</a>
+  <a href="#games">Food Passport</a>
+  <a href="#games">Food Museum</a>
+  <a href="#games">Food Map</a>
+  <a href="#games">Countries</a>
+  <a href="#learn">Learn</a>
+  <a href="#about">About</a>
+</nav>
+
+<div class="header-right">
+  <input class="search" placeholder="Search food, region, country...">
+</div>
 
 </header>
 
 
-<!-- ================= HERO ================= -->
+<!-- =====================================================
+     HERO
+===================================================== -->
 
 <section class="hero">
 
-  <div class="leaf leaf-a"></div>
-  <div class="leaf leaf-b"></div>
+<div class="hero-content">
 
-
-  <div class="hero-content">
-
-    <div class="eyebrow">
-      FOOD KNOWLEDGE GAME
-    </div>
-
-
-    <h1 class="hero-title">
-      Play. Learn.<br>
-      Discover Food.
-    </h1>
-
-
-    <p class="hero-text">
-      Test your knowledge, explore new cultures and unlock
-      the stories behind every dish. The Food Knowledge Game
-      makes learning about food fun, interactive and rewarding.
-    </p>
-
-
-    <div class="hero-buttons">
-
-      <a href="#games" class="btn btn-green">
-        🌿 &nbsp; Start Playing &nbsp; →
-      </a>
-
-      <a href="#learn" class="btn btn-outline">
-        How It Works &nbsp; ▷
-      </a>
-
-    </div>
-
+  <div class="eyebrow">
+    CHALLENGE MODE
   </div>
 
+  <h1 class="hero-title">
+    Food Around<br>
+    the <span>World</span>
+  </h1>
 
-  <!-- FOOD COLLAGE -->
+  <p class="hero-text">
+    Test your food knowledge, explore cultures,
+    discover ingredients and unlock the stories
+    behind what we eat.
+  </p>
 
-  <div class="hero-visual">
+  <div class="hero-buttons">
+    <a href="#games" class="btn btn-green">
+      🌿 Start Playing →
+    </a>
+
+    <a href="#challenge" class="btn btn-outline">
+      How It Works
+    </a>
+  </div>
+
+</div>
+
+
 <div class="hero-visual">
 
-    <!-- NIJOK SIGNATURE FLOWER -->
-    <div class="nijok-signature-flower">
-      <div class="nijok-flower-petal"></div>
-      <div class="nijok-flower-petal"></div>
-      <div class="nijok-flower-petal"></div>
-      <div class="nijok-flower-petal"></div>
-      <div class="nijok-flower-petal"></div>
+  <div class="hero-orbit"></div>
 
-      <div class="nijok-flower-center"></div>
-      <div class="nijok-flower-stem"></div>
-      <div class="nijok-flower-leaf"></div>
-    </div>
-
-    <div class="hero-orbit"></div>
-    <div class="hero-orbit"></div>
-
-
-    <div class="food-photo fp1">
-
-      <img
-        src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=700&q=90"
-        alt="Indian spices"
-      >
-
-    </div>
-
-
-    <div class="food-photo fp2">
-
-      <img
-        src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=700&q=90"
-        alt="Food landscape"
-      >
-
-    </div>
-
-
-    <div class="food-photo fp3">
-
-      <img
-        src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=700&q=90"
-        alt="Sushi"
-      >
-
-    </div>
-
-
-    <div class="food-photo fp4">
-
-      <img
-        src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=700&q=90"
-        alt="Indian food"
-      >
-
-    </div>
-
-
-    <div class="visual-leaf vl1"></div>
-    <div class="visual-leaf vl2"></div>
-
-
-    <div class="story">
-      Every<br>
-      Food Has<br>
-      a Story
-    </div>
-
+  <div class="food-photo fp1">
+    <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=85" alt="Food">
   </div>
+
+  <div class="food-photo fp2">
+    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=85" alt="Food">
+  </div>
+
+  <div class="food-photo fp3">
+    <img src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=800&q=85" alt="Food">
+  </div>
+
+  <div class="food-photo fp4">
+    <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=85" alt="Food">
+  </div>
+
+  <div class="story">
+    Every Food<br>
+    Has a Story
+  </div>
+
+</div>
 
 </section>
 
 
-<!-- ================= FEATURES ================= -->
+<!-- =====================================================
+     FEATURES
+===================================================== -->
 
 <section class="features">
 
-  <div class="feature">
+<div class="feature">
+  <div class="feature-icon">🧠</div>
+  <h3>Fun & Engaging</h3>
+  <p>Learn through<br>interactive quizzes.</p>
+</div>
 
-    <div class="feature-icon">🧠</div>
+<div class="feature">
+  <div class="feature-icon">🌍</div>
+  <h3>Global & Local</h3>
+  <p>Explore food from<br>everywhere.</p>
+</div>
 
-    <h3>Fun & Engaging</h3>
+<div class="feature">
+  <div class="feature-icon">📖</div>
+  <h3>Build Knowledge</h3>
+  <p>History, culture,<br>ingredients and more.</p>
+</div>
 
-    <p>
-      Learn through<br>
-      interactive quizzes.
-    </p>
+<div class="feature">
+  <div class="feature-icon">🏆</div>
+  <h3>Earn Rewards</h3>
+  <p>Collect points,<br>badges and levels.</p>
+</div>
 
-  </div>
-
-
-  <div class="feature">
-
-    <div class="feature-icon">🌍</div>
-
-    <h3>Global & Local</h3>
-
-    <p>
-      From Indian classics<br>
-      to world cuisines.
-    </p>
-
-  </div>
-
-
-  <div class="feature">
-
-    <div class="feature-icon">📖</div>
-
-    <h3>Build Knowledge</h3>
-
-    <p>
-      History, culture,<br>
-      ingredients and more.
-    </p>
-
-  </div>
-
-
-  <div class="feature">
-
-    <div class="feature-icon">🏅</div>
-
-    <h3>Earn Rewards</h3>
-
-    <p>
-      Collect points, badges<br>
-      and unlock levels.
-    </p>
-
-  </div>
-
-
-  <div class="feature">
-
-    <div class="feature-icon">👥</div>
-
-    <h3>Compete & Share</h3>
-
-    <p>
-      Challenge friends<br>
-      and climb the leaderboard.
-    </p>
-
-  </div>
+<div class="feature">
+  <div class="feature-icon">👥</div>
+  <h3>Compete & Share</h3>
+  <p>Challenge friends<br>and climb.</p>
+</div>
 
 </section>
 
 
-<!-- ================= GAME MODES ================= -->
+<!-- =====================================================
+     GAME MODES
+===================================================== -->
 
 <section class="game-section" id="games">
 
-  <div class="game-heading">
+<div class="game-heading">
+
+  <h2>
+    Choose Your<br>
+    Challenge
+  </h2>
+
+  <p class="game-description">
+    Different ways to play. Same goal —
+    become a curious Food Explorer.
+  </p>
+
+</div>
+
+
+<div class="game-grid">
+
+<div class="game-card">
+  <div class="card-blob"></div>
+  <div class="card-icon">📍</div>
+  <h3>Guess the Food</h3>
+  <p>Identify the dish<br>from the image.</p>
+  <div class="play-now">Play Now →</div>
+</div>
+
+<div class="game-card">
+  <div class="card-blob"></div>
+  <div class="card-icon">❓</div>
+  <h3>Food Quiz</h3>
+  <p>Test your knowledge<br>with tricky questions.</p>
+  <div class="play-now">Play Now →</div>
+</div>
+
+<div class="game-card">
+  <div class="card-blob"></div>
+  <div class="card-icon">🧩</div>
+  <h3>Match the Pair</h3>
+  <p>Match food with region,<br>ingredient or culture.</p>
+  <div class="play-now">Play Now →</div>
+</div>
+
+<div class="game-card">
+  <div class="card-blob"></div>
+  <div class="card-icon">🏆</div>
+  <h3>Time Challenge</h3>
+  <p>Answer fast.<br>Score higher.</p>
+  <div class="play-now">Play Now →</div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     REAL PLAYABLE GAME
+===================================================== -->
+
+<section class="challenge-area" id="challenge">
+
+<div class="challenge">
+
+  <div class="challenge-small">
+    🌿 &nbsp; TODAY'S CHALLENGE
+  </div>
+
+  <div id="gameBox">
+
+    <h2 id="question"></h2>
+
+    <div class="answers">
+
+      <button class="answer"></button>
+      <button class="answer"></button>
+      <button class="answer"></button>
+      <button class="answer"></button>
+
+    </div>
+
+    <div id="gameMessage"></div>
+
+    <div id="scoreBox">
+      ⭐ Score: <strong id="score">0</strong>
+    </div>
+
+    <button id="nextButton">
+      Next Question →
+    </button>
+
+  </div>
+
+
+  <img
+    class="sushi"
+    src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=1000&q=90"
+    alt="Sushi"
+  >
+
+  <div class="think">
+    Think<br>
+    Explore<br>
+    Learn →
+  </div>
+
+</div>
+
+
+<!-- PROFILE -->
+
+<div class="profile">
+
+  <h2>
+    🌿 &nbsp; Your Food Journey
+  </h2>
+
+  <div class="avatar">
+    👨🏻
+  </div>
+
+  <div class="profile-name">
+    Boske Shivadas
+  </div>
+
+  <div class="profile-role">
+    Food Explorer
+  </div>
+
+  <div class="stats">
 
     <div>
-
-      <div class="eyebrow">
-        GAME MODES
-      </div>
-
-      <h2>
-        Choose Your<br>
-        Challenge
-      </h2>
-
+      <strong id="gamesPlayed">12</strong>
+      <span>Games Played</span>
     </div>
 
+    <div>
+      <strong id="correctAnswers">8</strong>
+      <span>Correct Answers</span>
+    </div>
 
-    <div class="game-description">
-
-      Different ways to play. Same goal —
-      become a food expert!
-
+    <div>
+      <strong>4</strong>
+      <span>Badges Earned</span>
     </div>
 
   </div>
 
+  <a class="profile-btn" href="#">
+    View Profile →
+  </a>
 
-  <div class="game-grid">
-
-
-    <div class="game-card">
-
-      <div class="card-blob"></div>
-
-      <div class="card-icon">📍</div>
-
-      <h3>Guess the Food</h3>
-
-      <p>
-        Identify the dish<br>
-        from the image.
-      </p>
-
-      <div class="play-now">
-        Play Now &nbsp; →
-      </div>
-
-    </div>
-
-
-    <div class="game-card">
-
-      <div class="card-blob"></div>
-
-      <div class="card-icon">❓</div>
-
-      <h3>Food Quiz</h3>
-
-      <p>
-        Test your knowledge<br>
-        with tricky questions.
-      </p>
-
-      <div class="play-now">
-        Play Now &nbsp; →
-      </div>
-
-    </div>
-
-
-    <div class="game-card">
-
-      <div class="card-blob"></div>
-
-      <div class="card-icon">🧩</div>
-
-      <h3>Match the Pair</h3>
-
-      <p>
-        Match food with region,<br>
-        ingredient or culture.
-      </p>
-
-      <div class="play-now">
-        Play Now &nbsp; →
-      </div>
-
-    </div>
-
-
-    <div class="game-card">
-
-      <div class="card-blob"></div>
-
-      <div class="card-icon">🏆</div>
-
-      <h3>Time Challenge</h3>
-
-      <p>
-        Answer fast.<br>
-        Score higher.
-      </p>
-
-      <div class="play-now">
-        Play Now &nbsp; →
-      </div>
-
-    </div>
-
-  </div>
+</div>
 
 </section>
 
 
-<!-- ================= CHALLENGE ================= -->
-
-
-<section class="challenge-area">
-
-  <div class="challenge">
-
-    <div class="challenge-small">
-      🌿 &nbsp; TODAY'S CHALLENGE
-    </div>
-
-    <div id="gameBox">
-
-      <h2 id="question">
-        Which country is<br>
-        the origin of Sushi?
-      </h2>
-
-      <div class="answers">
-
-        <button class="answer" onclick="checkAnswer(this, false)">
-          A. &nbsp; China
-        </button>
-
-        <button class="answer" onclick="checkAnswer(this, true)">
-          B. &nbsp; Japan
-        </button>
-
-        <button class="answer" onclick="checkAnswer(this, false)">
-          C. &nbsp; Korea
-        </button>
-
-        <button class="answer" onclick="checkAnswer(this, false)">
-          D. &nbsp; Thailand
-        </button>
-
-      </div>
-
-      <div id="gameMessage"></div>
-
-      <div id="scoreBox">
-        ⭐ Score: <strong id="score">0</strong>
-      </div>
-
-      <button id="nextButton" onclick="nextQuestion()">
-        Next Question →
-      </button>
-
-    </div>
-
-    <img
-      class="sushi"
-      src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=1000&q=90"
-      alt="Sushi"
-    >
-
-    <div class="think">
-      Think<br>
-      Explore<br>
-      Learn →
-    </div>
-
-  </div>
-
-
-  <!-- PROFILE -->
-
-  <div class="profile">
-
-    <h2>
-      🌿 &nbsp; Your Food Journey
-    </h2>
-
-    <div class="avatar">
-      👨🏻
-    </div>
-
-    <div class="profile-name">
-      Boske Shivadas
-    </div>
-
-    <div class="profile-role">
-      Food Explorer
-    </div>
-
-    <div class="stats">
-
-      <div>
-        <strong>12</strong>
-        <span>Games Played</span>
-      </div>
-
-      <div>
-        <strong>8</strong>
-        <span>Correct Answers</span>
-      </div>
-
-      <div>
-        <strong>4</strong>
-        <span>Badges Earned</span>
-      </div>
-
-    </div>
-
-    <a class="profile-btn" href="#">
-      View Profile &nbsp; →
-    </a>
-
-  </div>
-
-</section>
-
-<!-- ================= LEADERBOARD ================= -->
+<!-- =====================================================
+     LEADERBOARD
+===================================================== -->
 
 <section class="bottom-grid">
 
+<div class="box">
 
-  <div class="box">
+  <div class="box-title">
+    🏆 Top Food Explorers
+  </div>
 
-    <div class="eyebrow">
-      👑 &nbsp; TOP FOOD EXPLORERS
+  <div class="box-sub">
+    See who knows food the best.
+  </div>
+
+  <div class="player">
+    <strong>1</strong>
+    <div class="player-info">
+      <div class="player-avatar">👩🏻</div>
+      FoodieRiya
+    </div>
+    <div class="score">1420</div>
+  </div>
+
+  <div class="player">
+    <strong>2</strong>
+    <div class="player-info">
+      <div class="player-avatar">👨🏻</div>
+      NomadChef
+    </div>
+    <div class="score">1360</div>
+  </div>
+
+  <div class="player">
+    <strong>3</strong>
+    <div class="player-info">
+      <div class="player-avatar">🧑🏻</div>
+      SpiceHunter
+    </div>
+    <div class="score">1280</div>
+  </div>
+
+  <div class="player">
+    <strong>4</strong>
+    <div class="player-info">
+      <div class="player-avatar">👨🏽</div>
+      TasteTraveler
+    </div>
+    <div class="score">1210</div>
+  </div>
+
+</div>
+
+
+<div class="box green-box">
+
+  <div class="box-title">
+    🌿 Daily Challenge
+  </div>
+
+  <div class="box-sub">
+    New questions every day.
+  </div>
+
+  <div class="timer">
+
+    <div class="time">
+      <strong>12</strong>
+      <span>Hours</span>
     </div>
 
-    <h2 class="box-title">
-      See who knows food the best!
-    </h2>
-
-
-    <div class="player">
-
-      <span>1</span>
-
-      <div class="player-info">
-        <div class="player-avatar">👩🏻</div>
-        FoodieRiya
-      </div>
-
-      <span class="score">1420</span>
-
+    <div class="time">
+      <strong>36</strong>
+      <span>Minutes</span>
     </div>
 
-
-    <div class="player">
-
-      <span>2</span>
-
-      <div class="player-info">
-        <div class="player-avatar">👨🏻</div>
-        NomadChef
-      </div>
-
-      <span class="score">1360</span>
-
-    </div>
-
-
-    <div class="player">
-
-      <span>3</span>
-
-      <div class="player-info">
-        <div class="player-avatar">👩🏽</div>
-        SpiceHunter
-      </div>
-
-      <span class="score">1280</span>
-
-    </div>
-
-
-    <div class="player">
-
-      <span>4</span>
-
-      <div class="player-info">
-        <div class="player-avatar">👨🏽</div>
-        TasteTraveler
-      </div>
-
-      <span class="score">1210</span>
-
-    </div>
-
-
-    <div class="player">
-
-      <span>5</span>
-
-      <div class="player-info">
-        <div class="player-avatar">👩🏻</div>
-        KulinarikKid
-      </div>
-
-      <span class="score">1180</span>
-
+    <div class="time">
+      <strong>18</strong>
+      <span>Seconds</span>
     </div>
 
   </div>
 
+  <p style="margin-top:22px;font-family:Caveat,cursive;font-size:22px;">
+    Play daily.<br>
+    Earn rewards.<br>
+    Stay curious. 🌿
+  </p>
 
-  <!-- DAILY -->
-
-  <div class="box green-box">
-
-    <div class="eyebrow">
-      📅 &nbsp; DAILY CHALLENGE
-    </div>
-
-    <h2 class="box-title">
-      New questions every day!
-    </h2>
-
-    <p class="box-sub">
-      Play daily. Earn rewards. Stay curious.
-    </p>
-
-
-    <div class="timer">
-
-      <div class="time">
-        <strong>12</strong>
-        <span>HOURS</span>
-      </div>
-
-      <div class="time">
-        <strong>36</strong>
-        <span>MINUTES</span>
-      </div>
-
-      <div class="time">
-        <strong>18</strong>
-        <span>SECONDS</span>
-      </div>
-
-    </div>
-
-  </div>
+</div>
 
 </section>
 
 
-<!-- ================= KNOWLEDGE ================= -->
-
-<section class="knowledge" id="learn">
-
-  <div class="knowledge-blob">
-
-    <span>
-      Small<br>
-      Bites of Knowledge<br>
-      Make Big<br>
-      Journeys.
-    </span>
-
-  </div>
-
-
-  <div class="knowledge-copy">
-
-    <div class="eyebrow">
-      FOOD KNOWLEDGE
-    </div>
-
-    <h2>
-      Every food<br>
-      has a story.
-    </h2>
-
-    <p>
-      Discover ingredients, cultures, places and
-      the stories behind the food we eat.
-    </p>
-
-    <a href="#" class="btn btn-green">
-      Start Exploring &nbsp; →
-    </a>
-
-  </div>
-
-</section>
-
-
-<!-- ================= FOOTER ================= -->
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
 <footer id="about">
 
-  <div class="footer-top">
+<div class="footer-top">
 
+  <div>
+    <div class="footer-name">NIJOK</div>
+    <div class="footer-tag">
+      Food · Culture · People · Places
+    </div>
+  </div>
 
-    <div class="footer-logo">
+  <div class="footer-links">
 
-      <div class="footer-leaf"></div>
-
-      <div>
-
-        <div class="footer-name">
-          NIJOK
-        </div>
-
-        <div class="footer-tag">
-          Food. Culture. People. Places.
-        </div>
-
-      </div>
-
+    <div>
+      <strong>EXPLORE</strong>
+      <a href="#">Food Passport</a>
+      <a href="#">Food Museum</a>
     </div>
 
+    <div>
+      <strong>DISCOVER</strong>
+      <a href="#">Food Map</a>
+      <a href="#">Countries</a>
+    </div>
 
-    <div class="footer-links">
+    <div>
+      <strong>LEARN</strong>
+      <a href="#">Knowledge</a>
+      <a href="#">Challenges</a>
+    </div>
 
-      <div>
-        <strong>EXPLORE</strong>
-        <a href="#">Home</a>
-        <a href="#">Food Passport</a>
-      </div>
+    <div>
+      <strong>COMMUNITY</strong>
+      <a href="#">Stories</a>
+      <a href="#">Leaderboard</a>
+    </div>
 
-      <div>
-        <strong>DISCOVER</strong>
-        <a href="#">Food Museum</a>
-        <a href="#">Food Map</a>
-      </div>
-
-      <div>
-        <strong>WORLD</strong>
-        <a href="#">Countries</a>
-        <a href="#">Cultures</a>
-      </div>
-
-      <div>
-        <strong>LEARN</strong>
-        <a href="#">Knowledge</a>
-        <a href="#">Stories</a>
-      </div>
-
-      <div>
-        <strong>NIJOK</strong>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-      </div>
-
+    <div>
+      <strong>NIJOK</strong>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
     </div>
 
   </div>
 
+</div>
 
-  <div class="footer-bottom">
+<div class="footer-bottom">
+  <span>© 2026 NIJOK. All rights reserved.</span>
+  <span>Facts First. You Decide. 🌿</span>
+</div>
 
-    <span>
-      © 2026 NIJOK
-    </span>
+</footer>
 
-    <span>
-      🌿 &nbsp; Good Food. Better Questions. A Richer World. &nbsp; 🌿
-    </span>
 
-  </div>
-  </footer>
+<!-- =====================================================
+     GAME JAVASCRIPT
+===================================================== -->
 
 <script>
 
-let score = 0;
-let currentQuestion = 0;
-
 const questions = [
+
   {
     question: "Which country is<br>the origin of Sushi?",
     answers: [
@@ -2217,60 +1500,79 @@ const questions = [
       ["D. &nbsp; Vitamin K2", false]
     ]
   }
+
 ];
 
+let currentQuestion = 0;
+let score = 0;
+let correctCount = 0;
+let answered = false;
 
-function loadQuestion() {
+const questionElement = document.getElementById("question");
+const buttons = document.querySelectorAll(".answer");
+const message = document.getElementById("gameMessage");
+const scoreElement = document.getElementById("score");
+const nextButton = document.getElementById("nextButton");
+
+
+function loadQuestion(){
 
   const q = questions[currentQuestion];
 
-  document.getElementById("question").innerHTML = q.question;
+  questionElement.innerHTML = q.question;
 
-  const buttons = document.querySelectorAll(".answer");
-
-  buttons.forEach((button, index) => {
+  buttons.forEach((button,index)=>{
 
     button.innerHTML = q.answers[index][0];
 
-    button.classList.remove("correct", "wrong");
+    button.classList.remove("correct","wrong");
 
     button.disabled = false;
 
+    button.onclick = () => checkAnswer(button,q.answers[index][1]);
+
   });
 
-  document.getElementById("gameMessage").innerHTML = "";
+  message.innerHTML = "";
 
-  document.getElementById("nextButton").style.display = "none";
+  scoreElement.innerText = score;
+
+  nextButton.style.display = "none";
+
+  answered = false;
 }
 
 
-function checkAnswer(button, correct) {
+function checkAnswer(button,correct){
 
-  const buttons = document.querySelectorAll(".answer");
+  if(answered) return;
 
-  buttons.forEach(btn => {
+  answered = true;
+
+  buttons.forEach(btn=>{
     btn.disabled = true;
   });
 
-  if (correct) {
+  if(correct){
 
     button.classList.add("correct");
 
     score += 10;
+    correctCount++;
 
-    document.getElementById("gameMessage").innerHTML =
-      "🎉 Correct! +10 points";
+    message.innerHTML = "🎉 Correct! +10 points";
 
-  } else {
+  }else{
 
     button.classList.add("wrong");
 
-    document.getElementById("gameMessage").innerHTML =
-      "❌ Not quite! Try the next one.";
+    message.innerHTML = "❌ Not quite!";
 
-    buttons.forEach(btn => {
+    const q = questions[currentQuestion];
 
-      if (btn.innerText.includes("Japan") && currentQuestion === 0) {
+    buttons.forEach((btn,index)=>{
+
+      if(q.answers[index][1] === true){
         btn.classList.add("correct");
       }
 
@@ -2278,45 +1580,65 @@ function checkAnswer(button, correct) {
 
   }
 
-  document.getElementById("score").innerText = score;
+  scoreElement.innerText = score;
 
-  document.getElementById("nextButton").style.display = "inline-block";
+  document.getElementById("correctAnswers").innerText =
+    8 + correctCount;
+
+  nextButton.style.display = "inline-block";
 }
 
 
-function nextQuestion() {
+nextButton.onclick = function(){
 
   currentQuestion++;
 
-  if (currentQuestion >= questions.length) {
+  if(currentQuestion >= questions.length){
 
     document.getElementById("gameBox").innerHTML = `
-      <h2>🎉 Game Complete!</h2>
 
-      <p>
-        You completed today's NIJOK challenge.
-      </p>
+      <div style="text-align:center;padding:35px 0;">
 
-      <div id="scoreBox">
-        ⭐ Final Score: <strong>${score}</strong>
+        <div style="font-size:45px;">🏆</div>
+
+        <h2 style="font-family:'Playfair Display',serif;margin-top:12px;">
+          Challenge Complete!
+        </h2>
+
+        <p style="margin-top:10px;font-size:11px;opacity:.8;">
+          You explored today's NIJOK Food Quest.
+        </p>
+
+        <div id="scoreBox" style="margin-top:20px;">
+          ⭐ Final Score: <strong>${score}</strong>
+        </div>
+
+        <br>
+
+        <button
+          onclick="restartGame()"
+          id="nextButton"
+          style="display:inline-block;margin-top:18px;"
+        >
+          Play Again →
+        </button>
+
       </div>
-
-      <button onclick="restartGame()" id="nextButton">
-        Play Again →
-      </button>
     `;
 
     return;
   }
 
   loadQuestion();
-}
+
+};
 
 
-function restartGame() {
+function restartGame(){
 
-  score = 0;
   currentQuestion = 0;
+  score = 0;
+  correctCount = 0;
 
   location.reload();
 
@@ -2326,5 +1648,6 @@ function restartGame() {
 loadQuestion();
 
 </script>
+
 </body>
 </html>

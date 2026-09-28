@@ -1,103 +1,663 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>NIJOK — Know Your Food</title>
+  <title>NIJOK — Know What You Eat</title>
+
+  <meta
+    name="description"
+    content="NIJOK helps you understand what you eat. Facts first, you decide."
+  />
 
   <style>
+    /* =========================
+       RESET
+    ========================= */
 
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
+    }
+
+    html {
       scroll-behavior: smooth;
     }
 
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #fffaf5;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #fffdf9;
       color: #222;
       line-height: 1.6;
       overflow-x: hidden;
     }
 
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-    /* HEADER */
+
+    /* =========================
+       HEADER
+    ========================= */
 
     header {
-      text-align: center;
-      padding: 35px 20px 25px;
+      width: 100%;
+      padding: 22px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 253, 249, 0.92);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #eee8df;
     }
 
     .logo {
-      color: #d62828;
-      font-size: 40px;
-      font-weight: 800;
+      font-size: 30px;
+      font-weight: 900;
       letter-spacing: 4px;
-      animation: logoPulse 3s ease-in-out infinite;
+      color: #d92f35;
     }
 
-    header h1 {
-      font-size: 34px;
-      margin: 10px 0;
+    .logo span {
+      display: inline-block;
+      animation: logoPulse 3s infinite;
+    }
+
+    nav {
+      display: flex;
+      gap: 25px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    nav a {
+      transition: 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #d92f35;
+    }
+
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: 88vh;
+      padding: 60px 7% 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      animation: heroText 1s ease forwards;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 15px;
+      border-radius: 30px;
+      background: #f9e7df;
+      color: #b52b30;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      font-size: clamp(48px, 7vw, 82px);
+      line-height: 0.98;
+      letter-spacing: -4px;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 span {
+      color: #d92f35;
+    }
+
+    .hero h2 {
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .hero-text {
+      max-width: 520px;
+      font-size: 18px;
+      color: #666;
+      margin-bottom: 30px;
     }
 
     .tagline {
       font-size: 18px;
-      color: #666;
-      font-style: italic;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 30px;
     }
 
-
-    /* HERO */
-
-    .hero-image {
-      width: 100%;
-      max-width: 430px;
-      height: 280px;
-      object-fit: cover;
-      border-radius: 22px;
-      display: block;
-      margin: 20px auto;
-
-      opacity: 0;
-      transform: scale(.92);
-      animation: heroIn 1s ease forwards;
+    .tagline span {
+      color: #d92f35;
     }
 
-    .hero-image:hover {
-      transform: scale(1.03);
-      transition: transform .5s ease;
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
     }
 
-    .hero-title {
+    .button {
+      padding: 14px 24px;
+      border-radius: 30px;
+      font-weight: 700;
       font-size: 14px;
-      font-weight: bold;
-      letter-spacing: 1px;
-      color: #d62828;
+      transition: 0.3s ease;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    .button-primary {
+      background: #d92f35;
+      color: white;
+      box-shadow: 0 10px 25px rgba(217, 47, 53, 0.22);
+    }
+
+    .button-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(217, 47, 53, 0.28);
+    }
+
+    .button-secondary {
+      border: 1px solid #ddd4ca;
+      background: white;
+    }
+
+    .button-secondary:hover {
+      transform: translateY(-3px);
+      border-color: #d92f35;
+      color: #d92f35;
+    }
+
+
+    /* =========================
+       GRAPHIC HERO
+    ========================= */
+
+    .hero-art {
+      min-height: 500px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: heroArt 1.2s ease forwards;
+    }
+
+    .art-circle {
+      width: 390px;
+      height: 390px;
+      border-radius: 50%;
+      background: #f8e5d9;
+      position: absolute;
+      animation: softFloat 5s ease-in-out infinite;
+    }
+
+    .art-circle::before {
+      content: "";
+      position: absolute;
+      width: 290px;
+      height: 290px;
+      border-radius: 50%;
+      border: 2px dashed #e6b8a5;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Tomato */
+
+    .tomato {
+      width: 220px;
+      height: 190px;
+      border-radius: 48% 48% 45% 45%;
+      background: #d9363e;
+      position: relative;
+      z-index: 5;
+      box-shadow:
+        inset -15px -18px 0 rgba(130, 20, 25, 0.12),
+        0 25px 40px rgba(100, 40, 30, 0.16);
+      animation: tomatoFloat 4s ease-in-out infinite;
+    }
+
+    .tomato::before {
+      content: "";
+      position: absolute;
+      width: 55px;
+      height: 35px;
+      background: #2f713f;
+      top: -15px;
+      left: 83px;
+      clip-path: polygon(
+        50% 0%,
+        60% 40%,
+        100% 30%,
+        72% 65%,
+        85% 100%,
+        50% 72%,
+        15% 100%,
+        28% 65%,
+        0% 30%,
+        40% 40%
+      );
+    }
+
+    .tomato::after {
+      content: "";
+      position: absolute;
+      width: 35px;
+      height: 25px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      top: 35px;
+      left: 45px;
+      transform: rotate(-30deg);
+    }
+
+    /* Leaf */
+
+    .leaf {
+      position: absolute;
+      z-index: 6;
+      width: 130px;
+      height: 65px;
+      background: #4f8a4d;
+      border-radius: 100% 0 100% 0;
+      transform: rotate(-28deg);
+      right: 45px;
+      top: 90px;
+      animation: leafFloat 4s ease-in-out infinite;
+    }
+
+    .leaf::after {
+      content: "";
+      position: absolute;
+      width: 90px;
+      height: 2px;
+      background: #dcebd8;
+      left: 18px;
+      top: 32px;
+      transform: rotate(22deg);
+      transform-origin: left;
+    }
+
+    .small-leaf {
+      position: absolute;
+      width: 75px;
+      height: 38px;
+      background: #73a76a;
+      border-radius: 100% 0 100% 0;
+      transform: rotate(30deg);
+      left: 55px;
+      bottom: 90px;
+      z-index: 4;
+    }
+
+    /* Decorative dots */
+
+    .dot {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      position: absolute;
+      background: #d92f35;
+      opacity: 0.7;
+    }
+
+    .dot-one {
+      top: 50px;
+      right: 100px;
+    }
+
+    .dot-two {
+      bottom: 70px;
+      right: 70px;
+      width: 20px;
+      height: 20px;
+      background: #4f8a4d;
+    }
+
+    .dot-three {
+      left: 60px;
+      top: 120px;
+      width: 9px;
+      height: 9px;
+    }
+
+
+    /* =========================
+       SECTION
+    ========================= */
+
+    section {
+      padding: 95px 7%;
+    }
+
+    .section-title {
+      max-width: 700px;
+      margin-bottom: 50px;
+    }
+
+    .section-title small {
+      color: #d92f35;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 2px;
       text-transform: uppercase;
     }
 
+    .section-title h2 {
+      font-size: clamp(34px, 5vw, 54px);
+      line-height: 1.05;
+      margin-top: 10px;
+      letter-spacing: -2px;
+    }
 
-    /* MAIN */
-
-    main {
-      max-width: 800px;
-      margin: auto;
-      padding: 0 18px 40px;
+    .section-title p {
+      color: #777;
+      margin-top: 15px;
+      font-size: 17px;
     }
 
 
-    /* SCROLL REVEAL */
+    /* =========================
+       THREE STEPS
+    ========================= */
+
+    .steps-section {
+      background: #f5efe8;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .step {
+      background: white;
+      padding: 35px;
+      border-radius: 25px;
+      border: 1px solid #eee3d8;
+      transition: 0.35s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(70, 40, 20, 0.08);
+    }
+
+    .step-number {
+      font-size: 45px;
+      font-weight: 900;
+      color: #ead7c9;
+      position: absolute;
+      right: 22px;
+      top: 12px;
+    }
+
+    .step-icon {
+      font-size: 34px;
+      margin-bottom: 18px;
+    }
+
+    .step h3 {
+      font-size: 25px;
+      margin-bottom: 10px;
+    }
+
+    .step p {
+      color: #777;
+    }
+
+
+    /* =========================
+       FOOD CARD
+    ========================= */
+
+    .food-section {
+      background: #fffdf9;
+    }
+
+    .food-card {
+      background: white;
+      border-radius: 30px;
+      padding: 45px;
+      border: 1px solid #eee5db;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+      box-shadow: 0 20px 50px rgba(70, 40, 20, 0.06);
+    }
+
+    .food-visual {
+      min-height: 300px;
+      background: #f9e9df;
+      border-radius: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mini-tomato {
+      width: 150px;
+      height: 125px;
+      border-radius: 48%;
+      background: #d9363e;
+      position: relative;
+      box-shadow: 0 20px 30px rgba(120, 30, 30, 0.15);
+    }
+
+    .mini-tomato::before {
+      content: "";
+      position: absolute;
+      width: 45px;
+      height: 28px;
+      background: #397842;
+      top: -12px;
+      left: 54px;
+      clip-path: polygon(
+        50% 0,
+        62% 40%,
+        100% 30%,
+        72% 65%,
+        85% 100%,
+        50% 72%,
+        15% 100%,
+        28% 65%,
+        0 30%,
+        40% 40%
+      );
+    }
+
+    .food-content h3 {
+      font-size: 38px;
+      margin-bottom: 12px;
+    }
+
+    .food-content p {
+      color: #777;
+      margin-bottom: 22px;
+    }
+
+    .fact-box {
+      background: #f6f2ed;
+      border-left: 4px solid #d92f35;
+      padding: 18px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .fact-box strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+
+    /* =========================
+       SEARCH
+    ========================= */
+
+    .search-section {
+      background: #f5efe8;
+      text-align: center;
+    }
+
+    .search-section .section-title {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .search-box {
+      max-width: 650px;
+      margin: 0 auto;
+      display: flex;
+      gap: 10px;
+      background: white;
+      padding: 8px;
+      border-radius: 40px;
+      border: 1px solid #e5dbd0;
+    }
+
+    .search-box input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 15px 20px;
+      font-size: 16px;
+      background: transparent;
+    }
+
+    .search-box button {
+      border: none;
+      background: #d92f35;
+      color: white;
+      padding: 0 25px;
+      border-radius: 30px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    #searchResult {
+      max-width: 650px;
+      margin: 25px auto 0;
+    }
+
+
+    /* =========================
+       SCAN SECTION
+    ========================= */
+
+    .scan-section {
+      background: #242522;
+      color: white;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scan-section::before,
+    .scan-section::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .scan-section::before {
+      width: 350px;
+      height: 350px;
+      left: -160px;
+      top: -170px;
+    }
+
+    .scan-section::after {
+      width: 500px;
+      height: 500px;
+      right: -250px;
+      bottom: -250px;
+    }
+
+    .scan-section h2 {
+      font-size: clamp(38px, 6vw, 65px);
+      line-height: 1;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .scan-section p {
+      max-width: 600px;
+      margin: auto;
+      color: #c8c8c8;
+      font-size: 17px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .scan-leaf {
+      font-size: 55px;
+      margin-bottom: 20px;
+      animation: softFloat 4s infinite;
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      padding: 35px 7%;
+      background: #171815;
+      color: #aaa;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 13px;
+    }
+
+    footer strong {
+      color: white;
+      letter-spacing: 2px;
+    }
+
+
+    /* =========================
+       SCROLL REVEAL
+    ========================= */
 
     .reveal {
       opacity: 0;
-      transform: translateY(55px);
+      transform: translateY(45px);
       transition:
-        opacity .8s ease,
-        transform .8s ease;
+        opacity 0.8s ease,
+        transform 0.8s ease;
     }
 
     .reveal.active {
@@ -105,290 +665,48 @@
       transform: translateY(0);
     }
 
-
-    /* CARDS */
-
-    .card {
-      background: white;
-      border-radius: 20px;
-      padding: 24px;
-      margin: 20px 0;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.07);
-
-      transition:
-        transform .35s ease,
-        box-shadow .35s ease;
+    .steps.active .step:nth-child(1) {
+      transition-delay: 0.1s;
     }
 
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.10);
+    .steps.active .step:nth-child(2) {
+      transition-delay: 0.25s;
     }
 
-    .label {
-      display: inline-block;
-      font-size: 12px;
-      font-weight: bold;
-      letter-spacing: 1px;
-      color: #d62828;
-      margin-bottom: 8px;
-    }
-
-    .card h2 {
-      margin-top: 5px;
-      font-size: 25px;
+    .steps.active .step:nth-child(3) {
+      transition-delay: 0.4s;
     }
 
 
-    /* TOPICS */
+    /* =========================
+       ANIMATIONS
+    ========================= */
 
-    .topics {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-top: 20px;
+    @keyframes heroText {
+      from {
+        opacity: 0;
+        transform: translateX(-35px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
 
-    .topics div {
-      background: #fff3e8;
-      padding: 18px 10px;
-      border-radius: 15px;
-      text-align: center;
-      font-weight: bold;
-      cursor: pointer;
+    @keyframes heroArt {
+      from {
+        opacity: 0;
+        transform: translateX(35px) scale(0.95);
+      }
 
-      opacity: 0;
-      transform: translateY(25px);
-      transition:
-        opacity .6s ease,
-        transform .6s ease,
-        background .3s ease;
+      to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+      }
     }
-
-    .topics.active div {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .topics.active div:nth-child(1) {
-      transition-delay: .1s;
-    }
-
-    .topics.active div:nth-child(2) {
-      transition-delay: .2s;
-    }
-
-    .topics.active div:nth-child(3) {
-      transition-delay: .3s;
-    }
-
-    .topics.active div:nth-child(4) {
-      transition-delay: .4s;
-    }
-
-    .topics div:hover {
-      transform: translateY(-5px) scale(1.02);
-      background: #ffe6d2;
-    }
-
-
-    /* NUTRITION */
-
-    .nutrition-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-top: 20px;
-    }
-
-    .nutrition-grid div {
-      background: #f8f8f8;
-      border-radius: 15px;
-      padding: 16px;
-
-      opacity: 0;
-      transform: translateY(25px);
-
-      transition:
-        opacity .6s ease,
-        transform .6s ease,
-        box-shadow .3s ease;
-    }
-
-    .nutrition-grid.active div {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .nutrition-grid.active div:nth-child(1) {
-      transition-delay: .1s;
-    }
-
-    .nutrition-grid.active div:nth-child(2) {
-      transition-delay: .2s;
-    }
-
-    .nutrition-grid.active div:nth-child(3) {
-      transition-delay: .3s;
-    }
-
-    .nutrition-grid.active div:nth-child(4) {
-      transition-delay: .4s;
-    }
-
-    .nutrition-grid div:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    }
-
-    .nutrition-grid strong {
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    .nutrition-grid span {
-      font-size: 14px;
-      color: #555;
-    }
-
-    .nijok-note {
-      margin-top: 20px;
-      padding: 18px;
-      background: #fff3e8;
-      border-radius: 15px;
-      border-left: 4px solid #d62828;
-    }
-
-
-    /* SEARCH */
-
-    .food-search {
-      background: white;
-      border-radius: 20px;
-      padding: 25px;
-      margin: 20px 0;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.07);
-    }
-
-    .food-search input {
-      width: 100%;
-      padding: 14px;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      font-size: 16px;
-      margin: 10px 0;
-
-      transition:
-        border .3s ease,
-        box-shadow .3s ease;
-    }
-
-    .food-search input:focus {
-      outline: none;
-      border-color: #d62828;
-      box-shadow: 0 0 0 4px rgba(214,40,40,0.08);
-    }
-
-    button {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 12px;
-      background: #d62828;
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-
-      transition:
-        transform .2s ease,
-        box-shadow .3s ease;
-    }
-
-    button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(214,40,40,0.25);
-    }
-
-    button:active {
-      transform: scale(.97);
-    }
-
-
-    /* SCAN */
-
-    .scan {
-      background: #222;
-      color: white;
-      text-align: center;
-      border-radius: 20px;
-      padding: 35px 22px;
-      margin: 20px 0;
-
-      position: relative;
-      overflow: hidden;
-    }
-
-    .scan::before {
-      content: "";
-      position: absolute;
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.05);
-
-      top: -70px;
-      left: -70px;
-
-      animation: floatCircle 5s ease-in-out infinite;
-    }
-
-    .scan::after {
-      content: "";
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.04);
-
-      bottom: -60px;
-      right: -40px;
-
-      animation: floatCircle 6s ease-in-out infinite reverse;
-    }
-
-    .scan h2,
-    .scan p,
-    .scan button {
-      position: relative;
-      z-index: 1;
-    }
-
-    .scan h2 {
-      animation: softPulse 3s ease-in-out infinite;
-    }
-
-    .scan button {
-      background: white;
-      color: #222;
-      margin-top: 10px;
-    }
-
-
-    /* FOOTER */
-
-    footer {
-      text-align: center;
-      padding: 30px 20px;
-      color: #777;
-      font-size: 14px;
-    }
-
-
-    /* ANIMATIONS */
 
     @keyframes logoPulse {
-
       0%, 100% {
         transform: scale(1);
       }
@@ -396,75 +714,178 @@
       50% {
         transform: scale(1.04);
       }
-
     }
 
-
-    @keyframes heroIn {
-
-      from {
-        opacity: 0;
-        transform: scale(.92);
-      }
-
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-
-    }
-
-
-    @keyframes softPulse {
-
+    @keyframes tomatoFloat {
       0%, 100% {
-        opacity: 1;
+        transform: translateY(0) rotate(0deg);
       }
 
       50% {
-        opacity: .75;
+        transform: translateY(-14px) rotate(2deg);
       }
-
     }
 
-
-    @keyframes floatCircle {
-
+    @keyframes leafFloat {
       0%, 100% {
-        transform: translate(0,0);
+        transform: rotate(-28deg) translateY(0);
       }
 
       50% {
-        transform: translate(25px,20px);
+        transform: rotate(-20deg) translateY(-10px);
+      }
+    }
+
+    @keyframes softFloat {
+      0%, 100% {
+        transform: translateY(0);
       }
 
+      50% {
+        transform: translateY(-10px);
+      }
     }
 
 
-    /* MOBILE */
+    /* =========================
+       MOBILE
+    ========================= */
 
-    @media (max-width: 600px) {
+    @media (max-width: 800px) {
 
-      header h1 {
-        font-size: 29px;
+      header {
+        padding: 18px 6%;
       }
 
       .logo {
-        font-size: 34px;
+        font-size: 25px;
       }
 
-      .hero-image {
-        height: 250px;
+      nav {
+        display: none;
       }
 
-      .nutrition-grid {
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 55px 6% 70px;
+        text-align: center;
+      }
+
+      .hero-text {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .hero-art {
+        min-height: 390px;
+      }
+
+      .art-circle {
+        width: 300px;
+        height: 300px;
+      }
+
+      .tomato {
+        width: 175px;
+        height: 150px;
+      }
+
+      .tomato::before {
+        left: 60px;
+      }
+
+      .leaf {
+        width: 100px;
+        right: 25px;
+        top: 65px;
+      }
+
+      section {
+        padding: 75px 6%;
+      }
+
+      .steps {
         grid-template-columns: 1fr;
       }
 
-      .card {
-        padding: 20px;
+      .food-card {
+        grid-template-columns: 1fr;
+        padding: 25px;
+        gap: 25px;
       }
 
+      .food-visual {
+        min-height: 250px;
+      }
+
+      .food-content h3 {
+        font-size: 32px;
+      }
+
+      .search-box {
+        border-radius: 20px;
+        flex-direction: column;
+        padding: 10px;
+      }
+
+      .search-box button {
+        padding: 14px;
+      }
+
+      footer {
+        text-align: center;
+        justify-content: center;
+      }
+    }
+
+
+    /* =========================
+       SMALL MOBILE
+    ========================= */
+
+    @media (max-width: 430px) {
+
+      .hero h1 {
+        font-size: 55px;
+      }
+
+      .hero-art {
+        min-height: 330px;
+      }
+
+      .art-circle {
+        width: 250px;
+        height: 250px;
+      }
+
+      .art-circle::before {
+        width: 190px;
+        height: 190px;
+      }
+
+      .tomato {
+        width: 145px;
+        height: 125px;
+      }
+
+      .tomato::before {
+        left: 48px;
+      }
+
+      .leaf {
+        width: 80px;
+        height: 45px;
+        right: 15px;
+      }
+
+      .small-leaf {
+        left: 20px;
+        bottom: 55px;
+      }
     }
 
   </style>
@@ -474,449 +895,242 @@
 <body>
 
 
+  <!-- =========================
+       HEADER
+  ========================= -->
+
   <header>
 
-    <div class="logo">
-      NIJOK
-    </div>
+    <a href="#" class="logo">
+      <span>NIJOK</span>
+    </a>
 
-    <h1>
-      Know Your Tomato
-    </h1>
-
-    <p class="tagline">
-      Fact first, you decide.
-    </p>
-
-    <img
-      class="hero-image"
-      src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?auto=format&fit=crop&w=900&q=80"
-      alt="Fresh tomatoes"
-    >
-
-    <div class="hero-title">
-      Hero Food of the Week
-    </div>
-
-    <p>
-      Meet the tomato — a simple food with a fascinating story.
-    </p>
+    <nav>
+      <a href="#why">Why NIJOK</a>
+      <a href="#food">Explore</a>
+      <a href="#search">Search</a>
+      <a href="#scan">Scan</a>
+    </nav>
 
   </header>
 
 
+
+  <!-- =========================
+       HERO
+  ========================= -->
+
   <main>
 
+    <section class="hero">
 
-    <section class="card reveal">
+      <div class="hero-content">
 
-      <span class="label">
-        FOOD FACT
-      </span>
-
-      <h2>
-        Fruit or Vegetable?
-      </h2>
-
-      <p>
-        Botanically, tomato is a fruit because it develops from the
-        flower of the plant and contains seeds.
-      </p>
-
-      <p>
-        In everyday cooking, however, we commonly use it like a vegetable.
-      </p>
-
-    </section>
-
-
-    <section class="card reveal">
-
-      <span class="label">
-        LEARN
-      </span>
-
-      <h2>
-        More Than Just a Tomato
-      </h2>
-
-      <p>
-        Explore its journey from seed to farm, market and finally
-        to your plate.
-      </p>
-
-      <div class="topics reveal">
-
-        <div>
-          🌱<br>
-          Growing
+        <div class="eyebrow">
+          FOOD • FACTS • AWARENESS
         </div>
 
-        <div
-          onclick="document.getElementById('nutrition').scrollIntoView({behavior:'smooth'})"
-        >
-          🧪<br>
-          Nutrition
+        <h1>
+          Know<br>
+          <span>What</span><br>
+          You Eat.
+        </h1>
+
+        <h2>
+          NIJOK
+        </h2>
+
+        <p class="hero-text">
+          Food should not be confusing.
+          NIJOK helps you understand food,
+          ingredients and labels in a simple way.
+        </p>
+
+        <p class="tagline">
+          <span>Fact first,</span> you decide.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#why" class="button button-primary">
+            Explore NIJOK
+          </a>
+
+          <a href="#search" class="button button-secondary">
+            Explore Food
+          </a>
         </div>
 
-        <div>
-          🚜<br>
-          Farming
-        </div>
+      </div>
 
-        <div>
-          🍽️<br>
-          Food
-        </div>
+
+      <!-- GRAPHIC -->
+
+      <div class="hero-art">
+
+        <div class="art-circle"></div>
+
+        <div class="dot dot-one"></div>
+        <div class="dot dot-two"></div>
+        <div class="dot dot-three"></div>
+
+        <div class="leaf"></div>
+
+        <div class="tomato"></div>
+
+        <div class="small-leaf"></div>
 
       </div>
 
     </section>
 
 
-    <section class="card reveal" id="nutrition">
 
-      <span class="label">
-        NUTRITION
-      </span>
+    <!-- =========================
+         WHY NIJOK
+    ========================= -->
 
-      <h2>
-        What's Inside a Tomato?
-      </h2>
+    <section class="steps-section" id="why">
 
-      <p>
-        Tomatoes are mostly water and provide a range of nutrients
-        and naturally occurring plant compounds.
-      </p>
+      <div class="section-title reveal">
 
-      <div class="nutrition-grid reveal">
+        <small>THE NIJOK WAY</small>
 
-        <div>
-          <strong>💧 Water</strong>
-          <span>
-            Tomatoes have a high water content.
-          </span>
-        </div>
-
-        <div>
-          <strong>🍊 Vitamin C</strong>
-          <span>
-            Contributes to normal immune system function.
-          </span>
-        </div>
-
-        <div>
-          <strong>🌿 Potassium</strong>
-          <span>
-            A mineral naturally present in tomatoes.
-          </span>
-        </div>
-
-        <div>
-          <strong>🔴 Lycopene</strong>
-          <span>
-            A naturally occurring plant compound that gives
-            many tomatoes their red colour.
-          </span>
-        </div>
-
-      </div>
-
-      <div class="nijok-note">
-        <strong>
-          NIJOK NOTE
-        </strong>
+        <h2>
+          Understand food.<br>
+          Make your own choice.
+        </h2>
 
         <p>
-          Nutrition can vary with tomato variety, size, ripeness
-          and preparation. Facts help you understand your food —
-          you decide what is right for you.
+          No pressure. No complicated language.
+          Just useful information.
         </p>
+
+      </div>
+
+
+      <div class="steps reveal">
+
+        <div class="step">
+
+          <div class="step-number">01</div>
+
+          <div class="step-icon">
+            🌱
+          </div>
+
+          <h3>Know</h3>
+
+          <p>
+            Discover simple facts about the food
+            you eat every day.
+          </p>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-number">02</div>
+
+          <div class="step-icon">
+            🔎
+          </div>
+
+          <h3>Understand</h3>
+
+          <p>
+            Turn confusing ingredients and labels
+            into information that makes sense.
+          </p>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-number">03</div>
+
+          <div class="step-icon">
+            ✓
+          </div>
+
+          <h3>Decide</h3>
+
+          <p>
+            Get the facts and make the choice
+            that works for you.
+          </p>
+
+        </div>
+
       </div>
 
     </section>
 
 
-    <section class="food-search reveal">
 
-      <span class="label">
-        NIJOK FOOD SEARCH
-      </span>
+    <!-- =========================
+         FOOD OF THE WEEK
+    ========================= -->
 
-      <h2>
-        🔎 Know Your Food
-      </h2>
+    <section class="food-section" id="food">
 
-      <p>
-        Search a food to start learning.
-      </p>
+      <div class="section-title reveal">
 
-      <input
-        type="text"
-        id="foodInput"
-        placeholder="Try: Tomato, Apple or Carrot"
-      >
+        <small>FOOD OF THE WEEK</small>
 
-      <button onclick="searchFood()">
-        Search
-      </button>
+        <h2>
+          Start with something simple.
+        </h2>
 
-      <div id="foodResult"></div>
+        <p>
+          Every food has a story.
+          Let's understand it.
+        </p>
+
+      </div>
+
+
+      <div class="food-card reveal">
+
+        <div class="food-visual">
+
+          <div class="mini-tomato"></div>
+
+        </div>
+
+
+        <div class="food-content">
+
+          <h3>🍅 Tomato</h3>
+
+          <p>
+            Is it a fruit or a vegetable?
+            The answer depends on how we look at it.
+          </p>
+
+          <div class="fact-box">
+
+            <strong>
+              Food Fact
+            </strong>
+
+            Botanically, tomato is a fruit because
+            it develops from the flower of the plant
+            and contains seeds.
+
+          </div>
+
+        </div>
+
+      </div>
 
     </section>
 
 
-    <section class="scan reveal">
 
-      <h2>
-        Scan it before you eat it.
-      </h2>
+    <!-- =========================
+         SEARCH
+    ========================= -->
 
-      <p>
-        NIJOK helps people understand food through simple,
-        accessible knowledge.
-      </p>
-
-      <button
-        onclick="document.getElementById('foodInput').focus()"
-      >
-        Explore NIJOK
-      </button>
-
-    </section>
-
-
-  </main>
-
-
-  <footer>
-
-    <p>
-      © 2026 NIJOK
-    </p>
-
-    <p>
-      Learn • Understand • Decide
-    </p>
-
-  </footer>
-
-
-  <script>
-
-
-    /* =========================
-       SCROLL ANIMATION
-    ========================= */
-
-    const observer = new IntersectionObserver(
-
-      (entries) => {
-
-        entries.forEach((entry) => {
-
-          if (entry.isIntersecting) {
-
-            entry.target.classList.add("active");
-
-            observer.unobserve(entry.target);
-
-          }
-
-        });
-
-      },
-
-      {
-        threshold: 0.15
-      }
-
-    );
-
-
-    document
-      .querySelectorAll(".reveal, .topics, .nutrition-grid")
-      .forEach((element) => {
-
-        observer.observe(element);
-
-      });
-
-
-    /* =========================
-       FOOD SEARCH
-    ========================= */
-
-    function searchFood() {
-
-      const food =
-        document
-          .getElementById("foodInput")
-          .value
-          .trim()
-          .toLowerCase();
-
-      const result =
-        document.getElementById("foodResult");
-
-
-      if (food === "") {
-
-        result.innerHTML =
-          "<p>Please enter a food name.</p>";
-
-        return;
-
-      }
-
-
-      if (food.includes("tomato")) {
-
-        result.innerHTML = `
-
-          <div class="card">
-
-            <span class="label">
-              NIJOK FOOD FACT
-            </span>
-
-            <h2>
-              🍅 Tomato
-            </h2>
-
-            <p>
-              Botanically, tomato is a fruit, although it is commonly
-              used like a vegetable in cooking.
-            </p>
-
-            <h3>
-              🧪 Nutrition
-            </h3>
-
-            <p>
-              Tomatoes provide nutrients including vitamin C and
-              potassium, and contain naturally occurring lycopene.
-            </p>
-
-            <p>
-              <strong>
-                NIJOK:
-              </strong>
-              Facts first. You decide.
-            </p>
-
-          </div>
-
-        `;
-
-
-      } else if (food.includes("apple")) {
-
-        result.innerHTML = `
-
-          <div class="card">
-
-            <span class="label">
-              NIJOK FOOD FACT
-            </span>
-
-            <h2>
-              🍎 Apple
-            </h2>
-
-            <p>
-              Apples are fruits that contain water,
-              carbohydrates and dietary fibre.
-            </p>
-
-            <h3>
-              🧪 Nutrition
-            </h3>
-
-            <p>
-              Apples provide dietary fibre and vitamin C,
-              with amounts varying by variety and size.
-            </p>
-
-            <p>
-              <strong>
-                NIJOK:
-              </strong>
-              Facts first. You decide.
-            </p>
-
-          </div>
-
-        `;
-
-
-      } else if (food.includes("carrot")) {
-
-        result.innerHTML = `
-
-          <div class="card">
-
-            <span class="label">
-              NIJOK FOOD FACT
-            </span>
-
-            <h2>
-              🥕 Carrot
-            </h2>
-
-            <p>
-              Carrots are root vegetables known for their
-              orange colour and naturally occurring carotenoids.
-            </p>
-
-            <h3>
-              🧪 Nutrition
-            </h3>
-
-            <p>
-              Carrots provide dietary fibre and carotenoids,
-              including beta-carotene.
-            </p>
-
-            <p>
-              <strong>
-                NIJOK:
-              </strong>
-              Facts first. You decide.
-            </p>
-
-          </div>
-
-        `;
-
-
-      } else {
-
-        result.innerHTML = `
-
-          <div class="card">
-
-            <h3>
-              🔍 Food not added yet
-            </h3>
-
-            <p>
-              NIJOK is still building its food knowledge library.
-              Try <strong>Tomato</strong>,
-              <strong>Apple</strong> or
-              <strong>Carrot</strong>.
-            </p>
-
-          </div>
-
-        `;
-
-      }
-
-    }
-
-  </script>
-
-
-</body>
-</html>
+    <section class="search-section" id=

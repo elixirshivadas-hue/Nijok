@@ -2029,6 +2029,149 @@ footer{
   </div>
   </footer>
 
+<script>
 
+let score = 0;
+let currentQuestion = 0;
+
+const questions = [
+  {
+    question: "Which country is<br>the origin of Sushi?",
+    answers: [
+      ["A. &nbsp; China", false],
+      ["B. &nbsp; Japan", true],
+      ["C. &nbsp; Korea", false],
+      ["D. &nbsp; Thailand", false]
+    ]
+  },
+
+  {
+    question: "Botanically, tomato is a…",
+    answers: [
+      ["A. &nbsp; Fruit", true],
+      ["B. &nbsp; Grain", false],
+      ["C. &nbsp; Nut", false],
+      ["D. &nbsp; Root", false]
+    ]
+  },
+
+  {
+    question: "Which nutrient is commonly associated with citrus fruits?",
+    answers: [
+      ["A. &nbsp; Vitamin C", true],
+      ["B. &nbsp; Vitamin D", false],
+      ["C. &nbsp; Vitamin B12", false],
+      ["D. &nbsp; Vitamin K2", false]
+    ]
+  }
+];
+
+
+function loadQuestion() {
+
+  const q = questions[currentQuestion];
+
+  document.getElementById("question").innerHTML = q.question;
+
+  const buttons = document.querySelectorAll(".answer");
+
+  buttons.forEach((button, index) => {
+
+    button.innerHTML = q.answers[index][0];
+
+    button.classList.remove("correct", "wrong");
+
+    button.disabled = false;
+
+  });
+
+  document.getElementById("gameMessage").innerHTML = "";
+
+  document.getElementById("nextButton").style.display = "none";
+}
+
+
+function checkAnswer(button, correct) {
+
+  const buttons = document.querySelectorAll(".answer");
+
+  buttons.forEach(btn => {
+    btn.disabled = true;
+  });
+
+  if (correct) {
+
+    button.classList.add("correct");
+
+    score += 10;
+
+    document.getElementById("gameMessage").innerHTML =
+      "🎉 Correct! +10 points";
+
+  } else {
+
+    button.classList.add("wrong");
+
+    document.getElementById("gameMessage").innerHTML =
+      "❌ Not quite! Try the next one.";
+
+    buttons.forEach(btn => {
+
+      if (btn.innerText.includes("Japan") && currentQuestion === 0) {
+        btn.classList.add("correct");
+      }
+
+    });
+
+  }
+
+  document.getElementById("score").innerText = score;
+
+  document.getElementById("nextButton").style.display = "inline-block";
+}
+
+
+function nextQuestion() {
+
+  currentQuestion++;
+
+  if (currentQuestion >= questions.length) {
+
+    document.getElementById("gameBox").innerHTML = `
+      <h2>🎉 Game Complete!</h2>
+
+      <p>
+        You completed today's NIJOK challenge.
+      </p>
+
+      <div id="scoreBox">
+        ⭐ Final Score: <strong>${score}</strong>
+      </div>
+
+      <button onclick="restartGame()" id="nextButton">
+        Play Again →
+      </button>
+    `;
+
+    return;
+  }
+
+  loadQuestion();
+}
+
+
+function restartGame() {
+
+  score = 0;
+  currentQuestion = 0;
+
+  location.reload();
+
+}
+
+
+loadQuestion();
+
+</script>
 </body>
 </html>

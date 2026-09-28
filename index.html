@@ -161,6 +161,60 @@
     <p>© 2026 NIJOK</p>
     <p>Learn • Understand • Decide</p>
   </footer>
+<script>
 
+function searchFood() {
+
+  const food = document.getElementById("foodInput").value.trim().toLowerCase();
+  const result = document.getElementById("foodResult");
+
+  if (food === "") {
+    result.innerHTML = "<p>Please enter a food name.</p>";
+    return;
+  }
+
+  if (food.includes("tomato")) {
+
+    result.innerHTML = `
+      <div class="card">
+
+        <span class="label">NIJOK FOOD FACT</span>
+
+        <h2>🍅 Tomato</h2>
+
+        <p>
+          Tomato is botanically a fruit, although it is commonly
+          used as a vegetable in cooking.
+        </p>
+
+        <h3>🧪 Nutrition</h3>
+
+        <p>
+          Tomatoes provide nutrients including vitamin C and
+          potassium, and contain naturally occurring lycopene.
+        </p>
+
+        <p>
+          <strong>NIJOK:</strong> Facts first. You decide.
+        </p>
+
+      </div>
+    `;
+
+  } else {
+
+    result.innerHTML = `
+      <div class="card">
+        <h3>🔍 Food not added yet</h3>
+        <p>
+          NIJOK is still building its food knowledge library.
+          Try searching for <strong>Tomato</strong>.
+        </p>
+      </div>
+    `;
+  }
+}
+
+</script>
 </body>
 </html>

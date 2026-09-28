@@ -5503,6 +5503,10 @@ const guessQuestions = [
     if(!modal) createModal();
 
     currentGame = game;
+     
+     if(game === "quiz"){
+  currentIndex = getDailyQuizIndex();
+}else{
     currentIndex = 0;
     score = 0;
     answered = false;
@@ -5600,7 +5604,18 @@ const guessQuestions = [
       </div>
     `;
   }
+function getDailyQuizIndex(){
 
+  const startDate = new Date("2026-09-29T00:00:00");
+  const today = new Date();
+
+  const diffTime = today - startDate;
+  const diffDays = Math.floor(
+    diffTime / (1000 * 60 * 60 * 24)
+  );
+
+  return diffDays % quizQuestions.length;
+}
   function renderQuiz(){
 
     const item = quizQuestions[

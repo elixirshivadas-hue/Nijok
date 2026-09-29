@@ -5195,7 +5195,796 @@ if(
   createPlaygroundSection();
 
 }
-  
+  // =====================================
+// NIJOK BATCH 7 — DAILY FOOD FACTS
+// =====================================
+
+const nijokFoodFacts = [
+
+  {
+    title:"Tea Has a Story",
+    fact:"Tea comes from the leaves of Camellia sinensis. Different processing methods create different types of tea.",
+    category:"Food Origins"
+  },
+
+  {
+    title:"The Color of Turmeric",
+    fact:"Curcumin is one of the major compounds responsible for turmeric's characteristic yellow color.",
+    category:"Food Science"
+  },
+
+  {
+    title:"A Tomato Is a Fruit",
+    fact:"Botanically, a tomato is a fruit because it develops from the flower's ovary and contains seeds.",
+    category:"Food Knowledge"
+  },
+
+  {
+    title:"Why Yogurt Tastes Tangy",
+    fact:"Yogurt is made by fermentation. Bacteria convert lactose in milk into lactic acid, giving yogurt its characteristic tang.",
+    category:"Food Science"
+  },
+
+  {
+    title:"Rice Around the World",
+    fact:"Rice is a staple food for billions of people and is cultivated in many regions with very different food traditions.",
+    category:"Food Culture"
+  },
+
+  {
+    title:"The Story of Kimchi",
+    fact:"Kimchi is a traditional Korean fermented food commonly made with vegetables and seasonings.",
+    category:"Food Culture"
+  },
+
+  {
+    title:"Why Bread Rises",
+    fact:"During fermentation, yeast produces carbon dioxide. The gas becomes trapped in the dough and helps it expand.",
+    category:"Food Science"
+  },
+
+  {
+    title:"The Heat in Chili",
+    fact:"Capsaicin is the compound primarily responsible for the burning sensation caused by chili peppers.",
+    category:"Food Science"
+  },
+
+  {
+    title:"Cacao Becomes Chocolate",
+    fact:"Chocolate begins with cacao seeds found inside cacao pods. They are processed through several stages before becoming chocolate.",
+    category:"Food Origins"
+  },
+
+  {
+    title:"The World of Spices",
+    fact:"Spices can come from different parts of plants, including seeds, bark, roots, fruits and flower buds.",
+    category:"Spices"
+  },
+
+  {
+    title:"Why Apples Brown",
+    fact:"When cut apple tissue is exposed to oxygen, enzymes can cause compounds in the apple to oxidize and turn brown.",
+    category:"Food Science"
+  },
+
+  {
+    title:"The Power of Fermentation",
+    fact:"Fermentation can change the flavor, texture and characteristics of foods through the activity of microorganisms.",
+    category:"Food Science"
+  },
+
+  {
+    title:"Protein on the Plate",
+    fact:"Protein is made from amino acids and is needed by the body for many important functions, including building and repairing tissues.",
+    category:"Nutrition"
+  },
+
+  {
+    title:"Fiber in Food",
+    fact:"Dietary fiber is found in plant foods and can support normal digestive health.",
+    category:"Nutrition"
+  },
+
+  {
+    title:"Whole Grains",
+    fact:"Whole grains contain the bran, germ and endosperm of the grain, while refined grains have parts removed during processing.",
+    category:"Nutrition"
+  },
+
+  {
+    title:"The Story of Samosa",
+    fact:"Samosas are popular across South Asia and are also enjoyed in many other parts of the world.",
+    category:"Food Culture"
+  },
+
+  {
+    title:"A World of Dumplings",
+    fact:"Many cultures have foods made by wrapping fillings in dough or similar coverings, with each region developing its own traditions.",
+    category:"Food Culture"
+  },
+
+  {
+    title:"Why Salt Matters",
+    fact:"Salt is commonly used to season food and can also play important roles in food preservation and processing.",
+    category:"Food Knowledge"
+  },
+
+  {
+    title:"The Science of Popcorn",
+    fact:"Popcorn kernels contain moisture inside a hard outer shell. When heated, pressure builds until the kernel pops.",
+    category:"Food Science"
+  },
+
+  {
+    title:"Banana: A Botanical Surprise",
+    fact:"From a botanical perspective, bananas are classified as berries.",
+    category:"Food Knowledge"
+  },
+
+  {
+    title:"The Story of Olive Oil",
+    fact:"Olive oil is produced by processing olives, the fruit of the olive tree.",
+    category:"Food Origins"
+  },
+
+  {
+    title:"Why Lemon Tastes Sour",
+    fact:"Citric acid is an important contributor to the sour taste of lemons and many other citrus fruits.",
+    category:"Food Science"
+  },
+
+  {
+    title:"Carrots Were Not Always Orange",
+    fact:"Carrots exist in several colors, including purple, yellow, white and orange varieties.",
+    category:"Food Knowledge"
+  },
+
+  {
+    title:"The World of Lentils",
+    fact:"Lentils are edible seeds from the legume family and are an important food in many cuisines.",
+    category:"Indian Food"
+  },
+
+  {
+    title:"Why We Refrigerate Food",
+    fact:"Refrigeration slows the growth of many microorganisms and helps many foods stay fresh for longer.",
+    category:"Food Safety"
+  },
+
+  {
+    title:"Clean Hands, Safer Food",
+    fact:"Washing hands before preparing or eating food is an important basic food-safety practice.",
+    category:"Food Safety"
+  },
+
+  {
+    title:"Ingredient Lists Have an Order",
+    fact:"In many food labeling systems, ingredients are listed in descending order by weight.",
+    category:"Food Labels"
+  },
+
+  {
+    title:"Understanding Food Labels",
+    fact:"A food label can provide information about ingredients, nutrition and other details that help consumers understand a product.",
+    category:"Food Labels"
+  },
+
+  {
+    title:"The Story of Pasta",
+    fact:"Pasta comes in many shapes and forms, and different varieties are used in cuisines around the world.",
+    category:"World Food"
+  },
+
+  {
+    title:"Sushi and Rice",
+    fact:"Traditional sushi commonly uses specially prepared vinegared rice together with ingredients such as seafood or vegetables.",
+    category:"World Food"
+  },
+
+  {
+    title:"The Story of Tacos",
+    fact:"Tacos are a traditional Mexican food in which fillings are served in a tortilla.",
+    category:"World Food"
+  },
+
+  {
+    title:"Guacamole's Main Ingredient",
+    fact:"Avocado is the key ingredient in traditional guacamole, often combined with ingredients such as lime, onion and herbs.",
+    category:"World Food"
+  },
+
+  {
+    title:"Matcha Is Tea",
+    fact:"Matcha is made from specially processed green tea leaves that are ground into a fine powder.",
+    category:"Food Origins"
+  },
+
+  {
+    title:"The Story of Basmati",
+    fact:"Basmati is an aromatic long-grain rice traditionally associated with the Indian subcontinent.",
+    category:"Indian Food"
+  },
+
+  {
+    title:"Millets Are Grains",
+    fact:"Millets are a group of small-seeded cereal grains that have been cultivated and eaten in many parts of the world.",
+    category:"Grains"
+  },
+
+  {
+    title:"The World of Oats",
+    fact:"Oats are cereal grains commonly eaten as porridge, rolled oats and other foods.",
+    category:"Grains"
+  },
+
+  {
+    title:"Why Steam Cooks Food",
+    fact:"Steam transfers heat to food and can cook it without directly immersing the food in boiling water.",
+    category:"Cooking"
+  },
+
+  {
+    title:"Roasting Uses Dry Heat",
+    fact:"Roasting generally cooks food using dry heat, often in an oven or over another heat source.",
+    category:"Cooking"
+  },
+
+  {
+    title:"Boiling Uses Water",
+    fact:"Boiling cooks food in liquid that has reached its boiling point.",
+    category:"Cooking"
+  },
+
+  {
+    title:"The Story of Paneer",
+    fact:"Paneer is a fresh cheese commonly used in South Asian cuisine and is made by curdling milk.",
+    category:"Indian Food"
+  },
+
+  {
+    title:"Dal on the Indian Plate",
+    fact:"Dal refers to dried pulses and also to dishes prepared from them. It is an important part of many Indian cuisines.",
+    category:"Indian Food"
+  },
+
+  {
+    title:"Ginger's Food Story",
+    fact:"Ginger is a flowering plant whose underground rhizome is widely used as a spice and food ingredient.",
+    category:"Spices"
+  },
+
+  {
+    title:"The Aroma of Cardamom",
+    fact:"Cardamom is a spice made from the aromatic pods and seeds of several plants in the ginger family.",
+    category:"Spices"
+  },
+
+  {
+    title:"Cumin in the Kitchen",
+    fact:"Cumin is a spice made from the dried seeds of the Cuminum cyminum plant.",
+    category:"Spices"
+  },
+
+  {
+    title:"Clove Is a Flower Bud",
+    fact:"The cloves used as a spice are dried flower buds of the clove tree.",
+    category:"Spices"
+  },
+
+  {
+    title:"Cinnamon Comes From Bark",
+    fact:"Cinnamon is obtained from the inner bark of trees belonging to the genus Cinnamomum.",
+    category:"Spices"
+  },
+
+  {
+    title:"The Story of Garlic",
+    fact:"Garlic is a bulb-forming plant related to onions and is widely used as a flavoring ingredient.",
+    category:"Indian Food"
+  },
+
+  {
+    title:"Onion Has Layers",
+    fact:"The familiar layers of an onion are modified leaf structures that form the bulb.",
+    category:"Food Knowledge"
+  },
+
+  {
+    title:"The World Loves Potatoes",
+    fact:"Potatoes originated in the Andes region of South America and are now cultivated and eaten around the world.",
+    category:"Food Origins"
+  },
+
+  {
+    title:"Corn Has Many Uses",
+    fact:"Corn is eaten as a vegetable in some forms and is also processed into products such as flour, starch and oil.",
+    category:"Food Knowledge"
+  },
+
+  {
+    title:"The Story of Wheat",
+    fact:"Wheat is one of the world's major cereal crops and is used to make foods such as bread, pasta and many flatbreads.",
+    category:"Grains"
+  },
+
+  {
+    title:"Why Flour Matters",
+    fact:"Flour can be made from many grains, seeds and other plant foods, with wheat flour being especially common in baking.",
+    category:"Food Knowledge"
+  },
+
+  {
+    title:"Gluten Comes From Grains",
+    fact:"Gluten proteins naturally occur in grains such as wheat, barley and rye.",
+    category:"Food Science"
+  },
+
+  {
+    title:"Vitamin C in Foods",
+    fact:"Vitamin C is found in many fruits and vegetables, including citrus fruits, guava and peppers.",
+    category:"Nutrition"
+  },
+
+  {
+    title:"Vitamin A and Food",
+    fact:"Vitamin A supports important functions including normal vision and immune function. Some plant foods provide carotenoids that the body can convert to vitamin A.",
+    category:"Nutrition"
+  },
+
+  {
+    title:"Calcium on the Plate",
+    fact:"Calcium is an important mineral involved in maintaining bones and teeth as well as other body functions.",
+    category:"Nutrition"
+  },
+
+  {
+    title:"Iron in the Diet",
+    fact:"Iron is an essential mineral needed for functions including the production of hemoglobin.",
+    category:"Nutrition"
+  },
+
+  {
+    title:"Water Is a Nutrient",
+    fact:"Water is essential for life and helps the body carry out many normal functions.",
+    category:"Nutrition"
+  },
+
+  {
+    title:"Food Has a Culture",
+    fact:"Food traditions can reflect geography, history, agriculture, migration and family customs.",
+    category:"Food Culture"
+  },
+
+  {
+    title:"Recipes Travel",
+    fact:"Migration and cultural exchange have helped ingredients, cooking techniques and recipes travel between regions.",
+    category:"Food Culture"
+  },
+
+  {
+    title:"Street Food Stories",
+    fact:"Street foods around the world often reflect local ingredients, cooking traditions and everyday eating habits.",
+    category:"Food Culture"
+  },
+
+  {
+    title:"Seasonal Eating",
+    fact:"Many fruits and vegetables naturally grow during particular seasons, although modern agriculture and food distribution can extend availability.",
+    category:"Smart Eating"
+  },
+
+  {
+    title:"Fresh Does Not Mean One Thing",
+    fact:"Freshness can refer to different qualities of food, and the meaning depends on the food and the context.",
+    category:"Food Knowledge"
+  },
+
+  {
+    title:"Food Waste Matters",
+    fact:"Reducing avoidable food waste can help conserve the resources used to produce, transport and prepare food.",
+    category:"Food & Environment"
+  },
+
+  {
+    title:"The Food Chain",
+    fact:"Food reaches consumers through connected systems involving farmers, producers, processors, transporters, retailers and others.",
+    category:"Food Knowledge"
+  },
+
+  {
+    title:"Farm to Plate",
+    fact:"The journey of food can involve many stages between production and the moment it reaches a person's plate.",
+    category:"Food Knowledge"
+  },
+
+  {
+    title:"Why Food Packaging Exists",
+    fact:"Packaging can help protect food during storage and transportation and can provide information to consumers.",
+    category:"Food Labels"
+  },
+
+  {
+    title:"Expiry and Food Safety",
+    fact:"Date labels have specific meanings that vary by food and labeling system, so consumers should follow the instructions and storage conditions provided.",
+    category:"Food Safety"
+  },
+
+  {
+    title:"Read the Serving Size",
+    fact:"Nutrition information is often presented for a specified serving size, so the serving size matters when interpreting the numbers.",
+    category:"Food Labels"
+  },
+
+  {
+    title:"Calories Are Energy",
+    fact:"Calories are a way of expressing the energy provided by food and beverages.",
+    category:"Nutrition"
+  },
+
+  {
+    title:"Not All Fats Are the Same",
+    fact:"Dietary fats include different types of fatty acids, and their effects can differ depending on the type and overall dietary pattern.",
+    category:"Nutrition"
+  },
+
+  {
+    title:"Sugar Has Many Names",
+    fact:"Added sugars can appear under different names on ingredient lists, so reading the full list can provide useful context.",
+    category:"Food Labels"
+  },
+
+  {
+    title:"Salt and Sodium",
+    fact:"Sodium is a mineral found in salt and many other foods. Salt is sodium chloride.",
+    category:"Nutrition"
+  },
+
+  {
+    title:"Food Safety Is a System",
+    fact:"Food safety depends on practices across production, processing, storage, preparation and handling.",
+    category:"Food Safety"
+  },
+
+  {
+    title:"Keep Raw and Cooked Foods Separate",
+    fact:"Separating raw foods from ready-to-eat foods is an important practice for reducing cross-contamination.",
+    category:"Food Safety"
+  },
+
+  {
+    title:"Heat Can Change Food",
+    fact:"Cooking can change the texture, flavor, color and chemical properties of foods.",
+    category:"Food Science"
+  },
+
+  {
+    title:"The Maillard Reaction",
+    fact:"The Maillard reaction contributes to the browning and complex flavors that develop when many foods are heated.",
+    category:"Food Science"
+  },
+
+  {
+    title:"Caramelization",
+    fact:"Caramelization is a set of chemical changes that occur when sugars are heated, producing new flavors and colors.",
+    category:"Food Science"
+  },
+
+  {
+    title:"Why Cut Fruit Changes",
+    fact:"Cutting fruit can expose its tissues to air and change how quickly certain reactions occur.",
+    category:"Food Science"
+  },
+
+  {
+    title:"A World of Apples",
+    fact:"Thousands of apple varieties exist, with differences in flavor, texture, color and use.",
+    category:"Fruits"
+  },
+
+  {
+    title:"Mango Diversity",
+    fact:"Mangoes come in many varieties with differences in size, color, aroma, sweetness and texture.",
+    category:"Fruits"
+  },
+
+  {
+    title:"Bananas Come in Varieties",
+    fact:"Bananas are available in many varieties, including types used mainly for cooking and types commonly eaten ripe.",
+    category:"Fruits"
+  },
+
+  {
+    title:"The Story of Coconut",
+    fact:"Coconut is used in many cuisines, with different parts of the fruit used for food and cooking.",
+    category:"Food Origins"
+  },
+
+  {
+    title:"Peanuts Are Legumes",
+    fact:"Despite their name and culinary use, peanuts are legumes rather than botanical nuts.",
+    category:"Food Knowledge"
+  },
+
+  {
+    title:"Chickpeas Have a Long History",
+    fact:"Chickpeas have been cultivated for thousands of years and are important ingredients in many cuisines.",
+    category:"Food Origins"
+  },
+
+  {
+    title:"Soybeans Are Versatile",
+    fact:"Soybeans can be used to make foods such as tofu, tempeh, soy milk and several fermented products.",
+    category:"Food Knowledge"
+  },
+
+  {
+    title:"Food Connects People",
+    fact:"Shared meals and food traditions can bring people together across generations and cultures.",
+    category:"Food Culture"
+  },
+
+  {
+    title:"Every Ingredient Has a Story",
+    fact:"An ingredient can tell us about agriculture, geography, trade, culture and the people who use it.",
+    category:"Food Culture"
+  },
+
+  {
+    title:"Curiosity Starts With a Label",
+    fact:"Reading a food label can help you ask better questions about what is inside a packaged food.",
+    category:"Food Labels"
+  },
+
+  {
+    title:"Knowledge Before Choice",
+    fact:"Understanding food information can help people make choices that fit their own needs and preferences.",
+    category:"Smart Eating"
+  },
+
+  {
+    title:"Think Before You Eat",
+    fact:"Food awareness begins with noticing what we eat, how it is made and what information is available.",
+    category:"Smart Eating"
+  },
+
+  {
+    title:"Food Is More Than Taste",
+    fact:"Food can carry information about nutrition, culture, agriculture, science and history.",
+    category:"Food Knowledge"
+  },
+
+  {
+    title:"Discover Your Food",
+    fact:"There is always something new to learn about an ingredient, recipe, tradition or food process.",
+    category:"Food Discovery"
+  },
+
+  {
+    title:"NIJOK Principle",
+    fact:"Facts first. You decide. Food awareness is about understanding information without taking away personal choice.",
+    category:"NIJOK"
+  },
+
+  {
+    title:"Keep Learning",
+    fact:"Food knowledge grows when we stay curious, check information and keep asking questions.",
+    category:"NIJOK"
+  }
+
+];
+
+
+// =====================================
+// DAILY FACT STATE
+// =====================================
+
+const NIJOK_FACT_KEY =
+  "NIJOK_DAILY_FACT_V1";
+
+function getDailyFactIndex(){
+
+  const today =
+    new Date();
+
+  const start =
+    new Date(
+      today.getFullYear(),
+      0,
+      0
+    );
+
+  const diff =
+    today - start;
+
+  const oneDay =
+    1000 * 60 * 60 * 24;
+
+  const dayOfYear =
+    Math.floor(
+      diff / oneDay
+    );
+
+  return (
+    dayOfYear - 1
+  ) % nijokFoodFacts.length;
+
+}
+
+function getTodayFoodFact(){
+
+  return nijokFoodFacts[
+    getDailyFactIndex()
+  ];
+
+}
+
+function markFactLearned(){
+
+  const key =
+    getTodayKey();
+
+  localStorage.setItem(
+    NIJOK_FACT_KEY,
+    key
+  );
+
+  renderDailyFact();
+
+}
+
+function renderDailyFact(){
+
+  const container =
+    document.getElementById(
+      "nijok-daily-fact"
+    );
+
+  if(!container){
+    return;
+  }
+
+  const fact =
+    getTodayFoodFact();
+
+  const learned =
+    localStorage.getItem(
+      NIJOK_FACT_KEY
+    ) === getTodayKey();
+
+  container.innerHTML = `
+
+    <div class="learn-card">
+
+      <div class="learn-card-top">
+
+        <span class="learn-kicker">
+          TODAY'S FOOD FACT
+        </span>
+
+        <span class="learn-day">
+          DAY ${getDailyFactIndex() + 1}
+        </span>
+
+      </div>
+
+      <div class="learn-leaf">
+        🌿
+      </div>
+
+      <span class="learn-category">
+        ${escapeHTML(fact.category)}
+      </span>
+
+      <h3>
+        ${escapeHTML(fact.title)}
+      </h3>
+
+      <p class="learn-fact-text">
+        ${escapeHTML(fact.fact)}
+      </p>
+
+      <div class="learn-divider"></div>
+
+      <div class="learn-bottom">
+
+        <span>
+          Learn something. Stay curious.
+        </span>
+
+        <button
+          onclick="markFactLearned()"
+          ${learned ? "disabled" : ""}>
+
+          ${
+            learned
+              ? "✓ Learned Today"
+              : "I Learned This →"
+          }
+
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+// =====================================
+// LEARN SECTION
+// =====================================
+
+function createLearnSection(){
+
+  if(
+    document.getElementById(
+      "nijok-learn-section"
+    )
+  ){
+    return;
+  }
+
+  const learn =
+    document.getElementById(
+      "learn"
+    );
+
+  if(!learn){
+    return;
+  }
+
+  learn.innerHTML = `
+
+    <d
+        <div
+      class="learn-section-inner"
+      id="nijok-learn-section">
+
+      <div class="learn-heading">
+
+        <span class="section-kicker">
+          LEARN SOMETHING NEW
+        </span>
+
+        <h2>
+          One food fact.
+          <span>Every day.</span>
+        </h2>
+
+        <p>
+          100 days. 100 food stories.
+          Then the journey begins again.
+        </p>
+
+      </div>
+
+      <div id="nijok-daily-fact"></div>
+
+      <div class="learn-quote">
+
+        <span>“</span>
+
+        <p>
+          Fact first.
+          You decide.
+        </p>
+
+        <span>”</span>
+
+      </div>
+
+    </div>
+
+  `;
+
+  addLearnStyles();
+
+  renderDailyFact();
+
+}
+    
 </script>
 
 </body>

@@ -19853,7 +19853,639 @@ function showDailyQuizStatus(){
 
 showDailyQuizStatus();
 
-  
+ // =====================================
+// PART 27 — QUIZ ENGINE CONNECTION
+// =====================================
+
+let nijokDailyQuiz = [];
+let nijokQuizIndex = 0;
+let nijokQuizScore = 0;
+let nijokQuizAnswered = false;
+
+
+// -------------------------------------
+// START DAILY QUIZ
+// -------------------------------------
+
+function startNijokQuiz(){
+
+  nijokDailyQuiz = getTodayQuiz();
+
+  if(
+    !Array.isArray(nijokDailyQuiz) ||
+    nijokDailyQuiz.length === 0
+  ){
+
+    console.error(
+      "❌ NIJOK Daily Quiz unavailable."
+    );
+
+    return;
+  }
+
+  nijokQuizIndex = 0;
+  nijokQuizScore = 0;
+  nijokQuizAnswered = false;
+
+  renderNijokQuiz();
+
+}
+
+
+// -------------------------------------
+// RENDER QUESTION
+// -------------------------------------
+
+function renderNijokQuiz(){
+
+  const container =
+    document.getElementById(
+      "nijokGameContent"
+    );
+
+  if(!container){
+
+    console.error(
+      "❌ NIJOK game content not found."
+    );
+
+    return;
+  }
+
+
+  const question =
+    nijokDailyQuiz[nijokQuizIndex];
+
+
+  nijokQuizAnswered = false;
+
+
+  container.innerHTML = `
+
+    ${header(
+      "Food Quiz",
+      "Think carefully. Learn something new."
+    )}
+
+    <div class="nijok-question">
+      ${question.q}
+    </div>
+
+
+    <div class="nijok-options">
+
+      ${question.options.map(
+        function(option,index){
+
+          return `
+
+            <button
+              class="nijok-option"
+              data-answer="${index}"
+            >
+              ${String.fromCharCode(65 + index)}.
+              ${option}
+            </button>
+
+          `;
+
+        }
+      ).join("")}
+
+    </div>
+
+
+    <div
+      class="nijok-message"
+      id="nijokMessage">
+    </div>
+
+
+    <button
+      class="nijok-next"
+      id="nijokNext"
+      disabled>
+      Next Question →
+    </button>
+
+  `;
+
+
+  document
+    .querySelectorAll(".nijok-option")
+    .forEach(function(button){
+
+      button.addEventListener(
+        "click",
+        function(){
+
+          answerNijokQuiz(
+            Number(
+              button.dataset.answer
+            ),
+            question.answer
+          );
+
+        }
+      );
+
+    });
+
+
+  document
+    .getElementById("nijokNext")
+    .addEventListener(
+      "click",
+      nextNijokQuestion
+    );
+
+}
+
+
+// -------------------------------------
+// ANSWER QUESTION
+// -------------------------------------
+
+function answerNijokQuiz(
+  selected,
+  correct
+){
+
+  if(nijokQuizAnswered){
+    return;
+  }
+
+
+  nijokQuizAnswered = true;
+
+
+  const buttons =
+    document.querySelectorAll(
+      ".nijok-option"
+    );
+
+
+  buttons.forEach(
+    function(button,index){
+
+      button.disabled = true;
+
+
+      if(index === correct){
+
+        button.classList.add(
+          "correct"
+        );
+
+      }
+
+    }
+  );
+
+
+  const message =
+    document.getElementById(
+      "nijokMessage"
+    );
+
+
+  if(selected === correct){
+
+    nijokQuizScore += 10;
+
+
+    buttons[selected]
+      .classList.add("correct");
+
+
+    message.textContent =
+      "✓ Correct! +10 points";
+
+  }else{
+
+    buttons[selected]
+      .classList.add("wrong");
+
+
+    message.textContent =
+      "Not quite. The correct answer is highlighted.";
+
+  }
+
+
+  const scoreElement =
+    document.querySelector(
+      ".nijok-stat strong"
+    );
+
+
+  if(scoreElement){
+
+    scoreElement.textContent =
+      nijokQuizScore;
+
+  }
+
+
+  document
+    .getElementById("nijokNext")
+    .disabled = false;
+
+}
+
+
+// -------------------------------------
+// NEXT QUESTION
+// -------------------------------------
+
+function nextNijokQuestion(){
+
+  nijokQuizIndex++;
+
+
+  if(
+    nijokQuizIndex >=
+    nijokDailyQuiz.length
+  ){
+
+    showNijokQuizResult();
+
+    return;
+  }
+
+
+  renderNijokQuiz();
+
+}
+
+
+// -------------------------------------
+// QUIZ RESULT
+// -------------------------------------
+
+function showNijokQuizResult(){
+
+  const total =
+    nijokDailyQuiz.length;
+
+
+  const correctAnswers =
+    nijokQuizScore / 10;
+
+
+  const percentage =
+    Math.round(
+      (correctAnswers / total) * 100
+    );
+
+
+  document.getElementById(
+    "nijokGameContent"
+  ).innerHTML = `
+
+    <div class="nijok-game-label">
+      NIJOK • FOOD QUEST
+    </div>
+
+
+    <h2 class="nijok-game-title">
+      Quiz Complete 🎉
+    </h2>
+
+
+    <p class="nijok-game-sub">
+      You completed today's Food Quiz.
+    </p>
+
+
+    <div class="nijok-result">
+
+      <div class="nijok-result-score">
+        ${nijokQuizScore}
+      </div>
+
+      <div class="nijok-result-label">
+        POINTS
+      </div>
+
+
+      <div class="nijok-result-info">
+
+        <span>
+          Correct
+        </span>
+
+        <strong>
+          ${correctAnswers}/${total}
+        </strong>
+
+      </div>
+
+
+      <div class="nijok-result-info">
+
+        <span>
+          Accuracy
+        </span>
+
+        <strong>
+          ${percentage}%
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="nijok-next"
+      id="nijokResultClose">
+      Back to Food Quest
+    </button>
+
+  `;
+
+
+  document
+    .getElementById(
+      "nijokResultClose"
+    )
+    .addEventListener(
+      "click",
+      closeGame
+    );
+
+}
+
+
+// -------------------------------------
+// CONNECT TO GAME OPENER
+// -------------------------------------
+
+function openNijokDailyQuiz(){
+
+  if(!modal){
+
+    createModal();
+
+  }
+
+
+  modal.classList.add("show");
+
+
+  startNijokQuiz();
+
+}
+
+
+console.log(
+  "🌿 NIJOK Batch 27 — Quiz Engine ready."
+); 
+  // =====================================
+// PART 28 — FOOD QUIZ CARD CONNECTION
+// =====================================
+
+function connectNijokQuizCard(){
+
+  const quizCards =
+    document.querySelectorAll(
+      ".game-card"
+    );
+
+
+  if(!quizCards.length){
+
+    console.warn(
+      "⚠️ NIJOK game cards not found."
+    );
+
+    return;
+  }
+
+
+  const quizCard =
+    quizCards[0];
+
+
+  if(!quizCard){
+
+    return;
+  }
+
+
+  const playButton =
+    quizCard.querySelector(
+      ".play-now"
+    );
+
+
+  if(!playButton){
+
+    console.warn(
+      "⚠️ Quiz Play button not found."
+    );
+
+    return;
+  }
+
+
+  playButton.addEventListener(
+    "click",
+    function(event){
+
+      event.preventDefault();
+
+      openNijokDailyQuiz();
+
+    }
+  );
+
+
+  console.log(
+    "🌿 NIJOK Food Quiz connected."
+  );
+
+}
+
+
+// -------------------------------------
+// WAIT FOR PAGE
+// -------------------------------------
+
+if(
+  document.readyState ===
+  "loading"
+){
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    connectNijokQuizCard
+  );
+
+}else{
+
+  connectNijokQuizCard();
+
+}
+  // =====================================
+// PART 29 — QUIZ PROGRESS SYSTEM
+// =====================================
+
+function updateNijokQuizProgress(){
+
+  const total =
+    nijokDailyQuiz.length;
+
+  const current =
+    nijokQuizIndex + 1;
+
+
+  const percentage =
+    Math.round(
+      (current / total) * 100
+    );
+
+
+  const counter =
+    document.getElementById(
+      "nijokQuizCounter"
+    );
+
+
+  if(counter){
+
+    counter.textContent =
+      current + " / " + total;
+
+  }
+
+
+  const progress =
+    document.getElementById(
+      "nijokQuizProgress"
+    );
+
+
+  if(progress){
+
+    progress.style.width =
+      percentage + "%";
+
+  }
+
+}
+
+
+// -------------------------------------
+// QUIZ PROGRESS HEADER
+// -------------------------------------
+
+function nijokQuizProgressHTML(){
+
+  return `
+
+    <div
+      class="nijok-quiz-progress">
+
+      <div
+        class="nijok-quiz-progress-top">
+
+        <span>
+          Question
+        </span>
+
+        <strong
+          id="nijokQuizCounter">
+          1 / ${nijokDailyQuiz.length}
+        </strong>
+
+      </div>
+
+
+      <div
+        class="nijok-quiz-progress-track">
+
+        <div
+          id="nijokQuizProgress"
+          class="nijok-quiz-progress-bar">
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+console.log(
+  "🌿 NIJOK Batch 29 — Progress system ready."
+);
+  // =====================================
+// PART 30 — CONNECT QUIZ PROGRESS
+// =====================================
+
+function renderNijokQuizProgress(){
+
+  const progressHTML =
+    nijokQuizProgressHTML();
+
+
+  const question =
+    document.querySelector(
+      ".nijok-question"
+    );
+
+
+  if(!question){
+    return;
+  }
+
+
+  question.insertAdjacentHTML(
+    "beforebegin",
+    progressHTML
+  );
+
+
+  updateNijokQuizProgress();
+
+}
+
+
+// -------------------------------------
+// UPDATE AFTER EACH QUESTION
+// -------------------------------------
+
+function refreshNijokQuizProgress(){
+
+  updateNijokQuizProgress();
+
+}
+
+
+// -------------------------------------
+// CONNECT WITH QUIZ RENDER
+// -------------------------------------
+
+const originalRenderNijokQuiz =
+  renderNijokQuiz;
+
+
+renderNijokQuiz = function(){
+
+  originalRenderNijokQuiz();
+
+  renderNijokQuizProgress();
+
+};
+
+
+console.log(
+  "🌿 NIJOK Batch 30 — Progress connected."
+);
   
 </script>
   

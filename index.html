@@ -761,7 +761,602 @@ function openLogin(){
     "Profile and score system is coming."
   );
 }
+// ================================
+// NIJOK BATCH 2 — FOUNDATION
+// ================================
 
+const NIJOK_STORAGE_KEY = "NIJOK_STATE_V2";
+
+const DAILY_LIMIT = 20;
+
+function getTodayKey(){
+
+  const now = new Date();
+
+  return [
+    now.getFullYear(),
+    String(now.getMonth()+1).padStart(2,"0"),
+    String(now.getDate()).padStart(2,"0")
+  ].join("-");
+
+}
+
+function createDefaultState(){
+
+  return {
+
+    profile:{
+      loggedIn:false,
+      name:"",
+      email:"",
+      joined:getTodayKey()
+    },
+
+    daily:{
+      date:getTodayKey(),
+      questions:[],
+      current:0,
+      played:0,
+      score:0,
+      correct:0,
+      streak:0,
+      completed:false
+    },
+
+    stats:{
+      bestScore:0,
+      totalPlayed:0,
+      totalCorrect:0,
+      gamesPlayed:0,
+      badges:[]
+    },
+
+    community:[]
+
+  };
+
+}
+
+function loadState(){
+
+  try{
+
+    const saved =
+      localStorage.getItem(NIJOK_STORAGE_KEY);
+
+    if(!saved){
+      return createDefaultState();
+    }
+
+    const parsed = JSON.parse(saved);
+
+    const fresh = createDefaultState();
+
+    return {
+      ...fresh,
+      ...parsed,
+      profile:{
+        ...fresh.profile,
+        ...(parsed.profile || {})
+      },
+      daily:{
+        ...fresh.daily,
+        ...(parsed.daily || {})
+      },
+      stats:{
+        ...fresh.stats,
+        ...(parsed.stats || {})
+      },
+      community:
+        Array.isArray(parsed.community)
+          ? parsed.community
+          : []
+
+    };
+
+  }catch(error){
+
+    console.warn(
+      "NIJOK state could not be loaded:",
+      error
+    );
+
+    return createDefaultState();
+
+  }
+
+}
+
+function saveState(){
+
+  try{
+
+    localStorage.setItem(
+      NIJOK_STORAGE_KEY,
+      JSON.stringify(nijokState)
+    );
+
+  }catch(error){
+
+    console.warn(
+      "NIJOK state could not be saved:",
+      error
+    );
+
+  }
+
+}
+
+let nijokState = loadState();
+
+function prepareToday(){
+
+  const today = getTodayKey();
+
+  if(!nijokState.daily){
+
+    nijokState.daily =
+      createDefaultState().daily;
+
+  }
+
+  if(nijokState.daily.date !== today){
+
+    nijokState.daily = {
+
+      date:today,
+
+      questions:[],
+
+      current:0,
+
+      played:0,
+
+      score:0,
+
+      correct:0,
+
+      streak:0,
+
+      completed:false
+
+    };
+
+    saveState();
+
+  }
+
+}
+
+function shuffleArray(array){
+
+  const copy = [...array];
+
+  for(
+    let i = copy.length - 1;
+    i > 0;
+    i--
+  ){
+
+    const j =
+      Math.floor(Math.random() * (i + 1));
+
+    [copy[i],copy[j]] =
+      [copy[j],copy[i]];
+
+  }
+
+  return copy;
+
+}
+
+
+// =====================================
+// STARTER FOOD QUESTION BANK
+// =====================================
+
+const nijokQuestionBank = [
+
+  {
+    id:1,
+    category:"Indian Food",
+    difficulty:"easy",
+    q:"Which Indian dish is commonly made with rice and lentils?",
+    options:[
+      "Khichdi",
+      "Pasta",
+      "Sushi",
+      "Tacos"
+    ],
+    answer:0,
+    fact:"Khichdi is a traditional Indian dish commonly prepared using rice and lentils."
+  },
+
+  {
+    id:2,
+    category:"Fruits",
+    difficulty:"easy",
+    q:"Which fruit is often called the king of fruits in India?",
+    options:[
+      "Mango",
+      "Apple",
+      "Orange",
+      "Grapes"
+    ],
+    answer:0,
+    fact:"Mango is widely celebrated in India for its varieties, flavor and cultural importance."
+  },
+
+  {
+    id:3,
+    category:"Spices",
+    difficulty:"easy",
+    q:"Which spice gives turmeric its characteristic yellow color?",
+    options:[
+      "Curcumin",
+      "Caffeine",
+      "Lactose",
+      "Glucose"
+    ],
+    answer:0,
+    fact:"Curcumin is the major pigment responsible for turmeric's characteristic yellow color."
+  },
+
+  {
+    id:4,
+    category:"Nutrition",
+    difficulty:"easy",
+    q:"Which nutrient is especially important for building and repairing body tissues?",
+    options:[
+      "Protein",
+      "Water",
+      "Fiber",
+      "Salt"
+    ],
+    answer:0,
+    fact:"Protein supplies amino acids that the body uses to build and repair tissues."
+  },
+
+  {
+    id:5,
+    category:"Food Science",
+    difficulty:"easy",
+    q:"What process turns milk into yogurt?",
+    options:[
+      "Fermentation",
+      "Freezing",
+      "Drying",
+      "Grinding"
+    ],
+    answer:0,
+    fact:"Yogurt is produced through fermentation by specific microorganisms."
+  },
+
+  {
+    id:6,
+    category:"World Food",
+    difficulty:"easy",
+    q:"Which country is famous for traditional kimchi?",
+    options:[
+      "South Korea",
+      "Italy",
+      "Brazil",
+      "Canada"
+    ],
+    answer:0,
+    fact:"Kimchi is a traditional Korean fermented food."
+  },
+
+  {
+    id:7,
+    category:"Food Origins",
+    difficulty:"easy",
+    q:"Sushi is strongly associated with which country?",
+    options:[
+      "Japan",
+      "Mexico",
+      "France",
+      "Egypt"
+    ],
+    answer:0,
+    fact:"Sushi is a major part of Japanese culinary tradition."
+  },
+
+  {
+    id:8,
+    category:"Food Labels",
+    difficulty:"easy",
+    q:"How are ingredients generally listed on a packaged food label?",
+    options:[
+      "By weight in descending order",
+      "Alphabetically",
+      "By color",
+      "By price"
+    ],
+    answer:0,
+    fact:"Ingredients are generally listed in descending order by weight."
+  },
+
+  {
+    id:9,
+    category:"Vegetables",
+    difficulty:"easy",
+    q:"Which vegetable is botanically a fruit?",
+    options:[
+      "Tomato",
+      "Carrot",
+      "Potato",
+      "Spinach"
+    ],
+    answer:0,
+    fact:"Botanically, a tomato is a fruit because it develops from a flower's ovary."
+  },
+
+  {
+    id:10,
+    category:"Food Knowledge",
+    difficulty:"easy",
+    q:"What plant is used to make traditional tea?",
+    options:[
+      "Camellia sinensis",
+      "Mentha",
+      "Ocimum",
+      "Rosa"
+    ],
+    answer:0,
+    fact:"Traditional tea comes from the leaves and buds of Camellia sinensis."
+  }
+
+];
+
+let fullFoodQuestionBank =
+  [...nijokQuestionBank];
+
+function getQuestionById(id){
+
+  return fullFoodQuestionBank.find(
+    question =>
+      question.id === Number(id)
+  ) || null;
+
+}
+
+function prepareDailyQuestions(){
+
+  prepareToday();
+
+  if(
+    Array.isArray(nijokState.daily.questions) &&
+    nijokState.daily.questions.length === DAILY_LIMIT
+  ){
+
+    return;
+
+  }
+
+  const ids =
+    shuffleArray(
+      fullFoodQuestionBank
+        .map(question => question.id)
+    ).slice(0,DAILY_LIMIT);
+
+  nijokState.daily.questions = ids;
+
+  nijokState.daily.current = 0;
+  nijokState.daily.played = 0;
+  nijokState.daily.score = 0;
+  nijokState.daily.correct = 0;
+  nijokState.daily.streak = 0;
+  nijokState.daily.completed = false;
+
+  saveState();
+
+}
+
+function getCurrentDailyQuestion(){
+
+  prepareDailyQuestions();
+
+  const id =
+    nijokState.daily.questions[
+      nijokState.daily.current
+    ];
+
+  return getQuestionById(id);
+
+}
+
+function getDailyProgress(){
+
+  return {
+
+    played:
+      nijokState.daily.played,
+
+    total:
+      DAILY_LIMIT,
+
+    remaining:
+      Math.max(
+        0,
+        DAILY_LIMIT -
+        nijokState.daily.played
+      ),
+
+    score:
+      nijokState.daily.score,
+
+    correct:
+      nijokState.daily.correct,
+
+    streak:
+      nijokState.daily.streak,
+
+    completed:
+      nijokState.daily.completed
+
+  };
+
+}
+
+function restartToday(){
+
+  nijokState.daily = {
+
+    date:getTodayKey(),
+
+    questions:[],
+
+    current:0,
+
+    played:0,
+
+    score:0,
+
+    correct:0,
+
+    streak:0,
+
+    completed:false
+
+  };
+
+  saveState();
+
+  prepareDailyQuestions();
+
+  alert(
+    "Today's NIJOK challenge has been restarted."
+  );
+
+}
+
+
+// =====================================
+// BASIC LOGIN
+// =====================================
+
+function openLogin(){
+
+  const name =
+    prompt(
+      "Welcome to NIJOK 🌿\n\nEnter your name:"
+    );
+
+  if(!name) return;
+
+  const cleanName =
+    name.trim();
+
+  if(!cleanName) return;
+
+  const email =
+    prompt(
+      "Enter your email (optional):"
+    ) || "";
+
+  nijokState.profile.loggedIn = true;
+  nijokState.profile.name = cleanName;
+  nijokState.profile.email =
+    email.trim();
+
+  saveState();
+
+  updateHeaderLogin();
+
+  alert(
+    "Welcome to NIJOK, " +
+    cleanName +
+    "! 🌿"
+  );
+
+}
+
+function logoutNIJOK(){
+
+  nijokState.profile.loggedIn = false;
+  nijokState.profile.name = "";
+  nijokState.profile.email = "";
+
+  saveState();
+
+  updateHeaderLogin();
+
+}
+
+function updateHeaderLogin(){
+
+  const buttons =
+    document.querySelectorAll(
+      ".header-btn.primary"
+    );
+
+  buttons.forEach(button => {
+
+    button.textContent =
+      nijokState.profile.loggedIn
+        ? nijokState.profile.name
+        : "Login";
+
+  });
+
+}
+
+
+// =====================================
+// SAFE HTML
+// =====================================
+
+function escapeHTML(value){
+
+  return String(value)
+
+    .replace(/&/g,"&amp;")
+
+    .replace(/</g,"&lt;")
+
+    .replace(/>/g,"&gt;")
+
+    .replace(/"/g,"&quot;")
+
+    .replace(/'/g,"&#039;");
+
+}
+
+
+// =====================================
+// SEARCH
+// =====================================
+
+function openSearch(){
+
+  alert(
+    "NIJOK Search 🔎\n\n" +
+    "Food, ingredients, countries " +
+    "and learning search is coming."
+  );
+
+}
+
+
+// =====================================
+// INITIALISE
+// =====================================
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    nijokState = loadState();
+
+    prepareToday();
+
+    prepareDailyQuestions();
+
+    updateHeaderLogin();
+
+  }
+);
 </script>
 
 </body>

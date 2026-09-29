@@ -2,39 +2,56 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>NIJOK — Food. Culture. People. Places.</title>
+<title>NIJOK — Think. Connect. Discover. Food.</title>
+
+<meta name="description"
+content="NIJOK — Food awareness through facts, games and discovery. Fact first. You decide.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+rel="stylesheet">
 
 <style>
 
-/* =====================================================
-   NIJOK — CORE
-===================================================== */
-
 :root{
   --paper:#f7f5e9;
-  --paper2:#fbfaf2;
+  --paper-soft:#fbfaf3;
+  --paper-dark:#eeeede;
+
   --green:#064a35;
   --green-dark:#043b2b;
-  --green-light:#dfe9cd;
+  --green-deep:#022c20;
+  --green-soft:#dfe9cd;
+
   --sage:#91aa6e;
   --gold:#d7b73e;
   --orange:#d96843;
-  --red:#9c4439;
+
   --text:#163f32;
   --muted:#60776c;
+  --white:#ffffff;
+  --black:#10251e;
+
   --line:#d9ddce;
+
+  --shadow:0 14px 40px rgba(4,59,43,.10);
+  --shadow-lg:0 25px 70px rgba(4,59,43,.16);
+
+  --radius:28px;
+
+  --sans:"DM Sans",sans-serif;
+  --display:"Playfair Display",serif;
+  --hand:"Caveat",cursive;
 }
 
 *{
+  box-sizing:border-box;
   margin:0;
   padding:0;
-  box-sizing:border-box;
 }
 
 html{
@@ -44,8 +61,18 @@ html{
 body{
   background:var(--paper);
   color:var(--text);
-  font-family:"DM Sans",sans-serif;
-  overflow-x:hidden;
+  font-family:var(--sans);
+  line-height:1.6;
+}
+
+button{
+  font:inherit;
+  cursor:pointer;
+}
+
+img{
+  max-width:100%;
+  display:block;
 }
 
 a{
@@ -53,955 +80,474 @@ a{
   text-decoration:none;
 }
 
-button{
-  font-family:inherit;
+/* TOP BAR */
+
+.top-bar{
+  background:var(--green);
+  color:white;
+  text-align:center;
+  padding:8px 15px;
+  font-size:13px;
+  letter-spacing:.3px;
 }
 
-/* =====================================================
-   HEADER
-===================================================== */
+/* HEADER */
 
-header{
-  height:76px;
-  padding:0 4%;
-  display:flex;
-  align-items:center;
-  gap:30px;
-  background:rgba(247,245,233,.96);
-  border-bottom:1px solid var(--line);
+.site-header{
   position:sticky;
   top:0;
   z-index:1000;
-  backdrop-filter:blur(12px);
+
+  background:rgba(247,245,233,.94);
+  backdrop-filter:blur(14px);
+
+  border-bottom:1px solid var(--line);
 }
+
+.header-inner{
+  max-width:1250px;
+  margin:auto;
+
+  min-height:76px;
+
+  padding:0 22px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+/* LOGO */
 
 .logo{
   display:flex;
   align-items:center;
-  gap:12px;
-  min-width:220px;
+  gap:10px;
 }
 
 .logo-leaf{
   width:38px;
-  height:50px;
+  height:38px;
+
   background:var(--green);
-  border-radius:100% 0 100% 0;
-  transform:rotate(28deg);
+
+  border-radius:4px 22px 4px 22px;
+
+  transform:rotate(-18deg);
+
   position:relative;
 }
 
 .logo-leaf:after{
   content:"";
   position:absolute;
-  width:2px;
-  height:43px;
-  background:var(--paper);
-  left:19px;
-  top:4px;
-  transform:rotate(-28deg);
+
+  width:3px;
+  height:25px;
+
+  background:var(--gold);
+
+  left:18px;
+  top:7px;
+
+  transform:rotate(35deg);
 }
 
 .logo-name{
-  font-family:"Playfair Display",serif;
-  font-size:31px;
-  letter-spacing:2px;
+  font-family:var(--display);
+  font-size:27px;
+  font-weight:700;
+  letter-spacing:1px;
+
+  color:var(--green);
 }
 
 .logo-tag{
   color:var(--muted);
-  font-size:9px;
-  margin-top:4px;
+  font-size:11px;
+  margin-top:-5px;
 }
 
-nav{
-  flex:1;
-  display:flex;
-  justify-content:center;
-  gap:22px;
-}
+/* NAV */
 
-nav a{
-  font-size:9px;
-  font-weight:700;
-  padding:29px 0 22px;
-  border-bottom:2px solid transparent;
-}
-
-nav a.active{
-  border-color:var(--green);
-}
-
-.header-right{
+.main-nav{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:25px;
 }
 
-.search{
-  width:180px;
-  height:34px;
-  border:1px solid #cbd2c4;
-  border-radius:20px;
+.main-nav a{
+  font-size:14px;
+  font-weight:600;
+  color:var(--text);
+}
+
+.main-nav a:hover{
+  color:var(--orange);
+}
+
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.header-btn{
+  border:1px solid var(--green);
   background:transparent;
-  padding:0 13px;
-  outline:none;
-  font-size:9px;
+  color:var(--green);
+
+  border-radius:50px;
+
+  padding:9px 17px;
+
+  font-size:13px;
+  font-weight:700;
 }
 
-/* =====================================================
-   HERO
-===================================================== */
+.header-btn.primary{
+  background:var(--green);
+  color:white;
+}
+
+/* HERO */
 
 .hero{
-  min-height:440px;
-  padding:40px 4% 25px;
+  max-width:1250px;
+  margin:auto;
+
+  padding:75px 22px 80px;
+
   display:grid;
-  grid-template-columns:47% 53%;
-  position:relative;
-  overflow:hidden;
-}
+  grid-template-columns:1fr 1fr;
 
-.hero-content{
-  padding-top:30px;
-  animation:heroLeft .8s ease both;
-}
+  gap:55px;
 
-.eyebrow{
-  display:flex;
   align-items:center;
-  gap:12px;
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:2px;
-  margin-bottom:18px;
 }
 
-.eyebrow:after{
-  content:"";
-  width:50px;
-  height:1px;
-  background:var(--green);
+.hero-kicker{
+  font-size:12px;
+  font-weight:700;
+
+  letter-spacing:2px;
+
+  color:var(--orange);
+
+  margin-bottom:14px;
 }
 
 .hero-title{
-  font-family:"Playfair Display",serif;
-  font-size:clamp(48px,5vw,68px);
-  line-height:.94;
-  letter-spacing:-2px;
+  font-family:var(--display);
+
+  font-size:clamp(48px,7vw,82px);
+
+  line-height:1.02;
+
+  color:var(--green);
+
+  margin-bottom:22px;
 }
 
 .hero-title span{
-  color:#71904f;
+  color:var(--orange);
 }
 
 .hero-text{
-  max-width:420px;
-  margin-top:20px;
-  color:#536c60;
-  font-size:13px;
-  line-height:1.55;
+  max-width:570px;
+
+  font-size:17px;
+
+  color:var(--muted);
+
+  margin-bottom:30px;
 }
 
-.hero-buttons{
+.hero-actions{
   display:flex;
   gap:12px;
-  margin-top:23px;
+  flex-wrap:wrap;
 }
 
-.btn{
-  border-radius:30px;
-  padding:12px 21px;
-  font-size:10px;
+.hero-btn{
+  border:0;
+
+  border-radius:50px;
+
+  padding:14px 22px;
+
   font-weight:700;
-  transition:.25s;
-}
 
-.btn:hover{
-  transform:translateY(-3px);
-}
-
-.btn-green{
   background:var(--green);
   color:white;
+
+  box-shadow:var(--shadow);
 }
 
-.btn-outline{
-  border:1px solid var(--green);
+.hero-btn.secondary{
+  background:var(--paper-dark);
+  color:var(--green);
 }
 
-/* =====================================================
-   HERO VISUAL
-===================================================== */
+.hero-signature{
+  margin-top:20px;
+
+  font-family:var(--hand);
+
+  font-size:25px;
+
+  color:var(--green);
+}
+
+/* HERO IMAGE */
 
 .hero-visual{
-  height:395px;
   position:relative;
-  animation:heroRight .9s ease both;
 }
 
-.hero-orbit{
-  position:absolute;
-  width:390px;
-  height:355px;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  background:#e2e9d1;
-  border-radius:50%;
-}
-
-.food-photo{
-  position:absolute;
-  overflow:hidden;
-  border:6px solid var(--paper);
-  box-shadow:0 9px 25px rgba(30,70,48,.16);
-  z-index:3;
-  animation:floatPhoto 6s ease-in-out infinite;
-}
-
-.food-photo img{
+.hero-main-image{
   width:100%;
-  height:100%;
+  height:470px;
+
   object-fit:cover;
+
+  border-radius:38px;
+
+  box-shadow:var(--shadow-lg);
 }
 
-.fp1{
-  width:170px;
-  height:137px;
-  left:12%;
-  top:10%;
-  transform:rotate(-7deg);
-  border-radius:65px 8px 8px 8px;
-}
-
-.fp2{
-  width:178px;
-  height:137px;
-  right:10%;
-  top:4%;
-  transform:rotate(7deg);
-  border-radius:8px 65px 8px 8px;
-}
-
-.fp3{
-  width:170px;
-  height:140px;
-  left:12%;
-  bottom:2%;
-  transform:rotate(7deg);
-  border-radius:8px 8px 8px 65px;
-}
-
-.fp4{
-  width:180px;
-  height:140px;
-  right:9%;
-  bottom:3%;
-  transform:rotate(-7deg);
-  border-radius:8px 8px 65px 8px;
-}
-
-.story{
+.food-sticker{
   position:absolute;
-  right:0;
-  top:42%;
-  z-index:8;
-  font-family:"Caveat",cursive;
-  font-size:27px;
-  line-height:.9;
-  transform:rotate(-7deg);
-}
 
-.story:after{
-  content:"";
-  display:block;
-  width:70px;
-  height:2px;
-  background:var(--green);
-  margin:9px auto;
-}
+  left:-22px;
+  bottom:28px;
 
-/* =====================================================
-   FEATURES
-===================================================== */
+  background:var(--gold);
 
-.features{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  background:var(--paper2);
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-}
+  color:var(--green-deep);
 
-.feature{
-  min-height:140px;
-  padding:19px 12px;
-  text-align:center;
-  border-right:1px solid var(--line);
-}
+  width:125px;
+  height:125px;
 
-.feature:last-child{
-  border:0;
-}
-
-.feature-icon{
-  width:51px;
-  height:51px;
-  margin:auto;
   border-radius:50%;
-  background:#e4edd5;
+
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:24px;
-}
 
-.feature h3{
-  font-family:"Playfair Display",serif;
-  font-size:15px;
-  margin-top:9px;
-}
+  text-align:center;
 
-.feature p{
-  color:#6c8075;
-  font-size:9px;
-  line-height:1.45;
-  margin-top:5px;
-}
+  font-family:var(--hand);
 
-/* =====================================================
-   GAME MODES
-===================================================== */
-
-.game-section{
-  padding:52px 4% 45px;
-}
-
-.game-heading{
-  display:grid;
-  grid-template-columns:25% 75%;
-  margin-bottom:23px;
-}
-
-.game-heading h2{
-  font-family:"Playfair Display",serif;
-  font-size:37px;
-  line-height:.95;
-}
-
-.game-description{
-  padding-top:25px;
-  color:#667b70;
-  font-size:11px;
-  line-height:1.5;
-  max-width:430px;
-}
-
-.game-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:13px;
-}
-
-.game-card{
-  height:242px;
-  border-radius:28px;
-  position:relative;
-  overflow:hidden;
-  padding:22px;
-  transition:.35s;
-}
-
-.game-card:hover{
-  transform:translateY(-7px);
-}
-
-.game-card:nth-child(1){background:#edf0df}
-.game-card:nth-child(2){background:#f5edcf}
-.game-card:nth-child(3){background:#f5e4dd}
-.game-card:nth-child(4){background:#deede5}
-
-.card-blob{
-  position:absolute;
-  width:160px;
-  height:112px;
-  right:-16px;
-  top:-17px;
-  border-radius:100% 0 100% 0;
-}
-
-.game-card:nth-child(1) .card-blob{background:#8eaf48}
-.game-card:nth-child(2) .card-blob{background:#d6b338}
-.game-card:nth-child(3) .card-blob{background:#d76b4b}
-.game-card:nth-child(4) .card-blob{background:#418c70}
-
-.card-icon{
-  position:relative;
-  z-index:3;
-  font-size:35px;
-  margin-bottom:48px;
-}
-
-.game-card h3{
-  font-family:"Playfair Display",serif;
-  font-size:20px;
-}
-
-.game-card p{
-  color:#667b70;
-  font-size:10px;
-  line-height:1.45;
-  margin-top:5px;
-}
-
-.play-now{
-  position:absolute;
-  left:22px;
-  bottom:17px;
-  font-size:10px;
-  font-weight:700;
-}
-
-/* =====================================================
-   CHALLENGE — PLAYABLE
-===================================================== */
-
-.challenge-area{
-  padding:0 4% 54px;
-  display:grid;
-  grid-template-columns:1.55fr .85fr;
-  gap:19px;
-}
-
-.challenge{
-  min-height:390px;
-  background:var(--green);
-  color:white;
-  border-radius:30px;
-  position:relative;
-  overflow:hidden;
-  padding:28px;
-}
-
-.challenge-small{
-  font-size:9px;
-  letter-spacing:2px;
-  opacity:.9;
-}
-
-#gameBox{
-  position:relative;
-  z-index:10;
-  width:54%;
-}
-
-#gameBox:before{
-  content:"NIJOK • FOOD QUEST";
-  display:inline-block;
-  margin-top:12px;
-  padding:6px 11px;
-  border-radius:20px;
-  background:rgba(255,255,255,.10);
-  border:1px solid rgba(255,255,255,.20);
-  font-size:8px;
-  letter-spacing:1.4px;
-}
-
-#question{
-  font-family:"Playfair Display",serif;
-  font-size:29px;
-  line-height:1.05;
-  margin-top:14px;
-}
-
-.answers{
-  margin-top:20px;
-  display:grid;
-  gap:8px;
-}
-
-.answer{
-  width:100%;
-  border:1px solid rgba(255,255,255,.55);
-  border-radius:20px;
-  padding:9px 13px;
-  background:transparent;
-  color:white;
-  text-align:left;
-  font-size:10px;
-  cursor:pointer;
-  transition:.22s;
-}
-
-.answer:hover:not(:disabled){
-  background:rgba(255,255,255,.10);
-  transform:translateX(3px);
-}
-
-.answer.correct{
-  background:#40945c;
-  border-color:#70bd80;
-  animation:correctPop .4s ease;
-}
-
-.answer.wrong{
-  background:#9c4439;
-  border-color:#d77a6d;
-  animation:wrongShake .35s ease;
-}
-
-.answer:disabled{
-  cursor:default;
-}
-
-#gameMessage{
-  min-height:25px;
-  margin-top:11px;
-  font-size:10px;
-  font-weight:700;
-}
-
-#scoreBox{
-  display:inline-flex;
-  align-items:center;
-  gap:4px;
-  margin-top:6px;
-  padding:7px 12px;
-  border-radius:20px;
-  background:rgba(255,255,255,.11);
-  font-size:10px;
-}
-
-#nextButton{
-  display:none;
-  margin-top:12px;
-  border:0;
-  border-radius:22px;
-  padding:10px 16px;
-  background:#f7f5e9;
-  color:var(--green);
-  font-weight:700;
-  font-size:10px;
-  cursor:pointer;
-  transition:.25s;
-}
-
-#nextButton:hover{
-  transform:translateY(-2px);
-}
-
-.sushi{
-  position:absolute;
-  width:48%;
-  height:82%;
-  right:0;
-  bottom:0;
-  object-fit:cover;
-  border-radius:50% 0 0 50%;
-  z-index:2;
-}
-
-.think{
-  position:absolute;
-  right:12%;
-  bottom:18px;
-  z-index:8;
-  font-family:"Caveat",cursive;
   font-size:23px;
-  line-height:.9;
+  font-weight:700;
+
   transform:rotate(-8deg);
+
+  box-shadow:var(--shadow);
 }
 
-/* =====================================================
-   PROFILE
-===================================================== */
-
-.profile{
-  min-height:390px;
-  background:var(--paper2);
-  border:1px solid var(--line);
-  border-radius:28px;
-  padding:26px;
-  position:relative;
-  overflow:hidden;
-}
-
-.profile:after{
-  content:"";
+.hero-caption{
   position:absolute;
-  width:95px;
-  height:70px;
-  right:-15px;
-  top:-13px;
-  background:#dce8cc;
-  border-radius:100% 0 100% 0;
-}
 
-.profile h2{
-  font-family:"Playfair Display",serif;
-  font-size:20px;
-}
+  right:18px;
+  bottom:18px;
 
-.avatar{
-  width:54px;
-  height:54px;
-  border-radius:50%;
-  margin-top:18px;
-  background:#ad8768;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:27px;
-}
+  background:rgba(255,255,255,.92);
 
-.profile-name{
-  font-family:"Playfair Display",serif;
-  font-size:16px;
-  margin-top:8px;
-}
+  padding:14px 18px;
 
-.profile-role{
-  font-size:9px;
-  color:#718178;
-}
+  border-radius:18px;
 
-.stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-  margin-top:18px;
-  padding:13px 0;
-  text-align:center;
-}
+  font-family:var(--hand);
 
-.stats strong{
-  display:block;
-  font-family:"Playfair Display",serif;
   font-size:22px;
+
+  color:var(--green);
 }
 
-.stats span{
-  display:block;
-  font-size:7px;
-  color:#718178;
-  margin-top:2px;
-}
+/* BRAND STRIP */
 
-.profile-btn{
-  display:inline-block;
-  color:white;
+.brand-strip{
   background:var(--green);
-  border-radius:22px;
-  padding:10px 16px;
-  font-size:9px;
-  font-weight:700;
-  margin-top:14px;
-}
 
-/* =====================================================
-   LOWER SECTION
-===================================================== */
-
-.bottom-grid{
-  padding:0 4% 55px;
-  display:grid;
-  grid-template-columns:1fr .9fr;
-  gap:20px;
-}
-
-.box{
-  border:1px solid var(--line);
-  background:var(--paper2);
-  border-radius:28px;
-  padding:25px;
-}
-
-.box.green-box{
-  background:#e1e9d1;
-}
-
-.box-title{
-  font-family:"Playfair Display",serif;
-  font-size:25px;
-}
-
-.box-sub{
-  font-size:10px;
-  color:#718178;
-  margin-top:5px;
-}
-
-.player{
-  display:grid;
-  grid-template-columns:28px 1fr 50px;
-  align-items:center;
-  border-bottom:1px solid #e1e4da;
-  padding:9px 0;
-  font-size:10px;
-}
-
-.player-info{
-  display:flex;
-  align-items:center;
-  gap:9px;
-}
-
-.player-avatar{
-  width:28px;
-  height:28px;
-  border-radius:50%;
-  background:#a98468;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.score{
-  text-align:right;
-  font-weight:700;
-}
-
-.timer{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:9px;
-  margin-top:24px;
-}
-
-.time{
-  background:#faf8ef;
-  border-radius:13px;
-  text-align:center;
-  padding:13px 5px;
-}
-
-.time strong{
-  display:block;
-  font-family:"Playfair Display",serif;
-  font-size:23px;
-}
-
-.time span{
-  font-size:8px;
-  color:#718178;
-}
-
-/* =====================================================
-   FOOTER
-===================================================== */
-
-footer{
-  background:var(--green-dark);
   color:white;
-  padding:35px 4% 18px;
-}
 
-.footer-top{
-  display:grid;
-  grid-template-columns:1fr 2fr;
-  gap:30px;
-}
+  padding:19px;
 
-.footer-name{
-  font-family:"Playfair Display",serif;
-  font-size:25px;
-  letter-spacing:2px;
-}
+  text-align:center;
 
-.footer-tag{
-  font-size:8px;
-  color:#b8cbbb;
-}
+  font-family:var(--hand);
 
-.footer-links{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-}
+  font-size:27px;
 
-.footer-links strong{
-  font-size:8px;
   letter-spacing:1px;
 }
 
-.footer-links a{
-  display:block;
-  margin-top:9px;
-  color:#b9cbbf;
-  font-size:8px;
+/* PROMISE */
+
+.promise{
+  max-width:1100px;
+  margin:auto;
+
+  padding:85px 22px;
 }
 
-.footer-bottom{
-  border-top:1px solid rgba(255,255,255,.2);
-  margin-top:28px;
-  padding-top:14px;
-  display:flex;
-  justify-content:space-between;
-  font-size:8px;
-  color:#afc3b5;
+.section-kicker{
+  color:var(--orange);
+
+  font-size:12px;
+  font-weight:700;
+
+  letter-spacing:2px;
+
+  margin-bottom:10px;
 }
 
-/* =====================================================
-   ANIMATIONS
-===================================================== */
+.section-title{
+  font-family:var(--display);
 
-@keyframes heroLeft{
-  from{opacity:0;transform:translateX(-30px)}
-  to{opacity:1;transform:translateX(0)}
+  color:var(--green);
+
+  font-size:clamp(34px,5vw,55px);
+
+  line-height:1.1;
+
+  margin-bottom:35px;
 }
 
-@keyframes heroRight{
-  from{opacity:0;transform:translateX(30px)}
-  to{opacity:1;transform:translateX(0)}
+.promise-grid{
+  display:grid;
+
+  grid-template-columns:repeat(3,1fr);
+
+  gap:20px;
 }
 
-@keyframes floatPhoto{
-  0%,100%{margin-top:0}
-  50%{margin-top:-5px}
+.promise-card{
+  background:var(--paper-soft);
+
+  border:1px solid var(--line);
+
+  border-radius:var(--radius);
+
+  padding:30px;
+
+  box-shadow:var(--shadow);
+
+  transition:.25s;
 }
 
-@keyframes correctPop{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.03)}
-  100%{transform:scale(1)}
+.promise-card:hover{
+  transform:translateY(-5px);
 }
 
-@keyframes wrongShake{
-  0%,100%{transform:translateX(0)}
-  25%{transform:translateX(-5px)}
-  75%{transform:translateX(5px)}
+.promise-number{
+  font-size:12px;
+  color:var(--orange);
+
+  font-weight:700;
+
+  letter-spacing:1px;
 }
 
-/* =====================================================
-   MOBILE
-===================================================== */
+.promise-card h3{
+  font-family:var(--display);
 
-@media(max-width:950px){
+  font-size:27px;
 
-  header{
-    height:68px;
-    padding:0 5%;
-  }
+  color:var(--green);
 
-  nav,
-  .search{
+  margin:10px 0;
+}
+
+.promise-card p{
+  color:var(--muted);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:850px){
+
+  .main-nav{
     display:none;
   }
 
-  .header-right{
-    margin-left:auto;
+  .header-inner{
+    min-height:68px;
+    padding:0 15px;
+  }
+
+  .logo-tag{
+    display:none;
   }
 
   .hero{
-    display:block;
-    padding:34px 6% 20px;
-  }
-
-  .hero-visual{
-    height:330px;
-    margin-top:15px;
-  }
-
-  .hero-orbit{
-    width:310px;
-    height:290px;
-  }
-
-  .features{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .game-heading{
     grid-template-columns:1fr;
-  }
 
-  .game-description{
-    padding-top:15px;
-  }
+    padding-top:48px;
 
-  .game-grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .challenge-area{
-    grid-template-columns:1fr;
-  }
-
-  .bottom-grid{
-    grid-template-columns:1fr;
-  }
-
-  .footer-top{
-    grid-template-columns:1fr;
-  }
-}
-
-@media(max-width:550px){
-
-  .logo{
-    min-width:0;
-  }
-
-  .logo-name{
-    font-size:26px;
+    gap:35px;
   }
 
   .hero-title{
-    font-size:43px;
+    font-size:52px;
   }
 
-  .hero-visual{
-    height:290px;
+  .hero-main-image{
+    height:370px;
   }
 
-  .hero-orbit{
-    width:250px;
-    height:235px;
+  .food-sticker{
+    left:-8px;
+    width:105px;
+    height:105px;
+    font-size:20px;
   }
 
-  .fp1,.fp2,.fp3,.fp4{
-    width:100px;
-    height:82px;
-    border-width:4px;
+  .promise{
+    padding:60px 18px;
   }
 
-  .story{
-    font-size:18px;
-  }
-
-  .game-grid{
+  .promise-grid{
     grid-template-columns:1fr;
   }
 
-  .challenge{
-    min-height:480px;
+}
+
+@media(max-width:480px){
+
+  .logo-name{
+    font-size:23px;
   }
 
-  #gameBox{
-    width:100%;
-  }
-
-  .sushi{
-    width:60%;
-    height:35%;
-    opacity:.22;
-  }
-
-  .think{
+  .header-actions .header-btn:first-child{
     display:none;
   }
 
-  .footer-links{
-    grid-template-columns:1fr 1fr;
-    gap:20px;
+  .hero{
+    padding-left:17px;
+    padding-right:17px;
   }
 
-  .footer-bottom{
-    flex-direction:column;
-    gap:8px;
-    text-align:center;
+  .hero-title{
+    font-size:46px;
   }
+
+  .hero-text{
+    font-size:15px;
+  }
+
+  .hero-main-image{
+    height:320px;
+    border-radius:27px;
+  }
+
+  .brand-strip{
+    font-size:23px;
+  }
+
 }
 
 </style>
@@ -1009,5140 +555,214 @@ footer{
 
 <body>
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
-<header>
-
-<a href="#" class="logo">
-  <div class="logo-leaf"></div>
-
-  <div>
-    <div class="logo-name">NIJOK</div>
-    <div class="logo-tag">
-      Food · Culture · People · Places
-    </div>
-  </div>
-</a>
-
-<nav>
-  <a class="active" href="#">Home</a>
-  <a href="#games">Food Passport</a>
-  <a href="#games">Food Museum</a>
-  <a href="#games">Food Map</a>
-  <a href="#games">Countries</a>
-  <a href="#learn">Learn</a>
-  <a href="#about">About</a>
-</nav>
-
-<div class="header-right">
-  <input class="search" placeholder="Search food, region, country...">
+<div class="top-bar">
+🌿 NIJOK — Learn something about food today.
 </div>
+
+<header class="site-header">
+
+  <div class="header-inner">
+
+    <a href="#" class="logo">
+
+      <div class="logo-leaf"></div>
+
+      <div>
+        <div class="logo-name">NIJOK</div>
+        <div class="logo-tag">Food · Culture · People · Places</div>
+      </div>
+
+    </a>
+
+    <nav class="main-nav">
+
+      <a href="#home">Home</a>
+      <a href="#play">Play</a>
+      <a href="#learn">Learn</a>
+      <a href="#community">Community</a>
+      <a href="#about">About</a>
+
+    </nav>
+
+    <div class="header-actions">
+
+      <button class="header-btn" onclick="openSearch()">
+        Search
+      </button>
+
+      <button class="header-btn primary" onclick="openLogin()">
+        Login
+      </button>
+
+    </div>
+
+  </div>
 
 </header>
 
-
-<!-- =====================================================
-     HERO
-===================================================== -->
+<main id="home">
 
 <section class="hero">
 
-<div class="hero-content">
+  <div class="hero-content">
 
-  <div class="eyebrow">
-    CHALLENGE MODE
+    <div class="hero-kicker">
+      FOOD DISCOVERY
+    </div>
+
+    <h1 class="hero-title">
+      Think.<br>
+      <span>Connect.</span><br>
+      Discover.
+    </h1>
+
+    <p class="hero-text">
+      Food carries stories — ingredients, cultures,
+      traditions and knowledge. NIJOK makes food
+      discovery simple, curious and fun.
+    </p>
+
+    <div class="hero-actions">
+
+      <button class="hero-btn"
+              onclick="scrollToPlay()">
+        🌿 Start Exploring →
+      </button>
+
+      <button class="hero-btn secondary"
+              onclick="scrollToLearn()">
+        Discover Today's Fact
+      </button>
+
+    </div>
+
+    <div class="hero-signature">
+      Fact first. You decide.
+    </div>
+
   </div>
 
-  <h1 class="hero-title">
-    Food Around<br>
-    the <span>World</span>
-  </h1>
+  <div class="hero-visual">
 
-  <p class="hero-text">
-    Test your food knowledge, explore cultures,
-    discover ingredients and unlock the stories
-    behind what we eat.
-  </p>
+    <img
+      class="hero-main-image"
+      src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=85"
+      alt="Beautiful food spread">
 
-  <div class="hero-buttons">
-    <a href="#games" class="btn btn-green">
-      🌿 Start Playing →
-    </a>
+    <div class="food-sticker">
+      Stay<br>Curious
+    </div>
 
-    <a href="#challenge" class="btn btn-outline">
-      How It Works
-    </a>
+    <div class="hero-caption">
+      Every bite.<br>
+      Has a story.
+    </div>
+
   </div>
-
-</div>
-
-
-<div class="hero-visual">
-
-  <div class="hero-orbit"></div>
-
-  <div class="food-photo fp1">
-    <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=85" alt="Food">
-  </div>
-
-  <div class="food-photo fp2">
-    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=85" alt="Food">
-  </div>
-
-  <div class="food-photo fp3">
-    <img src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=800&q=85" alt="Food">
-  </div>
-
-  <div class="food-photo fp4">
-    <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=85" alt="Food">
-  </div>
-
-  <div class="story">
-    Every Food<br>
-    Has a Story
-  </div>
-
-</div>
 
 </section>
 
-
-<!-- =====================================================
-     FEATURES
-===================================================== -->
-
-<section class="features">
-
-<div class="feature">
-  <div class="feature-icon">🧠</div>
-  <h3>Fun & Engaging</h3>
-  <p>Learn through<br>interactive quizzes.</p>
+<div class="brand-strip">
+Think · Connect · Discover · Food
 </div>
 
-<div class="feature">
-  <div class="feature-icon">🌍</div>
-  <h3>Global & Local</h3>
-  <p>Explore food from<br>everywhere.</p>
-</div>
+<section class="promise" id="play">
 
-<div class="feature">
-  <div class="feature-icon">📖</div>
-  <h3>Build Knowledge</h3>
-  <p>History, culture,<br>ingredients and more.</p>
-</div>
+  <div class="section-kicker">
+    THE NIJOK WAY
+  </div>
 
-<div class="feature">
-  <div class="feature-icon">🏆</div>
-  <h3>Earn Rewards</h3>
-  <p>Collect points,<br>badges and levels.</p>
-</div>
-
-<div class="feature">
-  <div class="feature-icon">👥</div>
-  <h3>Compete & Share</h3>
-  <p>Challenge friends<br>and climb.</p>
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     GAME MODES
-===================================================== -->
-
-<section class="game-section" id="games">
-
-<div class="game-heading">
-
-  <h2>
-    Choose Your<br>
-    Challenge
+  <h2 class="section-title">
+    Play. Learn.<br>
+    Stay curious.
   </h2>
 
-  <p class="game-description">
-    Different ways to play. Same goal —
-    become a curious Food Explorer.
-  </p>
+  <div class="promise-grid">
 
-</div>
+    <div class="promise-card">
 
-
-<div class="game-grid">
-
-<div class="game-card">
-  <div class="card-blob"></div>
-  <div class="card-icon">📍</div>
-  <h3>Guess the Food</h3>
-  <p>Identify the dish<br>from the image.</p>
-  <div class="play-now">Play Now →</div>
-</div>
-
-<div class="game-card">
-  <div class="card-blob"></div>
-  <div class="card-icon">❓</div>
-  <h3>Food Quiz</h3>
-  <p>Test your knowledge<br>with tricky questions.</p>
-  <div class="play-now">Play Now →</div>
-</div>
-
-<div class="game-card">
-  <div class="card-blob"></div>
-  <div class="card-icon">🧩</div>
-  <h3>Match the Pair</h3>
-  <p>Match food with region,<br>ingredient or culture.</p>
-  <div class="play-now">Play Now →</div>
-</div>
-
-<div class="game-card">
-  <div class="card-blob"></div>
-  <div class="card-icon">🏆</div>
-  <h3>Time Challenge</h3>
-  <p>Answer fast.<br>Score higher.</p>
-  <div class="play-now">Play Now →</div>
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     REAL PLAYABLE GAME
-===================================================== -->
-   
-<section class="challenge-area">
-
-  <div class="challenge nijok-game">
-
-    <div class="challenge-small">
-      🌿 &nbsp; NIJOK FOOD QUEST
-    </div>
-
-    <div class="game-top">
-      <div>
-        <span class="game-label">FOOD AROUND THE WORLD</span>
-        <h2 id="question">Loading your food quest...</h2>
+      <div class="promise-number">
+        01
       </div>
 
-      <div class="game-counter">
-        <strong id="questionNumber">1</strong>
-        <span>/ 20 today</span>
-      </div>
-    </div>
-
-    <div class="progress-track">
-      <div id="progressBar"></div>
-    </div>
-
-    <div id="categoryBadge">🌍 World Food</div>
-
-    <div id="answers" class="answers"></div>
-
-    <div id="gameMessage"></div>
-
-    <div class="game-stats">
-      <div>
-        <span>⭐ Score</span>
-        <strong id="score">0</strong>
-      </div>
-
-      <div>
-        <span>🔥 Streak</span>
-        <strong id="streak">0</strong>
-      </div>
-
-      <div>
-        <span>🏆 Best</span>
-        <strong id="bestScore">0</strong>
-      </div>
-    </div>
-
-    <button id="nextButton" onclick="nextQuestion()">
-      Next Question →
-    </button>
-
-    <button id="restartButton" onclick="restartToday()">
-      🔄 Restart today's game
-    </button>
-
-    <div id="dailyLimit" class="daily-limit">
-      🎉 Today's 20 questions are complete!
-      <br>
-      <small>Come back tomorrow for a new Food Quest.</small>
-    </div>
-
-  </div>
-
-
-  <!-- PROFILE -->
-
-  <div class="profile">
-
-    <h2>
-      🌿 &nbsp; Your Food Journey
-    </h2>
-
-    <div class="avatar">
-      👨🏻
-    </div>
-
-    <div class="profile-name">
-      Boske Shivadas
-    </div>
-
-    <div class="profile-role">
-      Food Explorer
-    </div>
-
-    <div class="stats">
-
-      <div>
-        <strong id="profilePlayed">0</strong>
-        <span>Games Played</span>
-      </div>
-
-      <div>
-        <strong id="profileCorrect">0</strong>
-        <span>Correct Answers</span>
-      </div>
-
-      <div>
-        <strong id="profileBadges">0</strong>
-        <span>Badges Earned</span>
-      </div>
-
-    </div>
-
-    <a class="profile-btn" href="#">
-      View Profile &nbsp; →
-    </a>
-
-  </div>
-
-</section>
-
-
-<style>
-
-/* =====================================================
-   NIJOK FOOD QUEST
-===================================================== */
-
-.nijok-game{
-  background:
-    radial-gradient(circle at 90% 10%,rgba(166,195,133,.18),transparent 28%),
-    var(--green);
-  min-height:390px;
-  padding:30px;
-}
-
-.game-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:20px;
-  position:relative;
-  z-index:5;
-}
-
-.game-label{
-  display:inline-block;
-  color:#d7e5c6;
-  font-size:9px;
-  letter-spacing:2px;
-  font-weight:700;
-  margin-top:12px;
-}
-
-#question{
-  color:white;
-  font-family:"Playfair Display",serif;
-  font-size:clamp(25px,3vw,39px);
-  line-height:1.05;
-  margin-top:10px;
-  max-width:620px;
-}
-
-.game-counter{
-  min-width:82px;
-  padding:10px;
-  border:1px solid rgba(255,255,255,.25);
-  border-radius:18px;
-  text-align:center;
-  color:white;
-}
-
-.game-counter strong{
-  display:block;
-  font-family:"Playfair Display",serif;
-  font-size:25px;
-}
-
-.game-counter span{
-  display:block;
-  font-size:8px;
-  opacity:.75;
-}
-
-.progress-track{
-  width:100%;
-  height:5px;
-  background:rgba(255,255,255,.16);
-  border-radius:10px;
-  margin:20px 0 15px;
-  overflow:hidden;
-}
-
-#progressBar{
-  height:100%;
-  width:5%;
-  background:#d7b73e;
-  border-radius:10px;
-  transition:.35s;
-}
-
-#categoryBadge{
-  display:inline-block;
-  color:#e6efd9;
-  background:rgba(255,255,255,.09);
-  border:1px solid rgba(255,255,255,.18);
-  border-radius:20px;
-  padding:6px 11px;
-  font-size:8px;
-  margin-bottom:13px;
-}
-
-.nijok-game .answers{
-  width:100%;
-  max-width:650px;
-  margin-top:0;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-}
-
-.nijok-game .answer{
-  width:100%;
-  text-align:left;
-  color:white;
-  background:rgba(255,255,255,.045);
-  border:1px solid rgba(255,255,255,.32);
-  cursor:pointer;
-  transition:.2s;
-}
-
-.nijok-game .answer:hover{
-  background:rgba(255,255,255,.13);
-  transform:translateY(-2px);
-}
-
-.nijok-game .answer.correct{
-  background:#3f9660;
-  border-color:#6bc27f;
-}
-
-.nijok-game .answer.wrong{
-  background:#9c4439;
-  border-color:#d06b5e;
-}
-
-.nijok-game .answer.disabled{
-  pointer-events:none;
-}
-
-#gameMessage{
-  min-height:24px;
-  margin-top:10px;
-  color:#fff;
-  font-size:10px;
-  font-weight:600;
-}
-
-.game-stats{
-  display:flex;
-  gap:20px;
-  margin-top:7px;
-}
-
-.game-stats div{
-  min-width:72px;
-}
-
-.game-stats span{
-  display:block;
-  color:#b9cbbf;
-  font-size:7px;
-}
-
-.game-stats strong{
-  display:block;
-  color:white;
-  font-family:"Playfair Display",serif;
-  font-size:19px;
-}
-
-#nextButton,
-#restartButton{
-  border:0;
-  cursor:pointer;
-  border-radius:22px;
-  padding:10px 17px;
-  font-size:9px;
-  font-weight:700;
-  margin-top:12px;
-}
-
-#nextButton{
-  background:#d7b73e;
-  color:#183d2e;
-}
-
-#restartButton{
-  display:none;
-  background:rgba(255,255,255,.12);
-  color:white;
-  border:1px solid rgba(255,255,255,.25);
-}
-
-.daily-limit{
-  display:none;
-  margin-top:20px;
-  padding:17px;
-  border-radius:20px;
-  background:rgba(255,255,255,.1);
-  color:white;
-  text-align:center;
-  font-family:"Playfair Display",serif;
-  font-size:18px;
-}
-
-.daily-limit small{
-  font-family:"DM Sans",sans-serif;
-  font-size:9px;
-  opacity:.7;
-}
-
-
-/* MOBILE */
-
-@media(max-width:550px){
-
-  .nijok-game{
-    padding:23px;
-    min-height:430px;
-  }
-
-  .game-top{
-    gap:10px;
-  }
-
-  .game-counter{
-    min-width:65px;
-  }
-
-  #question{
-    font-size:25px;
-  }
-
-  .nijok-game .answers{
-    grid-template-columns:1fr;
-  }
-
-  .game-stats{
-    gap:12px;
-  }
-
-  .game-stats div{
-    min-width:60px;
-  }
-
-}
-
-</style>
-
-
-<script>
-
-/* =====================================================
-   NIJOK FOOD QUEST ENGINE
-   20 QUESTIONS / DAY
-===================================================== */
-
-
-/*
-   QUESTION BANK
-
-   The engine supports hundreds of questions.
-   Add questions in this exact format:
-
-   {
-     q:"Question?",
-     a:["Option 1","Option 2","Option 3","Option 4"],
-     correct:0,
-     category:"🌍 World Food"
-   }
-*/
-
-const nijokQuestions = [
-
-  {
-    q:"Which country is traditionally associated with sushi?",
-    a:["China","Japan","Korea","Thailand"],
-    correct:1,
-    category:"🍣 Japan"
-  },
-
-  {
-    q:"Which fruit is known as the 'king of fruits' in many parts of Southeast Asia?",
-    a:["Mango","Durian","Apple","Orange"],
-    correct:1,
-    category:"🌏 Southeast Asia"
-  },
-
-  {
-    q:"Guacamole is traditionally made mainly from which fruit?",
-    a:["Avocado","Papaya","Banana","Pineapple"],
-    correct:0,
-    category:"🥑 Mexico"
-  },
-
-  {
-    q:"Which country is famous for pizza's traditional origin?",
-    a:["France","Italy","Spain","Greece"],
-    correct:1,
-    category:"🍕 Italy"
-  },
-
-  {
-    q:"What is the main ingredient in hummus?",
-    a:["Chickpeas","Rice","Potato","Corn"],
-    correct:0,
-    category:"🫘 Middle East"
-  },
-
-  {
-    q:"Which spice gives many curries a bright yellow colour?",
-    a:["Turmeric","Cinnamon","Cardamom","Clove"],
-    correct:0,
-    category:"🌿 Spices"
-  },
-
-  {
-    q:"Biryani is primarily a dish based on which staple grain?",
-    a:["Wheat","Rice","Corn","Barley"],
-    correct:1,
-    category:"🍚 South Asia"
-  },
-
-  {
-    q:"Which country is strongly associated with tacos?",
-    a:["Mexico","Brazil","Japan","Egypt"],
-    correct:0,
-    category:"🌮 Mexico"
-  },
-
-  {
-    q:"What is the main ingredient in traditional miso?",
-    a:["Soybeans","Potatoes","Wheat","Tomatoes"],
-    correct:0,
-    category:"🥢 Japan"
-  },
-
-  {
-    q:"Which fruit is commonly used to make traditional cider?",
-    a:["Apple","Mango","Grape","Lemon"],
-    correct:0,
-    category:"🍎 Food & Drink"
-  },
-
-  {
-    q:"Which country is famous for kimchi?",
-    a:["South Korea","India","Italy","Turkey"],
-    correct:0,
-    category:"🥬 Korea"
-  },
-
-  {
-    q:"What is tofu traditionally made from?",
-    a:["Soybeans","Rice","Milk","Corn"],
-    correct:0,
-    category:"🌱 Plant Foods"
-  },
-
-  {
-    q:"Which grain is traditionally used to make risotto?",
-    a:["Rice","Barley","Oats","Rye"],
-    correct:0,
-    category:"🍚 Italy"
-  },
-
-  {
-    q:"Which fruit is traditionally used in many Indian aamras preparations?",
-    a:["Mango","Apple","Guava","Papaya"],
-    correct:0,
-    category:"🥭 India"
-  },
-
-  {
-    q:"Falafel is commonly made from chickpeas or which other legume?",
-    a:["Fava beans","Soybeans","Peanuts","Lentils"],
-    correct:0,
-    category:"🫘 Middle East"
-  },
-
-  {
-    q:"Which country is especially famous for croissants?",
-    a:["France","India","China","Brazil"],
-    correct:0,
-    category:"🥐 France"
-  },
-
-  {
-    q:"What is the main ingredient in traditional popcorn?",
-    a:["Corn kernels","Rice","Wheat","Oats"],
-    correct:0,
-    category:"🌽 Grains"
-  },
-
-  {
-    q:"Which nut is commonly used to make marzipan?",
-    a:["Almond","Cashew","Walnut","Pistachio"],
-    correct:0,
-    category:"🥜 Nuts"
-  },
-
-  {
-    q:"Which country is famous for paella?",
-    a:["Spain","Portugal","Italy","France"],
-    correct:0,
-    category:"🥘 Spain"
-  },
-
-  {
-    q:"What is the main ingredient of traditional Japanese mochi?",
-    a:["Glutinous rice","Wheat","Corn","Potato"],
-    correct:0,
-    category:"🍡 Japan"
-  },
-
-  {
-    q:"Which fruit is dried to make raisins?",
-    a:["Grape","Plum","Apple","Fig"],
-    correct:0,
-    category:"🍇 Fruits"
-  },
-
-  {
-    q:"Which Indian spice is obtained from the dried stigma of a flower?",
-    a:["Saffron","Turmeric","Cumin","Pepper"],
-    correct:0,
-    category:"🌸 Spices"
-  },
-
-  {
-    q:"Which country is associated with the traditional dish moussaka?",
-    a:["Greece","Japan","Mexico","Canada"],
-    correct:0,
-    category:"🇬🇷 Greece"
-  },
-
-  {
-    q:"What is the main ingredient in traditional French ratatouille?",
-    a:["Vegetables","Rice","Fish","Bread"],
-    correct:0,
-    category:"🥕 France"
-  },
-
-  {
-    q:"Which fruit is commonly used to make traditional jam?",
-    a:["Many fruits can be used","Only apples","Only bananas","Only lemons"],
-    correct:0,
-    category:"🍓 Food Basics"
-  },
-
-  {
-    q:"Which ingredient is essential in traditional bread making?",
-    a:["Flour","Ice","Vinegar","Chocolate"],
-    correct:0,
-    category:"🍞 Baking"
-  },
-
-  {
-    q:"Which country is associated with traditional pho?",
-    a:["Vietnam","China","India","Japan"],
-    correct:0,
-    category:"🍜 Vietnam"
-  },
-
-  {
-    q:"What is paneer?",
-    a:["Fresh cheese","A spice","A grain","A fruit"],
-    correct:0,
-    category:"🥛 India"
-  },
-
-  {
-    q:"Which fruit has its seeds on the outside of the flesh?",
-    a:["Strawberry","Mango","Banana","Orange"],
-    correct:0,
-    category:"🍓 Fruits"
-  },
-
-  {
-    q:"Which legume is commonly used to make dal?",
-    a:["Lentils","Coffee beans","Cocoa beans","Sesame only"],
-    correct:0,
-    category:"🫘 India"
-  }
-
-];
-
-
-/* =====================================================
-   CREATE ADDITIONAL QUESTION VARIATIONS
-   ===================================================== */
-
-const extraQuestions = [];
-
-
-/*
-   These are generated from the knowledge set so
-   the game can scale without making the HTML enormous.
-*/
-
-const foodFacts = [
-
-  ["Mango","fruit","India"],
-  ["Sushi","dish","Japan"],
-  ["Kimchi","fermented food","Korea"],
-  ["Pizza","dish","Italy"],
-  ["Tacos","dish","Mexico"],
-  ["Paella","dish","Spain"],
-  ["Pho","dish","Vietnam"],
-  ["Miso","fermented food","Japan"],
-  ["Hummus","dish","Middle East"],
-  ["Falafel","dish","Middle East"],
-  ["Ratatouille","dish","France"],
-  ["Mochi","rice cake","Japan"],
-  ["Biryani","rice dish","South Asia"],
-  ["Paneer","fresh cheese","India"],
-  ["Tofu","soy food","East Asia"],
-  ["Guacamole","dish","Mexico"],
-  ["Croissant","pastry","France"],
-  ["Risotto","rice dish","Italy"],
-  ["Moussaka","dish","Greece"],
-  ["Aamras","mango preparation","India"],
-  ["Durian","fruit","Southeast Asia"],
-  ["Raisin","dried fruit","many regions"],
-  ["Saffron","spice","many regions"],
-  ["Turmeric","spice","South Asia"],
-  ["Strawberry","fruit","many regions"]
-];
-
-foodFacts.forEach((item,index)=>{
-
-  const name=item[0];
-  const type=item[1];
-  const place=item[2];
-
-  extraQuestions.push({
-    q:`${name} is best described as which of the following?`,
-    a:[
-      type.charAt(0).toUpperCase()+type.slice(1),
-      "A type of musical instrument",
-      "A building material",
-      "A type of vehicle"
-    ],
-    correct:0,
-    category:"📚 Food Knowledge"
-  });
-
-  extraQuestions.push({
-    q:`Which place or region is associated with ${name}?`,
-    a:[
-      place,
-      "Antarctica",
-      "The Moon",
-      "The Arctic Ocean"
-    ],
-    correct:0,
-    category:"🌍 Food Around the World"
-  });
-
-  extraQuestions.push({
-    q:`Which category does ${name} belong to?`,
-    a:[
-      type.charAt(0).toUpperCase()+type.slice(1),
-      "Electronic device",
-      "Sports equipment",
-      "Building tool"
-    ],
-    correct:0,
-    category:"🧠 Food Quiz"
-  });
-
-  extraQuestions.push({
-    q:`Which statement about ${name} is most appropriate?`,
-    a:[
-      `${name} is connected with food culture.`,
-      `${name} is a type of aircraft.`,
-      `${name} is a planet.`,
-      `${name} is a computer language.`
-    ],
-    correct:0,
-    category:"🌿 Food Culture"
-  });
-
-});
-
-
-/* Combine question bank */
-
-const allQuestions = [
-  ...nijokQuestions,
-  ...extraQuestions
-];
-
-
-/* =====================================================
-   GAME STATE
-===================================================== */
-
-let currentQuestion = 0;
-let score = 0;
-let streak = 0;
-let correctAnswers = 0;
-let answered = false;
-
-const DAILY_LIMIT = 20;
-
-let today = new Date().toISOString().split("T")[0];
-
-let savedDay = localStorage.getItem("nijokGameDay");
-
-if(savedDay !== today){
-
-  localStorage.setItem("nijokGameDay",today);
-  localStorage.setItem("nijokPlayedToday","0");
-  localStorage.setItem("nijokScoreToday","0");
-  localStorage.setItem("nijokCorrectToday","0");
-
-}
-
-let playedToday =
-  Number(localStorage.getItem("nijokPlayedToday")) || 0;
-
-let savedScore =
-  Number(localStorage.getItem("nijokScoreToday")) || 0;
-
-let savedCorrect =
-  Number(localStorage.getItem("nijokCorrectToday")) || 0;
-
-
-/* =====================================================
-   SHUFFLE
-===================================================== */
-
-function shuffle(array){
-
-  return array
-    .map(value=>({value,sort:Math.random()}))
-    .sort((a,b)=>a.sort-b.sort)
-    .map(({value})=>value);
-
-}
-
-
-/* =====================================================
-   CREATE TODAY'S QUESTIONS
-===================================================== */
-
-let todayQuestions =
-  shuffle([...allQuestions]).slice(0,DAILY_LIMIT);
-
-
-/* =====================================================
-   LOAD QUESTION
-===================================================== */
-
-function loadQuestion(){
-
-  if(playedToday >= DAILY_LIMIT){
-
-    showDailyLimit();
-    return;
-
-  }
-
-  answered=false;
-
-  const data=todayQuestions[currentQuestion];
-
-  document.getElementById("question").textContent=data.q;
-
-  document.getElementById("categoryBadge").textContent=data.category;
-
-  document.getElementById("questionNumber").textContent=
-    currentQuestion+1;
-
-  document.getElementById("progressBar").style.width=
-    ((currentQuestion+1)/DAILY_LIMIT*100)+"%";
-
-  const answers=document.getElementById("answers");
-
-  answers.innerHTML="";
-
-  data.a.forEach((option,index)=>{
-
-    const button=document.createElement("button");
-
-    button.className="answer";
-
-    button.innerHTML=
-      String.fromCharCode(65+index)+". &nbsp; "+option;
-
-    button.onclick=()=>checkAnswer(button,index);
-
-    answers.appendChild(button);
-
-  });
-
-  document.getElementById("gameMessage").textContent="";
-
-  document.getElementById("nextButton").style.display="none";
-
-}
-
-
-/* =====================================================
-   ANSWER
-===================================================== */
-
-function checkAnswer(button,index){
-
-  if(answered) return;
-
-  answered=true;
-
-  const data=todayQuestions[currentQuestion];
-
-  const buttons=document.querySelectorAll(".nijok-game .answer");
-
-  buttons.forEach(b=>b.classList.add("disabled"));
-
-  playedToday++;
-
-  localStorage.setItem("nijokPlayedToday",playedToday);
-
-  if(index===data.correct){
-
-    button.classList.add("correct");
-
-    score+=10;
-
-    correctAnswers++;
-
-    streak++;
-
-    document.getElementById("gameMessage").textContent=
-      "✓ Correct! +10 points — keep exploring 🌿";
-
-  }else{
-
-    button.classList.add("wrong");
-
-    buttons[data.correct].classList.add("correct");
-
-    streak=0;
-
-    document.getElementById("gameMessage").textContent=
-      "Not quite. The correct answer is highlighted above.";
-
-  }
-
-  localStorage.setItem("nijokScoreToday",score);
-
-  localStorage.setItem("nijokCorrectToday",correctAnswers);
-
-  updateStats();
-
-  document.getElementById("nextButton").style.display=
-    playedToday>=DAILY_LIMIT ? "none" : "inline-block";
-
-  if(playedToday>=DAILY_LIMIT){
-
-    setTimeout(showDailyLimit,700);
-
-  }
-
-}
-
-
-/* =====================================================
-   NEXT
-===================================================== */
-
-function nextQuestion(){
-
-  currentQuestion++;
-
-  if(currentQuestion>=DAILY_LIMIT){
-
-    showDailyLimit();
-
-    return;
-
-  }
-
-  loadQuestion();
-
-}
-
-
-/* =====================================================
-   STATS
-===================================================== */
-
-function updateStats(){
-
-  document.getElementById("score").textContent=score;
-
-  document.getElementById("streak").textContent=streak;
-
-  const best=
-    Number(localStorage.getItem("nijokBestScore")) || 0;
-
-  if(score>best){
-
-    localStorage.setItem("nijokBestScore",score);
-
-  }
-
-  document.getElementById("bestScore").textContent=
-    Math.max(score,best);
-
-  document.getElementById("profilePlayed").textContent=
-    playedToday;
-
-  document.getElementById("profileCorrect").textContent=
-    correctAnswers;
-
-  let badges=0;
-
-  if(correctAnswers>=5) badges=1;
-
-  if(correctAnswers>=10) badges=2;
-
-  if(correctAnswers>=15) badges=3;
-
-  if(correctAnswers>=20) badges=4;
-
-  document.getElementById("profileBadges").textContent=badges;
-
-}
-
-
-/* =====================================================
-   DAILY LIMIT
-===================================================== */
-
-function showDailyLimit(){
-
-  document.getElementById("answers").style.display="none";
-
-  document.getElementById("nextButton").style.display="none";
-
-  document.getElementById("dailyLimit").style.display="block";
-
-  document.getElementById("question").textContent=
-    "Quest complete for today!";
-
-  document.getElementById("categoryBadge").textContent=
-    "🏆 20 / 20 COMPLETED";
-
-  document.getElementById("progressBar").style.width="100%";
-
-}
-
-
-/* =====================================================
-   RESTART
-===================================================== */
-
-function restartToday(){
-
-  if(!confirm("Restart today's Food Quest? Your current score will reset.")){
-    return;
-  }
-
-  localStorage.setItem("nijokPlayedToday","0");
-
-  localStorage.setItem("nijokScoreToday","0");
-
-  localStorage.setItem("nijokCorrectToday","0");
-
-  location.reload();
-
-}
-
-
-/* =====================================================
-   START
-===================================================== */
-
-score=savedScore;
-
-correctAnswers=savedCorrect;
-
-updateStats();
-
-loadQuestion();
-
-</script>
-
-<!-- ================= NIJOK PUZZLE MODE ================= -->
-
-<section class="nijok-puzzle-section">
-
-  <div class="puzzle-header">
-
-    <div>
-      <div class="puzzle-label">🌿 NIJOK PUZZLE MODE</div>
-
-      <h2>
-        Think. Connect.<br>
-        Discover Food.
-      </h2>
+      <h3>Play Daily</h3>
 
       <p>
-        Solve the clue and discover something new about
-        food, culture and the world.
+        Short food games designed to make
+        learning enjoyable every day.
       </p>
-    </div>
-
-    <div class="puzzle-score">
-      <span>⭐ Puzzle Score</span>
-      <strong id="puzzleScore">0</strong>
-    </div>
-
-  </div>
-
-
-  <div class="puzzle-card">
-
-    <div class="puzzle-top">
-      <span id="puzzleCategory">🌍 FOOD & CULTURE</span>
-      <span id="puzzleNumber">Puzzle 1</span>
-    </div>
-
-
-    <div class="puzzle-question">
-
-      <div class="puzzle-icon">🧩</div>
-
-      <h3 id="puzzleQuestion">
-        I am a fruit.
-        <br>
-        I am yellow when ripe.
-        <br>
-        Monkeys are often associated with me.
-        <br><br>
-        What am I?
-      </h3>
 
     </div>
 
+    <div class="promise-card">
 
-    <div id="puzzleAnswers" class="puzzle-answers">
-
-      <button onclick="answerPuzzle(0)">
-        🍎 Apple
-      </button>
-
-      <button onclick="answerPuzzle(1)">
-        🍌 Banana
-      </button>
-
-      <button onclick="answerPuzzle(2)">
-        🍊 Orange
-      </button>
-
-      <button onclick="answerPuzzle(3)">
-        🍇 Grape
-      </button>
-
-    </div>
-
-
-    <div id="puzzleMessage" class="puzzle-message"></div>
-
-
-    <div class="puzzle-bottom">
-
-      <div class="puzzle-streak">
-        🔥 Streak:
-        <strong id="puzzleStreak">0</strong>
+      <div class="promise-number">
+        02
       </div>
 
-      <button
-        id="nextPuzzle"
-        class="next-puzzle"
-        onclick="nextPuzzle()"
-      >
-        Next Puzzle →
-      </button>
+      <h3>Earn Rewards</h3>
+
+      <p>
+        Learn, play and build your NIJOK
+        journey with points and achievements.
+      </p>
 
     </div>
 
-  </div>
+    <div class="promise-card">
 
+      <div class="promise-number">
+        03
+      </div>
 
-  <div class="puzzle-tip">
-    🌱 <strong>NIJOK idea:</strong>
-    Every puzzle should teach something — not just test memory.
+      <h3>Stay Curious</h3>
+
+      <p>
+        Discover something new about food,
+        culture and the world around you.
+      </p>
+
+    </div>
+
   </div>
 
 </section>
 
+<section id="learn"></section>
 
-<style>
+<section id="community"></section>
 
-/* =====================================================
-   NIJOK PUZZLE MODE
-===================================================== */
+<section id="about"></section>
 
-.nijok-puzzle-section{
-  padding:10px 4% 55px;
-  position:relative;
-}
-
-.puzzle-header{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:30px;
-  align-items:end;
-  margin-bottom:20px;
-}
-
-.puzzle-label{
-  color:#60784e;
-  font-size:9px;
-  font-weight:700;
-  letter-spacing:2px;
-  margin-bottom:9px;
-}
-
-.puzzle-header h2{
-  font-family:"Playfair Display",serif;
-  font-size:38px;
-  line-height:.98;
-  color:var(--text);
-}
-
-.puzzle-header p{
-  max-width:430px;
-  color:#718178;
-  font-size:10px;
-  line-height:1.5;
-  margin-top:10px;
-}
-
-.puzzle-score{
-  min-width:125px;
-  padding:16px;
-  border-radius:22px;
-  background:#e5ecd6;
-  text-align:center;
-}
-
-.puzzle-score span{
-  display:block;
-  color:#60784e;
-  font-size:8px;
-  font-weight:700;
-}
-
-.puzzle-score strong{
-  display:block;
-  color:var(--green);
-  font-family:"Playfair Display",serif;
-  font-size:30px;
-  margin-top:3px;
-}
-
-
-/* CARD */
-
-.puzzle-card{
-  position:relative;
-  overflow:hidden;
-  background:#f5edcf;
-  border-radius:30px;
-  padding:27px;
-  border:1px solid #e0dcc4;
-}
-
-.puzzle-card:after{
-  content:"";
-  position:absolute;
-  width:180px;
-  height:130px;
-  right:-35px;
-  top:-35px;
-  background:#d6b338;
-  opacity:.22;
-  border-radius:100% 0 100% 0;
-  transform:rotate(15deg);
-}
-
-.puzzle-top{
-  position:relative;
-  z-index:2;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  color:#60784e;
-  font-size:8px;
-  font-weight:700;
-  letter-spacing:1.3px;
-}
-
-.puzzle-question{
-  position:relative;
-  z-index:2;
-  display:flex;
-  align-items:flex-start;
-  gap:18px;
-  margin-top:24px;
-}
-
-.puzzle-icon{
-  width:58px;
-  height:58px;
-  min-width:58px;
-  border-radius:50%;
-  background:#dfe9cd;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:28px;
-}
-
-.puzzle-question h3{
-  max-width:650px;
-  color:#183f31;
-  font-family:"Playfair Display",serif;
-  font-size:24px;
-  line-height:1.15;
-}
-
-
-/* ANSWERS */
-
-.puzzle-answers{
-  position:relative;
-  z-index:3;
-  max-width:700px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px;
-  margin-top:25px;
-}
-
-.puzzle-answers button{
-  border:1px solid #c8ceb9;
-  background:rgba(255,255,255,.62);
-  color:#24493b;
-  border-radius:18px;
-  padding:12px 15px;
-  text-align:left;
-  font-size:10px;
-  font-weight:600;
-  cursor:pointer;
-  transition:.25s;
-}
-
-.puzzle-answers button:hover{
-  transform:translateY(-2px);
-  background:white;
-}
-
-.puzzle-answers button.correct{
-  background:#40945c;
-  border-color:#40945c;
-  color:white;
-}
-
-.puzzle-answers button.wrong{
-  background:#9c4439;
-  border-color:#9c4439;
-  color:white;
-}
-
-.puzzle-answers button.disabled{
-  pointer-events:none;
-}
-
-
-/* MESSAGE */
-
-.puzzle-message{
-  min-height:23px;
-  margin-top:12px;
-  color:#315847;
-  font-size:10px;
-  font-weight:700;
-}
-
-
-/* BOTTOM */
-
-.puzzle-bottom{
-  position:relative;
-  z-index:3;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  max-width:700px;
-  margin-top:5px;
-}
-
-.puzzle-streak{
-  color:#60776c;
-  font-size:9px;
-}
-
-.puzzle-streak strong{
-  color:#9c4439;
-  font-size:15px;
-}
-
-.next-puzzle{
-  display:none;
-  border:0;
-  border-radius:22px;
-  padding:10px 17px;
-  background:var(--green);
-  color:white;
-  font-size:9px;
-  font-weight:700;
-  cursor:pointer;
-}
-
-.puzzle-tip{
-  margin-top:12px;
-  color:#718178;
-  font-family:"Caveat",cursive;
-  font-size:17px;
-  transform:rotate(-1deg);
-}
-
-
-/* MOBILE */
-
-@media(max-width:550px){
-
-  .nijok-puzzle-section{
-    padding-left:6%;
-    padding-right:6%;
-  }
-
-  .puzzle-header{
-    grid-template-columns:1fr;
-    gap:15px;
-  }
-
-  .puzzle-header h2{
-    font-size:32px;
-  }
-
-  .puzzle-score{
-    width:130px;
-  }
-
-  .puzzle-card{
-    padding:21px;
-  }
-
-  .puzzle-question{
-    gap:12px;
-  }
-
-  .puzzle-icon{
-    width:45px;
-    height:45px;
-    min-width:45px;
-    font-size:22px;
-  }
-
-  .puzzle-question h3{
-    font-size:20px;
-  }
-
-  .puzzle-answers{
-    grid-template-columns:1fr;
-  }
-
-  .puzzle-bottom{
-    align-items:flex-end;
-  }
-
-}
-
-</style>
-
+</main>
 
 <script>
 
-/* =====================================================
-   NIJOK PUZZLE ENGINE
-===================================================== */
-
-const nijokPuzzles = [
-
-  {
-    category:"🍌 FOOD BASICS",
-    question:
-      "I am a fruit.<br>I am yellow when ripe.<br>Monkeys are often associated with me.<br><br>What am I?",
-    answers:[
-      "🍎 Apple",
-      "🍌 Banana",
-      "🍊 Orange",
-      "🍇 Grape"
-    ],
-    correct:1,
-    fact:"Bananas are one of the world's widely cultivated tropical fruits."
-  },
-
-  {
-    category:"🍣 FOOD AROUND THE WORLD",
-    question:
-      "I am a famous Japanese food.<br>Rice is one of my important components.<br>What am I?",
-    answers:[
-      "🍕 Pizza",
-      "🌮 Taco",
-      "🍣 Sushi",
-      "🥐 Croissant"
-    ],
-    correct:2,
-    fact:"Sushi is a Japanese food tradition with many different styles."
-  },
-
-  {
-    category:"🌿 SPICES",
-    question:
-      "I am a spice.<br>I can give food a bright yellow colour.<br>What am I?",
-    answers:[
-      "🌿 Turmeric",
-      "🌶️ Chilli",
-      "🧂 Salt",
-      "🍃 Mint"
-    ],
-    correct:0,
-    fact:"Turmeric contains curcumin, a compound responsible for much of its yellow colour."
-  },
-
-  {
-    category:"🥑 WORLD FOOD",
-    question:
-      "I am the main ingredient in traditional guacamole.<br>What am I?",
-    answers:[
-      "🥑 Avocado",
-      "🍌 Banana",
-      "🥕 Carrot",
-      "🍎 Apple"
-    ],
-    correct:0,
-    fact:"Traditional guacamole is based on mashed avocado."
-  },
-
-  {
-    category:"🥬 FOOD CULTURE",
-    question:
-      "I am a Korean fermented food made mainly from vegetables.<br>What am I?",
-    answers:[
-      "🍣 Sushi",
-      "🥬 Kimchi",
-      "🥖 Baguette",
-      "🥟 Ravioli"
-    ],
-    correct:1,
-    fact:"Kimchi refers to a broad family of traditional Korean fermented vegetable foods."
-  },
-
-  {
-    category:"🍕 FOOD AROUND THE WORLD",
-    question:
-      "Which country is traditionally associated with the origin of modern pizza?",
-    answers:[
-      "🇮🇹 Italy",
-      "🇯🇵 Japan",
-      "🇮🇳 India",
-      "🇲🇽 Mexico"
-    ],
-    correct:0,
-    fact:"Modern pizza developed in Naples, Italy."
-  },
-
-  {
-    category:"🥭 INDIA",
-    question:
-      "Which fruit is commonly called the 'king of fruits' in India?",
-    answers:[
-      "🍎 Apple",
-      "🥭 Mango",
-      "🍊 Orange",
-      "🍉 Watermelon"
-    ],
-    correct:1,
-    fact:"Mango has a long cultural and culinary history across South Asia."
-  },
-
-  {
-    category:"🫘 FOOD KNOWLEDGE",
-    question:
-      "Hummus is traditionally made mainly from which legume?",
-    answers:[
-      "🫘 Chickpeas",
-      "🌽 Corn",
-      "🍚 Rice",
-      "🥔 Potato"
-    ],
-    correct:0,
-    fact:"Traditional hummus is made from cooked and mashed chickpeas with ingredients such as tahini."
-  }
-
-];
-
-let puzzleIndex=0;
-let puzzleScore=0;
-let puzzleStreak=0;
-let puzzleAnswered=false;
-
-function loadPuzzle(){
-
-  const puzzle=nijokPuzzles[puzzleIndex];
-
-  document.getElementById("puzzleCategory").textContent=
-    puzzle.category;
-
-  document.getElementById("puzzleNumber").textContent=
-    "Puzzle "+(puzzleIndex+1);
-
-  document.getElementById("puzzleQuestion").innerHTML=
-    puzzle.question;
-
-  const area=document.getElementById("puzzleAnswers");
-
-  area.innerHTML="";
-
-  puzzle.answers.forEach((answer,index)=>{
-
-    const button=document.createElement("button");
-
-    button.innerHTML=answer;
-
-    button.onclick=()=>answerPuzzle(index);
-
-    area.appendChild(button);
-
-  });
-
-  document.getElementById("puzzleMessage").textContent="";
-
-  document.getElementById("nextPuzzle").style.display="none";
-
-  puzzleAnswered=false;
-
+function scrollToPlay(){
+  document.getElementById("play")
+    ?.scrollIntoView({behavior:"smooth"});
 }
 
-
-function answerPuzzle(index){
-
-  if(puzzleAnswered) return;
-
-  puzzleAnswered=true;
-
-  const puzzle=nijokPuzzles[puzzleIndex];
-
-  const buttons=
-    document.querySelectorAll("#puzzleAnswers button");
-
-  buttons.forEach(button=>{
-    button.classList.add("disabled");
-  });
-
-  if(index===puzzle.correct){
-
-    buttons[index].classList.add("correct");
-
-    puzzleScore+=20;
-
-    puzzleStreak++;
-
-    document.getElementById("puzzleMessage").textContent=
-      "✓ Correct! +20 points. "+puzzle.fact;
-
-  }else{
-
-    buttons[index].classList.add("wrong");
-
-    buttons[puzzle.correct].classList.add("correct");
-
-    puzzleStreak=0;
-
-    document.getElementById("puzzleMessage").textContent=
-      "Not quite! "+puzzle.fact;
-
-  }
-
-  document.getElementById("puzzleScore").textContent=
-    puzzleScore;
-
-  document.getElementById("puzzleStreak").textContent=
-    puzzleStreak;
-
-  document.getElementById("nextPuzzle").style.display=
-    "inline-block";
-
+function scrollToLearn(){
+  document.getElementById("learn")
+    ?.scrollIntoView({behavior:"smooth"});
 }
 
-
-function nextPuzzle(){
-
-  puzzleIndex++;
-
-  if(puzzleIndex>=nijokPuzzles.length){
-
-    puzzleIndex=0;
-
-  }
-
-  loadPuzzle();
-
+function openSearch(){
+  alert(
+    "NIJOK Search\n\n" +
+    "Food, ingredients, countries and learning search is coming."
+  );
 }
 
-
-loadPuzzle();
+function openLogin(){
+  alert(
+    "NIJOK Login\n\n" +
+    "Profile and score system is coming."
+  );
+}
 
 </script>
 
-<!-- =====================================================
-     LEADERBOARD
-===================================================== -->
-
-<section class="bottom-grid">
-
-<div class="box">
-
-  <div class="box-title">
-    🏆 Top Food Explorers
-  </div>
-
-  <div class="box-sub">
-    See who knows food the best.
-  </div>
-
-  <div class="player">
-    <strong>1</strong>
-    <div class="player-info">
-      <div class="player-avatar">👩🏻</div>
-      FoodieRiya
-    </div>
-    <div class="score">1420</div>
-  </div>
-
-  <div class="player">
-    <strong>2</strong>
-    <div class="player-info">
-      <div class="player-avatar">👨🏻</div>
-      NomadChef
-    </div>
-    <div class="score">1360</div>
-  </div>
-
-  <div class="player">
-    <strong>3</strong>
-    <div class="player-info">
-      <div class="player-avatar">🧑🏻</div>
-      SpiceHunter
-    </div>
-    <div class="score">1280</div>
-  </div>
-
-  <div class="player">
-    <strong>4</strong>
-    <div class="player-info">
-      <div class="player-avatar">👨🏽</div>
-      TasteTraveler
-    </div>
-    <div class="score">1210</div>
-  </div>
-
-</div>
-
-
-<div class="box green-box">
-
-  <div class="box-title">
-    🌿 Daily Challenge
-  </div>
-
-  <div class="box-sub">
-    New questions every day.
-  </div>
-
-  <div class="timer">
-
-    <div class="time">
-      <strong>12</strong>
-      <span>Hours</span>
-    </div>
-
-    <div class="time">
-      <strong>36</strong>
-      <span>Minutes</span>
-    </div>
-
-    <div class="time">
-      <strong>18</strong>
-      <span>Seconds</span>
-    </div>
-
-  </div>
-
-  <p style="margin-top:22px;font-family:Caveat,cursive;font-size:22px;">
-    Play daily.<br>
-    Earn rewards.<br>
-    Stay curious. 🌿
-  </p>
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer id="about">
-
-<div class="footer-top">
-
-  <div>
-    <div class="footer-name">NIJOK</div>
-    <div class="footer-tag">
-      Food · Culture · People · Places
-    </div>
-  </div>
-
-  <div class="footer-links">
-
-    <div>
-      <strong>EXPLORE</strong>
-      <a href="#">Food Passport</a>
-      <a href="#">Food Museum</a>
-    </div>
-
-    <div>
-      <strong>DISCOVER</strong>
-      <a href="#">Food Map</a>
-      <a href="#">Countries</a>
-    </div>
-
-    <div>
-      <strong>LEARN</strong>
-      <a href="#">Knowledge</a>
-      <a href="#">Challenges</a>
-    </div>
-
-    <div>
-      <strong>COMMUNITY</strong>
-      <a href="#">Stories</a>
-      <a href="#">Leaderboard</a>
-    </div>
-
-    <div>
-      <strong>NIJOK</strong>
-      <a href="#">About</a>
-      <a href="#">Contact</a>
-    </div>
-
-  </div>
-
-</div>
-
-<div class="footer-bottom">
-  <span>© 2026 NIJOK. All rights reserved.</span>
-  <span>Facts First. You Decide. 🌿</span>
-</div>
-
-</footer>
-
-
-<!-- =====================================================
-     GAME JAVASCRIPT
-===================================================== -->
-
-<style>
-/* =====================================================
-   NIJOK — GAME ENGINE
-===================================================== */
-
-.nijok-game-modal{
-  position:fixed;
-  inset:0;
-  background:rgba(4,59,43,.72);
-  backdrop-filter:blur(8px);
-  z-index:99999;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:18px;
-}
-
-.nijok-game-modal.show{
-  display:flex;
-}
-
-.nijok-game-panel{
-  width:min(620px,100%);
-  max-height:92vh;
-  overflow:auto;
-  background:#f7f5e9;
-  border-radius:30px;
-  padding:25px;
-  position:relative;
-  box-shadow:0 25px 80px rgba(0,0,0,.25);
-}
-
-.nijok-game-close{
-  position:absolute;
-  right:18px;
-  top:16px;
-  width:38px;
-  height:38px;
-  border:0;
-  border-radius:50%;
-  background:#e1e9d1;
-  color:#064a35;
-  font-size:20px;
-  cursor:pointer;
-}
-
-.nijok-game-label{
-  display:inline-block;
-  padding:7px 12px;
-  border-radius:20px;
-  background:#e1e9d1;
-  color:#60784e;
-  font-size:9px;
-  font-weight:700;
-  letter-spacing:1.5px;
-}
-
-.nijok-game-title{
-  font-family:"Playfair Display",serif;
-  color:#064a35;
-  font-size:32px;
-  margin:15px 0 6px;
-}
-
-.nijok-game-sub{
-  color:#718178;
-  font-size:11px;
-  line-height:1.5;
-}
-
-.nijok-game-status{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  margin:20px 0;
-}
-
-.nijok-stat{
-  flex:1;
-  background:#fffdf5;
-  border:1px solid #d9ddce;
-  border-radius:16px;
-  padding:11px;
-  text-align:center;
-}
-
-.nijok-stat strong{
-  display:block;
-  color:#064a35;
-  font-family:"Playfair Display",serif;
-  font-size:20px;
-}
-
-.nijok-stat span{
-  display:block;
-  color:#718178;
-  font-size:8px;
-  margin-top:2px;
-}
-
-.nijok-question{
-  font-family:"Playfair Display",serif;
-  color:#163f32;
-  font-size:25px;
-  line-height:1.15;
-  margin:20px 0;
-}
-
-.nijok-options{
-  display:grid;
-  gap:10px;
-}
-
-.nijok-option{
-  width:100%;
-  text-align:left;
-  border:1px solid #cfd6c7;
-  background:#fffdf5;
-  color:#163f32;
-  border-radius:18px;
-  padding:14px;
-  font-size:11px;
-  font-weight:600;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.nijok-option:hover{
-  transform:translateY(-2px);
-  border-color:#064a35;
-}
-
-.nijok-option.correct{
-  background:#dcebd7;
-  border-color:#40945c;
-}
-
-.nijok-option.wrong{
-  background:#f3dcd5;
-  border-color:#c65b48;
-}
-
-.nijok-message{
-  min-height:25px;
-  margin-top:13px;
-  font-size:11px;
-  font-weight:700;
-}
-
-.nijok-next{
-  width:100%;
-  border:0;
-  border-radius:22px;
-  padding:13px;
-  margin-top:12px;
-  background:#064a35;
-  color:white;
-  font-size:11px;
-  font-weight:700;
-  cursor:pointer;
-}
-
-.nijok-next:disabled{
-  opacity:.35;
-  cursor:not-allowed;
-}
-
-.nijok-pair-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-}
-
-.nijok-pair{
-  aspect-ratio:1;
-  border:0;
-  border-radius:18px;
-  background:#dfe9cd;
-  font-size:25px;
-  cursor:pointer;
-}
-
-.nijok-pair.open{
-  background:#fffdf5;
-}
-
-.nijok-pair.matched{
-  background:#cfe3c5;
-}
-
-.nijok-food-image{
-  width:100%;
-  min-height:150px;
-  border-radius:24px;
-  background:#e1e9d1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:80px;
-  margin-bottom:18px;
-}
-
-.nijok-timer{
-  text-align:center;
-  font-family:"Playfair Display",serif;
-  font-size:42px;
-  color:#064a35;
-  margin:10px 0 20px;
-}
-
-.nijok-result{
-  text-align:center;
-  padding:25px 5px;
-}
-
-.nijok-result h3{
-  font-family:"Playfair Display",serif;
-  color:#064a35;
-  font-size:30px;
-}
-
-.nijok-result-score{
-  font-family:"Playfair Display",serif;
-  color:#d7b73e;
-  font-size:50px;
-  margin:10px;
-}
-
-@media(max-width:550px){
-  .nijok-game-panel{
-    padding:20px;
-    border-radius:24px;
-  }
-
-  .nijok-game-title{
-    font-size:27px;
-  }
-
-  .nijok-question{
-    font-size:22px;
-  }
-
-  .nijok-pair-grid{
-    gap:7px;
-  }
-
-  .nijok-pair{
-    border-radius:14px;
-    font-size:21px;
-  }
-}
-</style>
-
-
-<script>
-/* =====================================================
-   NIJOK GAME ENGINE
-===================================================== */
-
-(function(){
-
-  const LIMITS = {
-    quiz:20,
-    pair:10,
-    time:5,
-    guess:10
-  };
-
-
-   const quizQuestions = [
-
-  // =====================================================
-  // 🇮🇳 INDIAN FOOD & CULTURE — Q001–Q015
-  // =====================================================
-
-  {
-    id: 1,
-    category: "Indian Food",
-    difficulty: "easy",
-    q: "Biryani is primarily a dish based on which staple?",
-    options: ["Rice", "Wheat", "Corn", "Barley"],
-    answer: 0,
-    fact: "Biryani is a rice-based dish with many regional variations."
-  },
-
-  {
-    id: 2,
-    category: "Indian Food",
-    difficulty: "easy",
-    q: "Which spice gives turmeric its characteristic yellow colour?",
-    options: ["Piperine", "Curcumin", "Lycopene", "Caffeine"],
-    answer: 1,
-    fact: "Curcumin is the principal yellow pigment associated with turmeric."
-  },
-
-  {
-    id: 3,
-    category: "Indian Food",
-    difficulty: "easy",
-    q: "Idli is traditionally made mainly from rice and which pulse?",
-    options: ["Chickpea", "Black gram", "Kidney bean", "Peas"],
-    answer: 1,
-    fact: "Traditional idli batter commonly uses rice and black gram."
-  },
-
-  {
-    id: 4,
-    category: "Indian Food",
-    difficulty: "easy",
-    q: "Dal is generally prepared from which food group?",
-    options: ["Pulses", "Fruits", "Dairy", "Oils"],
-    answer: 0,
-    fact: "Dal commonly refers to preparations made from split pulses."
-  },
-
-  {
-    id: 5,
-    category: "Indian Food",
-    difficulty: "easy",
-    q: "Paneer is primarily made from:",
-    options: ["Milk", "Soybean", "Wheat", "Coconut"],
-    answer: 0,
-    fact: "Paneer is a fresh cheese made from milk."
-  },
-
-  {
-    id: 6,
-    category: "Indian Food",
-    difficulty: "easy",
-    q: "Samosa is commonly associated with which type of food?",
-    options: ["Savoury snack", "Fruit", "Beverage", "Dairy product"],
-    answer: 0,
-    fact: "Samosa is commonly served as a savoury snack."
-  },
-
-  {
-    id: 7,
-    category: "Indian Food",
-    difficulty: "easy",
-    q: "Aamras is traditionally prepared from:",
-    options: ["Apple", "Mango", "Orange", "Guava"],
-    answer: 1,
-    fact: "Aamras is a mango-based preparation."
-  },
-
-  {
-    id: 8,
-    category: "Indian Food",
-    difficulty: "easy",
-    q: "Which Indian flatbread is commonly made from wheat flour?",
-    options: ["Roti", "Idli", "Dhokla", "Poha"],
-    answer: 0,
-    fact: "Roti is commonly made using wheat flour."
-  },
-
-  {
-    id: 9,
-    category: "Indian Food",
-    difficulty: "easy",
-    q: "Poha is mainly made from:",
-    options: ["Flattened rice", "Wheat flakes", "Corn flour", "Barley"],
-    answer: 0,
-    fact: "Poha is made from flattened or beaten rice."
-  },
-
-  {
-    id: 10,
-    category: "Indian Food",
-    difficulty: "easy",
-    q: "Dhokla is commonly associated with which Indian state?",
-    options: ["Gujarat", "Assam", "Kerala", "Punjab"],
-    answer: 0,
-    fact: "Dhokla is strongly associated with Gujarati cuisine."
-  },
-
-  {
-    id: 11,
-    category: "Indian Food",
-    difficulty: "easy",
-    q: "Rasgulla is traditionally associated with which ingredient?",
-    options: ["Chhena", "Potato", "Lentil", "Rice"],
-    answer: 0,
-    fact: "Rasgulla is traditionally prepared using chhena-based dough."
-  },
-
-  {
-    id: 12,
-    category: "Indian Food",
-    difficulty: "easy",
-    q: "Which ingredient is central to traditional sambar?",
-    options: ["Lentils", "Apple", "Cheese", "Corn"],
-    answer: 0,
-    fact: "Traditional sambar uses lentils along with vegetables and spices."
-  },
-
-  {
-    id: 13,
-    category: "Indian Food",
-    difficulty: "easy",
-    q: "Chutney can commonly be prepared using:",
-    options: ["Herbs and spices", "Only wheat", "Only milk", "Only rice"],
-    answer: 0,
-    fact: "Chutneys can use many combinations of herbs, spices, fruits, vegetables and other ingredients."
-  },
-
-  {
-    id: 14,
-    category: "Indian Food",
-    difficulty: "easy",
-    q: "Which food is made by fermenting a batter of rice and black gram?",
-    options: ["Dosa", "Roti", "Pulao", "Halwa"],
-    answer: 0,
-    fact: "Traditional dosa batter commonly contains fermented rice and black gram."
-  },
-
-  {
-    id: 15,
-    category: "Indian Food",
-    difficulty: "easy",
-    q: "Which spice is commonly obtained from dried berries of a pepper plant?",
-    options: ["Black pepper", "Turmeric", "Cinnamon", "Clove"],
-    answer: 0,
-    fact: "Black pepper comes from dried berries of the pepper plant."
-  },
-
-
-  // =====================================================
-  // 🌎 WORLD FOOD & CUISINE — Q016–Q027
-  // =====================================================
-
-  {
-    id: 16,
-    category: "World Food",
-    difficulty: "easy",
-    q: "Sushi is strongly associated with which country?",
-    options: ["Japan", "Mexico", "Italy", "Egypt"],
-    answer: 0,
-    fact: "Sushi is a traditional Japanese food."
-  },
-
-  {
-    id: 17,
-    category: "World Food",
-    difficulty: "easy",
-    q: "Pizza is strongly associated with which country?",
-    options: ["Italy", "India", "China", "Peru"],
-    answer: 0,
-    fact: "Modern pizza is strongly associated with Italian cuisine."
-  },
-
-  {
-    id: 18,
-    category: "World Food",
-    difficulty: "easy",
-    q: "Kimchi is a traditional food associated with:",
-    options: ["Korea", "Spain", "Brazil", "Morocco"],
-    answer: 0,
-    fact: "Kimchi is a traditional Korean fermented food."
-  },
-
-  {
-    id: 19,
-    category: "World Food",
-    difficulty: "easy",
-    q: "Hummus is traditionally made mainly from:",
-    options: ["Chickpeas", "Rice", "Potato", "Wheat"],
-    answer: 0,
-    fact: "Traditional hummus is primarily made from chickpeas and tahini."
-  },
-
-  {
-    id: 20,
-    category: "World Food",
-    difficulty: "easy",
-    q: "Tacos are strongly associated with which cuisine?",
-    options: ["Mexican", "Japanese", "French", "Greek"],
-    answer: 0,
-    fact: "Tacos are a well-known part of Mexican cuisine."
-  },
-
-  {
-    id: 21,
-    category: "World Food",
-    difficulty: "easy",
-    q: "Pasta is strongly associated with which cuisine?",
-    options: ["Italian", "Korean", "Indian", "Ethiopian"],
-    answer: 0,
-    fact: "Pasta is strongly associated with Italian cuisine."
-  },
-
-  {
-    id: 22,
-    category: "World Food",
-    difficulty: "easy",
-    q: "Miso is a traditional Japanese food made through fermentation of ingredients including:",
-    options: ["Soybeans", "Apples", "Potatoes", "Bananas"],
-    answer: 0,
-    fact: "Miso is a fermented Japanese food commonly made using soybeans."
-  },
-
-  {
-    id: 23,
-    category: "World Food",
-    difficulty: "easy",
-    q: "Guacamole is primarily made from:",
-    options: ["Avocado", "Mango", "Tomato", "Coconut"],
-    answer: 0,
-    fact: "Avocado is the main ingredient in traditional guacamole."
-  },
-
-  {
-    id: 24,
-    category: "World Food",
-    difficulty: "easy",
-    q: "Paella is traditionally associated with:",
-    options: ["Spain", "Japan", "India", "Canada"],
-    answer: 0,
-    fact: "Paella originated in Spain and is especially associated with Valencia."
-  },
-
-  {
-    id: 25,
-    category: "World Food",
-    difficulty: "medium",
-    q: "Falafel is commonly made from chickpeas or:",
-    options: ["Fava beans", "Apples", "Rice", "Potatoes"],
-    answer: 0,
-    fact: "Falafel can be made using chickpeas, fava beans, or a combination depending on the regional tradition."
-  },
-
-  {
-    id: 26,
-    category: "World Food",
-    difficulty: "easy",
-    q: "Croissant is traditionally associated with:",
-    options: ["France", "India", "Thailand", "Brazil"],
-    answer: 0,
-    fact: "The croissant is strongly associated with French baking."
-  },
-
-  {
-    id: 27,
-    category: "World Food",
-    difficulty: "easy",
-    q: "Mochi is a traditional Japanese food made primarily from:",
-    options: ["Glutinous rice", "Wheat", "Corn", "Chickpeas"],
-    answer: 0,
-    fact: "Mochi is made from glutinous rice or glutinous rice flour."
-  },
-
-
-  // =====================================================
-  // 🍎 FRUITS & VEGETABLES — Q028–Q039
-  // =====================================================
-
-  {
-    id: 28,
-    category: "Fruits & Vegetables",
-    difficulty: "easy",
-    q: "Botanically, a tomato is classified as a:",
-    options: ["Fruit", "Root", "Grain", "Nut"],
-    answer: 0,
-    fact: "Botanically, a tomato is a fruit because it develops from the flower's ovary."
-  },
-
-  {
-    id: 29,
-    category: "Fruits & Vegetables",
-    difficulty: "easy",
-    q: "Which fruit is commonly known for its high vitamin C content?",
-    options: ["Amla", "Banana", "Coconut", "Date"],
-    answer: 0,
-    fact: "Indian gooseberry, or amla, is a notable source of vitamin C."
-  },
-
-  {
-    id: 30,
-    category: "Fruits & Vegetables",
-    difficulty: "easy",
-    q: "Which fruit is commonly called the “king of fruits” in India?",
-    options: ["Mango", "Apple", "Orange", "Papaya"],
-    answer: 0,
-    fact: "Mango is popularly known as the king of fruits in India."
-  },
-
-  {
-    id: 31,
-    category: "Fruits & Vegetables",
-    difficulty: "easy",
-    q: "Which fruit has seeds on the outside of its fleshy surface?",
-    options: ["Strawberry", "Mango", "Banana", "Orange"],
-    answer: 0,
-    fact: "The small structures on the outside of a strawberry are technically individual fruits called achenes."
-  },
-
-  {
-    id: 32,
-    category: "Fruits & Vegetables",
-    difficulty: "medium",
-    q: "Banana is botanically classified as a:",
-    options: ["Berry", "Nut", "Root", "Grain"],
-    answer: 0,
-    fact: "Botanically, a banana is classified as a berry."
-  },
-
-  {
-    id: 33,
-    category: "Fruits & Vegetables",
-    difficulty: "easy",
-    q: "Which vegetable is well known for its orange colour due largely to carotenoid pigments?",
-    options: ["Carrot", "Cucumber", "Cauliflower", "Onion"],
-    answer: 0,
-    fact: "Carrots contain carotenoid pigments, including beta-carotene."
-  },
-
-  {
-    id: 34,
-    category: "Fruits & Vegetables",
-    difficulty: "easy",
-    q: "Which vegetable belongs to the cruciferous family?",
-    options: ["Broccoli", "Banana", "Mango", "Potato"],
-    answer: 0,
-    fact: "Broccoli belongs to the Brassica, or cruciferous, group of vegetables."
-  },
-
-  {
-    id: 35,
-    category: "Fruits & Vegetables",
-    difficulty: "easy",
-    q: "Which fruit is commonly associated with vitamin C?",
-    options: ["Orange", "Coconut", "Date", "Fig"],
-    answer: 0,
-    fact: "Oranges are a well-known dietary source of vitamin C."
-  },
-
-  {
-    id: 36,
-    category: "Fruits & Vegetables",
-    difficulty: "easy",
-    q: "Which part of a carrot is normally eaten?",
-    options: ["Root", "Flower", "Seed", "Bark"],
-    answer: 0,
-    fact: "The carrot's enlarged taproot is the part commonly eaten."
-  },
-
-  {
-    id: 37,
-    category: "Fruits & Vegetables",
-    difficulty: "medium",
-    q: "Potato is botanically a modified:",
-    options: ["Stem", "Leaf", "Flower", "Fruit"],
-    answer: 0,
-    fact: "A potato is a modified underground stem called a tuber."
-  },
-
-  {
-    id: 38,
-    category: "Fruits & Vegetables",
-    difficulty: "easy",
-    q: "Which fruit is commonly dried to make raisins?",
-    options: ["Grapes", "Apples", "Mangoes", "Oranges"],
-    answer: 0,
-    fact: "Raisins are dried grapes."
-  },
-
-  {
-    id: 39,
-    category: "Fruits & Vegetables",
-    difficulty: "easy",
-    q: "Coconut water is found inside the:",
-    options: ["Coconut fruit", "Coconut leaf", "Coconut flower", "Coconut root"],
-    answer: 0,
-    fact: "Coconut water is the liquid naturally found inside young coconuts."
-  },
-
-
-  // =====================================================
-  // 🌾 GRAINS, PULSES & SEEDS — Q040–Q049
-  // =====================================================
-
-  {
-    id: 40,
-    category: "Grains & Pulses",
-    difficulty: "easy",
-    q: "Rice is primarily a:",
-    options: ["Cereal grain", "Pulse", "Nut", "Fruit"],
-    answer: 0,
-    fact: "Rice is a cereal grain."
-  },
-
-  {
-    id: 41,
-    category: "Grains & Pulses",
-    difficulty: "easy",
-    q: "Wheat belongs to which food group?",
-    options: ["Cereal grains", "Fruits", "Dairy", "Oils"],
-    answer: 0,
-    fact: "Wheat is a cereal grain."
-  },
-
-  {
-    id: 42,
-    category: "Grains & Pulses",
-    difficulty: "easy",
-    q: "Chickpea is classified as a:",
-    options: ["Pulse/legume", "Fruit", "Dairy food", "Cereal"],
-    answer: 0,
-    fact: "Chickpeas are legumes and are commonly classified as pulses."
-  },
-
-  {
-    id: 43,
-    category: "Grains & Pulses",
-    difficulty: "easy",
-    q: "Lentils belong to the:",
-    options: ["Legume family", "Citrus family", "Grass family", "Nut family"],
-    answer: 0,
-    fact: "Lentils are legumes."
-  },
-
-  {
-    id: 44,
-    category: "Grains & Pulses",
-    difficulty: "easy",
-    q: "Which grain is naturally gluten-free?",
-    options: ["Rice", "Wheat", "Barley", "Rye"],
-    answer: 0,
-    fact: "Rice is naturally gluten-free."
-  },
-
-  {
-    id: 45,
-    category: "Grains & Pulses",
-    difficulty: "medium",
-    q: "Quinoa is commonly described as a:",
-    options: ["Seed", "Dairy product", "Fruit", "Root vegetable"],
-    answer: 0,
-    fact: "Quinoa is botanically a seed, although it is commonly used like a grain."
-  },
-
-  {
-    id: 46,
-    category: "Grains & Pulses",
-    difficulty: "easy",
-    q: "Which is a commonly eaten pulse in India?",
-    options: ["Moong dal", "Apple", "Rice milk", "Coconut water"],
-    answer: 0,
-    fact: "Moong dal is made from mung beans, a commonly consumed pulse."
-  },
-
-  {
-    id: 47,
-    category: "Grains & Pulses",
-    difficulty: "easy",
-    q: "Which grain is used to make traditional popcorn?",
-    options: ["Maize/corn", "Rice", "Wheat", "Barley"],
-    answer: 0,
-    fact: "Popcorn comes from a special variety of maize with kernels that can expand when heated."
-  },
-
-  {
-    id: 48,
-    category: "Grains & Pulses",
-    difficulty: "easy",
-    q: "Oats are classified as a:",
-    options: ["Cereal grain", "Fruit", "Pulse", "Nut"],
-    answer: 0,
-    fact: "Oats are cereal grains."
-  },
-
-  {
-    id: 49,
-    category: "Grains & Pulses",
-    difficulty: "easy",
-    q: "Sesame is primarily consumed as a:",
-    options: ["Seed", "Fruit", "Root", "Leaf"],
-    answer: 0,
-    fact: "Sesame seeds are widely used in cooking and food products."
-  },
-
-
-  // =====================================================
-  // 🌶️ SPICES & INGREDIENTS — Q050–Q059
-  // =====================================================
-
-  {
-    id: 50,
-    category: "Spices",
-    difficulty: "medium",
-    q: "Black pepper comes from the berries of which plant?",
-    options: ["Piper nigrum", "Camellia sinensis", "Curcuma longa", "Cinnamomum verum"],
-    answer: 0,
-    fact: "Black pepper comes from Piper nigrum."
-  },
-
-  {
-    id: 51,
-    category: "Spices",
-    difficulty: "easy",
-    q: "Cinnamon is obtained mainly from the:",
-    options: ["Bark", "Root", "Fruit", "Flower"],
-    answer: 0,
-    fact: "Cinnamon spice is obtained mainly from the inner bark of certain trees."
-  },
-
-  {
-    id: 52,
-    category: "Spices",
-    difficulty: "easy",
-    q: "Cloves are dried:",
-    options: ["Flower buds", "Roots", "Leaves", "Seeds"],
-    answer: 0,
-    fact: "Cloves are the dried flower buds of the clove tree."
-  },
-
-  {
-    id: 53,
-    category: "Spices",
-    difficulty: "medium",
-    q: "Saffron is obtained from parts of which flower?",
-    options: ["Crocus sativus", "Rose", "Jasmine", "Sunflower"],
-    answer: 0,
-    fact: "Saffron comes from the dried stigmas of Crocus sativus."
-  },
-
-  {
-    id: 54,
-    category: "Spices",
-    difficulty: "easy",
-    q: "Cumin is mainly used as a:",
-    options: ["Spice", "Fruit", "Dairy product", "Grain"],
-    answer: 0,
-    fact: "Cumin seeds are commonly used as a culinary spice."
-  },
-
-  {
-    id: 55,
-    category: "Spices",
-    difficulty: "easy",
-    q: "Cardamom is commonly used as a:",
-    options: ["Spice", "Pulse", "Fruit juice", "Grain"],
-    answer: 0,
-    fact: "Cardamom is a commonly used aromatic spice."
-  },
-
-  {
-    id: 56,
-    category: "Spices",
-    difficulty: "easy",
-    q: "Ginger is commonly used as a:",
-    options: ["Rhizome", "Cereal", "Nut", "Dairy product"],
-    answer: 0,
-    fact: "The commonly eaten part of ginger is a rhizome."
-  },
-
-  {
-    id: 57,
-    category: "Spices",
-    difficulty: "medium",
-    q: "Garlic belongs to the same genus as:",
-    options: ["Onion", "Mango", "Banana", "Carrot"],
-    answer: 0,
-    fact: "Garlic and onion are both members of the Allium genus."
-  },
-
-  {
-    id: 58,
-    category: "Spices",
-    difficulty: "easy",
-    q: "Vanilla flavour traditionally comes from the:",
-    options: ["Vanilla bean/pod", "Root", "Leaf", "Flower petal"],
-    answer: 0,
-    fact: "Natural vanilla comes from the cured fruit, commonly called the vanilla bean or pod."
-  },
-
-  {
-    id: 59,
-    category: "Spices",
-    difficulty: "easy",
-    q: "Salt used in food is primarily:",
-    options: ["Sodium chloride", "Calcium carbonate", "Potassium iodide", "Glucose"],
-    answer: 0,
-    fact: "Common table salt is primarily sodium chloride."
-  },
-
-
-  // =====================================================
-  // 🧪 FOOD SCIENCE — Q060–Q071
-  // =====================================================
-
-  {
-    id: 60,
-    category: "Food Science",
-    difficulty: "easy",
-    q: "Fermentation can involve the activity of:",
-    options: ["Microorganisms", "Rocks", "Metals", "Plastic"],
-    answer: 0,
-    fact: "Fermentation can involve microorganisms such as yeasts and bacteria."
-  },
-
-  {
-    id: 61,
-    category: "Food Science",
-    difficulty: "easy",
-    q: "Yeast is commonly used to help bread:",
-    options: ["Rise", "Freeze", "Become salty", "Become oily"],
-    answer: 0,
-    fact: "Yeast produces carbon dioxide during fermentation, helping many breads rise."
-  },
-
-  {
-    id: 62,
-    category: "Food Science",
-    difficulty: "medium",
-    q: "The browning that occurs when many foods are cooked is often associated with the:",
-    options: ["Maillard reaction", "Water cycle", "Nitrogen cycle", "Krebs cycle"],
-    answer: 0,
-    fact: "The Maillard reaction contributes to browning and flavour development in many cooked foods."
-  },
-
-  {
-    id: 63,
-    category: "Food Science",
-    difficulty: "easy",
-    q: "Freezing food generally helps slow down:",
-    options: ["Microbial growth", "All chemical reactions completely", "Gravity", "Evaporation completely"],
-    answer: 0,
-    fact: "Freezing generally slows microbial growth and many chemical reactions, but does not stop every process completely."
-  },
-
-  {
-    id: 64,
-    category: "Food Science",
-    difficulty: "easy",
-    q: "Pasteurization is a heat-treatment process used to reduce:",
-    options: ["Harmful microorganisms", "Salt crystals", "Food colour", "All nutrients"],
-    answer: 0,
-    fact: "Pasteurization uses controlled heating to reduce certain harmful microorganisms."
-  },
-
-  {
-    id: 65,
-    category: "Food Science",
-    difficulty: "easy",
-    q: "Baking soda is chemically known as:",
-    options: ["Sodium bicarbonate", "Sodium chloride", "Calcium chloride", "Citric acid"],
-    answer: 0,
-    fact: "Baking soda is sodium bicarbonate."
-  },
-
-  {
-    id: 66,
-    category: "Food Science",
-    difficulty: "easy",
-    q: "Vinegar commonly contains which acid?",
-    options: ["Acetic acid", "Sulfuric acid", "Hydrochloric acid", "Nitric acid"],
-    answer: 0,
-    fact: "Acetic acid is the main acid responsible for vinegar's characteristic acidity."
-  },
-
-  {
-    id: 67,
-    category: "Food Science",
-    difficulty: "easy",
-    q: "Lemon's sour taste is mainly associated with:",
-    options: ["Citric acid", "Acetic acid", "Lactic acid", "Carbonic acid"],
-    answer: 0,
-    fact: "Citric acid contributes significantly to the sour taste of lemons."
-  },
-
-  {
-    id: 68,
-    category: "Food Science",
-    difficulty: "easy",
-    q: "Yogurt is produced through:",
-    options: ["Fermentation", "Freezing", "Dry roasting only", "Grinding only"],
-    answer: 0,
-    fact: "Yogurt is produced through fermentation by specific microorganisms."
-  },
-
-  {
-    id: 69,
-    category: "Food Science",
-    difficulty: "easy",
-    q: "Ice is the solid form of:",
-    options: ["Water", "Oil", "Protein", "Salt"],
-    answer: 0,
-    fact: "Ice is water in its solid state."
-  },
-
-  {
-    id: 70,
-    category: "Food Science",
-    difficulty: "easy",
-    q: "Caramelization involves the heating of:",
-    options: ["Sugars", "Proteins only", "Minerals", "Water only"],
-    answer: 0,
-    fact: "Caramelization is a group of reactions that occur when sugars are heated."
-  },
-
-  {
-    id: 71,
-    category: "Food Science",
-    difficulty: "easy",
-    q: "A food's pH is related to its:",
-    options: ["Acidity/alkalinity", "Weight only", "Colour only", "Temperature only"],
-    answer: 0,
-    fact: "pH is a measure related to acidity and alkalinity."
-  },
-
-
-  // =====================================================
-  // 🥗 NUTRITION BASICS — Q072–Q081
-  // =====================================================
-
-  {
-    id: 72,
-    category: "Nutrition",
-    difficulty: "easy",
-    q: "Which nutrient provides energy and is also essential for many body functions?",
-    options: ["Carbohydrate", "Water only", "Minerals only", "Fibre only"],
-    answer: 0,
-    fact: "Carbohydrates are an important source of energy."
-  },
-
-  {
-    id: 73,
-    category: "Nutrition",
-    difficulty: "easy",
-    q: "Protein is made up of smaller units called:",
-    options: ["Amino acids", "Fatty acids only", "Glucose molecules only", "Minerals"],
-    answer: 0,
-    fact: "Proteins are made from chains of amino acids."
-  },
-
-  {
-    id: 74,
-    category: "Nutrition",
-    difficulty: "easy",
-    q: "Which nutrient contains more energy per gram than carbohydrate?",
-    options: ["Fat", "Water", "Vitamin C", "Fibre"],
-    answer: 0,
-    fact: "Fat provides more energy per gram than carbohydrate or protein."
-  },
-
-  {
-    id: 75,
-    category: "Nutrition",
-    difficulty: "easy",
-    q: "Which vitamin is commonly associated with citrus fruits?",
-    options: ["Vitamin C", "Vitamin B12", "Vitamin D", "Vitamin K2"],
-    answer: 0,
-    fact: "Citrus fruits are well-known sources of vitamin C."
-  },
-
-  {
-    id: 76,
-    category: "Nutrition",
-    difficulty: "easy",
-    q: "Dietary fibre is found mainly in:",
-    options: ["Plant foods", "Pure table salt", "Water", "Cooking oil"],
-    answer: 0,
-    fact: "Dietary fibre is naturally found mainly in plant foods."
-  },
-
-  {
-    id: 77,
-    category: "Nutrition",
-    difficulty: "easy",
-    q: "Which mineral is important for normal bone structure?",
-    options: ["Calcium", "Sodium only", "Chloride only", "Iodine only"],
-    answer: 0,
-    fact: "Calcium is an important mineral for bones and teeth."
-  },
-
-  {
-    id: 78,
-    category: "Nutrition",
-    difficulty: "medium",
-    q: "Iron is an essential mineral involved in:",
-    options: ["Oxygen transport", "Making table salt", "Producing cooking oil", "Making water"],
-    answer: 0,
-    fact: "Iron is part of haemoglobin, which helps transport oxygen in the blood."
-  },
-
-  {
-    id: 79,
-    category: "Nutrition",
-    difficulty: "easy",
-    q: "Vitamin D helps the body with:",
-    options: ["Calcium absorption and bone health", "Making sugar taste sweet", "Producing salt", "Fermenting bread"],
-    answer: 0,
-    fact: "Vitamin D plays an important role in calcium absorption and bone health."
-  },
-
-  {
-    id: 80,
-    category: "Nutrition",
-    difficulty: "easy",
-    q: "Which nutrient is especially important for growth and tissue repair?",
-    options: ["Protein", "Water only", "Salt only", "Sugar only"],
-    answer: 0,
-    fact: "Protein provides amino acids needed for growth and tissue maintenance."
-  },
-
-  {
-    id: 81,
-    category: "Nutrition",
-    difficulty: "easy",
-    q: "Water is important because it helps with:",
-    options: ["Many body processes", "Only digestion", "Only taste", "Only sleep"],
-    answer: 0,
-    fact: "Water is involved in many essential processes throughout the body."
-  },
-
-
-  // =====================================================
-  // 🏷️ FOOD LABELS & AWARENESS — Q082–Q090
-  // =====================================================
-
-  {
-    id: 82,
-    category: "Food Labels",
-    difficulty: "easy",
-    q: "What does an ingredient list tell you?",
-    options: [
-      "Ingredients used in the food",
-      "The shop's profit",
-      "The customer's age",
-      "The food's cooking temperature"
-    ],
-    answer: 0,
-    fact: "An ingredient list identifies the ingredients used in a packaged food."
-  },
-
-  {
-    id: 83,
-    category: "Food Labels",
-    difficulty: "easy",
-    q: "A serving size on a nutrition label refers to:",
-    options: [
-      "An amount of food used as the reference for the nutrition information",
-      "The entire factory production",
-      "The package's price",
-      "The food's expiry date"
-    ],
-    answer: 0,
-    fact: "Serving size provides the reference amount for nutrition information."
-  },
-
-  {
-    id: 84,
-    category: "Food Labels",
-    difficulty: "easy",
-    q: "Nutrition information may include the amount of:",
-    options: [
-      "Fat, carbohydrate and protein",
-      "Only water",
-      "Only colour",
-      "Only flavour"
-    ],
-    answer: 0,
-    fact: "Nutrition information can provide amounts of nutrients such as fat, carbohydrate and protein."
-  },
-
-  {
-    id: 85,
-    category: "Food Labels",
-    difficulty: "easy",
-    q: "On an Indian packaged-food label, serving information can be expressed using:",
-    options: [
-      "Metric units such as grams or millilitres",
-      "Only inches",
-      "Only kilograms",
-      "Only kilometres"
-    ],
-    answer: 0,
-    fact: "Food-label information can use metric units such as grams and millilitres."
-  },
-
-  {
-    id: 86,
-    category: "Food Labels",
-    difficulty: "medium",
-    q: "“Added sugars” refers to sugars that are:",
-    options: [
-      "Added to foods or beverages",
-      "Naturally present only in whole fruits",
-      "Minerals",
-      "Proteins"
-    ],
-    answer: 0,
-    fact: "Added sugars are sugars added during processing or preparation rather than sugars naturally present in whole foods."
-  },
-
-  {
-    id: 87,
-    category: "Food Labels",
-    difficulty: "easy",
-    q: "Which organisation regulates food safety standards in India?",
-    options: ["FSSAI", "RBI", "ISRO", "TRAI"],
-    answer: 0,
-    fact: "FSSAI is India's Food Safety and Standards Authority."
-  },
-
-  {
-    id: 88,
-    category: "Food Labels",
-    difficulty: "medium",
-    q: "Why should you check the serving size before interpreting nutrition numbers?",
-    options: [
-      "The listed nutrition amount is tied to the stated serving reference",
-      "It tells you the brand's history",
-      "It changes the package colour",
-      "It identifies the shopkeeper"
-    ],
-    answer: 0,
-    fact: "Nutrition values should be interpreted in relation to the serving reference shown on the label."
-  },
-
-  {
-    id: 89,
-    category: "Food Labels",
-    difficulty: "easy",
-    q: "Which information can help a consumer understand what a packaged food contains?",
-    options: [
-      "Ingredient list and nutrition information",
-      "Package colour alone",
-      "Brand logo alone",
-      "Advertisement alone"
-    ],
-    answer: 0,
-    fact: "Ingredient and nutrition information can help consumers understand a packaged food."
-  },
-
-  {
-    id: 90,
-    category: "Food Labels",
-    difficulty: "easy",
-    q: "What is the basic NIJOK philosophy?",
-    options: [
-      "Facts first, you decide",
-      "Buy everything",
-      "Avoid every packaged food",
-      "Trust every advertisement"
-    ],
-    answer: 0,
-    fact: "NIJOK is designed around providing information so the consumer can make their own decision."
-  },
-
-
-  // =====================================================
-  // 👨‍🍳 COOKING & TRADITIONS — Q091–Q095
-  // =====================================================
-
-  {
-    id: 91,
-    category: "Cooking",
-    difficulty: "easy",
-    q: "Boiling means cooking food in:",
-    options: ["Hot water", "Cold oil", "Dry salt", "Ice"],
-    answer: 0,
-    fact: "Boiling cooks food in water at or near its boiling point."
-  },
-
-  {
-    id: 92,
-    category: "Cooking",
-    difficulty: "easy",
-    q: "Steaming cooks food primarily using:",
-    options: ["Steam", "Ice", "Dry sand", "Salt crystals"],
-    answer: 0,
-    fact: "Steaming cooks food using hot water vapour."
-  },
-
-  {
-    id: 93,
-    category: "Cooking",
-    difficulty: "easy",
-    q: "Roasting generally involves cooking food using:",
-    options: ["Dry heat", "Freezing", "Cold water", "Ice"],
-    answer: 0,
-    fact: "Roasting generally uses dry heat."
-  },
-
-  {
-    id: 94,
-    category: "Cooking",
-    difficulty: "easy",
-    q: "Grinding spices changes their:",
-    options: [
-      "Physical form and particle size",
-      "Country of origin",
-      "Vitamin names",
-      "Botanical family"
-    ],
-    answer: 0,
-    fact: "Grinding reduces spices into smaller particles and changes their physical form."
-  },
-
-  {
-    id: 95,
-    category: "Cooking",
-    difficulty: "easy",
-    q: "Fermentation is used traditionally in preparing foods such as:",
-    options: ["Yogurt", "Ice cubes", "Table salt", "Plain water"],
-    answer: 0,
-    fact: "Fermentation is used to produce foods including yogurt and many other traditional foods."
-  },
-
-
-  // =====================================================
-  // 🎯 FUN FOOD KNOWLEDGE — Q096–Q100
-  // =====================================================
-
-  {
-    id: 96,
-    category: "Fun Food",
-    difficulty: "easy",
-    q: "Which food can pop when heated because moisture inside turns into steam?",
-    options: ["Popcorn", "Raisin", "Paneer", "Banana"],
-    answer: 0,
-    fact: "Popcorn kernels contain moisture that can turn into steam and cause the kernel to pop."
-  },
-
-  {
-    id: 97,
-    category: "Fun Food",
-    difficulty: "easy",
-    q: "Which fruit is famous for its distinctive strong aroma and spiky outer shell?",
-    options: ["Durian", "Apple", "Grape", "Pear"],
-    answer: 0,
-    fact: "Durian is known for its strong aroma and distinctive spiky shell."
-  },
-
-  {
-    id: 98,
-    category: "Fun Food",
-    difficulty: "easy",
-    q: "Which food is traditionally made from chickpeas and tahini?",
-    options: ["Hummus", "Sushi", "Pizza", "Kimchi"],
-    answer: 0,
-    fact: "Traditional hummus combines chickpeas with tahini and other ingredients."
-  },
-
-  {
-    id: 99,
-    category: "Fun Food",
-    difficulty: "medium",
-    q: "Which spice is one of the world's most expensive by weight?",
-    options: ["Saffron", "Cumin", "Coriander", "Fennel"],
-    answer: 0,
-    fact: "Saffron is widely recognized as one of the most expensive spices by weight."
-  },
-
-  {
-    id: 100,
-    category: "Fun Food",
-    difficulty: "easy",
-    q: "Which food is made from fermented cabbage in traditional Korean cuisine?",
-    options: ["Kimchi", "Paella", "Falafel", "Risotto"],
-    answer: 0,
-    fact: "Kimchi includes many varieties of fermented vegetables, with cabbage being a common base."
-  
-   },
-      
-  // =====================================================
-  // 🌍 FOOD ORIGINS & CULTURE — Q101–Q110
-  // =====================================================
-
-  {
-    id: 101,
-    category: "Food Origins",
-    difficulty: "easy",
-    q: "Which country is strongly associated with traditional sushi?",
-    options: ["Japan", "Mexico", "France", "Brazil"],
-    answer: 0,
-    fact: "Sushi is strongly associated with Japanese cuisine."
-  },
-
-  {
-    id: 102,
-    category: "Food Origins",
-    difficulty: "easy",
-    q: "Paella is traditionally associated with which country?",
-    options: ["Spain", "India", "Japan", "Egypt"],
-    answer: 0,
-    fact: "Paella is a Spanish rice dish especially associated with Valencia."
-  },
-
-  {
-    id: 103,
-    category: "Food Origins",
-    difficulty: "easy",
-    q: "Which country is strongly associated with traditional tacos?",
-    options: ["Mexico", "Italy", "China", "Greece"],
-    answer: 0,
-    fact: "Tacos are an important part of Mexican cuisine."
-  },
-
-  {
-    id: 104,
-    category: "Food Origins",
-    difficulty: "easy",
-    q: "Pho is a traditional food associated with:",
-    options: ["Vietnam", "France", "India", "Turkey"],
-    answer: 0,
-    fact: "Pho is a Vietnamese noodle soup."
-  },
-
-  {
-    id: 105,
-    category: "Food Origins",
-    difficulty: "easy",
-    q: "Which country is famous for traditional kimchi?",
-    options: ["South Korea", "Italy", "Brazil", "Canada"],
-    answer: 0,
-    fact: "Kimchi is a traditional Korean fermented food."
-  },
-
-  {
-    id: 106,
-    category: "Food Origins",
-    difficulty: "easy",
-    q: "Which country is strongly associated with croissants?",
-    options: ["France", "India", "Mexico", "Thailand"],
-    answer: 0,
-    fact: "Croissants are strongly associated with French baking traditions."
-  },
-
-  {
-    id: 107,
-    category: "Food Origins",
-    difficulty: "easy",
-    q: "Miso is traditionally associated with which cuisine?",
-    options: ["Japanese", "Mexican", "Greek", "Brazilian"],
-    answer: 0,
-    fact: "Miso is a traditional Japanese fermented food."
-  },
-
-  {
-    id: 108,
-    category: "Food Origins",
-    difficulty: "easy",
-    q: "Which country is strongly associated with traditional hummus?",
-    options: ["Middle Eastern countries", "Japan", "Brazil", "Canada"],
-    answer: 0,
-    fact: "Hummus is a widely consumed traditional food across the Middle East."
-  },
-
-  {
-    id: 109,
-    category: "Food Origins",
-    difficulty: "easy",
-    q: "Ratatouille is associated with which cuisine?",
-    options: ["French", "Indian", "Japanese", "Mexican"],
-    answer: 0,
-    fact: "Ratatouille is a vegetable dish associated with French cuisine."
-  },
-
-  {
-    id: 110,
-    category: "Food Origins",
-    difficulty: "easy",
-    q: "Moussaka is strongly associated with which cuisine?",
-    options: ["Greek", "Japanese", "Mexican", "Korean"],
-    answer: 0,
-    fact: "Moussaka is a dish strongly associated with Greek cuisine."
-  },
-
-
-  // =====================================================
-  // 🧪 FOOD SCIENCE — Q111–Q120
-  // =====================================================
-
-  {
-    id: 111,
-    category: "Food Science",
-    difficulty: "easy",
-    q: "What happens to water when it reaches its boiling point?",
-    options: ["It changes into vapour", "It becomes salt", "It becomes oil", "It becomes sugar"],
-    answer: 0,
-    fact: "At its boiling point, liquid water changes into water vapour."
-  },
-
-  {
-    id: 112,
-    category: "Food Science",
-    difficulty: "easy",
-    q: "Which microorganism is commonly used in bread making?",
-    options: ["Yeast", "Mould only", "Algae", "Protozoa"],
-    answer: 0,
-    fact: "Baker's yeast produces carbon dioxide during fermentation, helping dough rise."
-  },
-
-  {
-    id: 113,
-    category: "Food Science",
-    difficulty: "easy",
-    q: "What process helps turn milk into yogurt?",
-    options: ["Fermentation", "Freezing", "Roasting", "Drying"],
-    answer: 0,
-    fact: "Yogurt is produced through fermentation by specific bacteria."
-  },
-
-  {
-    id: 114,
-    category: "Food Science",
-    difficulty: "medium",
-    q: "The Maillard reaction contributes mainly to:",
-    options: ["Browning and flavour", "Freezing", "Sweetness only", "Cooling"],
-    answer: 0,
-    fact: "The Maillard reaction contributes to browning and flavour in many cooked foods."
-  },
-
-  {
-    id: 115,
-    category: "Food Science",
-    difficulty: "easy",
-    q: "What is the main purpose of pasteurization?",
-    options: ["Reduce harmful microorganisms", "Add sugar", "Remove all water", "Add colour"],
-    answer: 0,
-    fact: "Pasteurization uses controlled heating to reduce certain harmful microorganisms."
-  },
-
-  {
-    id: 116,
-    category: "Food Science",
-    difficulty: "easy",
-    q: "What does freezing generally do to microbial growth?",
-    options: ["Slows it down", "Always increases it", "Creates bacteria", "Has no effect at all"],
-    answer: 0,
-    fact: "Freezing generally slows microbial growth, although it does not necessarily destroy all microorganisms."
-  },
-
-  {
-    id: 117,
-    category: "Food Science",
-    difficulty: "easy",
-    q: "What is baking soda?",
-    options: ["Sodium bicarbonate", "Sodium chloride", "Citric acid", "Glucose"],
-    answer: 0,
-    fact: "Baking soda is the common name for sodium bicarbonate."
-  },
-
-  {
-    id: 118,
-    category: "Food Science",
-    difficulty: "easy",
-    q: "Which acid is commonly found in vinegar?",
-    options: ["Acetic acid", "Citric acid", "Sulfuric acid", "Nitric acid"],
-    answer: 0,
-    fact: "Acetic acid gives vinegar much of its characteristic acidity."
-  },
-
-  {
-    id: 119,
-    category: "Food Science",
-    difficulty: "easy",
-    q: "Which acid contributes strongly to the sour taste of lemons?",
-    options: ["Citric acid", "Acetic acid", "Lactic acid", "Sulfuric acid"],
-    answer: 0,
-    fact: "Citric acid is an important contributor to the sour taste of lemons."
-  },
-
-  {
-    id: 120,
-    category: "Food Science",
-    difficulty: "medium",
-    q: "Caramelization mainly involves heating:",
-    options: ["Sugars", "Water", "Minerals", "Salt"],
-    answer: 0,
-    fact: "Caramelization involves chemical changes that occur when sugars are heated."
-  },
-
-
-  // =====================================================
-  // 🥗 NUTRITION BASICS — Q121–Q130
-  // =====================================================
-
-  {
-    id: 121,
-    category: "Nutrition",
-    difficulty: "easy",
-    q: "Which nutrient is an important source of energy?",
-    options: ["Carbohydrate", "Water", "Minerals", "Salt"],
-    answer: 0,
-    fact: "Carbohydrates are an important source of energy."
-  },
-
-  {
-    id: 122,
-    category: "Nutrition",
-    difficulty: "easy",
-    q: "Proteins are made from smaller units called:",
-    options: ["Amino acids", "Minerals", "Water molecules", "Starch grains"],
-    answer: 0,
-    fact: "Proteins are made from chains of amino acids."
-  },
-
-  {
-    id: 123,
-    category: "Nutrition",
-    difficulty: "easy",
-    q: "Which nutrient provides more energy per gram than carbohydrate?",
-    options: ["Fat", "Water", "Vitamin C", "Minerals"],
-    answer: 0,
-    fact: "Fat provides more energy per gram than carbohydrate or protein."
-  },
-
-  {
-    id: 124,
-    category: "Nutrition",
-    difficulty: "easy",
-    q: "Which vitamin is commonly associated with citrus fruits?",
-    options: ["Vitamin C", "Vitamin B12", "Vitamin D", "Vitamin K2"],
-    answer: 0,
-    fact: "Citrus fruits are well-known sources of vitamin C."
-  },
-
-  {
-    id: 125,
-    category: "Nutrition",
-    difficulty: "easy",
-    q: "Dietary fibre is found mainly in:",
-    options: ["Plant foods", "Cooking oil", "Table salt", "Water"],
-    answer: 0,
-    fact: "Dietary fibre is naturally found mainly in plant foods."
-  },
-
-  {
-    id: 126,
-    category: "Nutrition",
-    difficulty: "easy",
-    q: "Which mineral is important for bones and teeth?",
-    options: ["Calcium", "Sodium", "Chloride", "Iodine"],
-    answer: 0,
-    fact: "Calcium is an important mineral for normal bones and teeth."
-  },
-
-  {
-    id: 127,
-    category: "Nutrition",
-    difficulty: "medium",
-    q: "Iron plays an important role in:",
-    options: ["Oxygen transport", "Making cooking oil", "Making sugar", "Freezing water"],
-    answer: 0,
-    fact: "Iron is part of haemoglobin, which helps transport oxygen in the blood."
-  },
-
-  {
-    id: 128,
-    category: "Nutrition",
-    difficulty: "easy",
-    q: "Vitamin D helps the body with:",
-    options: ["Calcium absorption", "Making salt", "Fermenting rice", "Producing sugar"],
-    answer: 0,
-    fact: "Vitamin D plays an important role in calcium absorption and bone health."
-  },
-
-  {
-    id: 129,
-    category: "Nutrition",
-    difficulty: "easy",
-    q: "Which nutrient is especially important for tissue growth and repair?",
-    options: ["Protein", "Water only", "Salt only", "Sugar only"],
-    answer: 0,
-    fact: "Protein supplies amino acids needed for growth and tissue maintenance."
-  },
-
-  {
-    id: 130,
-    category: "Nutrition",
-    difficulty: "easy",
-    q: "Why is water important to the body?",
-    options: ["It supports many body processes", "It is only used for taste", "It is only used during sleep", "It replaces every nutrient"],
-    answer: 0,
-    fact: "Water participates in many essential processes throughout the body."
-  },
-
-
-  // =====================================================
-  // 🏷️ FOOD LABELS — Q131–Q140
-  // =====================================================
-
-  {
-    id: 131,
-    category: "Food Labels",
-    difficulty: "easy",
-    q: "What does an ingredient list show?",
-    options: ["Ingredients used in the food", "The shop's profit", "The customer's age", "The factory's electricity use"],
-    answer: 0,
-    fact: "An ingredient list identifies the ingredients used in a packaged food."
-  },
-
-  {
-    id: 132,
-    category: "Food Labels",
-    difficulty: "easy",
-    q: "Why should you check the serving size on a nutrition label?",
-    options: ["Nutrition values are given in relation to it", "It tells the brand's history", "It gives the shop address", "It changes the food colour"],
-    answer: 0,
-    fact: "Serving size provides the reference amount for the nutrition information."
-  },
-
-  {
-    id: 133,
-    category: "Food Labels",
-    difficulty: "easy",
-    q: "Which information can appear in nutrition information?",
-    options: ["Fat, carbohydrate and protein", "Only package colour", "Only brand name", "Only advertisement text"],
-    answer: 0,
-    fact: "Nutrition information can include amounts of nutrients such as fat, carbohydrate and protein."
-  },
-
-  {
-    id: 134,
-    category: "Food Labels",
-    difficulty: "medium",
-    q: "Added sugars are sugars that are:",
-    options: ["Added during processing or preparation", "Only found in whole fruits", "Minerals", "Proteins"],
-    answer: 0,
-    fact: "Added sugars are introduced during processing or preparation rather than being naturally present in whole foods."
-  },
-
-  {
-    id: 135,
-    category: "Food Labels",
-    difficulty: "easy",
-    q: "Which Indian authority is responsible for food safety standards?",
-    options: ["FSSAI", "RBI", "ISRO", "TRAI"],
-    answer: 0,
-    fact: "FSSAI is India's Food Safety and Standards Authority."
-  },
-
-  {
-    id: 136,
-    category: "Food Labels",
-    difficulty: "easy",
-    q: "What can an expiry or use-by date help a consumer understand?",
-    options: ["Date-related food safety or quality information", "The brand's logo", "The shop's profit", "The customer's age"],
-    answer: 0,
-    fact: "Date markings provide information about the product's shelf life and, depending on the marking, safety or quality."
-  },
-
-  {
-    id: 137,
-    category: "Food Labels",
-    difficulty: "easy",
-    q: "Which is more useful for understanding a packaged food's composition?",
-    options: ["Ingredient list", "Package colour alone", "Logo alone", "Advertisement alone"],
-    answer: 0,
-    fact: "The ingredient list provides direct information about the ingredients used."
-  },
-
-  {
-    id: 138,
-    category: "Food Labels",
-    difficulty: "medium",
-    q: "Why is comparing nutrition values using the same reference useful?",
-    options: ["It makes comparisons more meaningful", "It changes the ingredients", "It removes calories", "It changes the expiry date"],
-    answer: 0,
-    fact: "Using the same reference amount helps consumers compare nutrition information more meaningfully."
-  },
-
-  {
-    id: 139,
-    category: "Food Labels",
-    difficulty: "easy",
-    q: "A food label can help consumers learn about:",
-    options: ["Ingredients and nutrition", "The weather", "A customer's height", "A shop's electricity bill"],
-    answer: 0,
-    fact: "Food labels can provide information about ingredients, nutrition and other product details."
-  },
-
-  {
-    id: 140,
-    category: "Food Labels",
-    difficulty: "easy",
-    q: "What is the NIJOK approach to food information?",
-    options: ["Facts first, you decide", "Buy everything", "Avoid all packaged foods", "Trust every advertisement"],
-    answer: 0,
-    fact: "NIJOK is built around providing information so consumers can make their own decisions."
-  },
-
-
-  // =====================================================
-  // 🌾 GRAINS & PULSES — Q141–Q150
-  // =====================================================
-
-  {
-    id: 141,
-    category: "Grains & Pulses",
-    difficulty: "easy",
-    q: "Rice is classified as a:",
-    options: ["Cereal grain", "Fruit", "Nut", "Dairy product"],
-    answer: 0,
-    fact: "Rice is a cereal grain."
-  },
-
-  {
-    id: 142,
-    category: "Grains & Pulses",
-    difficulty: "easy",
-    q: "Chickpeas belong to which group?",
-    options: ["Legumes", "Citrus fruits", "Dairy", "Oils"],
-    answer: 0,
-    fact: "Chickpeas are legumes and are commonly classified as pulses."
-  },
-
-  {
-    id: 143,
-    category: "Grains & Pulses",
-    difficulty: "easy",
-    q: "Lentils are:",
-    options: ["Legumes", "Fruits", "Nuts", "Dairy foods"],
-    answer: 0,
-    fact: "Lentils are legumes."
-  },
-
-  {
-    id: 144,
-    category: "Grains & Pulses",
-    difficulty: "easy",
-    q: "Which grain is naturally gluten-free?",
-    options: ["Rice", "Wheat", "Barley", "Rye"],
-    answer: 0,
-    fact: "Rice is naturally gluten-free."
-  },
-
-  {
-    id: 145,
-    category: "Grains & Pulses",
-    difficulty: "medium",
-    q: "Quinoa is botanically a:",
-    options: ["Seed", "Fruit", "Root", "Dairy product"],
-    answer: 0,
-    fact: "Quinoa is botanically a seed but is commonly used like a grain."
-  },
-
-  {
-    id: 146,
-    category: "Grains & Pulses",
-    difficulty: "easy",
-    q: "Moong dal comes from:",
-    options: ["Mung beans", "Apples", "Rice grains", "Coconut"],
-    answer: 0,
-    fact: "Moong dal is made from mung beans."
-  },
-
-  {
-    id: 147,
-    category: "Grains & Pulses",
-    difficulty: "easy",
-    q: "Popcorn comes from a special variety of:",
-    options: ["Maize", "Wheat", "Rice", "Barley"],
-    answer: 0,
-    fact: "Popcorn comes from a variety of maize with kernels capable of popping when heated."
-  },
-
-  {
-    id: 148,
-    category: "Grains & Pulses",
-    difficulty: "easy",
-    q: "Oats are classified as:",
-    options: ["Cereal grains", "Pulses", "Fruits", "Nuts"],
-    answer: 0,
-    fact: "Oats are cereal grains."
-  },
-
-  {
-    id: 149,
-    category: "Grains & Pulses",
-    difficulty: "easy",
-    q: "Sesame is mainly used as a:",
-    options: ["Seed", "Fruit", "Root", "Leaf"],
-    answer: 0,
-    fact: "Sesame seeds are widely used in cooking and food products."
-  },
-
-  {
-    id: 150,
-    category: "Grains & Pulses",
-    difficulty: "easy",
-    q: "Which food is commonly made from flattened rice?",
-    options: ["Poha", "Paneer", "Roti", "Sambar"],
-    answer: 0,
-    fact: "Poha is made from flattened or beaten rice."
-  },
-
-
-  // =====================================================
-  // 🌿 SPICES & INGREDIENTS — Q151–Q160
-  // =====================================================
-
-  {
-    id: 151,
-    category: "Spices",
-    difficulty: "easy",
-    q: "Cinnamon is obtained mainly from:",
-    options: ["Bark", "Root", "Seed", "Flower"],
-    answer: 0,
-    fact: "Cinnamon is obtained mainly from the inner bark of certain trees."
-  },
-
-  {
-    id: 152,
-    category: "Spices",
-    difficulty: "easy",
-    q: "Cloves are dried:",
-    options: ["Flower buds", "Roots", "Leaves", "Fruits"],
-    answer: 0,
-    fact: "Cloves are the dried flower buds of the clove tree."
-  },
-
-  {
-    id: 153,
-    category: "Spices",
-    difficulty: "medium",
-    q: "Saffron comes from which plant?",
-    options: ["Crocus sativus", "Piper nigrum", "Curcuma longa", "Allium cepa"],
-    answer: 0,
-    fact: "Saffron comes from the dried stigmas of Crocus sativus."
-  },
-
-  {
-    id: 154,
-    category: "Spices",
-    difficulty: "easy",
-    q: "Cumin is commonly used as a:",
-    options: ["Spice", "Fruit", "Dairy food", "Grain"],
-    answer: 0,
-    fact: "Cumin is widely used as a culinary spice."
-  },
-
-  {
-    id: 155,
-    category: "Spices",
-    difficulty: "easy",
-    q: "Cardamom is best described as a:",
-    options: ["Spice", "Pulse", "Cereal", "Dairy product"],
-    answer: 0,
-    fact: "Cardamom is an aromatic spice."
-  },
-
-  {
-    id: 156,
-    category: "Spices",
-    difficulty: "easy",
-    q: "The commonly eaten part of ginger is a:",
-    options: ["Rhizome", "Fruit", "Seed", "Leaf"],
-    answer: 0,
-    fact: "Ginger is commonly consumed as a rhizome."
-  },
-
-  {
-    id: 157,
-    category: "Spices",
-    difficulty: "medium",
-    q: "Garlic belongs to the same genus as:",
-    options: ["Onion", "Mango", "Carrot", "Banana"],
-    answer: 0,
-    fact: "Garlic and onion are both members of the Allium genus."
-  },
-
-  {
-    id: 158,
-    category: "Spices",
-    difficulty: "easy",
-    q: "Black pepper comes from the berries of:",
-    options: ["Piper nigrum", "Crocus sativus", "Camellia sinensis", "Curcuma longa"],
-    answer: 0,
-    fact: "Black pepper comes from the berries of Piper nigrum."
-  },
-
-  {
-    id: 159,
-    category: "Spices",
-    difficulty: "easy",
-    q: "Natural vanilla comes from the:",
-    options: ["Vanilla fruit/pod", "Root", "Leaf", "Bark"],
-    answer: 0,
-    fact: "Natural vanilla comes from the cured fruit of vanilla orchids."
-  },
-
-  {
-    id: 160,
-    category: "Spices",
-    difficulty: "easy",
-    q: "Common table salt is primarily:",
-    options: ["Sodium chloride", "Glucose", "Citric acid", "Calcium"],
-    answer: 0,
-    fact: "Common table salt is primarily sodium chloride."
-  },
-
-
-  // =====================================================
-  // 🥕 FRUITS & VEGETABLES — Q161–Q170
-  // =====================================================
-
-  {
-    id: 161,
-    category: "Fruits & Vegetables",
-    difficulty: "easy",
-    q: "Botanically, a tomato is a:",
-    options: ["Fruit", "Root", "Nut", "Grain"],
-    answer: 0,
-    fact: "Botanically, a tomato is a fruit."
-  },
-
-  {
-    id: 162,
-    category: "Fruits & Vegetables",
-    difficulty: "easy",
-    q: "Which fruit is widely known as a good source of vitamin C?",
-    options: ["Amla", "Banana", "Date", "Coconut"],
-    answer: 0,
-    fact: "Amla is a notable dietary source of vitamin C."
-  },
-
-  {
-    id: 163,
-    category: "Fruits & Vegetables",
-    difficulty: "easy",
-    q: "Which fruit is popularly called the king of fruits in India?",
-    options: ["Mango", "Apple", "Orange", "Papaya"],
-    answer: 0,
-    fact: "Mango is popularly called the king of fruits in India."
-  },
-
-  {
-    id: 164,
-    category: "Fruits & Vegetables",
-    difficulty: "medium",
-    q: "Botanically, a banana is classified as a:",
-    options: ["Berry", "Nut", "Root", "Grain"],
-    answer: 0,
-    fact: "Botanically, a banana is classified as a berry."
-  },
-
-  {
-    id: 165,
-    category: "Fruits & Vegetables",
-    difficulty: "easy",
-    q: "Which vegetable is rich in orange carotenoid pigments?",
-    options: ["Carrot", "Cucumber", "Onion", "Cauliflower"],
-    answer: 0,
-    fact: "Carrots contain carotenoid pigments including beta-carotene."
-  },
-
-  {
-    id: 166,
-    category: "Fruits & Vegetables",
-    difficulty: "easy",
-    q: "Broccoli belongs to which group?",
-    options: ["Cruciferous vegetables", "Citrus fruits", "Legumes", "Cereals"],
-    answer: 0,
-    fact: "Broccoli belongs to the Brassica or cruciferous group."
-  },
-
-  {
-    id: 167,
-    category: "Fruits & Vegetables",
-    difficulty: "easy",
-    q: "Which fruit is commonly used to make raisins?",
-    options: ["Grapes", "Apples", "Oranges", "Bananas"],
-    answer: 0,
-    fact: "Raisins are dried grapes."
-  },
-
-  {
-    id: 168,
-    category: "Fruits & Vegetables",
-    difficulty: "easy",
-    q: "The commonly eaten part of a carrot is its:",
-    options: ["Root", "Flower", "Leaf", "Bark"],
-    answer: 0,
-    fact: "The carrot's enlarged taproot is commonly eaten."
-  },
-
-  {
-    id: 169,
-    category: "Fruits & Vegetables",
-    difficulty: "medium",
-    q: "A potato is a modified underground:",
-    options: ["Stem", "Leaf", "Flower", "Fruit"],
-    answer: 0,
-    fact: "A potato is a modified underground stem called a tuber."
-  },
-
-  {
-    id: 170,
-    category: "Fruits & Vegetables",
-    difficulty: "easy",
-    q: "Coconut water is naturally found inside:",
-    options: ["Young coconuts", "Coconut leaves", "Coconut roots", "Coconut bark"],
-    answer: 0,
-    fact: "Coconut water is the liquid naturally found inside young coconuts."
-  },
-
-
-  // =====================================================
-  // ♻️ FOOD & ENVIRONMENT — Q171–Q180
-  // =====================================================
-
-  {
-    id: 171,
-    category: "Food & Environment",
-    difficulty: "easy",
-    q: "Which action can help reduce household food waste?",
-    options: ["Planning meals", "Buying without planning", "Throwing leftovers away", "Ignoring expiry dates"],
-    answer: 0,
-    fact: "Meal planning can help households buy and prepare food more efficiently."
-  },
-
-  {
-    id: 172,
-    category: "Food & Environment",
-    difficulty: "easy",
-    q: "Composting is a way to recycle:",
-    options: ["Organic waste", "Glass bottles only", "Metal wires", "Plastic electronics"],
-    answer: 0,
-    fact: "Composting converts suitable organic materials into a useful soil amendment."
-  },
-
-  {
-    id: 173,
-    category: "Food & Environment",
-    difficulty: "easy",
-    q: "Which item is generally considered reusable?",
-    options: ["Reusable food container", "Single-use wrapper", "Disposable straw", "Single-use cup"],
-    answer: 0,
-    fact: "Reusable containers can be used multiple times and may reduce single-use waste."
-  },
-
-  {
-    id: 174,
-    category: "Food & Environment",
-    difficulty: "easy",
-    q: "Why can buying only what you need help reduce food waste?",
-    options: ["Less unused food is likely to remain", "It makes food expire faster", "It increases leftovers", "It removes nutrition"],
-    answer: 0,
-    fact: "Buying appropriate quantities can help reduce the amount of food that goes unused."
-  },
-
-  {
-    id: 175,
-    category: "Food & Environment",
-    difficulty: "easy",
-    q: "Which material is commonly recyclable when properly collected?",
-    options: ["Glass", "Food scraps mixed with oil", "Dirty tissues", "Spoiled food"],
-    answer: 0,
-    fact: "Glass can commonly be recycled when collected and processed through suitable systems."
-  },
-
-  {
-    id: 176,
-    category: "Food & Environment",
-    difficulty: "medium",
-    q: "Food waste can contribute to environmental impacts because:",
-    options: ["Resources used to produce wasted food are also wasted", "Wasted food creates new farmland", "It removes all emissions", "It produces clean water automatically"],
-    answer: 0,
-    fact: "Food production uses land, water, energy and other resources, so wasting food also wastes resources used to produce it."
-  },
-
-  {
-    id: 177,
-    category: "Food & Environment",
-    difficulty: "easy",
-    q: "Which practice can help extend the life of some foods?",
-    options: ["Proper storage", "Leaving all foods uncovered", "Ignoring temperature", "Mixing raw and cooked foods"],
-    answer: 0,
-    fact: "Appropriate storage conditions can help maintain food quality and safety."
-  },
-
-  {
-    id: 178,
-    category: "Food & Environment",
-    difficulty: "easy",
-    q: "Why is separating waste useful?",
-    options: ["Different materials can be handled appropriately", "It makes all waste edible", "It removes all plastic", "It prevents all food spoilage"],
-    answer: 0,
-    fact: "Separating waste can make recycling, composting and other waste-management processes easier."
-  },
-
-  {
-    id: 179,
-    category: "Food & Environment",
-    difficulty: "easy",
-    q: "Which is an example of food waste?",
-    options: ["Throwing away edible leftovers", "Eating a meal", "Washing vegetables", "Cooking rice"],
-    answer: 0,
-    fact: "Discarding edible food is a form of food waste."
-  },
-
-  {
-    id: 180,
-    category: "Food & Environment",
-    difficulty: "easy",
-    q: "Which habit can help reduce unnecessary packaging waste?",
-    options: ["Choosing reusable options when practical", "Using more single-use items", "Throwing containers away immediately", "Buying extra packaging"],
-    answer: 0,
-    fact: "Reusable options can reduce reliance on some single-use packaging."
-  },
-
-
-  // =====================================================
-  // 👨‍🍳 COOKING KNOWLEDGE — Q181–Q190
-  // =====================================================
-
-  {
-    id: 181,
-    category: "Cooking",
-    difficulty: "easy",
-    q: "Boiling means cooking food in:",
-    options: ["Water at or near its boiling point", "Ice", "Dry salt", "Cold oil"],
-    answer: 0,
-    fact: "Boiling cooks food in water at or near its boiling point."
-  },
-
-  {
-    id: 182,
-    category: "Cooking",
-    difficulty: "easy",
-    q: "Steaming cooks food mainly using:",
-    options: ["Hot water vapour", "Ice", "Dry sand", "Cold air"],
-    answer: 0,
-    fact: "Steaming uses hot water vapour to cook food."
-  },
-
-  {
-    id: 183,
-    category: "Cooking",
-    difficulty: "easy",
-    q: "Roasting generally uses:",
-    options: ["Dry heat", "Freezing", "Cold water", "Ice"],
-    answer: 0,
-    fact: "Roasting generally uses dry heat."
-  },
-
-  {
-    id: 184,
-    category: "Cooking",
-    difficulty: "easy",
-    q: "Grinding spices mainly changes their:",
-    options: ["Particle size and physical form", "Country of origin", "Botanical family", "Vitamin names"],
-    answer: 0,
-    fact: "Grinding reduces spices into smaller particles and changes their physical form."
-  },
-
-  {
-    id: 185,
-    category: "Cooking",
-    difficulty: "easy",
-    q: "Sautéing usually involves cooking food quickly with:",
-    options: ["A small amount of fat", "Only ice", "Only water", "Dry flour"],
-    answer: 0,
-    fact: "Sautéing commonly involves relatively quick cooking in a small amount of fat."
-  },
-
-  {
-    id: 186,
-    category: "Cooking",
-    difficulty: "easy",
-    q: "Marinating food generally means:",
-    options: ["Soaking it in a seasoned mixture", "Freezing it immediately", "Drying it in sunlight only", "Grinding it into flour"],
-    answer: 0,
-    fact: "Marinating involves placing food in a seasoned liquid or mixture for a period of time."
-  },
-
-  {
-    id: 187,
-    category: "Cooking",
-    difficulty: "easy",
-    q: "Why are vegetables sometimes blanched?",
-    options: ["Brief cooking followed by cooling", "To freeze them instantly", "To turn them into flour", "To remove all nutrients"],
-    answer: 0,
-    fact: "Blanching usually involves brief heating followed by rapid cooling."
-  },
-
-  {
-    id: 188,
-    category: "Cooking",
-    difficulty: "easy",
-    q: "Kneading dough mainly helps develop:",
-    options: ["Gluten structure in wheat dough", "Salt crystals", "Water vapour", "Fruit sugar"],
-    answer: 0,
-    fact: "Kneading wheat dough helps develop gluten structure."
-  },
-
-  {
-    id: 189,
-    category: "Cooking",
-    difficulty: "easy",
-    q: "Why is food often cut into similar-sized pieces before cooking?",
-    options: ["For more even cooking", "To remove all nutrients", "To increase salt", "To change its country of origin"],
-    answer: 0,
-    fact: "Similar-sized pieces can help food cook more evenly."
-  },
-
-  {
-    id: 190,
-    category: "Cooking",
-    difficulty: "easy",
-    q: "Fermentation is used traditionally to prepare:",
-    options: ["Yogurt and many other foods", "Ice cubes", "Table salt", "Plain water"],
-    answer: 0,
-    fact: "Fermentation is used in producing yogurt, fermented vegetables, breads and many other foods."
-  },
-
-
-  // =====================================================
-  // 🧠 FOOD MYTHS & FACTS — Q191–Q200
-  // =====================================================
-
-  {
-    id: 191,
-    category: "Food Facts",
-    difficulty: "medium",
-    q: "Botanically, which of these is a fruit?",
-    options: ["Tomato", "Carrot", "Potato", "Spinach"],
-    answer: 0,
-    fact: "Tomato is botanically a fruit because it develops from a flower's ovary."
-  },
-
-  {
-    id: 192,
-    category: "Food Facts",
-    difficulty: "easy",
-    q: "Which statement about fruit juice is most accurate?",
-    options: ["It can contain naturally occurring sugars from fruit", "It is always sugar-free", "It is always identical to whole fruit", "It contains no water"],
-    answer: 0,
-    fact: "Fruit juice can contain sugars naturally present in the fruit; composition varies by product."
-  },
-
-  {
-    id: 193,
-    category: "Food Facts",
-    difficulty: "easy",
-    q: "Which statement about food labels is generally useful?",
-    options: ["Read the ingredient and nutrition information", "Judge food only by packaging colour", "Ignore serving information", "Trust every advertisement"],
-    answer: 0,
-    fact: "Ingredient and nutrition information can provide useful information for understanding packaged foods."
-  },
-
-  {
-    id: 194,
-    category: "Food Facts",
-    difficulty: "medium",
-    q: "Does freezing automatically make every food completely sterile?",
-    options: ["No", "Yes", "Only for fruit", "Only for bread"],
-    answer: 0,
-    fact: "Freezing can slow microbial growth but does not make every food completely sterile."
-  },
-
-  {
-    id: 195,
-    category: "Food Facts",
-    difficulty: "easy",
-    q: "Which statement about natural ingredients is most accurate?",
-    options: ["Natural does not automatically mean a food is nutritionally better", "Natural always means calorie-free", "Natural always means sugar-free", "Natural means it cannot spoil"],
-    answer: 0,
-    fact: "The word natural alone does not describe the complete nutritional quality or safety profile of a food."
-  },
-
-  {
-    id: 196,
-    category: "Food Facts",
-    difficulty: "easy",
-    q: "Which statement about sugar is correct?",
-    options: ["Sugar is a carbohydrate", "Sugar is a mineral", "Sugar is a protein", "Sugar is a vitamin"],
-    answer: 0,
-    fact: "Sugars are carbohydrates."
-  },
-
-  {
-    id: 197,
-    category: "Food Facts",
-    difficulty: "easy",
-    q: "Which statement about protein is correct?",
-    options: ["Protein is made from amino acids", "Protein is made only from water", "Protein is a mineral", "Protein is always a carbohydrate"],
-    answer: 0,
-    fact: "Proteins are made from amino acids."
-  },
-
-  {
-    id: 198,
-    category: "Food Facts",
-    difficulty: "medium",
-    q: "Which statement about food safety is most appropriate?",
-    options: ["Proper storage and handling matter", "Food safety depends only on packaging colour", "Expiry information never matters", "Raw and cooked foods should always be mixed"],
-    answer: 0,
-    fact: "Proper storage, handling and preparation are important parts of food safety."
-  },
-
-  {
-    id: 199,
-    category: "Food Facts",
-    difficulty: "easy",
-    q: "Which statement best matches NIJOK's purpose?",
-    options: ["Understand the facts before making your choice", "Tell everyone what they must eat", "Promote one food brand", "Ignore food labels"],
-    answer: 0,
-    fact: "NIJOK aims to make food information easier to understand so people can make informed choices."
-  },
-
-  {
-    id: 200,
-    category: "Food Facts",
-    difficulty: "easy",
-    q: "What should you do before making your own food choice?",
-    options: ["Learn and check the facts", "Believe every advertisement", "Ignore the label", "Choose only by package colour"],
-    answer: 0,
-    fact: "Checking reliable information can help people make their own informed food choices."
-  }
- ];
-   
-  const guessQuestions = [
-   
-    {
-      emoji:"🍕",
-      q:"Which food is this?",
-      options:["Pizza","Sushi","Taco","Curry"],
-      answer:0
-    },
-    {
-      emoji:"🍣",
-      q:"Which food is this?",
-      options:["Biryani","Sushi","Pasta","Ramen"],
-      answer:1
-    },
-    {
-      emoji:"🌮",
-      q:"Which food is this?",
-      options:["Taco","Dosa","Samosa","Kimchi"],
-      answer:0
-    },
-    {
-      emoji:"🥭",
-      q:"Which fruit is this?",
-      options:["Apple","Mango","Orange","Pear"],
-      answer:1
-    },
-    {
-      emoji:"🥟",
-      q:"Which food is represented here?",
-      options:["Dumpling","Pizza","Salad","Bread"],
-      answer:0
-    }
-  ];
-
-  const pairItems = [
-    ["🇯🇵","Sushi"],
-    ["🇮🇹","Pizza"],
-    ["🇮🇳","Biryani"],
-    ["🇰🇷","Kimchi"]
-  ];
-
-  let modal;
-  let currentGame = "";
-  let currentIndex = 0;
-  let score = 0;
-  let answered = false;
-  let timeLeft = 30;
-  let timer = null;
-
-  function todayKey(game){
-    const d = new Date();
-    return "nijok_"+game+"_"+d.getFullYear()+"_"+(d.getMonth()+1)+"_"+d.getDate();
-  }
-
-  function getPlayed(game){
-    return Number(localStorage.getItem(todayKey(game)) || 0);
-  }
-
-  function addPlayed(game){
-    localStorage.setItem(
-      todayKey(game),
-      getPlayed(game)+1
-    );
-  }
-
-  function remaining(game){
-    return Math.max(0, LIMITS[game]-getPlayed(game));
-  }
-
-  function createModal(){
-
-    modal = document.createElement("div");
-    modal.className = "nijok-game-modal";
-
-    modal.innerHTML = `
-      <div class="nijok-game-panel">
-
-        <button class="nijok-game-close" aria-label="Close">×</button>
-
-        <div id="nijokGameContent"></div>
-
-      </div>
-    `;
-
-    document.body.appendChild(modal);
-
-    modal.querySelector(".nijok-game-close")
-      .addEventListener("click", closeGame);
-
-    modal.addEventListener("click",function(e){
-      if(e.target === modal){
-        closeGame();
-      }
-    });
-  }
-function openGame(game){
-
-  alert("OPEN GAME: " + game);
-
-  if(!modal) createModal();
-
-  currentGame = game;
-  function openGame(game){
-
-    if(!modal) createModal();
-
-    currentGame = game;
-     
-     if(game === "quiz"){
-    currentIndex = 0;
-    score = 0;
-    answered = false;
-
-    if(timer){
-      clearInterval(timer);
-      timer = null;
-    }
-
-    if(remaining(game) <= 0){
-      showLimit();
-      return;
-    }
-
-    modal.classList.add("show");
-
-    if(game === "quiz"){
-      renderQuiz();
-    }
-
-    if(game === "guess"){
-      renderGuess();
-    }
-
-    if(game === "pair"){
-      renderPair();
-    }
-
-    if(game === "time"){
-      renderTime();
-    }
-  }
-
-  function closeGame(){
-
-    if(timer){
-      clearInterval(timer);
-      timer = null;
-    }
-
-    if(modal){
-      modal.classList.remove("show");
-    }
-  }
-
-  function header(title,sub){
-
-    return `
-      <div class="nijok-game-label">
-        NIJOK • FOOD QUEST
-      </div>
-
-      <h2 class="nijok-game-title">${title}</h2>
-
-      <p class="nijok-game-sub">${sub}</p>
-
-      <div class="nijok-game-status">
-
-        <div class="nijok-stat">
-          <strong>${score}</strong>
-          <span>Score</span>
-        </div>
-
-        <div class="nijok-stat">
-          <strong>${remaining(currentGame)}</strong>
-          <span>Today Left</span>
-        </div>
-
-      </div>
-    `;
-  }
-
-  function showLimit(){
-
-    modal.classList.add("show");
-
-    document.getElementById("nijokGameContent").innerHTML = `
-
-      <div class="nijok-result">
-
-        <div class="nijok-game-label">
-          DAILY LIMIT
-        </div>
-
-        <h3>You've completed today's games 🎉</h3>
-
-        <p class="nijok-game-sub">
-          Come back tomorrow for a fresh set of NIJOK challenges.
-        </p>
-
-        <button class="nijok-next" onclick="document.querySelector('.nijok-game-close').click()">
-          Back to NIJOK
-        </button>
-
-      </div>
-    `;
-  }
-     
-  function renderQuiz(){
-
-    const item = quizQuestions[
-      currentIndex % quizQuestions.length
-    ];
-
-    answered = false;
-
-    document.getElementById("nijokGameContent").innerHTML = `
-
-      ${header(
-        "Food Quiz",
-        "Think carefully. Learn something new."
-      )}
-
-      <div class="nijok-question">
-        ${item.q}
-      </div>
-
-      <div class="nijok-options">
-
-        ${item.options.map((option,i)=>`
-
-          <button
-            class="nijok-option"
-            data-index="${i}"
-          >
-            ${String.fromCharCode(65+i)}. ${option}
-          </button>
-
-        `).join("")}
-
-      </div>
-
-      <div class="nijok-message" id="nijokMessage"></div>
-
-      <button class="nijok-next" id="nijokNext" disabled>
-        Next Question →
-      </button>
-    `;
-
-    document.querySelectorAll(".nijok-option")
-      .forEach(btn=>{
-        btn.addEventListener("click",()=>{
-          answerQuiz(
-            Number(btn.dataset.index),
-            item.answer,
-            btn
-          );
-        });
-      });
-
-    document.getElementById("nijokNext")
-      .addEventListener("click",()=>{
-        currentIndex++;
-        renderQuiz();
-      });
-  }
-
-  function answerQuiz(selected,correct,button){
-
-    if(answered) return;
-
-    answered = true;
-    addPlayed("quiz");
-
-    const buttons =
-      document.querySelectorAll(".nijok-option");
-
-    buttons.forEach((b,i)=>{
-      b.disabled = true;
-
-      if(i === correct){
-        b.classList.add("correct");
-      }
-    });
-
-    const message =
-      document.getElementById("nijokMessage");
-
-    if(selected === correct){
-
-      score += 10;
-
-      button.classList.add("correct");
-
-      message.textContent =
-        "✓ Correct! +10 points";
-
-    }else{
-
-      button.classList.add("wrong");
-
-      message.textContent =
-        "Not quite. The correct answer is highlighted.";
-    }
-
-    document.querySelector(".nijok-stat strong")
-      .textContent = score;
-
-    document.querySelectorAll(".nijok-stat")[1]
-      .querySelector("strong")
-      .textContent = remaining("quiz");
-
-    document.getElementById("nijokNext")
-      .disabled = false;
-  }
-
-
-  function renderGuess(){
-
-    const item =
-      guessQuestions[
-        currentIndex % guessQuestions.length
-      ];
-
-    answered = false;
-
-    document.getElementById("nijokGameContent").innerHTML = `
-
-      ${header(
-        "Guess the Food",
-        "Identify the food and test your food knowledge."
-      )}
-
-      <div class="nijok-food-image">
-        ${item.emoji}
-      </div>
-
-      <div class="nijok-question">
-        ${item.q}
-      </div>
-
-      <div class="nijok-options">
-
-        ${item.options.map((option,i)=>`
-
-          <button
-            class="nijok-option"
-            data-index="${i}"
-          >
-            ${String.fromCharCode(65+i)}. ${option}
-          </button>
-
-        `).join("")}
-
-      </div>
-
-      <div class="nijok-message" id="nijokMessage"></div>
-
-      <button class="nijok-next" id="nijokNext" disabled>
-        Next →
-      </button>
-    `;
-
-    document.querySelectorAll(".nijok-option")
-      .forEach(btn=>{
-        btn.addEventListener("click",()=>{
-          answerGuess(
-            Number(btn.dataset.index),
-            item.answer,
-            btn
-          );
-        });
-      });
-
-    document.getElementById("nijokNext")
-      .addEventListener("click",()=>{
-        currentIndex++;
-        renderGuess();
-      });
-  }
-
-  function answerGuess(selected,correct,button){
-
-    if(answered) return;
-
-    answered = true;
-    addPlayed("guess");
-
-    document.querySelectorAll(".nijok-option")
-      .forEach((b,i)=>{
-        b.disabled = true;
-
-        if(i === correct){
-          b.classList.add("correct");
-        }
-      });
-
-    const message =
-      document.getElementById("nijokMessage");
-
-    if(selected === correct){
-
-      score += 10;
-      button.classList.add("correct");
-
-      message.textContent =
-        "✓ Correct! +10 points";
-
-    }else{
-
-      button.classList.add("wrong");
-
-      message.textContent =
-        "Keep exploring! The answer is highlighted.";
-    }
-
-    document.getElementById("nijokNext")
-      .disabled = false;
-  }
-
-
-  function renderPair(){
-
-    const shuffled = [
-      ...pairItems,
-      ...pairItems
-    ].sort(()=>Math.random()-.5);
-
-    let first = null;
-    let locked = false;
-    let matches = 0;
-
-    document.getElementById("nijokGameContent").innerHTML = `
-
-      ${header(
-        "Match the Pair",
-        "Match each food with its country."
-      )}
-
-      <div class="nijok-pair-grid">
-
-        ${shuffled.map((item,i)=>`
-
-          <button
-            class="nijok-pair"
-            data-value="${item[1]}"
-            data-index="${i}"
-          >
-            ?
-          </button>
-
-        `).join("")}
-
-      </div>
-
-      <div class="nijok-message" id="nijokMessage">
-        Find all four pairs.
-      </div>
-
-      <button class="nijok-next" id="nijokNext" disabled>
-        New Puzzle →
-      </button>
-    `;
-
-    const cards =
-      document.querySelectorAll(".nijok-pair");
-
-    cards.forEach(card=>{
-
-      card.addEventListener("click",function(){
-
-        if(
-          locked ||
-          this.classList.contains("open") ||
-          this.classList.contains("matched")
-        ) return;
-
-        this.classList.add("open");
-
-        const item =
-          pairItems.find(x=>x[1]===this.dataset.value);
-
-        this.textContent = item ? item[0] : "🍴";
-
-        if(!first){
-
-          first = this;
-
-        }else{
-
-          if(first.dataset.value === this.dataset.value){
-
-            first.classList.add("matched");
-            this.classList.add("matched");
-
-            matches++;
-            score += 10;
-
-            first = null;
-
-            if(matches === pairItems.length){
-
-              addPlayed("pair");
-
-              document.getElementById("nijokMessage")
-                .textContent =
-                "🎉 All pairs matched! +40 points";
-
-              document.getElementById("nijokNext")
-                .disabled = false;
-            }
-
-          }else{
-
-            locked = true;
-
-            setTimeout(()=>{
-
-              first.classList.remove("open");
-              this.classList.remove("open");
-
-              first.textContent = "?";
-              this.textContent = "?";
-
-              first = null;
-              locked = false;
-
-            },700);
-          }
-        }
-      });
-    });
-
-    document.getElementById("nijokNext")
-      .addEventListener("click",()=>{
-        renderPair();
-      });
-  }
-
-
-  function renderTime(){
-
-    timeLeft = 30;
-
-    document.getElementById("nijokGameContent").innerHTML = `
-
-      ${header(
-        "Time Challenge",
-        "Answer as many food questions as you can."
-      )}
-
-      <div class="nijok-timer" id="nijokTimer">
-        30
-      </div>
-
-      <div class="nijok-question" id="timeQuestion"></div>
-
-      <div class="nijok-options" id="timeOptions"></div>
-
-      <div class="nijok-message" id="timeMessage">
-        You have 30 seconds.
-      </div>
-    `;
-
-    let timeScore = 0;
-    let qIndex = 0;
-
-    function nextTimeQuestion(){
-
-      const item =
-        quizQuestions[
-          qIndex % quizQuestions.length
-        ];
-
-      document.getElementById("timeQuestion")
-        .textContent = item.q;
-
-      document.getElementById("timeOptions")
-        .innerHTML = item.options.map((o,i)=>`
-
-          <button
-            class="nijok-option"
-            data-index="${i}"
-          >
-            ${String.fromCharCode(65+i)}. ${o}
-          </button>
-
-        `).join("");
-
-      document.querySelectorAll("#timeOptions .nijok-option")
-        .forEach(btn=>{
-
-          btn.addEventListener("click",()=>{
-
-            if(Number(btn.dataset.index) === item.answer){
-
-              timeScore += 10;
-
-              document.getElementById("timeMessage")
-                .textContent =
-                "✓ Correct! +10";
-
-            }else{
-
-              document.getElementById("timeMessage")
-                .textContent =
-                "Keep going!";
-            }
-
-            qIndex++;
-            nextTimeQuestion();
-
-          });
-
-        });
-    }
-
-    nextTimeQuestion();
-
-    timer = setInterval(()=>{
-
-      timeLeft--;
-
-      document.getElementById("nijokTimer")
-        .textContent = timeLeft;
-
-      if(timeLeft <= 0){
-
-        clearInterval(timer);
-        timer = null;
-
-        addPlayed("time");
-
-        document.getElementById("nijokGameContent")
-          .innerHTML = `
-
-            <div class="nijok-result">
-
-              <div class="nijok-game-label">
-                TIME COMPLETE
-              </div>
-
-              <h3>Challenge Complete 🎉</h3>
-
-              <div class="nijok-result-score">
-                ${timeScore}
-              </div>
-
-              <p class="nijok-game-sub">
-                Points earned in this round
-              </p>
-
-              <button class="nijok-next"
-                onclick="document.querySelector('.nijok-game-close').click()">
-                Back to Games
-              </button>
-
-            </div>
-          `;
-
-      }
-
-    },1000);
-  }
-
-
-  /* =====================================================
-     CONNECT EXISTING GAME CARDS
-  ===================================================== */
-
-  function detectGame(card){
-
-    const text =
-      card.innerText.toLowerCase();
-
-    if(text.includes("match the pair")){
-      return "pair";
-    }
-
-    if(text.includes("time challenge")){
-      return "time";
-    }
-
-    if(text.includes("guess the food")){
-      return "guess";
-    }
-
-    if(
-      text.includes("food quiz") ||
-      text.includes("food around")
-    ){
-      return "quiz";
-    }
-
-    return null;
-  }
-
-  function connectCards(){
-
-    document.querySelectorAll(".game-card")
-      .forEach(card=>{
-
-        const game = detectGame(card);
-
-        if(!game) return;
-
-        const play =
-          card.querySelector(".play-now");
-
-        if(!play) return;
-
-        play.addEventListener("click",function(e){
-
-          e.preventDefault();
-
-          openGame(game);
-
-        });
-
-      });
-  }
-
-  if(document.readyState === "loading"){
-
-    document.addEventListener(
-      "DOMContentLoaded",
-      connectCards
-    );
-
-  }else{
-
-    connectCards();
-
-  }
-
-})();
-                       </script>
 </body>
 </html>
-
-
-
-
-          

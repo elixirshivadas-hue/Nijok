@@ -19651,6 +19651,209 @@ function reportQuestionBankPart24(){
 addExpandedQuestionsPart24();
 reportQuestionBankPart24();
   
+  // =====================================
+// PART 25 — QUESTION BANK CONTROLLER
+// =====================================
+
+function getQuestionBank(){
+
+  if(
+    typeof fullFoodQuestionBank === "undefined" ||
+    !Array.isArray(fullFoodQuestionBank)
+  ){
+    console.error("❌ NIJOK Question Bank not found.");
+    return [];
+  }
+
+  return fullFoodQuestionBank;
+}
+
+
+function getRandomQuestions(count){
+
+  const bank = getQuestionBank();
+
+  if(bank.length === 0){
+    return [];
+  }
+
+  const shuffled = [...bank];
+
+  for(let i = shuffled.length - 1; i > 0; i--){
+
+    const j = Math.floor(Math.random() * (i + 1));
+
+    [shuffled[i], shuffled[j]] =
+    [shuffled[j], shuffled[i]];
+  }
+
+  return shuffled.slice(
+    0,
+    Math.min(count, shuffled.length)
+  );
+}
+
+
+function getQuizQuestions(count = 20){
+
+  return getRandomQuestions(count);
+
+}
+
+
+function getQuestionById(id){
+
+  const bank = getQuestionBank();
+
+  return bank.find(function(question){
+    return question.id === id;
+  }) || null;
+
+}
+
+
+function showQuestionBankStatus(){
+
+  const bank = getQuestionBank();
+
+  console.log(
+    "🌿 NIJOK Question Bank:",
+    bank.length,
+    "questions ready."
+  );
+
+}
+
+
+showQuestionBankStatus();
+// =====================================
+// PART 26 — DAILY QUIZ SYSTEM
+// =====================================
+
+const NIJOK_DAILY_QUIZ_SIZE = 20;
+
+
+function getNijokTodayKey(){
+
+  const now = new Date();
+
+  return (
+    "nijok_daily_quiz_" +
+    now.getFullYear() + "_" +
+    (now.getMonth() + 1) + "_" +
+    now.getDate()
+  );
+
+}
+
+
+function createDailyQuiz(){
+
+  const questions =
+    getQuizQuestions(NIJOK_DAILY_QUIZ_SIZE);
+
+  if(questions.length === 0){
+
+    console.error(
+      "❌ Cannot create daily quiz."
+    );
+
+    return [];
+
+  }
+
+  localStorage.setItem(
+    getNijokTodayKey(),
+    JSON.stringify(questions)
+  );
+
+  console.log(
+    "🌿 NIJOK Daily Quiz created:",
+    questions.length,
+    "questions"
+  );
+
+  return questions;
+
+}
+
+
+function getTodayQuiz(){
+
+  const key = getNijokTodayKey();
+
+  const saved =
+    localStorage.getItem(key);
+
+  if(saved){
+
+    try{
+
+      const questions =
+        JSON.parse(saved);
+
+      if(
+        Array.isArray(questions) &&
+        questions.length > 0
+      ){
+
+        return questions;
+
+      }
+
+    }catch(error){
+
+      console.warn(
+        "⚠️ Saved quiz could not be read."
+      );
+
+    }
+
+  }
+
+  return createDailyQuiz();
+
+}
+
+
+function resetTodayQuiz(){
+
+  localStorage.removeItem(
+    getNijokTodayKey()
+  );
+
+  console.log(
+    "🔄 Today's NIJOK quiz reset."
+  );
+
+}
+
+
+function showDailyQuizStatus(){
+
+  const quiz = getTodayQuiz();
+
+  console.log(
+    "📚 Today's Quiz:",
+    quiz.length,
+    "questions"
+  );
+
+  if(quiz.length > 0){
+
+    console.log(
+      "First Question ID:",
+      quiz[0].id
+    );
+
+  }
+
+}
+
+
+showDailyQuizStatus();
+
+  
   
 </script>
   

@@ -20486,6 +20486,270 @@ renderNijokQuiz = function(){
 console.log(
   "🌿 NIJOK Batch 30 — Progress connected."
 );
+  // =====================================
+// PART 31 — ANSWER FACT SYSTEM
+// =====================================
+
+function showNijokAnswerFact(question){
+
+  const message =
+    document.getElementById(
+      "nijokMessage"
+    );
+
+  if(!message || !question){
+    return;
+  }
+
+
+  const fact =
+    question.fact || "";
+
+
+  if(!fact){
+    return;
+  }
+
+
+  const factBox =
+    document.createElement("div");
+
+
+  factBox.className =
+    "nijok-fact-box";
+
+
+  factBox.innerHTML = `
+
+    <div class="nijok-fact-title">
+      🌿 NIJOK FOOD FACT
+    </div>
+
+    <div class="nijok-fact-text">
+      ${fact}
+    </div>
+
+  `;
+
+
+  message.insertAdjacentElement(
+    "afterend",
+    factBox
+  );
+
+}
+
+
+console.log(
+  "🌿 NIJOK Batch 31 — Food Fact system ready."
+);
+  // =====================================
+// PART 32 — CONNECT ANSWER + FOOD FACT
+// =====================================
+
+const originalAnswerNijokQuiz =
+  answerNijokQuiz;
+
+
+answerNijokQuiz = function(
+  selected,
+  correct
+){
+
+  originalAnswerNijokQuiz(
+    selected,
+    correct
+  );
+
+
+  const question =
+    nijokDailyQuiz[
+      nijokQuizIndex
+    ];
+
+
+  showNijokAnswerFact(
+    question
+  );
+
+
+  refreshNijokQuizProgress();
+
+};
+
+
+console.log(
+  "🌿 NIJOK Batch 32 — Answer + Fact connected."
+);
+  // =====================================
+// PART 33 — QUIZ FINAL RESULT
+// =====================================
+
+function showNijokQuizResult(){
+
+  const total =
+    nijokDailyQuiz.length;
+
+  const correct =
+    nijokQuizCorrect || 0;
+
+  const points =
+    correct * 10;
+
+  const content =
+    document.getElementById(
+      "nijokGameContent"
+    );
+
+  if(!content){
+    return;
+  }
+
+
+  content.innerHTML = `
+
+    <div class="nijok-result">
+
+      <div class="nijok-game-label">
+        NIJOK • FOOD QUEST
+      </div>
+
+      <h2 class="nijok-game-title">
+        Quiz Complete 🎉
+      </h2>
+
+      <p class="nijok-game-sub">
+        You completed today's Food Quiz.
+      </p>
+
+
+      <div class="nijok-result-score">
+
+        <strong>
+          ${points}
+        </strong>
+
+        <span>
+          Points
+        </span>
+
+      </div>
+
+
+      <div class="nijok-result-stats">
+
+        <div>
+          <strong>
+            ${correct}
+          </strong>
+          <span>
+            Correct
+          </span>
+        </div>
+
+        <div>
+          <strong>
+            ${total}
+          </strong>
+          <span>
+            Played
+          </span>
+        </div>
+
+        <div>
+          <strong>
+            ${total - correct}
+          </strong>
+          <span>
+            Incorrect
+          </div>
+
+      </div>
+
+
+      <div class="nijok-result-message">
+
+        🌿 Keep learning.<br>
+        Every answer adds a little more food awareness.
+
+      </div>
+
+
+      <button
+        class="nijok-next"
+        id="nijokResultDone">
+
+        Done ✓
+
+      </button>
+
+    </div>
+
+  `;
+
+
+  const done =
+    document.getElementById(
+      "nijokResultDone"
+    );
+
+
+  if(done){
+
+    done.addEventListener(
+      "click",
+      closeGame
+    );
+
+  }
+
+}
+
+
+console.log(
+  "🌿 NIJOK Batch 33 — Result screen ready."
+);
+  // =====================================
+// PART 34 — CONNECT QUIZ COMPLETION
+// =====================================
+
+function finishNijokQuiz(){
+
+  showNijokQuizResult();
+
+}
+
+
+// -------------------------------------
+// NEXT QUESTION CONTROL
+// -------------------------------------
+
+const originalNextNijokQuiz =
+  nextNijokQuiz;
+
+
+nextNijokQuiz = function(){
+
+  if(
+    nijokQuizIndex >=
+    nijokDailyQuiz.length - 1
+  ){
+
+    finishNijokQuiz();
+
+    return;
+  }
+
+
+  originalNextNijokQuiz();
+
+};
+
+
+console.log(
+  "🌿 NIJOK Batch 34 — Quiz completion connected."
+);
+
   
 </script>
   

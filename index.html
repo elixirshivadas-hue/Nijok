@@ -1357,6 +1357,971 @@ document.addEventListener(
 
   }
 );
+  // =====================================
+// NIJOK FOOD QUIZ — BATCH 3
+// =====================================
+
+let foodQuizState = {
+  current: 0,
+  score: 0,
+  correct: 0,
+  answered: false,
+  questions: []
+};
+
+const foodQuizQuestions = [
+
+  {
+    q:"Which Indian food is traditionally made mainly from fermented rice and urad dal batter?",
+    options:["Idli","Samosa","Kheer","Paratha"],
+    answer:0,
+    fact:"Idli is traditionally prepared from a fermented batter commonly made with rice and urad dal."
+  },
+
+  {
+    q:"Which fruit is especially known for containing vitamin C?",
+    options:["Guava","Banana","Mango","Watermelon"],
+    answer:0,
+    fact:"Guava is a fruit that can provide a substantial amount of vitamin C."
+  },
+
+  {
+    q:"Which spice is commonly known as jeera in India?",
+    options:["Cumin","Clove","Cardamom","Saffron"],
+    answer:0,
+    fact:"Jeera is the common Indian name for cumin seeds."
+  },
+
+  {
+    q:"Which nutrient provides about 4 calories per gram?",
+    options:["Protein","Fat","Water","Fiber"],
+    answer:0,
+    fact:"Protein provides approximately 4 calories per gram."
+  },
+
+  {
+    q:"What happens to starch when it is heated with water?",
+    options:[
+      "It can gelatinize",
+      "It becomes a vitamin",
+      "It turns directly into protein",
+      "It disappears completely"
+    ],
+    answer:0,
+    fact:"Heating starch with water can cause gelatinization, changing its structure and texture."
+  },
+
+  {
+    q:"Which food is traditionally associated with Mexico?",
+    options:["Taco","Baguette","Sushi","Kimchi"],
+    answer:0,
+    fact:"Tacos are a well-known part of Mexican cuisine."
+  },
+
+  {
+    q:"Which ingredient is the main base of traditional guacamole?",
+    options:["Avocado","Potato","Coconut","Carrot"],
+    answer:0,
+    fact:"Traditional guacamole is primarily made from mashed avocado."
+  },
+
+  {
+    q:"Which grain is naturally gluten-free?",
+    options:["Rice","Wheat","Barley","Rye"],
+    answer:0,
+    fact:"Rice is naturally gluten-free, while wheat, barley and rye contain gluten proteins."
+  },
+
+  {
+    q:"Which method cooks food using hot water vapor?",
+    options:["Steaming","Roasting","Frying","Grilling"],
+    answer:0,
+    fact:"Steaming cooks food using hot water vapor."
+  },
+
+  {
+    q:"Why are ingredients listed on packaged foods?",
+    options:[
+      "To show what the product contains",
+      "To show the store's profit",
+      "To show the weather",
+      "To show the customer's age"
+    ],
+    answer:0,
+    fact:"An ingredient list tells consumers which ingredients are present in a packaged food."
+  }
+
+];
+
+function prepareFoodQuiz(){
+
+  foodQuizState = {
+
+    current:0,
+
+    score:0,
+
+    correct:0,
+
+    answered:false,
+
+    questions:shuffleArray(
+      foodQuizQuestions
+    )
+
+  };
+
+}
+
+function openFoodQuiz(){
+
+  prepareFoodQuiz();
+
+  let modal =
+    document.querySelector(
+      ".nijok-game-modal"
+    );
+
+  if(!modal){
+
+    createGameModal();
+
+    modal =
+      document.querySelector(
+        ".nijok-game-modal"
+      );
+
+  }
+
+  if(!modal) return;
+
+  modal.classList.add("show");
+
+  renderFoodQuiz();
+
+}
+
+function getCurrentFoodQuiz(){
+
+  return foodQuizState.questions[
+    foodQuizState.current
+  ];
+
+}
+
+function renderFoodQuiz(){
+
+  const modal =
+    document.querySelector(
+      ".nijok-game-modal"
+    );
+
+  if(!modal) return;
+
+  const question =
+    getCurrentFoodQuiz();
+
+  if(!question){
+
+    showFoodQuizComplete();
+
+    return;
+
+  }
+
+  foodQuizState.answered = false;
+
+  modal.innerHTML = `
+
+    <div class="nijok-game-panel">
+
+      <button
+        class="nijok-game-close"
+        onclick="closeGameModal()">
+        ×
+      </button>
+
+      <div class="quiz-top">
+
+        <span>
+          FOOD QUIZ
+        </span>
+
+        <strong>
+          ${foodQuizState.current + 1}
+          / ${foodQuizState.questions.length}
+        </strong>
+
+      </div>
+
+      <div class="quiz-score">
+        Score: ${foodQuizState.score}
+      </div>
+
+      <div class="quiz-progress">
+
+        <div
+          style="
+            width:${
+              ((foodQuizState.current + 1) /
+              foodQuizState.questions.length) * 100
+            }%;
+          ">
+        </div>
+
+      </div>
+
+      <div class="quiz-kicker">
+        THINK • CONNECT • DISCOVER
+      </div>
+
+      <h2 class="quiz-question">
+        ${escapeHTML(question.q)}
+      </h2>
+
+      <div class="quiz-options">
+
+        ${question.options.map(
+          (option,index)=>`
+
+            <button
+              class="quiz-option"
+              onclick="answerFoodQuiz(${index})">
+
+              <span>
+                ${String.fromCharCode(65 + index)}
+              </span>
+
+              ${escapeHTML(option)}
+
+            </button>
+
+          `
+        ).join("")}
+
+      </div>
+
+      <p class="quiz-hint">
+        💡 Think about what you already know
+        about food.
+      </p>
+
+      <div
+        id="foodQuizFeedback">
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+function answerFoodQuiz(selected){
+
+  if(foodQuizState.answered) return;
+
+  const question =
+    getCurrentFoodQuiz();
+
+  if(!question) return;
+
+  foodQuizState.answered = true;
+
+  const buttons =
+    document.querySelectorAll(
+      ".quiz-option"
+    );
+
+  buttons.forEach(
+    button=>{
+      button.disabled = true;
+    }
+  );
+
+  const correct =
+    selected === question.answer;
+
+  buttons.forEach(
+    (button,index)=>{
+
+      if(index === question.answer){
+
+        button.classList.add(
+          "quiz-correct"
+        );
+
+      }
+
+      if(
+        index === selected &&
+        !correct
+      ){
+
+        button.classList.add(
+          "quiz-wrong"
+        );
+
+      }
+
+    }
+  );
+
+  if(correct){
+
+    foodQuizState.correct++;
+
+    foodQuizState.score += 10;
+
+  }
+
+  const feedback =
+    document.getElementById(
+      "foodQuizFeedback"
+    );
+
+  if(feedback){
+
+    feedback.innerHTML = `
+
+      <div class="
+        quiz-result
+        ${correct ? "success" : "error"}
+      ">
+
+        <strong>
+          ${correct
+            ? "Correct! 🌿"
+            : "Keep learning! 💡"}
+        </strong>
+
+        <p>
+          ${
+            correct
+              ? "Great food knowledge."
+              : "The correct answer is " +
+                escapeHTML(
+                  question.options[
+                    question.answer
+                  ]
+                ) + "."
+          }
+        </p>
+
+      </div>
+
+      <div class="quiz-fact">
+
+        <strong>
+          Food fact
+        </strong>
+
+        <p>
+          ${escapeHTML(question.fact)}
+        </p>
+
+      </div>
+
+      <button
+        class="quiz-next"
+        onclick="nextFoodQuiz()">
+
+        ${
+          foodQuizState.current ===
+          foodQuizState.questions.length - 1
+            ? "See My Score"
+            : "Next Question →"
+        }
+
+      </button>
+
+    `;
+
+  }
+
+}
+
+function nextFoodQuiz(){
+
+  foodQuizState.current++;
+
+  if(
+    foodQuizState.current >=
+    foodQuizState.questions.length
+  ){
+
+    showFoodQuizComplete();
+
+    return;
+
+  }
+
+  renderFoodQuiz();
+
+}
+
+function showFoodQuizComplete(){
+
+  const modal =
+    document.querySelector(
+      ".nijok-game-modal"
+    );
+
+  if(!modal) return;
+
+  const total =
+    foodQuizState.questions.length;
+
+  const accuracy =
+    total
+      ? Math.round(
+          (foodQuizState.correct / total) * 100
+        )
+      : 0;
+
+  modal.innerHTML = `
+
+    <div class="nijok-game-panel quiz-complete">
+
+      <button
+        class="nijok-game-close"
+        onclick="closeGameModal()">
+        ×
+      </button>
+
+      <div class="complete-leaf">
+        🌿
+      </div>
+
+      <div class="quiz-kicker">
+        FOOD QUIZ COMPLETE
+      </div>
+
+      <h2>
+        Nice work.
+      </h2>
+
+      <p>
+        You completed today's Food Quiz.
+      </p>
+
+      <div class="complete-stats">
+
+        <div>
+          <strong>
+            ${foodQuizState.score}
+          </strong>
+          <span>Points</span>
+        </div>
+
+        <div>
+          <strong>
+            ${foodQuizState.correct}
+          </strong>
+          <span>Correct</span>
+        </div>
+
+        <div>
+          <strong>
+            ${accuracy}%
+          </strong>
+          <span>Accuracy</span>
+        </div>
+
+      </div>
+
+      <button
+        class="quiz-next"
+        onclick="closeGameModal()">
+
+        Back to NIJOK
+
+      </button>
+
+    </div>
+
+  `;
+
+}
+
+
+// =====================================
+// GAME MODAL
+// =====================================
+
+function createGameModal(){
+
+  const old =
+    document.querySelector(
+      ".nijok-game-modal"
+    );
+
+  if(old) old.remove();
+
+  const modal =
+    document.createElement("div");
+
+  modal.className =
+    "nijok-game-modal";
+
+  modal.innerHTML = `
+
+    <div class="nijok-game-panel">
+
+      <button
+        class="nijok-game-close"
+        onclick="closeGameModal()">
+        ×
+      </button>
+
+      <div id="nijokGameContent">
+      </div>
+
+    </div>
+
+  `;
+
+  document.body.appendChild(modal);
+
+  modal.addEventListener(
+    "click",
+    function(e){
+
+      if(e.target === modal){
+
+        closeGameModal();
+
+      }
+
+    }
+  );
+
+}
+
+function closeGameModal(){
+
+  const modal =
+    document.querySelector(
+      ".nijok-game-modal"
+    );
+
+  if(modal){
+
+    modal.classList.remove("show");
+
+  }
+
+}
+
+
+// =====================================
+// QUIZ STYLES
+// =====================================
+
+function addFoodQuizStyles(){
+
+  if(
+    document.getElementById(
+      "nijok-food-quiz-styles"
+    )
+  ) return;
+
+  const style =
+    document.createElement("style");
+
+  style.id =
+    "nijok-food-quiz-styles";
+
+  style.textContent = `
+
+    .nijok-game-modal{
+      position:fixed;
+      inset:0;
+      z-index:9999;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      padding:18px;
+
+      background:rgba(2,44,32,.72);
+
+      opacity:0;
+      visibility:hidden;
+
+      transition:.25s;
+    }
+
+    .nijok-game-modal.show{
+      opacity:1;
+      visibility:visible;
+    }
+
+    .nijok-game-panel{
+      width:min(620px,100%);
+
+      max-height:92vh;
+      overflow:auto;
+
+      background:var(--paper-soft);
+
+      border-radius:30px;
+
+      padding:30px;
+
+      box-shadow:var(--shadow-lg);
+
+      position:relative;
+    }
+
+    .nijok-game-close{
+      position:absolute;
+
+      top:14px;
+      right:16px;
+
+      width:38px;
+      height:38px;
+
+      border:0;
+      border-radius:50%;
+
+      background:var(--paper-dark);
+
+      color:var(--green);
+
+      font-size:25px;
+    }
+
+    .quiz-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+
+      color:var(--green);
+
+      font-size:13px;
+      font-weight:700;
+
+      margin-bottom:12px;
+    }
+
+    .quiz-score{
+      color:var(--orange);
+      font-weight:700;
+
+      margin-bottom:10px;
+    }
+
+    .quiz-progress{
+      height:7px;
+
+      background:var(--paper-dark);
+
+      border-radius:20px;
+
+      overflow:hidden;
+
+      margin-bottom:30px;
+    }
+
+    .quiz-progress div{
+      height:100%;
+
+      background:var(--green);
+
+      border-radius:20px;
+    }
+
+    .quiz-kicker{
+      color:var(--orange);
+
+      font-size:11px;
+      font-weight:700;
+
+      letter-spacing:2px;
+
+      margin-bottom:9px;
+    }
+
+    .quiz-question{
+      font-family:var(--display);
+
+      color:var(--green);
+
+      font-size:clamp(27px,5vw,38px);
+
+      line-height:1.2;
+
+      margin-bottom:25px;
+    }
+
+    .quiz-options{
+      display:grid;
+      gap:10px;
+    }
+
+    .quiz-option{
+      width:100%;
+
+      text-align:left;
+
+      border:1px solid var(--line);
+
+      background:white;
+
+      color:var(--text);
+
+      border-radius:17px;
+
+      padding:15px;
+
+      display:flex;
+      align-items:center;
+      gap:12px;
+
+      font-weight:600;
+
+      transition:.2s;
+    }
+
+    .quiz-option span{
+      width:30px;
+      height:30px;
+
+      flex:none;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      border-radius:50%;
+
+      background:var(--green-soft);
+
+      color:var(--green);
+
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .quiz-option:hover{
+      border-color:var(--green);
+      transform:translateY(-1px);
+    }
+
+    .quiz-option.quiz-correct{
+      border-color:var(--green);
+      background:var(--green-soft);
+    }
+
+    .quiz-option.quiz-wrong{
+      border-color:var(--orange);
+      background:#f8e4dc;
+    }
+
+    .quiz-hint{
+      color:var(--muted);
+
+      font-size:13px;
+
+      margin-top:18px;
+    }
+
+    .quiz-result{
+      margin-top:18px;
+
+      padding:15px;
+
+      border-radius:17px;
+
+      background:var(--green-soft);
+    }
+
+    .quiz-result.error{
+      background:#f8e4dc;
+    }
+
+    .quiz-result strong{
+      color:var(--green);
+    }
+
+    .quiz-result p{
+      margin-top:4px;
+      color:var(--muted);
+    }
+
+    .quiz-fact{
+      margin-top:12px;
+
+      padding:16px;
+
+      border-radius:17px;
+
+      background:var(--paper-dark);
+    }
+
+    .quiz-fact strong{
+      color:var(--orange);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
+
+    .quiz-fact p{
+      margin-top:5px;
+      color:var(--text);
+    }
+
+    .quiz-next{
+      width:100%;
+
+      border:0;
+
+      border-radius:50px;
+
+      padding:14px 20px;
+
+      margin-top:15px;
+
+      background:var(--green);
+
+      color:white;
+
+      font-weight:700;
+    }
+
+    .quiz-complete{
+      text-align:center;
+      padding-top:45px;
+    }
+
+    .complete-leaf{
+      font-size:50px;
+      margin-bottom:10px;
+    }
+
+    .quiz-complete h2{
+      font-family:var(--display);
+
+      color:var(--green);
+
+      font-size:40px;
+
+      margin-bottom:8px;
+    }
+
+    .quiz-complete > p{
+      color:var(--muted);
+    }
+
+    .complete-stats{
+      display:grid;
+
+      grid-template-columns:repeat(3,1fr);
+
+      gap:10px;
+
+      margin-top:25px;
+    }
+
+    .complete-stats div{
+      background:white;
+
+      border:1px solid var(--line);
+
+      border-radius:18px;
+
+      padding:17px 8px;
+    }
+
+    .complete-stats strong{
+      display:block;
+
+      font-size:25px;
+
+      color:var(--green);
+    }
+
+    .complete-stats span{
+      color:var(--muted);
+
+      font-size:12px;
+    }
+
+    @media(max-width:500px){
+
+      .nijok-game-panel{
+        padding:24px 18px;
+        border-radius:25px;
+      }
+
+      .complete-stats{
+        grid-template-columns:1fr;
+      }
+
+    }
+
+  `;
+
+  document.head.appendChild(style);
+
+}
+
+addFoodQuizStyles();
+
+
+// =====================================
+// CONNECT FOOD QUIZ
+// =====================================
+
+function connectFoodQuizCards(){
+
+  document.querySelectorAll(
+    ".game-card"
+  ).forEach(card=>{
+
+    const text =
+      card.textContent.toLowerCase();
+
+    if(
+      text.includes("food quiz") ||
+      text.includes("quiz")
+    ){
+
+      card.addEventListener(
+        "click",
+        function(e){
+
+          if(
+            e.target.closest("button")
+          ) return;
+
+          openFoodQuiz();
+
+        }
+      );
+
+    }
+
+  });
+
+}
+
+if(
+  document.readyState === "loading"
+){
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    connectFoodQuizCards
+  );
+
+}else{
+
+  connectFoodQuizCards();
+
+    }
 </script>
 
 </body>

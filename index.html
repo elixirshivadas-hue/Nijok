@@ -3582,6 +3582,1619 @@ function openGame(game){
   );
 
 }
+  // =====================================
+// NIJOK BATCH 5 — TIME CHALLENGE
+// =====================================
+
+const TIME_LIMIT = 60;
+
+const timeChallengeQuestions = [
+
+  {
+    q:"Which vitamin is commonly associated with citrus fruits?",
+    options:["Vitamin C","Vitamin D","Vitamin B12","Vitamin K"],
+    answer:0,
+    fact:"Citrus fruits such as oranges are well known sources of vitamin C."
+  },
+
+  {
+    q:"Which grain is used to make traditional popcorn?",
+    options:["Corn","Rice","Wheat","Barley"],
+    answer:0,
+    fact:"Popcorn is made from a special variety of corn whose kernels can pop when heated."
+  },
+
+  {
+    q:"Which spice is commonly called haldi in India?",
+    options:["Turmeric","Cumin","Clove","Cardamom"],
+    answer:0,
+    fact:"Haldi is the common Hindi name for turmeric."
+  },
+
+  {
+    q:"Which food is made by fermenting soybeans with a mold culture?",
+    options:["Tempeh","Butter","Bread","Paneer"],
+    answer:0,
+    fact:"Tempeh is traditionally made from fermented soybeans."
+  },
+
+  {
+    q:"Which cooking method uses dry heat inside an oven?",
+    options:["Roasting","Boiling","Steaming","Poaching"],
+    answer:0,
+    fact:"Roasting cooks food using dry heat, commonly inside an oven."
+  },
+
+  {
+    q:"Which ingredient is traditionally used to make tofu?",
+    options:["Soybeans","Wheat","Corn","Potatoes"],
+    answer:0,
+    fact:"Tofu is made from soybeans and is sometimes called bean curd."
+  },
+
+  {
+    q:"What does a food barcode mainly help identify?",
+    options:["The product","The recipe","The taste","The cooking temperature"],
+    answer:0,
+    fact:"Barcodes help identify products and support systems such as retail scanning and inventory."
+  },
+
+  {
+    q:"Which mineral is important for normal bone structure?",
+    options:["Calcium","Sodium","Chloride","Iodine"],
+    answer:0,
+    fact:"Calcium is an important mineral for bones and teeth."
+  },
+
+  {
+    q:"Which process helps bread dough rise?",
+    options:["Yeast fermentation","Freezing","Grinding","Boiling"],
+    answer:0,
+    fact:"Yeast fermentation produces carbon dioxide that can make bread dough rise."
+  },
+
+  {
+    q:"Which food is made primarily from chickpeas and tahini?",
+    options:["Hummus","Pesto","Sushi","Kimchi"],
+    answer:0,
+    fact:"Hummus traditionally combines cooked chickpeas with tahini and other ingredients."
+  },
+
+  {
+    q:"Which fruit is botanically classified as a berry?",
+    options:["Banana","Apple","Peach","Cherry"],
+    answer:0,
+    fact:"Botanically, a banana is classified as a berry."
+  },
+
+  {
+    q:"Which leafy vegetable is especially associated with iron?",
+    options:["Spinach","Cucumber","Onion","Garlic"],
+    answer:0,
+    fact:"Spinach contains iron, although the amount absorbed by the body depends on several dietary factors."
+  },
+
+  {
+    q:"What is the main purpose of refrigeration for many foods?",
+    options:[
+      "To slow microbial growth",
+      "To increase sugar",
+      "To remove all water",
+      "To create vitamins"
+    ],
+    answer:0,
+    fact:"Lower temperatures can slow the growth of many microorganisms and help preserve food."
+  },
+
+  {
+    q:"Which traditional Japanese tea is made from finely ground green tea leaves?",
+    options:["Matcha","Masala chai","Earl Grey","Rooibos"],
+    answer:0,
+    fact:"Matcha is a powdered green tea traditionally prepared from specially grown and processed tea leaves."
+  },
+
+  {
+    q:"Which cooking method uses hot oil to cook food?",
+    options:["Frying","Steaming","Boiling","Poaching"],
+    answer:0,
+    fact:"Frying cooks food in hot oil or another cooking fat."
+  },
+
+  {
+    q:"Which food is traditionally made from fermented milk?",
+    options:["Yogurt","Rice","Bread","Pasta"],
+    answer:0,
+    fact:"Yogurt is produced by fermenting milk with suitable bacterial cultures."
+  },
+
+  {
+    q:"Which part of a cacao plant provides the beans used to make chocolate?",
+    options:["Cacao fruit","Root","Leaf","Flower stem"],
+    answer:0,
+    fact:"Cacao beans are found inside the fruit, commonly called cacao pods."
+  },
+
+  {
+    q:"Which ingredient gives chili peppers their characteristic heat?",
+    options:["Capsaicin","Curcumin","Lactose","Pectin"],
+    answer:0,
+    fact:"Capsaicin is the compound primarily responsible for the heat of chili peppers."
+  },
+
+  {
+    q:"Which food is traditionally associated with Punjab and commonly made with mustard greens?",
+    options:["Sarson da saag","Sushi","Paella","Hummus"],
+    answer:0,
+    fact:"Sarson da saag is a traditional Punjabi preparation made primarily with mustard greens."
+  },
+
+  {
+    q:"What should you generally do before handling food?",
+    options:[
+      "Wash your hands",
+      "Touch your phone",
+      "Taste raw ingredients",
+      "Leave utensils unwashed"
+    ],
+    answer:0,
+    fact:"Washing hands before preparing or eating food is an important food-safety practice."
+  }
+
+];
+
+let timeChallengeState = {
+
+  current:0,
+
+  score:0,
+
+  correct:0,
+
+  answered:0,
+
+  timeLeft:TIME_LIMIT,
+
+  running:false,
+
+  finished:false,
+
+  questions:[]
+
+};
+
+let timeChallengeTimer = null;
+
+function prepareTimeChallenge(){
+
+  if(timeChallengeTimer){
+
+    clearInterval(
+      timeChallengeTimer
+    );
+
+    timeChallengeTimer = null;
+
+  }
+
+  timeChallengeState = {
+
+    current:0,
+
+    score:0,
+
+    correct:0,
+
+    answered:0,
+
+    timeLeft:TIME_LIMIT,
+
+    running:false,
+
+    finished:false,
+
+    questions:shuffleArray(
+      timeChallengeQuestions
+    )
+
+  };
+
+}
+
+function openTimeChallenge(){
+
+  prepareTimeChallenge();
+
+  createGameModal();
+
+  const modal =
+    document.querySelector(
+      ".nijok-game-modal"
+    );
+
+  if(!modal) return;
+
+  modal.classList.add("show");
+
+  renderTimeChallenge();
+
+}
+
+function getCurrentTimeQuestion(){
+
+  return timeChallengeState.questions[
+    timeChallengeState.current
+  ];
+
+}
+
+function renderTimeChallenge(){
+
+  const modal =
+    document.querySelector(
+      ".nijok-game-modal"
+    );
+
+  if(!modal) return;
+
+  const question =
+    getCurrentTimeQuestion();
+
+  if(!question){
+
+    finishTimeChallenge();
+
+    return;
+
+  }
+
+  modal.innerHTML = `
+
+    <div class="nijok-game-panel time-panel">
+
+      <button
+        class="nijok-game-close"
+        onclick="closeGameModal()">
+        ×
+      </button>
+
+      <div class="time-top">
+
+        <div>
+          <span class="time-label">
+            TIME CHALLENGE
+          </span>
+
+          <strong>
+            ${timeChallengeState.current + 1}
+            /
+            ${timeChallengeState.questions.length}
+          </strong>
+        </div>
+
+        <div class="time-clock">
+          ${timeChallengeState.timeLeft}s
+        </div>
+
+      </div>
+
+      <div class="time-score">
+        Score: ${timeChallengeState.score}
+      </div>
+
+      <div class="time-progress">
+
+        <div
+          style="
+            width:${
+              (timeChallengeState.timeLeft /
+              TIME_LIMIT) * 100
+            }%;
+          ">
+        </div>
+
+      </div>
+
+      <div class="quiz-kicker">
+        THINK FAST • LEARN FASTER
+      </div>
+
+      <h2 class="quiz-question">
+        ${escapeHTML(question.q)}
+      </h2>
+
+      <div class="guess-options">
+
+        ${question.options.map(
+          (option,index)=>`
+
+            <button
+              class="guess-option time-option"
+              onclick="answerTimeChallenge(${index})">
+
+              <span>
+                ${String.fromCharCode(65 + index)}
+              </span>
+
+              ${escapeHTML(option)}
+
+            </button>
+
+          `
+        ).join("")}
+
+      </div>
+
+      <p class="guess-hint">
+        ⏱️ You have one minute. Stay curious.
+      </p>
+
+      <div id="timeFeedback"></div>
+
+      <button
+        class="time-start"
+        id="timeStartButton"
+        onclick="startTimeChallenge()">
+
+        Start Challenge
+
+      </button>
+
+    </div>
+
+  `;
+
+}
+
+function startTimeChallenge(){
+
+  if(
+    timeChallengeState.running ||
+    timeChallengeState.finished
+  ) return;
+
+  timeChallengeState.running = true;
+
+  const startButton =
+    document.getElementById(
+      "timeStartButton"
+    );
+
+  if(startButton){
+
+    startButton.remove();
+
+  }
+
+  timeChallengeTimer =
+    setInterval(
+      function(){
+
+        if(
+          !timeChallengeState.running ||
+          timeChallengeState.finished
+        ){
+
+          return;
+
+        }
+
+        timeChallengeState.timeLeft--;
+
+        updateTimeChallengeUI();
+
+        if(
+          timeChallengeState.timeLeft <= 0
+        ){
+
+          finishTimeChallenge();
+
+        }
+
+      },
+      1000
+    );
+
+}
+
+function updateTimeChallengeUI(){
+
+  const clock =
+    document.querySelector(
+      ".time-clock"
+    );
+
+  if(clock){
+
+    clock.textContent =
+      timeChallengeState.timeLeft + "s";
+
+  }
+
+  const progress =
+    document.querySelector(
+      ".time-progress div"
+    );
+
+  if(progress){
+
+    progress.style.width =
+      (
+        timeChallengeState.timeLeft /
+        TIME_LIMIT
+      ) * 100 + "%";
+
+  }
+
+}
+
+function answerTimeChallenge(selected){
+
+  if(
+    !timeChallengeState.running ||
+    timeChallengeState.finished
+  ) return;
+
+  const question =
+    getCurrentTimeQuestion();
+
+  if(!question) return;
+
+  const buttons =
+    document.querySelectorAll(
+      ".time-option"
+    );
+
+  buttons.forEach(
+    button=>{
+      button.disabled = true;
+    }
+  );
+
+  const correct =
+    selected === question.answer;
+
+  timeChallengeState.answered++;
+
+  if(correct){
+
+    timeChallengeState.correct++;
+
+    timeChallengeState.score += 10;
+
+  }
+
+  buttons.forEach(
+    (button,index)=>{
+
+      if(index === question.answer){
+
+        button.classList.add(
+          "guess-correct"
+        );
+
+      }
+
+      if(
+        index === selected &&
+        !correct
+      ){
+
+        button.classList.add(
+          "guess-wrong"
+        );
+
+      }
+
+    }
+  );
+
+  const feedback =
+    document.getElementById(
+      "timeFeedback"
+    );
+
+  if(feedback){
+
+    feedback.innerHTML = `
+
+      <div class="
+        guess-result
+        ${correct ? "success" : "error"}
+      ">
+
+        <strong>
+          ${
+            correct
+              ? "Correct! ⚡"
+              : "Keep going! 💡"
+          }
+        </strong>
+
+        <p>
+          ${
+            correct
+              ? "+10 points"
+              : "Correct answer: " +
+                escapeHTML(
+                  question.options[
+                    question.answer
+                  ]
+                )
+          }
+        </p>
+
+      </div>
+
+      <div class="guess-fact">
+
+        <strong>
+          Quick fact
+        </strong>
+
+        <p>
+          ${escapeHTML(question.fact)}
+        </p>
+
+      </div>
+
+    `;
+
+  }
+
+  setTimeout(
+    function(){
+
+      if(
+        timeChallengeState.running &&
+        !timeChallengeState.finished
+      ){
+
+        nextTimeChallenge();
+
+      }
+
+    },
+    500
+  );
+
+}
+
+function nextTimeChallenge(){
+
+  if(
+    timeChallengeState.finished
+  ) return;
+
+  timeChallengeState.current++;
+
+  if(
+    timeChallengeState.current >=
+    timeChallengeState.questions.length
+  ){
+
+    timeChallengeState.current = 0;
+
+  }
+
+  renderTimeChallenge();
+
+}
+
+function finishTimeChallenge(){
+
+  if(timeChallengeState.finished) return;
+
+  timeChallengeState.finished = true;
+
+  timeChallengeState.running = false;
+
+  if(timeChallengeTimer){
+
+    clearInterval(
+      timeChallengeTimer
+    );
+
+    timeChallengeTimer = null;
+
+  }
+
+  showTimeChallengeComplete();
+
+}
+
+function showTimeChallengeComplete(){
+
+  const modal =
+    document.querySelector(
+      ".nijok-game-modal"
+    );
+
+  if(!modal) return;
+
+  const accuracy =
+    timeChallengeState.answered
+      ? Math.round(
+          (
+            timeChallengeState.correct /
+            timeChallengeState.answered
+          ) * 100
+        )
+      : 0;
+
+  modal.innerHTML = `
+
+    <div class="nijok-game-panel quiz-complete">
+
+      <button
+        class="nijok-game-close"
+        onclick="closeGameModal()">
+        ×
+      </button>
+
+      <div class="complete-leaf">
+        ⏱️
+      </div>
+
+      <div class="quiz-kicker">
+        TIME CHALLENGE COMPLETE
+      </div>
+
+      <h2>
+        Time well spent.
+      </h2>
+
+      <p>
+        Fast thinking. Food learning.
+      </p>
+
+      <div class="complete-stats">
+
+        <div>
+          <strong>
+            ${timeChallengeState.score}
+          </strong>
+          <span>Points</span>
+        </div>
+
+        <div>
+          <strong>
+            ${timeChallengeState.correct}
+          </strong>
+          <span>Correct</span>
+        </div>
+
+        <div>
+          <strong>
+            ${accuracy}%
+          </strong>
+          <span>Accuracy</span>
+        </div>
+
+      </div>
+
+      <button
+        class="quiz-next"
+        onclick="restartTimeChallenge()">
+
+        Play Again
+
+      </button>
+
+      <button
+        class="time-back"
+        onclick="closeGameModal()">
+
+        Back to NIJOK
+
+      </button>
+
+    </div>
+
+  `;
+
+}
+
+function restartTimeChallenge(){
+
+  prepareTimeChallenge();
+
+  renderTimeChallenge();
+
+}
+
+
+// =====================================
+// TIME CHALLENGE STYLES
+// =====================================
+
+function addTimeChallengeStyles(){
+
+  if(
+    document.getElementById(
+      "nijok-time-styles"
+    )
+  ) return;
+
+  const style =
+    document.createElement("style");
+
+  style.id =
+    "nijok-time-styles";
+
+  style.textContent = `
+
+    .time-top{
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:space-between;
+
+      gap:15px;
+
+      margin-bottom:8px;
+
+    }
+
+    .time-top > div:first-child{
+
+      display:flex;
+
+      flex-direction:column;
+
+      gap:4px;
+
+      color:var(--green);
+
+      font-size:12px;
+
+      font-weight:700;
+
+    }
+
+    .time-label{
+
+      color:var(--orange);
+
+      letter-spacing:1.5px;
+
+      font-size:11px;
+
+    }
+
+    .time-clock{
+
+      min-width:72px;
+
+      text-align:center;
+
+      padding:9px 12px;
+
+      border-radius:50px;
+
+      background:var(--green);
+
+      color:white;
+
+      font-weight:700;
+
+      font-size:17px;
+
+    }
+
+    .time-score{
+
+      color:var(--orange);
+
+      font-weight:700;
+
+      margin-bottom:10px;
+
+    }
+
+    .time-progress{
+
+      height:7px;
+
+      border-radius:20px;
+
+      overflow:hidden;
+
+      background:var(--paper-dark);
+
+      margin-bottom:28px;
+
+    }
+
+    .time-progress div{
+
+      height:100%;
+
+      width:100%;
+
+      background:var(--orange);
+
+      transition:width 1s linear;
+
+    }
+
+    .time-start{
+
+      width:100%;
+
+      margin-top:18px;
+
+      padding:13px 20px;
+
+      border:0;
+
+      border-radius:50px;
+
+      background:var(--gold);
+
+      color:var(--green-deep);
+
+      font-weight:700;
+
+    }
+
+    .time-back{
+
+      width:100%;
+
+      margin-top:9px;
+
+      padding:13px 20px;
+
+      border:1px solid var(--line);
+
+      border-radius:50px;
+
+      background:transparent;
+
+      color:var(--green);
+
+      font-weight:700;
+
+    }
+
+    @media(max-width:500px){
+
+      .time-clock{
+
+        min-width:65px;
+
+        font-size:15px;
+
+      }
+
+    }
+
+  `;
+
+  document.head.appendChild(style);
+
+}
+
+addTimeChallengeStyles();
+
+
+// =====================================
+// GAME CARD CONNECTION
+// =====================================
+
+function connectTimeChallengeCard(){
+
+  document.querySelectorAll(
+    ".game-card"
+  ).forEach(card=>{
+
+    const text =
+      card.textContent.toLowerCase();
+
+    if(
+      text.includes("time challenge")
+    ){
+
+      card.addEventListener(
+        "click",
+        function(e){
+
+          if(
+            e.target.closest("button")
+          ) return;
+
+          openTimeChallenge();
+
+        }
+      );
+
+    }
+
+  });
+
+}
+
+if(
+  document.readyState === "loading"
+){
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    connectTimeChallengeCard
+  );
+
+}else{
+
+  connectTimeChallengeCard();
+
+}
+  // =====================================
+// NIJOK BATCH 6 — PLAYGROUND SECTION
+// =====================================
+
+function createPlaygroundSection(){
+
+  if(document.getElementById("nijok-playground")){
+    return;
+  }
+
+  const playSection = document.getElementById("play");
+
+  if(!playSection){
+    return;
+  }
+
+  playSection.innerHTML = `
+
+    <div class="playground-wrap">
+
+      <div class="playground-heading">
+
+        <span class="section-kicker">
+          THE NIJOK PLAYGROUND
+        </span>
+
+        <h2>
+          Think. Connect. Discover.
+          <span>Food.</span>
+        </h2>
+
+        <p>
+          Play with food knowledge, discover something new,
+          and keep your curiosity alive.
+        </p>
+
+      </div>
+
+
+      <div class="game-grid" id="nijok-playground">
+
+
+        <article
+          class="game-card"
+          data-game="guess">
+
+          <div class="game-image">
+
+            <img
+              src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1000&q=85"
+              alt="Pizza">
+
+            <span class="game-badge">
+              PLAY
+            </span>
+
+          </div>
+
+          <div class="game-content">
+
+            <span class="game-number">
+              01
+            </span>
+
+            <h3>
+              Guess the Food
+            </h3>
+
+            <p>
+              Look, think and identify the food.
+            </p>
+
+            <button
+              type="button"
+              onclick="openGame('guess')">
+
+              Play Now →
+
+            </button>
+
+          </div>
+
+        </article>
+
+
+        <article
+          class="game-card"
+          data-game="quiz">
+
+          <div class="game-image">
+
+            <img
+              src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=1000&q=85"
+              alt="Fresh food">
+
+            <span class="game-badge">
+              QUIZ
+            </span>
+
+          </div>
+
+          <div class="game-content">
+
+            <span class="game-number">
+              02
+            </span>
+
+            <h3>
+              Food Quiz
+            </h3>
+
+            <p>
+              Test what you know about food.
+            </p>
+
+            <button
+              type="button"
+              onclick="openGame('quiz')">
+
+              Start Quiz →
+
+            </button>
+
+          </div>
+
+        </article>
+
+
+        <article
+          class="game-card"
+          data-game="pair">
+
+          <div class="game-image">
+
+            <img
+              src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1000&q=85"
+              alt="Healthy food">
+
+            <span class="game-badge">
+              MATCH
+            </span>
+
+          </div>
+
+          <div class="game-content">
+
+            <span class="game-number">
+              03
+            </span>
+
+            <h3>
+              Match the Pair
+            </h3>
+
+            <p>
+              Connect foods with their origins and ingredients.
+            </p>
+
+            <button
+              type="button"
+              onclick="openGame('pair')">
+
+              Match Now →
+
+            </button>
+
+          </div>
+
+        </article>
+
+
+        <article
+          class="game-card"
+          data-game="time">
+
+          <div class="game-image">
+
+            <img
+              src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=1000&q=85"
+              alt="Food ingredients">
+
+            <span class="game-badge">
+              60 SEC
+            </span>
+
+          </div>
+
+          <div class="game-content">
+
+            <span class="game-number">
+              04
+            </span>
+
+            <h3>
+              Time Challenge
+            </h3>
+
+            <p>
+              How much can you discover before time runs out?
+            </p>
+
+            <button
+              type="button"
+              onclick="openGame('time')">
+
+              Beat the Clock →
+
+            </button>
+
+          </div>
+
+        </article>
+
+
+      </div>
+
+
+      <div class="playground-note">
+
+        <span>🌿</span>
+
+        <p>
+          Every game teaches something.
+          Every answer adds a little more food knowledge.
+        </p>
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  addPlaygroundSectionStyles();
+
+}
+
+
+// =====================================
+// PLAYGROUND STYLES
+// =====================================
+
+function addPlaygroundSectionStyles(){
+
+  if(
+    document.getElementById(
+      "nijok-playground-section-styles"
+    )
+  ){
+    return;
+  }
+
+  const style =
+    document.createElement("style");
+
+  style.id =
+    "nijok-playground-section-styles";
+
+  style.textContent = `
+
+    #play{
+
+      padding:90px 20px;
+
+      background:var(--paper-soft);
+
+      scroll-margin-top:90px;
+
+    }
+
+    .playground-wrap{
+
+      max-width:1180px;
+
+      margin:0 auto;
+
+    }
+
+    .playground-heading{
+
+      max-width:760px;
+
+      margin:0 auto 48px;
+
+      text-align:center;
+
+    }
+
+    .section-kicker{
+
+      display:inline-block;
+
+      margin-bottom:12px;
+
+      color:var(--orange);
+
+      font-size:12px;
+
+      font-weight:800;
+
+      letter-spacing:2px;
+
+    }
+
+    .playground-heading h2{
+
+      margin:0;
+
+      color:var(--green-deep);
+
+      font-family:var(--font-display);
+
+      font-size:clamp(38px,6vw,66px);
+
+      line-height:1.02;
+
+    }
+
+    .playground-heading h2 span{
+
+      color:var(--orange);
+
+      font-style:italic;
+
+    }
+
+    .playground-heading p{
+
+      max-width:620px;
+
+      margin:18px auto 0;
+
+      color:var(--muted);
+
+      font-size:16px;
+
+      line-height:1.7;
+
+    }
+
+    .game-grid{
+
+      display:grid;
+
+      grid-template-columns:
+        repeat(4,1fr);
+
+      gap:20px;
+
+    }
+
+    .game-card{
+
+      overflow:hidden;
+
+      border:1px solid var(--line);
+
+      border-radius:24px;
+
+      background:var(--white);
+
+      box-shadow:
+        0 12px 35px rgba(22,63,50,.07);
+
+      transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+
+    }
+
+    .game-card:hover{
+
+      transform:translateY(-7px);
+
+      box-shadow:
+        0 20px 45px rgba(22,63,50,.13);
+
+    }
+
+    .game-image{
+
+      position:relative;
+
+      height:205px;
+
+      overflow:hidden;
+
+      background:var(--paper-dark);
+
+    }
+
+    .game-image img{
+
+      width:100%;
+
+      height:100%;
+
+      object-fit:cover;
+
+      display:block;
+
+      transition:
+        transform .5s ease;
+
+    }
+
+    .game-card:hover .game-image img{
+
+      transform:scale(1.06);
+
+    }
+
+    .game-badge{
+
+      position:absolute;
+
+      top:14px;
+
+      left:14px;
+
+      padding:7px 11px;
+
+      border-radius:30px;
+
+      background:var(--paper);
+
+      color:var(--green);
+
+      font-size:10px;
+
+      font-weight:800;
+
+      letter-spacing:1px;
+
+      box-shadow:
+        0 5px 15px rgba(0,0,0,.12);
+
+    }
+
+    .game-content{
+
+      padding:22px;
+
+    }
+
+    .game-number{
+
+      display:block;
+
+      margin-bottom:7px;
+
+      color:var(--sage);
+
+      font-size:11px;
+
+      font-weight:800;
+
+      letter-spacing:1.5px;
+
+    }
+
+    .game-content h3{
+
+      margin:0;
+
+      color:var(--green);
+
+      font-family:var(--font-display);
+
+      font-size:28px;
+
+      line-height:1.1;
+
+    }
+
+    .game-content p{
+
+      min-height:50px;
+
+      margin:12px 0 18px;
+
+      color:var(--muted);
+
+      font-size:14px;
+
+      line-height:1.55;
+
+    }
+
+    .game-content button{
+
+      width:100%;
+
+      padding:12px 16px;
+
+      border:1px solid var(--green);
+
+      border-radius:40px;
+
+      background:transparent;
+
+      color:var(--green);
+
+      font-weight:800;
+
+      cursor:pointer;
+
+      transition:
+        background .2s ease,
+        color .2s ease;
+
+    }
+
+    .game-content button:hover{
+
+      background:var(--green);
+
+      color:white;
+
+    }
+
+    .playground-note{
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:center;
+
+      gap:12px;
+
+      max-width:700px;
+
+      margin:42px auto 0;
+
+      padding:18px 24px;
+
+      border:1px solid var(--line);
+
+      border-radius:50px;
+
+      background:var(--paper);
+
+      text-align:center;
+
+    }
+
+    .playground-note span{
+
+      font-size:20px;
+
+    }
+
+    .playground-note p{
+
+      margin:0;
+
+      color:var(--green);
+
+      font-family:var(--font-display);
+
+      font-size:18px;
+
+    }
+
+
+    @media(max-width:1000px){
+
+      .game-grid{
+
+        grid-template-columns:
+          repeat(2,1fr);
+
+      }
+
+    }
+
+
+    @media(max-width:600px){
+
+      #play{
+
+        padding:65px 16px;
+
+      }
+
+      .playground-heading{
+
+        margin-bottom:32px;
+
+      }
+
+      .playground-heading h2{
+
+        font-size:42px;
+
+      }
+
+      .playground-heading p{
+
+        font-size:14px;
+
+      }
+
+      .game-grid{
+
+        grid-template-columns:1fr;
+
+        gap:18px;
+
+      }
+
+      .game-image{
+
+        height:230px;
+
+      }
+
+      .game-content{
+
+        padding:20px;
+
+      }
+
+      .game-content h3{
+
+        font-size:30px;
+
+      }
+
+      .playground-note{
+
+        border-radius:22px;
+
+        padding:17px;
+
+      }
+
+    }
+
+  `;
+
+  document.head.appendChild(style);
+
+}
+
+
+// =====================================
+// START PLAYGROUND
+// =====================================
+
+if(
+  document.readyState === "loading"
+){
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    createPlaygroundSection
+  );
+
+}else{
+
+  createPlaygroundSection();
+
+}
   
 </script>
 

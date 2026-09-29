@@ -2322,6 +2322,1267 @@ if(
   connectFoodQuizCards();
 
     }
+// =====================================
+// NIJOK BATCH 4 — PLAYGROUND
+// GUESS THE FOOD + MATCH THE PAIR
+// =====================================
+
+const guessFoodQuestions = [
+
+  {
+    image:"https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1000&q=85",
+    q:"Look at the dish. What food is this?",
+    options:["Pizza","Sushi","Biryani","Tacos"],
+    answer:0,
+    fact:"Pizza is traditionally associated with Italian cuisine and has many regional styles."
+  },
+
+  {
+    image:"https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=1000&q=85",
+    q:"Which food is shown here?",
+    options:["Sushi","Pasta","Taco","Khichdi"],
+    answer:0,
+    fact:"Sushi is a Japanese food tradition built around seasoned rice and various toppings or fillings."
+  },
+
+  {
+    image:"https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?auto=format&fit=crop&w=1000&q=85",
+    q:"Can you identify this popular food?",
+    options:["Tacos","Pizza","Baguette","Sushi"],
+    answer:0,
+    fact:"Tacos are a well-known part of Mexican cuisine and can contain many different fillings."
+  },
+
+  {
+    image:"https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1000&q=85",
+    q:"Which Indian snack is shown?",
+    options:["Samosa","Idli","Dosa","Kheer"],
+    answer:0,
+    fact:"Samosas are popular savory pastries commonly filled with ingredients such as potato and spices."
+  },
+
+  {
+    image:"https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1000&q=85",
+    q:"What kind of food is this?",
+    options:["Salad","Biryani","Noodles","Paratha"],
+    answer:0,
+    fact:"Salads can combine vegetables, fruits, grains, proteins and dressings in many different ways."
+  },
+
+  {
+    image:"https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1000&q=85",
+    q:"Which food category best matches this bowl?",
+    options:["Soup","Pizza","Sushi","Bread"],
+    answer:0,
+    fact:"Soups are liquid-based dishes that can contain vegetables, grains, legumes, meat or other ingredients."
+  },
+
+  {
+    image:"https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=1000&q=85",
+    q:"What Italian-style food is shown?",
+    options:["Pasta","Taco","Kimchi","Dhokla"],
+    answer:0,
+    fact:"Pasta is a major part of Italian culinary tradition and comes in many shapes and preparations."
+  },
+
+  {
+    image:"https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=1000&q=85",
+    q:"Which sweet Indian food does this resemble?",
+    options:["Gulab jamun","Sushi","Taco","Hummus"],
+    answer:0,
+    fact:"Gulab jamun is a popular South Asian sweet traditionally made from milk-solid-based dough."
+  },
+
+  {
+    image:"https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=1000&q=85",
+    q:"Which food is commonly made with chickpeas and tahini?",
+    options:["Hummus","Pizza","Sushi","Kimchi"],
+    answer:0,
+    fact:"Traditional hummus commonly combines chickpeas and tahini with ingredients such as lemon and garlic."
+  },
+
+  {
+    image:"https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1000&q=85",
+    q:"Which food is commonly associated with South Asian cuisine?",
+    options:["Samosa","Croissant","Sushi","Taco"],
+    answer:0,
+    fact:"Samosas are widely enjoyed across South Asia and have many regional variations."
+  }
+
+];
+
+let guessFoodState = {
+
+  current:0,
+
+  score:0,
+
+  correct:0,
+
+  answered:false,
+
+  questions:[]
+
+};
+
+function prepareGuessFood(){
+
+  guessFoodState = {
+
+    current:0,
+
+    score:0,
+
+    correct:0,
+
+    answered:false,
+
+    questions:shuffleArray(
+      guessFoodQuestions
+    )
+
+  };
+
+}
+
+function openGuessFood(){
+
+  prepareGuessFood();
+
+  createGameModal();
+
+  const modal =
+    document.querySelector(
+      ".nijok-game-modal"
+    );
+
+  if(!modal) return;
+
+  modal.classList.add("show");
+
+  renderGuessFood();
+
+}
+
+function getCurrentGuessFood(){
+
+  return guessFoodState.questions[
+    guessFoodState.current
+  ];
+
+}
+
+function renderGuessFood(){
+
+  const modal =
+    document.querySelector(
+      ".nijok-game-modal"
+    );
+
+  if(!modal) return;
+
+  const question =
+    getCurrentGuessFood();
+
+  if(!question){
+
+    showGuessFoodComplete();
+
+    return;
+
+  }
+
+  guessFoodState.answered = false;
+
+  modal.innerHTML = `
+
+    <div class="nijok-game-panel guess-panel">
+
+      <button
+        class="nijok-game-close"
+        onclick="closeGameModal()">
+        ×
+      </button>
+
+      <div class="guess-top">
+
+        <span>GUESS THE FOOD</span>
+
+        <strong>
+          ${guessFoodState.current + 1}
+          /
+          ${guessFoodState.questions.length}
+        </strong>
+
+      </div>
+
+      <div class="guess-score">
+        Score: ${guessFoodState.score}
+      </div>
+
+      <img
+        class="guess-image"
+        src="${question.image}"
+        alt="Food discovery">
+
+      <div class="guess-sticker">
+        CAN YOU GUESS?
+      </div>
+
+      <div class="guess-kicker">
+        LOOK • THINK • DISCOVER
+      </div>
+
+      <h2 class="guess-question">
+        ${escapeHTML(question.q)}
+      </h2>
+
+      <div class="guess-options">
+
+        ${question.options.map(
+          (option,index)=>`
+
+            <button
+              class="guess-option"
+              onclick="answerGuessFood(${index})">
+
+              <span>
+                ${String.fromCharCode(65 + index)}
+              </span>
+
+              ${escapeHTML(option)}
+
+            </button>
+
+          `
+        ).join("")}
+
+      </div>
+
+      <p class="guess-hint">
+        💡 Look closely before choosing.
+      </p>
+
+      <div id="guessFeedback"></div>
+
+    </div>
+
+  `;
+
+}
+
+function answerGuessFood(selected){
+
+  if(guessFoodState.answered) return;
+
+  const question =
+    getCurrentGuessFood();
+
+  if(!question) return;
+
+  guessFoodState.answered = true;
+
+  const buttons =
+    document.querySelectorAll(
+      ".guess-option"
+    );
+
+  buttons.forEach(
+    button=>{
+      button.disabled = true;
+    }
+  );
+
+  const correct =
+    selected === question.answer;
+
+  buttons.forEach(
+    (button,index)=>{
+
+      if(index === question.answer){
+
+        button.classList.add(
+          "guess-correct"
+        );
+
+      }
+
+      if(
+        index === selected &&
+        !correct
+      ){
+
+        button.classList.add(
+          "guess-wrong"
+        );
+
+      }
+
+    }
+  );
+
+  if(correct){
+
+    guessFoodState.correct++;
+
+    guessFoodState.score += 10;
+
+  }
+
+  const feedback =
+    document.getElementById(
+      "guessFeedback"
+    );
+
+  if(feedback){
+
+    feedback.innerHTML = `
+
+      <div class="
+        guess-result
+        ${correct ? "success" : "error"}
+      ">
+
+        <strong>
+          ${
+            correct
+              ? "You got it! 🌿"
+              : "Nice try! 💡"
+          }
+        </strong>
+
+        <p>
+          ${
+            correct
+              ? "Your food knowledge is growing."
+              : "The correct answer is " +
+                escapeHTML(
+                  question.options[
+                    question.answer
+                  ]
+                ) + "."
+          }
+        </p>
+
+      </div>
+
+      <div class="guess-fact">
+
+        <strong>
+          Food fact
+        </strong>
+
+        <p>
+          ${escapeHTML(question.fact)}
+        </p>
+
+      </div>
+
+      <button
+        class="quiz-next"
+        onclick="nextGuessFood()">
+
+        ${
+          guessFoodState.current ===
+          guessFoodState.questions.length - 1
+            ? "See My Score"
+            : "Next Food →"
+        }
+
+      </button>
+
+    `;
+
+  }
+
+}
+
+function nextGuessFood(){
+
+  guessFoodState.current++;
+
+  if(
+    guessFoodState.current >=
+    guessFoodState.questions.length
+  ){
+
+    showGuessFoodComplete();
+
+    return;
+
+  }
+
+  renderGuessFood();
+
+}
+
+function showGuessFoodComplete(){
+
+  const modal =
+    document.querySelector(
+      ".nijok-game-modal"
+    );
+
+  if(!modal) return;
+
+  const total =
+    guessFoodState.questions.length;
+
+  const accuracy =
+    total
+      ? Math.round(
+          (guessFoodState.correct / total) * 100
+        )
+      : 0;
+
+  modal.innerHTML = `
+
+    <div class="nijok-game-panel quiz-complete">
+
+      <button
+        class="nijok-game-close"
+        onclick="closeGameModal()">
+        ×
+      </button>
+
+      <div class="complete-leaf">
+        🌿
+      </div>
+
+      <div class="quiz-kicker">
+        GUESS THE FOOD COMPLETE
+      </div>
+
+      <h2>
+        Food detective!
+      </h2>
+
+      <p>
+        You discovered ${total} foods.
+      </p>
+
+      <div class="complete-stats">
+
+        <div>
+          <strong>
+            ${guessFoodState.score}
+          </strong>
+          <span>Points</span>
+        </div>
+
+        <div>
+          <strong>
+            ${guessFoodState.correct}
+          </strong>
+          <span>Correct</span>
+        </div>
+
+        <div>
+          <strong>
+            ${accuracy}%
+          </strong>
+          <span>Accuracy</span>
+        </div>
+
+      </div>
+
+      <button
+        class="quiz-next"
+        onclick="closeGameModal()">
+
+        Back to NIJOK
+
+      </button>
+
+    </div>
+
+  `;
+
+}
+
+
+// =====================================
+// MATCH THE PAIR
+// =====================================
+
+const matchPairQuestions = [
+
+  {
+    left:"Sushi",
+    right:"Japan",
+    fact:"Sushi is strongly associated with Japanese culinary tradition."
+  },
+
+  {
+    left:"Pizza",
+    right:"Italy",
+    fact:"Pizza has deep roots in Italian cuisine, especially Naples."
+  },
+
+  {
+    left:"Taco",
+    right:"Mexico",
+    fact:"Tacos are an important part of Mexican food culture."
+  },
+
+  {
+    left:"Kimchi",
+    right:"South Korea",
+    fact:"Kimchi is a traditional Korean fermented food."
+  },
+
+  {
+    left:"Baguette",
+    right:"France",
+    fact:"The baguette is strongly associated with French baking culture."
+  },
+
+  {
+    left:"Paella",
+    right:"Spain",
+    fact:"Paella is a famous dish associated with Spain, particularly Valencia."
+  },
+
+  {
+    left:"Matcha",
+    right:"Japan",
+    fact:"Matcha is finely ground green tea traditionally used in Japan."
+  },
+
+  {
+    left:"Guacamole",
+    right:"Avocado",
+    fact:"Avocado is the main ingredient in traditional guacamole."
+  },
+
+  {
+    left:"Hummus",
+    right:"Chickpeas",
+    fact:"Chickpeas are the main legume used in traditional hummus."
+  },
+
+  {
+    left:"Chocolate",
+    right:"Cacao",
+    fact:"Chocolate is made using products derived from cacao beans."
+  }
+
+];
+
+let matchPairState = {
+
+  current:0,
+
+  score:0,
+
+  correct:0,
+
+  selected:null,
+
+  answered:false,
+
+  questions:[]
+
+};
+
+function prepareMatchPair(){
+
+  matchPairState = {
+
+    current:0,
+
+    score:0,
+
+    correct:0,
+
+    selected:null,
+
+    answered:false,
+
+    questions:shuffleArray(
+      matchPairQuestions
+    )
+
+  };
+
+}
+
+function openMatchPair(){
+
+  prepareMatchPair();
+
+  createGameModal();
+
+  const modal =
+    document.querySelector(
+      ".nijok-game-modal"
+    );
+
+  if(!modal) return;
+
+  modal.classList.add("show");
+
+  renderMatchPair();
+
+}
+
+function renderMatchPair(){
+
+  const modal =
+    document.querySelector(
+      ".nijok-game-modal"
+    );
+
+  if(!modal) return;
+
+  const question =
+    matchPairState.questions[
+      matchPairState.current
+    ];
+
+  if(!question){
+
+    showMatchPairComplete();
+
+    return;
+
+  }
+
+  matchPairState.answered = false;
+  matchPairState.selected = null;
+
+  const rightOptions =
+    shuffleArray(
+      matchPairQuestions
+        .map(item=>item.right)
+    );
+
+  modal.innerHTML = `
+
+    <div class="nijok-game-panel match-panel">
+
+      <button
+        class="nijok-game-close"
+        onclick="closeGameModal()">
+        ×
+      </button>
+
+      <div class="guess-top">
+
+        <span>MATCH THE PAIR</span>
+
+        <strong>
+          ${matchPairState.current + 1}
+          /
+          ${matchPairState.questions.length}
+        </strong>
+
+      </div>
+
+      <div class="guess-score">
+        Score: ${matchPairState.score}
+      </div>
+
+      <div class="match-kicker">
+        CONNECT FOOD WITH ITS CLUE
+      </div>
+
+      <h2 class="guess-question">
+        Match this food:
+      </h2>
+
+      <div class="match-food">
+        🌿 ${escapeHTML(question.left)}
+      </div>
+
+      <div class="match-grid">
+
+        ${rightOptions.map(
+          option=>`
+
+            <button
+              class="match-option"
+              onclick="
+                selectMatchPair(
+                  this,
+                  '${escapeHTML(option)}'
+                )">
+
+              ${escapeHTML(option)}
+
+            </button>
+
+          `
+        ).join("")}
+
+      </div>
+
+      <p class="guess-hint">
+        💡 Think about origin or main ingredient.
+      </p>
+
+      <div id="matchFeedback"></div>
+
+    </div>
+
+  `;
+
+}
+
+function selectMatchPair(button,value){
+
+  if(matchPairState.answered) return;
+
+  const question =
+    matchPairState.questions[
+      matchPairState.current
+    ];
+
+  const buttons =
+    document.querySelectorAll(
+      ".match-option"
+    );
+
+  buttons.forEach(
+    item=>{
+      item.disabled = true;
+    }
+  );
+
+  const correct =
+    value === question.right;
+
+  matchPairState.answered = true;
+
+  if(correct){
+
+    matchPairState.correct++;
+
+    matchPairState.score += 10;
+
+    button.classList.add(
+      "match-correct"
+    );
+
+  }else{
+
+    button.classList.add(
+      "match-wrong"
+    );
+
+    buttons.forEach(
+      item=>{
+
+        if(
+          item.textContent.trim() ===
+          question.right
+        ){
+
+          item.classList.add(
+            "match-correct"
+          );
+
+        }
+
+      }
+    );
+
+  }
+
+  const feedback =
+    document.getElementById(
+      "matchFeedback"
+    );
+
+  if(feedback){
+
+    feedback.innerHTML = `
+
+      <div class="
+        guess-result
+        ${correct ? "success" : "error"}
+      ">
+
+        <strong>
+          ${
+            correct
+              ? "Perfect match! 🌿"
+              : "Keep discovering! 💡"
+          }
+        </strong>
+
+        <p>
+          The pair is
+          <strong>
+            ${escapeHTML(question.left)}
+            →
+            ${escapeHTML(question.right)}
+          </strong>
+        </p>
+
+      </div>
+
+      <div class="guess-fact">
+
+        <strong>
+          Food fact
+        </strong>
+
+        <p>
+          ${escapeHTML(question.fact)}
+        </p>
+
+      </div>
+
+      <button
+        class="quiz-next"
+        onclick="nextMatchPair()">
+
+        ${
+          matchPairState.current ===
+          matchPairState.questions.length - 1
+            ? "See My Score"
+            : "Next Pair →"
+        }
+
+      </button>
+
+    `;
+
+  }
+
+}
+
+function nextMatchPair(){
+
+  matchPairState.current++;
+
+  if(
+    matchPairState.current >=
+    matchPairState.questions.length
+  ){
+
+    showMatchPairComplete();
+
+    return;
+
+  }
+
+  renderMatchPair();
+
+}
+
+function showMatchPairComplete(){
+
+  const modal =
+    document.querySelector(
+      ".nijok-game-modal"
+    );
+
+  if(!modal) return;
+
+  const total =
+    matchPairState.questions.length;
+
+  const accuracy =
+    total
+      ? Math.round(
+          (matchPairState.correct / total) * 100
+        )
+      : 0;
+
+  modal.innerHTML = `
+
+    <div class="nijok-game-panel quiz-complete">
+
+      <button
+        class="nijok-game-close"
+        onclick="closeGameModal()">
+        ×
+      </button>
+
+      <div class="complete-leaf">
+        🔗
+      </div>
+
+      <div class="quiz-kicker">
+        MATCH COMPLETE
+      </div>
+
+      <h2>
+        Connections made.
+      </h2>
+
+      <p>
+        Every food has a story.
+      </p>
+
+      <div class="complete-stats">
+
+        <div>
+          <strong>
+            ${matchPairState.score}
+          </strong>
+          <span>Points</span>
+        </div>
+
+        <div>
+          <strong>
+            ${matchPairState.correct}
+          </strong>
+          <span>Correct</span>
+        </div>
+
+        <div>
+          <strong>
+            ${accuracy}%
+          </strong>
+          <span>Accuracy</span>
+        </div>
+
+      </div>
+
+      <button
+        class="quiz-next"
+        onclick="closeGameModal()">
+
+        Back to NIJOK
+
+      </button>
+
+    </div>
+
+  `;
+
+}
+
+
+// =====================================
+// PLAYGROUND STYLES
+// =====================================
+
+function addPlaygroundStyles(){
+
+  if(
+    document.getElementById(
+      "nijok-playground-styles"
+    )
+  ) return;
+
+  const style =
+    document.createElement("style");
+
+  style.id =
+    "nijok-playground-styles";
+
+  style.textContent = `
+
+    .guess-panel{
+      overflow:hidden;
+    }
+
+    .guess-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+
+      color:var(--green);
+
+      font-size:12px;
+      font-weight:700;
+
+      margin-bottom:8px;
+    }
+
+    .guess-score{
+      color:var(--orange);
+
+      font-weight:700;
+
+      margin-bottom:16px;
+    }
+
+    .guess-image{
+      width:100%;
+      height:320px;
+
+      object-fit:cover;
+
+      border-radius:24px;
+
+      margin-bottom:20px;
+    }
+
+    .guess-sticker{
+      display:inline-block;
+
+      padding:7px 14px;
+
+      background:var(--gold);
+
+      color:var(--green-deep);
+
+      border-radius:50px;
+
+      font-family:var(--hand);
+
+      font-size:19px;
+      font-weight:700;
+
+      transform:rotate(-3deg);
+
+      margin-bottom:14px;
+    }
+
+    .guess-kicker,
+    .match-kicker{
+      color:var(--orange);
+
+      font-size:11px;
+
+      font-weight:700;
+
+      letter-spacing:2px;
+
+      margin-bottom:8px;
+    }
+
+    .guess-question{
+      font-family:var(--display);
+
+      color:var(--green);
+
+      font-size:32px;
+
+      line-height:1.2;
+
+      margin-bottom:22px;
+    }
+
+    .guess-options,
+    .match-grid{
+      display:grid;
+
+      grid-template-columns:1fr 1fr;
+
+      gap:10px;
+    }
+
+    .guess-option,
+    .match-option{
+
+      border:1px solid var(--line);
+
+      background:white;
+
+      color:var(--text);
+
+      border-radius:16px;
+
+      padding:14px;
+
+      text-align:left;
+
+      font-weight:600;
+
+      transition:.2s;
+
+    }
+
+    .guess-option span{
+
+      display:inline-flex;
+
+      width:27px;
+      height:27px;
+
+      align-items:center;
+      justify-content:center;
+
+      border-radius:50%;
+
+      background:var(--green-soft);
+
+      color:var(--green);
+
+      margin-right:8px;
+
+      font-size:12px;
+
+    }
+
+    .guess-option:hover,
+    .match-option:hover{
+
+      border-color:var(--green);
+
+      transform:translateY(-1px);
+
+    }
+
+    .guess-correct,
+    .match-correct{
+
+      background:var(--green-soft)!important;
+
+      border-color:var(--green)!important;
+
+    }
+
+    .guess-wrong,
+    .match-wrong{
+
+      background:#f8e4dc!important;
+
+      border-color:var(--orange)!important;
+
+    }
+
+    .guess-hint{
+
+      color:var(--muted);
+
+      font-size:13px;
+
+      margin-top:16px;
+
+    }
+
+    .guess-result{
+
+      margin-top:16px;
+
+      padding:14px;
+
+      border-radius:16px;
+
+      background:var(--green-soft);
+
+    }
+
+    .guess-result.error{
+      background:#f8e4dc;
+    }
+
+    .guess-result p{
+      color:var(--muted);
+      margin-top:4px;
+    }
+
+    .guess-fact{
+
+      margin-top:10px;
+
+      padding:15px;
+
+      border-radius:16px;
+
+      background:var(--paper-dark);
+
+    }
+
+    .guess-fact strong{
+
+      color:var(--orange);
+
+      font-size:11px;
+
+      text-transform:uppercase;
+
+      letter-spacing:1px;
+
+    }
+
+    .guess-fact p{
+
+      margin-top:5px;
+
+      color:var(--text);
+
+    }
+
+    .match-food{
+
+      padding:20px;
+
+      margin-bottom:18px;
+
+      border-radius:20px;
+
+      background:var(--green);
+
+      color:white;
+
+      text-align:center;
+
+      font-family:var(--display);
+
+      font-size:27px;
+
+    }
+
+    @media(max-width:520px){
+
+      .guess-image{
+        height:260px;
+      }
+
+      .guess-options,
+      .match-grid{
+        grid-template-columns:1fr;
+      }
+
+      .guess-question{
+        font-size:28px;
+      }
+
+    }
+
+  `;
+
+  document.head.appendChild(style);
+
+}
+
+addPlaygroundStyles();
+
+
+// =====================================
+// FINAL GAME ROUTER
+// =====================================
+
+function openGame(game){
+
+  if(game === "guess"){
+
+    openGuessFood();
+
+    return;
+
+  }
+
+  if(game === "quiz"){
+
+    openFoodQuiz();
+
+    return;
+
+  }
+
+  if(game === "pair" || game === "match"){
+
+    openMatchPair();
+
+    return;
+
+  }
+
+  alert(
+    "This NIJOK game is coming soon. 🌿"
+  );
+
+}
+  
 </script>
 
 </body>

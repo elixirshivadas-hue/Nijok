@@ -7133,6 +7133,547 @@ function startNIJOKProfile(){
 }
 
 startNIJOKProfile();
+  /* =========================================
+   NIJOK LEADERBOARD — BATCH 10 PART 1
+   ========================================= */
+
+const NIJOK_LEADERBOARD_KEY =
+  "NIJOK_LEADERBOARD_V1";
+
+const nijokDemoPlayers = [
+  {
+    name:"Food Explorer",
+    score:920,
+    streak:18
+  },
+  {
+    name:"Curious Kitchen",
+    score:850,
+    streak:14
+  },
+  {
+    name:"Taste Detective",
+    score:780,
+    streak:12
+  },
+  {
+    name:"Food Learner",
+    score:710,
+    streak:10
+  },
+  {
+    name:"Daily Discoverer",
+    score:650,
+    streak:8
+  }
+];
+
+function loadNIJOKLeaderboard(){
+
+  try{
+
+    return JSON.parse(
+      localStorage.getItem(
+        NIJOK_LEADERBOARD_KEY
+      )
+    ) || [];
+
+  }catch(e){
+
+    return [];
+
+  }
+
+}
+
+function saveNIJOKLeaderboard(players){
+
+  localStorage.setItem(
+    NIJOK_LEADERBOARD_KEY,
+    JSON.stringify(players)
+  );
+
+}
+
+function getCurrentPlayer(){
+
+  const profile =
+    getNIJOKProfile();
+
+  if(!profile.name) return null;
+
+  return {
+    name:profile.name,
+    score:getNIJOKScore(),
+    streak:getNIJOKStreak()
+  };
+
+}
+
+function buildNIJOKLeaderboard(){
+
+  const saved =
+    loadNIJOKLeaderboard();
+
+  const players = [
+    ...nijokDemoPlayers,
+    ...saved
+  ];
+
+  const current =
+    getCurrentPlayer();
+
+  if(current){
+
+    players.push(current);
+
+  }
+
+  return players
+    .sort((a,b) => b.score - a.score)
+    .slice(0,10);
+
+}
+
+function getMyLeaderboardPosition(){
+
+  const current =
+    getCurrentPlayer();
+
+  if(!current) return null;
+
+  const all = [
+    ...nijokDemoPlayers,
+    current
+  ];
+
+  all.sort(
+    (a,b) => b.score - a.score
+  );
+
+  return all.findIndex(
+    player =>
+      player.name === current.name &&
+      player.score === current.score
+  ) + 1;
+
+}
+  /* =========================================
+   NIJOK LEADERBOARD — BATCH 10 PART 2
+   ========================================= */
+
+function createLeaderboardSection(){
+
+  const community =
+    document.getElementById("community");
+
+  if(!community) return;
+
+  const old =
+    document.getElementById(
+      "nijok-leaderboard"
+    );
+
+  if(old) old.remove();
+
+  const section =
+    document.createElement("section");
+
+  section.id =
+    "nijok-leaderboard";
+
+  section.className =
+    "nijok-leaderboard-section";
+
+  section.innerHTML = `
+
+    <div class="leaderboard-heading">
+
+      <span class="section-kicker">
+        NIJOK LEADERBOARD
+      </span>
+
+      <h2>
+        Learn together.
+        <span>Grow together.</span>
+      </h2>
+
+      <p>
+        See how the NIJOK community
+        is doing on its food-learning journey.
+      </p>
+
+    </div>
+
+    <div class="leaderboard-card">
+
+      <div class="leaderboard-top">
+
+        <div>
+          <span>TOP EXPLORERS</span>
+          <h3>Today's Leaders</h3>
+        </div>
+
+        <div class="leaderboard-trophy">
+          🏆
+        </div>
+
+      </div>
+
+      <div
+        id="nijok-leaderboard-list">
+      </div>
+
+      <div
+        id="nijok-my-position">
+      </div>
+
+    </div>
+
+  `;
+
+  community.appendChild(section);
+
+  renderNIJOKLeaderboard();
+
+  addLeaderboardStyles();
+
+}
+  /* =========================================
+   NIJOK LEADERBOARD — BATCH 10 PART 3
+   ========================================= */
+
+function renderNIJOKLeaderboard(){
+
+  const list =
+    document.getElementById(
+      "nijok-leaderboard-list"
+    );
+
+  const position =
+    document.getElementById(
+      "nijok-my-position"
+    );
+
+  if(!list) return;
+
+  const players =
+    buildNIJOKLeaderboard();
+
+  list.innerHTML =
+    players.map((player,index) => {
+
+      const rank = index + 1;
+
+      let medal = "";
+
+      if(rank === 1) medal = "🥇";
+      if(rank === 2) medal = "🥈";
+      if(rank === 3) medal = "🥉";
+
+      return `
+
+        <div class="leaderboard-row">
+
+          <div class="leaderboard-rank">
+            ${medal || rank}
+          </div>
+
+          <div class="leaderboard-avatar">
+            ${escapeHTML(
+              player.name
+                .charAt(0)
+                .toUpperCase()
+            )}
+          </div>
+
+          <div class="leaderboard-name">
+
+            <strong>
+              ${escapeHTML(player.name)}
+            </strong>
+
+            <small>
+              🔥 ${player.streak} day streak
+            </small>
+
+          </div>
+
+          <div class="leaderboard-score">
+            <strong>
+              ${player.score}
+            </strong>
+
+            <span>
+              points
+            </span>
+          </div>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+  if(position){
+
+    const myPosition =
+      getMyLeaderboardPosition();
+
+    if(myPosition){
+
+      position.innerHTML = `
+        <div class="my-position">
+          Your current position:
+          <strong>#${myPosition}</strong>
+        </div>
+      `;
+
+    }else{
+
+      position.innerHTML = "";
+
+    }
+
+  }
+
+}
+  /* =========================================
+   NIJOK LEADERBOARD — BATCH 10 PART 4
+   DESIGN + MOBILE
+   ========================================= */
+
+function addLeaderboardStyles(){
+
+  if(document.getElementById(
+    "nijok-leaderboard-styles"
+  )) return;
+
+  const style =
+    document.createElement("style");
+
+  style.id =
+    "nijok-leaderboard-styles";
+
+  style.textContent = `
+
+    .nijok-leaderboard-section{
+      max-width:900px;
+      margin:0 auto;
+      padding:70px 24px 90px;
+    }
+
+    .leaderboard-heading{
+      text-align:center;
+      margin-bottom:35px;
+    }
+
+    .leaderboard-heading .section-kicker{
+      color:var(--orange);
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:2px;
+    }
+
+    .leaderboard-heading h2{
+      margin:14px 0;
+      color:var(--green);
+      font-family:var(--font-display);
+      font-size:clamp(38px,6vw,62px);
+      line-height:1;
+    }
+
+    .leaderboard-heading h2 span{
+      display:block;
+      color:var(--orange);
+      font-family:var(--font-script);
+      font-weight:500;
+    }
+
+    .leaderboard-heading p{
+      max-width:560px;
+      margin:auto;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .leaderboard-card{
+      padding:28px;
+      border-radius:28px;
+      background:var(--white);
+      border:1px solid var(--line);
+      box-shadow:0 20px 50px rgba(4,59,43,.10);
+    }
+
+    .leaderboard-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:20px;
+    }
+
+    .leaderboard-top span{
+      color:var(--orange);
+      font-size:10px;
+      font-weight:800;
+      letter-spacing:1.5px;
+    }
+
+    .leaderboard-top h3{
+      margin:5px 0 0;
+      color:var(--green);
+      font-family:var(--font-display);
+      font-size:30px;
+    }
+
+    .leaderboard-trophy{
+      font-size:38px;
+    }
+
+    .leaderboard-row{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:14px 8px;
+      border-bottom:1px solid var(--line);
+    }
+
+    .leaderboard-rank{
+      width:32px;
+      text-align:center;
+      color:var(--green);
+      font-weight:800;
+    }
+
+    .leaderboard-avatar{
+      width:42px;
+      height:42px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      background:var(--green-soft);
+      color:var(--green);
+      font-weight:800;
+    }
+
+    .leaderboard-name{
+      flex:1;
+      min-width:0;
+    }
+
+    .leaderboard-name strong{
+      display:block;
+      color:var(--green);
+    }
+
+    .leaderboard-name small{
+      color:var(--muted);
+      font-size:10px;
+    }
+
+    .leaderboard-score{
+      text-align:right;
+    }
+
+    .leaderboard-score strong{
+      display:block;
+      color:var(--green);
+      font-size:20px;
+    }
+
+    .leaderboard-score span{
+      color:var(--muted);
+      font-size:9px;
+    }
+
+    .my-position{
+      margin-top:20px;
+      padding:14px;
+      border-radius:15px;
+      background:var(--green-soft);
+      color:var(--green);
+      text-align:center;
+      font-size:13px;
+    }
+
+    .my-position strong{
+      margin-left:5px;
+      font-size:18px;
+    }
+
+    @media(max-width:600px){
+
+      .nijok-leaderboard-section{
+        padding:55px 17px 70px;
+      }
+
+      .leaderboard-card{
+        padding:20px 14px;
+        border-radius:22px;
+      }
+
+      .leaderboard-row{
+        gap:8px;
+        padding:13px 3px;
+      }
+
+      .leaderboard-avatar{
+        width:38px;
+        height:38px;
+      }
+
+      .leaderboard-name strong{
+        font-size:14px;
+      }
+
+      .leaderboard-score strong{
+        font-size:18px;
+      }
+
+    }
+
+  `;
+
+  document.head.appendChild(style);
+
+}
+  /* =========================================
+   NIJOK LEADERBOARD — BATCH 10 PART 5
+   STARTUP CONNECTION
+   ========================================= */
+
+function initNIJOKLeaderboard(){
+
+  createLeaderboardSection();
+
+}
+
+
+/* Refresh leaderboard after score changes */
+
+function refreshNIJOKLeaderboard(){
+
+  renderNIJOKLeaderboard();
+
+}
+
+
+/* Start leaderboard */
+
+if(
+  document.readyState === "loading"
+){
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    initNIJOKLeaderboard
+  );
+
+}else{
+
+  initNIJOKLeaderboard();
+
+}
 </script>
 
 </body>

@@ -20788,6 +20788,136 @@ console.log(
 
   
 </script>
-  
+  /* =====================================
+   NIJOK BATCH 36 — EDITORIAL DESIGN
+   ===================================== */
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(231,238,216,.8), transparent 32%),
+    var(--cream);
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  width:420px;
+  height:420px;
+  right:-150px;
+  top:-130px;
+  background:var(--sage);
+  border-radius:70% 30% 60% 40%;
+  opacity:.7;
+  z-index:0;
+}
+
+.hero-content,
+.hero-visual{
+  position:relative;
+  z-index:1;
+}
+
+.hero-title{
+  font-family:var(--display);
+  color:var(--forest);
+  letter-spacing:-1.5px;
+}
+
+.hero-title span{
+  color:var(--terracotta);
+}
+
+.hero-btn{
+  border-radius:18px 28px 18px 28px;
+  box-shadow:0 10px 25px rgba(6,79,61,.12);
+}
+
+.hero-visual{
+  padding:20px;
+}
+
+.hero-main-image{
+  border-radius:32px 55px 32px 55px;
+  box-shadow:0 24px 60px rgba(6,79,61,.18);
+  transform:rotate(1.5deg);
+}
+
+.food-sticker{
+  border-radius:50% 40% 55% 45%;
+  background:var(--yellow);
+  color:var(--forest);
+  box-shadow:0 12px 30px rgba(0,0,0,.10);
+}
+
+.hero-caption{
+  background:var(--cream);
+  border-radius:18px 30px 18px 30px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.brand-strip{
+  background:var(--forest);
+  color:var(--cream);
+  letter-spacing:2px;
+}
+
+.promise-card{
+  background:rgba(255,255,255,.72);
+  border-radius:28px 45px 28px 45px;
+  border:1px solid rgba(6,79,61,.08);
+  box-shadow:0 14px 35px rgba(6,79,61,.08);
+}
+
+.promise-card:nth-child(2){
+  background:var(--yellow);
+}
+
+.promise-card:nth-child(3){
+  background:var(--sage);
+}
+
+.promise-number{
+  color:var(--terracotta);
+}
+
+@media(max-width:850px){
+  .hero{
+    overflow:hidden;
+  }
+
+  .hero-content{
+    padding-bottom:10px;
+  }
+
+  .hero-visual{
+    margin-top:20px;
+  }
+}
+
+@media(max-width:480px){
+  .hero-title{
+    font-size:clamp(48px,15vw,70px);
+    line-height:.95;
+  }
+
+  .hero-main-image{
+    transform:none;
+    border-radius:28px 42px 28px 42px;
+  }
+
+  .hero-actions{
+    gap:10px;
+  }
+
+  .hero-btn{
+    width:100%;
+  }
+
+  .promise-card{
+    border-radius:24px 36px 24px 36px;
+  }
+}
 </body>
 </html>

@@ -7674,7 +7674,2797 @@ if(
   initNIJOKLeaderboard();
 
 }
-</script>
+  /* =========================================
+   NIJOK HOME DASHBOARD — BATCH 11 PART 1
+   ========================================= */
 
+function createHomeDashboard(){
+
+  const hero =
+    document.querySelector(".hero");
+
+  if(!hero) return;
+
+  if(document.getElementById(
+    "nijok-home-dashboard"
+  )) return;
+
+  const dashboard =
+    document.createElement("section");
+
+  dashboard.id =
+    "nijok-home-dashboard";
+
+  dashboard.className =
+    "nijok-home-dashboard";
+
+  dashboard.innerHTML = `
+
+    <div class="dashboard-heading">
+
+      <span class="section-kicker">
+        YOUR FOOD JOURNEY
+      </span>
+
+      <h2>
+        Today on
+        <span>NIJOK.</span>
+      </h2>
+
+      <p>
+        Learn something new,
+        play a little,
+        and keep discovering.
+      </p>
+
+    </div>
+
+    <div class="dashboard-grid">
+
+      <article class="dashboard-card progress-card">
+
+        <div class="dashboard-icon">
+          🎯
+        </div>
+
+        <div class="dashboard-content">
+
+          <span>DAILY PROGRESS</span>
+
+          <h3 id="dashboard-progress">
+            0 / 20
+          </h3>
+
+          <div class="dashboard-progress-bar">
+
+            <div
+              id="dashboard-progress-fill">
+            </div>
+
+          </div>
+
+          <p>
+            Today's food questions
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <article class="dashboard-card score-card">
+
+        <div class="dashboard-icon">
+          ⭐
+        </div>
+
+        <div class="dashboard-content">
+
+          <span>YOUR SCORE</span>
+
+          <h3 id="dashboard-score">
+            0
+          </h3>
+
+          <p>
+            Keep learning and improving
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <article class="dashboard-card streak-card">
+
+        <div class="dashboard-icon">
+          🔥
+        </div>
+
+        <div class="dashboard-content">
+
+          <span>STREAK</span>
+
+          <h3 id="dashboard-streak">
+            0 days
+          </h3>
+
+          <p>
+            Come back tomorrow
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <article class="dashboard-card best-card">
+
+        <div class="dashboard-icon">
+          🏆
+        </div>
+
+        <div class="dashboard-content">
+
+          <span>BEST SCORE</span>
+
+          <h3 id="dashboard-best">
+            0
+          </h3>
+
+          <p>
+            Your personal record
+          </p>
+
+        </div>
+
+      </article>
+
+    </div>
+
+
+    <div class="dashboard-actions">
+
+      <button
+        onclick="scrollToLearn()">
+
+        🌿 Today's Food Fact
+
+      </button>
+
+      <button
+        onclick="scrollToPlay()">
+
+        🎮 Play a Game
+
+      </button>
+
+      <button
+        onclick="document.getElementById(
+          'community'
+        ).scrollIntoView({
+          behavior:'smooth'
+        })">
+
+        💬 Community
+
+      </button>
+
+    </div>
+
+  `;
+
+  hero.insertAdjacentElement(
+    "afterend",
+    dashboard
+  );
+
+  updateHomeDashboard();
+
+}
+
+
+/* =========================================
+   DASHBOARD DATA
+   ========================================= */
+
+function updateHomeDashboard(){
+
+  const progress =
+    getDailyProgress();
+
+  const completed =
+    progress.completed || 0;
+
+  const total =
+    progress.total || DAILY_LIMIT;
+
+  const score =
+    getNIJOKScore();
+
+  const streak =
+    getNIJOKStreak();
+
+  const best =
+    getNIJOKBestScore();
+
+
+  const progressText =
+    document.getElementById(
+      "dashboard-progress"
+    );
+
+  const progressFill =
+    document.getElementById(
+      "dashboard-progress-fill"
+    );
+
+  const scoreBox =
+    document.getElementById(
+      "dashboard-score"
+    );
+
+  const streakBox =
+    document.getElementById(
+      "dashboard-streak"
+    );
+
+  const bestBox =
+    document.getElementById(
+      "dashboard-best"
+    );
+
+
+  if(progressText){
+
+    progressText.textContent =
+      `${completed} / ${total}`;
+
+  }
+
+
+  if(progressFill){
+
+    const percentage =
+      total > 0
+      ? Math.min(
+          100,
+          Math.round(
+            (completed / total) * 100
+          )
+        )
+      : 0;
+
+    progressFill.style.width =
+      percentage + "%";
+
+  }
+
+
+  if(scoreBox){
+
+    scoreBox.textContent =
+      score;
+
+  }
+
+
+  if(streakBox){
+
+    streakBox.textContent =
+      `${streak} days`;
+
+  }
+
+
+  if(bestBox){
+
+    bestBox.textContent =
+      best;
+
+  }
+
+}
+
+
+/* =========================================
+   DASHBOARD STARTUP
+   ========================================= */
+
+function initHomeDashboard(){
+
+  createHomeDashboard();
+
+}
+
+if(
+  document.readyState === "loading"
+){
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    initHomeDashboard
+  );
+
+}else{
+
+  initHomeDashboard();
+
+}
+  /* =========================================
+   NIJOK HOME DASHBOARD — BATCH 11 PART 2
+   DESIGN + MOBILE
+   ========================================= */
+
+function addHomeDashboardStyles(){
+
+  if(document.getElementById(
+    "nijok-dashboard-styles"
+  )) return;
+
+  const style =
+    document.createElement("style");
+
+  style.id =
+    "nijok-dashboard-styles";
+
+  style.textContent = `
+
+    .nijok-home-dashboard{
+      max-width:1180px;
+      margin:0 auto;
+      padding:85px 24px 90px;
+    }
+
+    .dashboard-heading{
+      max-width:720px;
+      margin:0 auto 42px;
+      text-align:center;
+    }
+
+    .dashboard-heading
+    .section-kicker{
+      color:var(--orange);
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:2px;
+    }
+
+    .dashboard-heading h2{
+      margin:14px 0;
+      color:var(--green);
+      font-family:var(--font-display);
+      font-size:clamp(42px,6vw,68px);
+      line-height:1;
+    }
+
+    .dashboard-heading h2 span{
+      color:var(--orange);
+      font-family:var(--font-script);
+      font-weight:500;
+    }
+
+    .dashboard-heading p{
+      max-width:560px;
+      margin:auto;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+
+    /* DASHBOARD GRID */
+
+    .dashboard-grid{
+      display:grid;
+      grid-template-columns:
+        repeat(4,1fr);
+      gap:15px;
+    }
+
+    .dashboard-card{
+      position:relative;
+      overflow:hidden;
+      min-height:190px;
+      padding:24px 20px;
+      border:1px solid var(--line);
+      border-radius:24px;
+      background:var(--white);
+      box-shadow:
+        0 15px 40px
+        rgba(4,59,43,.07);
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+    }
+
+    .dashboard-card:hover{
+      transform:translateY(-4px);
+      box-shadow:
+        0 22px 45px
+        rgba(4,59,43,.12);
+    }
+
+    .dashboard-card::after{
+      content:"";
+      position:absolute;
+      width:100px;
+      height:100px;
+      right:-45px;
+      bottom:-45px;
+      border-radius:50%;
+      background:var(--green-soft);
+      opacity:.7;
+    }
+
+    .dashboard-icon{
+      position:relative;
+      z-index:1;
+      width:48px;
+      height:48px;
+      display:grid;
+      place-items:center;
+      margin-bottom:22px;
+      border-radius:15px;
+      background:var(--paper);
+      font-size:23px;
+    }
+
+    .dashboard-content{
+      position:relative;
+      z-index:1;
+    }
+
+    .dashboard-content > span{
+      color:var(--muted);
+      font-size:9px;
+      font-weight:800;
+      letter-spacing:1.4px;
+    }
+
+    .dashboard-content h3{
+      margin:7px 0 5px;
+      color:var(--green);
+      font-family:var(--font-display);
+      font-size:32px;
+      line-height:1;
+    }
+
+    .dashboard-content p{
+      margin:0;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.5;
+    }
+
+
+    /* PROGRESS BAR */
+
+    .dashboard-progress-bar{
+      position:relative;
+      width:100%;
+      height:7px;
+      margin:15px 0 10px;
+      overflow:hidden;
+      border-radius:999px;
+      background:var(--paper-dark);
+    }
+
+    #dashboard-progress-fill{
+      width:0%;
+      height:100%;
+      border-radius:999px;
+      background:var(--green);
+      transition:width .4s ease;
+    }
+
+
+    /* ACTION BUTTONS */
+
+    .dashboard-actions{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:28px;
+    }
+
+    .dashboard-actions button{
+      border:1px solid var(--line);
+      padding:13px 19px;
+      border-radius:999px;
+      background:var(--white);
+      color:var(--green);
+      font-size:12px;
+      font-weight:800;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+
+    .dashboard-actions button:hover{
+      border-color:var(--green);
+      background:var(--green);
+      color:var(--white);
+      transform:translateY(-2px);
+    }
+
+
+    /* MOBILE */
+
+    @media(max-width:900px){
+
+      .dashboard-grid{
+        grid-template-columns:
+          repeat(2,1fr);
+      }
+
+    }
+
+    @media(max-width:600px){
+
+      .nijok-home-dashboard{
+        padding:60px 17px 70px;
+      }
+
+      .dashboard-heading{
+        margin-bottom:30px;
+      }
+
+      .dashboard-grid{
+        grid-template-columns:1fr;
+        gap:12px;
+      }
+
+      .dashboard-card{
+        min-height:auto;
+        padding:20px;
+      }
+
+      .dashboard-icon{
+        margin-bottom:16px;
+      }
+
+      .dashboard-actions{
+        flex-direction:column;
+      }
+
+      .dashboard-actions button{
+        width:100%;
+      }
+
+    }
+
+  `;
+
+  document.head.appendChild(style);
+
+}
+
+
+/* =========================================
+   APPLY DASHBOARD DESIGN
+   ========================================= */
+
+addHomeDashboardStyles();
+  /* =========================================
+   NIJOK HOME DASHBOARD — BATCH 11 PART 3
+   LIVE SCORE SYNC
+   ========================================= */
+
+function refreshHomeDashboard(){
+
+  updateHomeDashboard();
+
+}
+
+
+/* =========================================
+   DAILY QUIZ SCORE UPDATE
+   ========================================= */
+
+function syncDashboardAfterQuiz(){
+
+  updateHomeDashboard();
+
+  if(
+    typeof refreshNIJOKProfile ===
+    "function"
+  ){
+
+    refreshNIJOKProfile();
+
+  }
+
+  if(
+    typeof refreshNIJOKLeaderboard ===
+    "function"
+  ){
+
+    refreshNIJOKLeaderboard();
+
+  }
+
+}
+
+
+/* =========================================
+   SAFE DASHBOARD REFRESH
+   ========================================= */
+
+function nijokRefreshAllStats(){
+
+  updateHomeDashboard();
+
+  if(
+    typeof createProfileSection ===
+    "function"
+  ){
+
+    createProfileSection();
+
+  }
+
+  if(
+    typeof renderNIJOKLeaderboard ===
+    "function"
+  ){
+
+    renderNIJOKLeaderboard();
+
+  }
+
+}
+
+
+/* =========================================
+   REFRESH WHEN RETURNING TO HOME
+   ========================================= */
+
+document.addEventListener(
+  "visibilitychange",
+  function(){
+
+    if(
+      document.visibilityState ===
+      "visible"
+    ){
+
+      updateHomeDashboard();
+
+    }
+
+  }
+);
+/* =========================================
+   NIJOK HOME DASHBOARD — BATCH 11 PART 4
+   DAILY PROGRESS SYNC
+   ========================================= */
+
+function getDashboardCompletedCount(){
+
+  if(
+    !nijokState ||
+    !nijokState.daily
+  ){
+
+    return 0;
+
+  }
+
+  if(
+    Array.isArray(
+      nijokState.daily.completed
+    )
+  ){
+
+    return nijokState.daily.completed
+      .length;
+
+  }
+
+  return Number(
+    nijokState.daily.completed || 0
+  );
+
+}
+
+
+/* =========================================
+   DASHBOARD DAILY STATUS
+   ========================================= */
+
+function updateDashboardDailyStatus(){
+
+  const progress =
+    getDailyProgress();
+
+  const completed =
+    progress.completed || 0;
+
+  const total =
+    progress.total || DAILY_LIMIT;
+
+  const progressBox =
+    document.getElementById(
+      "dashboard-progress"
+    );
+
+  const fill =
+    document.getElementById(
+      "dashboard-progress-fill"
+    );
+
+  if(progressBox){
+
+    progressBox.textContent =
+      `${completed} / ${total}`;
+
+  }
+
+  if(fill){
+
+    const percent =
+      total > 0
+      ? Math.min(
+          100,
+          Math.round(
+            completed / total * 100
+          )
+        )
+      : 0;
+
+    fill.style.width =
+      percent + "%";
+
+  }
+
+}
+
+
+/* =========================================
+   DASHBOARD COMPLETE STATE
+   ========================================= */
+
+function checkDashboardCompletion(){
+
+  const progress =
+    getDailyProgress();
+
+  const completed =
+    progress.completed || 0;
+
+  const total =
+    progress.total || DAILY_LIMIT;
+
+  const dashboard =
+    document.getElementById(
+      "nijok-home-dashboard"
+    );
+
+  if(!dashboard) return;
+
+  if(
+    completed >= total
+  ){
+
+    dashboard.classList.add(
+      "dashboard-complete"
+    );
+
+  }else{
+
+    dashboard.classList.remove(
+      "dashboard-complete"
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   MASTER DASHBOARD UPDATE
+   ========================================= */
+
+function updateNIJOKDashboard(){
+
+  updateHomeDashboard();
+
+  updateDashboardDailyStatus();
+
+  checkDashboardCompletion();
+
+}
+
+
+/* =========================================
+   PERIODIC SAFE UPDATE
+   ========================================= */
+
+setInterval(
+  function(){
+
+    if(
+      document.visibilityState ===
+      "visible"
+    ){
+
+      updateNIJOKDashboard();
+
+    }
+
+  },
+  3000
+);
+  /* =========================================
+   NIJOK HOME DASHBOARD — BATCH 11 PART 5
+   CONTINUE TODAY ACTION
+   ========================================= */
+
+function getDashboardAction(){
+
+  const progress =
+    getDailyProgress();
+
+  const completed =
+    progress.completed || 0;
+
+  const total =
+    progress.total || DAILY_LIMIT;
+
+  const actionBox =
+    document.querySelector(
+      ".dashboard-actions"
+    );
+
+  if(!actionBox) return;
+
+  const existing =
+    document.getElementById(
+      "nijok-continue-today"
+    );
+
+  if(existing){
+
+    existing.remove();
+
+  }
+
+  const button =
+    document.createElement("button");
+
+  button.id =
+    "nijok-continue-today";
+
+  button.className =
+    "dashboard-continue-button";
+
+  if(completed >= total){
+
+    button.innerHTML =
+      "✓ Today's Journey Complete";
+
+    button.disabled = true;
+
+  }else{
+
+    button.innerHTML =
+      "▶ Continue Today's Questions";
+
+    button.onclick =
+      function(){
+
+        if(
+          typeof openFoodQuiz ===
+          "function"
+        ){
+
+          openFoodQuiz();
+
+        }else{
+
+          scrollToPlay();
+
+        }
+
+      };
+
+  }
+
+  actionBox.prepend(button);
+
+}
+
+
+/* =========================================
+   REFRESH DASHBOARD ACTION
+   ========================================= */
+
+function refreshDashboardAction(){
+
+  getDashboardAction();
+
+}
+
+
+/* =========================================
+   DASHBOARD ACTION STYLES
+   ========================================= */
+
+function addDashboardActionStyles(){
+
+  if(
+    document.getElementById(
+      "nijok-dashboard-action-styles"
+    )
+  ) return;
+
+  const style =
+    document.createElement("style");
+
+  style.id =
+    "nijok-dashboard-action-styles";
+
+  style.textContent = `
+
+    .dashboard-continue-button{
+
+      background:
+        var(--green);
+
+      color:
+        var(--white);
+
+      border:
+        none;
+
+      padding:
+        13px 20px;
+
+      border-radius:
+        999px;
+
+      font-family:
+        var(--font-body);
+
+      font-size:
+        14px;
+
+      font-weight:
+        700;
+
+      cursor:
+        pointer;
+
+      box-shadow:
+        0 8px 20px
+        rgba(6,74,53,.16);
+
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+
+    }
+
+
+    .dashboard-continue-button:hover{
+
+      transform:
+        translateY(-2px);
+
+      box-shadow:
+        0 12px 26px
+        rgba(6,74,53,.22);
+
+    }
+
+
+    .dashboard-continue-button:disabled{
+
+      opacity:
+        .75;
+
+      cursor:
+        default;
+
+      transform:
+        none;
+
+      box-shadow:
+        none;
+
+    }
+
+
+    @media(max-width:600px){
+
+      .dashboard-continue-button{
+
+        width:
+          100%;
+
+      }
+
+    }
+
+  `;
+
+  document.head.appendChild(style);
+
+}
+
+
+/* =========================================
+   START DASHBOARD ACTION
+   ========================================= */
+
+function initDashboardAction(){
+
+  addDashboardActionStyles();
+
+  getDashboardAction();
+
+}
+
+
+if(
+  document.readyState ===
+  "loading"
+){
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    initDashboardAction
+  );
+
+}else{
+
+  initDashboardAction();
+
+}
+
+
+/* =========================================
+   KEEP ACTION UPDATED
+   ========================================= */
+
+document.addEventListener(
+  "visibilitychange",
+  function(){
+
+    if(
+      document.visibilityState ===
+      "visible"
+    ){
+
+      refreshDashboardAction();
+
+    }
+
+  }
+);
+ /* =========================================
+   NIJOK HOME DASHBOARD — BATCH 11 PART 6
+   COMPLETION MESSAGE
+   ========================================= */
+
+function updateDashboardMessage(){
+
+  const dashboard =
+    document.getElementById(
+      "nijok-home-dashboard"
+    );
+
+  if(!dashboard) return;
+
+  const progress =
+    getDailyProgress();
+
+  const completed =
+    progress.completed || 0;
+
+  const total =
+    progress.total || DAILY_LIMIT;
+
+  let message =
+    dashboard.querySelector(
+      ".dashboard-message"
+    );
+
+  if(!message){
+
+    message =
+      document.createElement("div");
+
+    message.className =
+      "dashboard-message";
+
+    dashboard.appendChild(message);
+
+  }
+
+  if(completed >= total){
+
+    message.innerHTML = `
+      <strong>
+        🌿 You did it today.
+      </strong>
+
+      <span>
+        20 food questions completed.
+        Come back tomorrow and keep
+        your learning streak alive.
+      </span>
+    `;
+
+  }else if(completed > 0){
+
+    message.innerHTML = `
+      <strong>
+        🔥 You're already learning.
+      </strong>
+
+      <span>
+        ${total - completed}
+        questions left for today's journey.
+      </span>
+    `;
+
+  }else{
+
+    message.innerHTML = `
+      <strong>
+        🌱 Your journey starts here.
+      </strong>
+
+      <span>
+        Take your first food question
+        and discover something new today.
+      </span>
+    `;
+
+  }
+
+}
+
+
+/* =========================================
+   COMPLETION MESSAGE STYLES
+   ========================================= */
+
+function addDashboardMessageStyles(){
+
+  if(
+    document.getElementById(
+      "nijok-dashboard-message-styles"
+    )
+  ) return;
+
+  const style =
+    document.createElement("style");
+
+  style.id =
+    "nijok-dashboard-message-styles";
+
+  style.textContent = `
+
+    .dashboard-message{
+
+      margin-top:
+        22px;
+
+      padding:
+        18px 22px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius:
+        var(--radius-lg);
+
+      background:
+        var(--paper-soft);
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        20px;
+
+    }
+
+
+    .dashboard-message strong{
+
+      color:
+        var(--green);
+
+      font-family:
+        var(--font-display);
+
+      font-size:
+        20px;
+
+      font-weight:
+        700;
+
+    }
+
+
+    .dashboard-message span{
+
+      color:
+        var(--muted);
+
+      font-size:
+        14px;
+
+      line-height:
+        1.6;
+
+      text-align:
+        right;
+
+    }
+
+
+    @media(max-width:700px){
+
+      .dashboard-message{
+
+        flex-direction:
+          column;
+
+        align-items:
+          flex-start;
+
+        gap:
+          8px;
+
+      }
+
+
+      .dashboard-message span{
+
+        text-align:
+          left;
+
+      }
+
+    }
+
+  `;
+
+  document.head.appendChild(style);
+
+}
+
+
+/* =========================================
+   MASTER DASHBOARD MESSAGE UPDATE
+   ========================================= */
+
+function refreshDashboardMessage(){
+
+  updateDashboardMessage();
+
+}
+
+
+/* =========================================
+   INITIALIZE
+   ========================================= */
+
+function initDashboardMessage(){
+
+  addDashboardMessageStyles();
+
+  updateDashboardMessage();
+
+}
+
+
+if(
+  document.readyState ===
+  "loading"
+){
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    initDashboardMessage
+  );
+
+}else{
+
+  initDashboardMessage();
+
+}
+
+
+/* =========================================
+   KEEP MESSAGE LIVE
+   ========================================= */
+
+setInterval(
+  function(){
+
+    if(
+      document.visibilityState ===
+      "visible"
+    ){
+
+      refreshDashboardMessage();
+
+    }
+
+  },
+  3000
+); 
+  /* =========================================
+   NIJOK HOME DASHBOARD — BATCH 11 PART 7
+   STAT COUNTER ANIMATION
+   ========================================= */
+
+function animateDashboardNumber(
+  element,
+  target
+){
+
+  if(!element) return;
+
+  const finalValue =
+    Number(target) || 0;
+
+  const startValue =
+    Number(
+      element.dataset.value || 0
+    );
+
+  if(startValue === finalValue){
+
+    element.textContent =
+      finalValue;
+
+    return;
+
+  }
+
+  const duration = 500;
+  const startTime = performance.now();
+
+  function step(currentTime){
+
+    const elapsed =
+      currentTime - startTime;
+
+    const progress =
+      Math.min(
+        elapsed / duration,
+        1
+      );
+
+    const eased =
+      1 - Math.pow(
+        1 - progress,
+        3
+      );
+
+    const value =
+      Math.round(
+        startValue +
+        (finalValue - startValue) *
+        eased
+      );
+
+    element.textContent =
+      value;
+
+    element.dataset.value =
+      value;
+
+    if(progress < 1){
+
+      requestAnimationFrame(step);
+
+    }else{
+
+      element.textContent =
+        finalValue;
+
+      element.dataset.value =
+        finalValue;
+
+    }
+
+  }
+
+  requestAnimationFrame(step);
+
+}
+
+
+/* =========================================
+   UPDATE ANIMATED STATS
+   ========================================= */
+
+function updateAnimatedDashboardStats(){
+
+  const score =
+    getNIJOKScore();
+
+  const best =
+    getNIJOKBestScore();
+
+  const streak =
+    getNIJOKStreak();
+
+  const scoreBox =
+    document.getElementById(
+      "dashboard-score"
+    );
+
+  const bestBox =
+    document.getElementById(
+      "dashboard-best"
+    );
+
+  const streakBox =
+    document.getElementById(
+      "dashboard-streak"
+    );
+
+  animateDashboardNumber(
+    scoreBox,
+    score
+  );
+
+  animateDashboardNumber(
+    bestBox,
+    best
+  );
+
+  animateDashboardNumber(
+    streakBox,
+    streak
+  );
+
+}
+
+
+/* =========================================
+   DASHBOARD NUMBER INITIALIZATION
+   ========================================= */
+
+function initDashboardCounters(){
+
+  updateAnimatedDashboardStats();
+
+}
+
+
+if(
+  document.readyState ===
+  "loading"
+){
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    initDashboardCounters
+  );
+
+}else{
+
+  initDashboardCounters();
+
+}
+
+
+/* =========================================
+   REFRESH COUNTERS
+   ========================================= */
+
+function refreshDashboardCounters(){
+
+  updateAnimatedDashboardStats();
+
+}
+
+
+/* =========================================
+   VISIBILITY REFRESH
+   ========================================= */
+
+document.addEventListener(
+  "visibilitychange",
+  function(){
+
+    if(
+      document.visibilityState ===
+      "visible"
+    ){
+
+      refreshDashboardCounters();
+
+    }
+
+  }
+);
+  /* =========================================
+   NIJOK HOME DASHBOARD — BATCH 11 PART 8
+   DAILY JOURNEY MILESTONES
+   ========================================= */
+
+function createDashboardMilestones(){
+
+  const dashboard =
+    document.getElementById(
+      "nijok-home-dashboard"
+    );
+
+  if(!dashboard) return;
+
+  if(
+    document.getElementById(
+      "nijok-dashboard-milestones"
+    )
+  ) return;
+
+  const milestones =
+    document.createElement("div");
+
+  milestones.id =
+    "nijok-dashboard-milestones";
+
+  milestones.className =
+    "nijok-dashboard-milestones";
+
+  milestones.innerHTML = `
+
+    <div class="milestone-heading">
+
+      <span>
+        TODAY'S JOURNEY
+      </span>
+
+      <small>
+        Keep moving forward
+      </small>
+
+    </div>
+
+    <div class="milestone-track">
+
+      <div
+        class="milestone"
+        data-milestone="5"
+      >
+
+        <div class="milestone-dot">
+          5
+        </div>
+
+        <span>
+          Start
+        </span>
+
+      </div>
+
+
+      <div
+        class="milestone"
+        data-milestone="10"
+      >
+
+        <div class="milestone-dot">
+          10
+        </div>
+
+        <span>
+          Curious
+        </span>
+
+      </div>
+
+
+      <div
+        class="milestone"
+        data-milestone="15"
+      >
+
+        <div class="milestone-dot">
+          15
+        </div>
+
+        <span>
+          Explorer
+        </span>
+
+      </div>
+
+
+      <div
+        class="milestone"
+        data-milestone="20"
+      >
+
+        <div class="milestone-dot">
+          20
+        </div>
+
+        <span>
+          Complete
+        </span>
+
+      </div>
+
+    </div>
+
+  `;
+
+  dashboard.appendChild(
+    milestones
+  );
+
+  updateDashboardMilestones();
+
+}
+
+
+/* =========================================
+   UPDATE MILESTONES
+   ========================================= */
+
+function updateDashboardMilestones(){
+
+  const progress =
+    getDailyProgress();
+
+  const completed =
+    progress.completed || 0;
+
+  const items =
+    document.querySelectorAll(
+      ".nijok-dashboard-milestones .milestone"
+    );
+
+  items.forEach(
+    function(item){
+
+      const required =
+        Number(
+          item.dataset.milestone
+        );
+
+      if(
+        completed >= required
+      ){
+
+        item.classList.add(
+          "milestone-complete"
+        );
+
+      }else{
+
+        item.classList.remove(
+          "milestone-complete"
+        );
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================================
+   MILESTONE STYLES
+   ========================================= */
+
+function addDashboardMilestoneStyles(){
+
+  if(
+    document.getElementById(
+      "nijok-dashboard-milestone-styles"
+    )
+  ) return;
+
+  const style =
+    document.createElement("style");
+
+  style.id =
+    "nijok-dashboard-milestone-styles";
+
+  style.textContent = `
+
+    .nijok-dashboard-milestones{
+
+      margin-top:
+        24px;
+
+      padding:
+        22px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius:
+        var(--radius-lg);
+
+      background:
+        var(--paper-soft);
+
+    }
+
+
+    .milestone-heading{
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        center;
+
+      margin-bottom:
+        22px;
+
+    }
+
+
+    .milestone-heading span{
+
+      color:
+        var(--green);
+
+      font-size:
+        12px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        .12em;
+
+    }
+
+
+    .milestone-heading small{
+
+      color:
+        var(--muted);
+
+      font-size:
+        12px;
+
+    }
+
+
+    .milestone-track{
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(4,1fr);
+
+      position:
+        relative;
+
+      gap:
+        12px;
+
+    }
+
+
+    .milestone-track::before{
+
+      content:
+        "";
+
+      position:
+        absolute;
+
+      top:
+        18px;
+
+      left:
+        8%;
+
+      right:
+        8%;
+
+      height:
+        2px;
+
+      background:
+        var(--line);
+
+      z-index:
+        0;
+
+    }
+
+
+    .milestone{
+
+      position:
+        relative;
+
+      z-index:
+        1;
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      align-items:
+        center;
+
+      gap:
+        8px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        11px;
+
+      font-weight:
+        700;
+
+    }
+
+
+    .milestone-dot{
+
+      width:
+        36px;
+
+      height:
+        36px;
+
+      border-radius:
+        50%;
+
+      background:
+        var(--paper-dark);
+
+      border:
+        2px solid var(--line);
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      font-size:
+        11px;
+
+      font-weight:
+        800;
+
+      color:
+        var(--muted);
+
+    }
+
+
+    .milestone-complete{
+
+      color:
+        var(--green);
+
+    }
+
+
+    .milestone-complete
+    .milestone-dot{
+
+      background:
+        var(--green);
+
+      border-color:
+        var(--green);
+
+      color:
+        var(--white);
+
+      box-shadow:
+        0 6px 14px
+        rgba(6,74,53,.18);
+
+    }
+
+
+    @media(max-width:600px){
+
+      .nijok-dashboard-milestones{
+
+        padding:
+          18px 12px;
+
+      }
+
+
+      .milestone-heading{
+
+        align-items:
+          flex-start;
+
+        gap:
+          8px;
+
+        flex-direction:
+          column;
+
+      }
+
+
+      .milestone-track{
+
+        gap:
+          4px;
+
+      }
+
+
+      .milestone-dot{
+
+        width:
+          32px;
+
+        height:
+          32px;
+
+      }
+
+    }
+
+  `;
+
+  document.head.appendChild(style);
+
+}
+
+
+/* =========================================
+   INITIALIZE MILESTONES
+   ========================================= */
+
+function initDashboardMilestones(){
+
+  addDashboardMilestoneStyles();
+
+  createDashboardMilestones();
+
+}
+
+
+if(
+  document.readyState ===
+  "loading"
+){
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    initDashboardMilestones
+  );
+
+}else{
+
+  initDashboardMilestones();
+
+}
+
+
+/* =========================================
+   KEEP MILESTONES LIVE
+   ========================================= */
+
+setInterval(
+  function(){
+
+    if(
+      document.visibilityState ===
+      "visible"
+    ){
+
+      updateDashboardMilestones();
+
+    }
+
+  },
+  3000
+);
+  /* =========================================
+   NIJOK HOME DASHBOARD — BATCH 11 PART 9
+   SMART PLAY BUTTON
+   ========================================= */
+
+function updateDashboardPlayButton(){
+
+  const button =
+    document.getElementById(
+      "nijok-continue-today"
+    );
+
+  if(!button) return;
+
+  const progress =
+    getDailyProgress();
+
+  const completed =
+    progress.completed || 0;
+
+  const total =
+    progress.total || DAILY_LIMIT;
+
+  button.disabled = false;
+
+  if(completed >= total){
+
+    button.innerHTML =
+      "✓ Today's Journey Complete";
+
+    button.disabled = true;
+
+    button.classList.add(
+      "journey-complete"
+    );
+
+    return;
+
+  }
+
+  button.classList.remove(
+    "journey-complete"
+  );
+
+  const remaining =
+    total - completed;
+
+  if(completed === 0){
+
+    button.innerHTML =
+      "▶ Start Today's Journey";
+
+  }else{
+
+    button.innerHTML =
+      `▶ Continue · ${remaining} left`;
+
+  }
+
+}
+
+
+/* =========================================
+   SMART BUTTON ACTION
+   ========================================= */
+
+function connectDashboardPlayButton(){
+
+  const button =
+    document.getElementById(
+      "nijok-continue-today"
+    );
+
+  if(!button) return;
+
+  button.onclick =
+    function(){
+
+      const progress =
+        getDailyProgress();
+
+      const completed =
+        progress.completed || 0;
+
+      const total =
+        progress.total || DAILY_LIMIT;
+
+      if(completed >= total){
+
+        return;
+
+      }
+
+      if(
+        typeof openFoodQuiz ===
+        "function"
+      ){
+
+        openFoodQuiz();
+
+      }else{
+
+        const play =
+          document.getElementById(
+            "play"
+          );
+
+        if(play){
+
+          play.scrollIntoView({
+            behavior:"smooth"
+          });
+
+        }
+
+      }
+
+    };
+
+}
+
+
+/* =========================================
+   SMART BUTTON STYLES
+   ========================================= */
+
+function addSmartPlayStyles(){
+
+  if(
+    document.getElementById(
+      "nijok-smart-play-styles"
+    )
+  ) return;
+
+  const style =
+    document.createElement("style");
+
+  style.id =
+    "nijok-smart-play-styles";
+
+  style.textContent = `
+
+    .dashboard-continue-button{
+
+      min-width:
+        210px;
+
+      position:
+        relative;
+
+      overflow:
+        hidden;
+
+    }
+
+
+    .dashboard-continue-button::after{
+
+      content:
+        "";
+
+      position:
+        absolute;
+
+      top:
+        0;
+
+      left:
+        -100%;
+
+      width:
+        60%;
+
+      height:
+        100%;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(255,255,255,.22),
+          transparent
+        );
+
+      transition:
+        left .55s ease;
+
+    }
+
+
+    .dashboard-continue-button:hover::after{
+
+      left:
+        140%;
+
+    }
+
+
+    .dashboard-continue-button.journey-complete{
+
+      background:
+        var(--sage);
+
+    }
+
+
+    @media(max-width:600px){
+
+      .dashboard-continue-button{
+
+        min-width:
+          0;
+
+      }
+
+    }
+
+  `;
+
+  document.head.appendChild(style);
+
+}
+
+
+/* =========================================
+   MASTER SMART BUTTON UPDATE
+   ========================================= */
+
+function refreshSmartDashboardButton(){
+
+  updateDashboardPlayButton();
+
+  connectDashboardPlayButton();
+
+}
+
+
+/* =========================================
+   INITIALIZE
+   ========================================= */
+
+function initSmartDashboardButton(){
+
+  addSmartPlayStyles();
+
+  refreshSmartDashboardButton();
+
+}
+
+
+if(
+  document.readyState ===
+  "loading"
+){
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    initSmartDashboardButton
+  );
+
+}else{
+
+  initSmartDashboardButton();
+
+}
+
+
+/* =========================================
+   LIVE REFRESH
+   ========================================= */
+
+setInterval(
+  function(){
+
+    if(
+      document.visibilityState ===
+      "visible"
+    ){
+
+      refreshSmartDashboardButton();
+
+    }
+
+  },
+  3000
+);
+  /* =========================================
+   NIJOK HOME DASHBOARD — BATCH 11 PART 10
+   LEARNING SNAPSHOT
+   ========================================= */
+
+function getDashboardSnapshot(){
+
+  const progress =
+    getDailyProgress();
+
+  const completed =
+    progress.completed || 0;
+
+  const total =
+    progress.total || DAILY_LIMIT;
+
+  let correct = 0;
+
+  if(
+    nijokState &&
+    typeof nijokState.correctAnswers ===
+    "number"
+  ){
+
+    correct =
+      nijokState.correctAnswers;
+
+  }
+
+  let accuracy = 0;
+
+  if(completed > 0){
+
+    accuracy =
+      Math.round(
+        (correct / completed) * 100
+      );
+
+  }
+
+
+  return {
+    completed: completed,
+    total: total,
+    correct: correct,
+    accuracy: accuracy
+  };
+
+}
+
+
+/* =========================================
+   CREATE SNAPSHOT
+   ========================================= */
+
+function createDashboardSnapshot(){
+
+  const dashboard =
+    document.getElementById(
+      "nijok-home-dashboard"
+    );
+
+  if(!dashboard) return;
+
+  if(
+    document.getElementById(
+      "nijok-learning-snapshot"
+    )
+  ) return;
+
+  const snapshot =
+    document.createElement("div");
+
+  snapshot.id =
+    "nijok-learning-snapshot";
+
+  snapshot.className =
+    "nijok-learning-snapshot";
+
+  snapshot.innerHTML = `
+
+    <div class="snapshot-title">
+
+      <span>
+        LEARNING SNAPSHOT
+      </span>
+
+      <small>
+        Your progress today
+      </small>
+
+    </div>
+
+
+    <div class="snapshot-grid">
+
+      <div class="snapshot-item">
+
+        <strong
+          id="snapshot-answered"
+        >
+          0
+        </strong>
+
+        <span>
+          Questions
+        </span>
+
+      </div>
+
+
+      <div class="snapshot-item">
+
+        <strong
+          id="snapshot-correct"
+        >
+          0
+        </strong>
+
+        <span>
+          Correct
+        </span>
+
+      </div>
+
+
+      <div class="snapshot-item">
+
+        <strong
+          id="snapshot-accuracy"
+        >
+          0%
+        </strong>
+
+        <span>
+          Accuracy
+        </span>
+
+      </div>
+
+
+      <div class="snapshot-item">
+
+        <strong
+          id="snapshot-status"
+        >
+          Start
+        </strong>
+
+        <span>
+          Status
+        </span>
+
+      </div>
+
+    </div>
+
+  `;
+
+  dashboard.appendChild(
+    snapshot
+  );
+
+  updateDashboardSnapshot();
+
+}
+
+
+/* =========================================
+   UPDATE SNAPSHOT
+   ========================================= */
+
+function updateDashboardSnapshot(){
+
+  const data =
+    getDashboardSnapshot();
+
+  const answered =
+    document.getElementById(
+      "snapshot-answered"
+    );
+
+  const correct =
+    document.getElementById(
+      "snapshot-correct"
+    );
+
+  const accuracy =
+    document.getElementById(
+      "snapshot-accuracy"
+    );
+
+  const status =
+    document.getElementById(
+      "snapshot-status"
+    );
+
+
+  if(answered){
+
+    answered.textContent =
+      data.completed;
+
+  }
+
+
+  if(correct){
+
+    correct.textContent =
+      data.correct;
+
+  }
+
+
+  if(accuracy){
+
+    accuracy.textContent =
+      data.accuracy + "%";
+
+  }
+
+
+  if(status){
+
+    if(
+      data.completed >= data.total
+    ){
+
+      status.textContent =
+        "Complete";
+
+    }else if(
+      data.completed > 0
+    ){
+
+      status.textContent =
+        "Learning";
+
+    }else{
+
+      status.textContent =
+        "Ready";
+
+    }
+
+  }
+
+}
+
+
+/* =========================================
+   SNAPSHOT STYLES
+   ========================================= */
+
+function addSnapshotStyles(){
+
+  if(
+    document.getElementById(
+      "nijok-snapshot-styles"
+    )
+  ) return;
+
+  const style =
+    document.createElement("style");
+
+  style.id =
+    "nijok-snapshot-styles";
+
+  style.textContent = `
+
+    .nijok-learning-snapshot{
+
+      margin-top:
+        24px;
+
+      padding:
+        22px;
+
+      border-radius:
+        var(--radius-lg);
+
+      background:
+        var(--green);
+
+      color:
+        var(--white);
+
+    }
+
+
+    .snapshot-title{
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        center;
+
+      margin-bottom:
+        20px;
+
+    }
+
+
+    .snapshot-title span{
+
+      font-size:
+        11px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        .14em;
+
+    }
+
+
+    .snapshot-title small{
+
+      font-size:
+        12px;
+
+      opacity:
+        .72;
+
+    }
+
+
+    .snapshot-grid{
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(4,1fr);
+
+      gap:
+        1px;
+
+      background:
+        rgba(255,255,255,.15);
+
+      border-radius:
+        14px;
+
+      overflow:
+        hidden;
+
+    }
+
+
+    .snapshot-item{
+
+      padding:
+        18px 12px;
+
+      background:
+        var(--green);
+
+      text-align:
+        center;
+
+    }
+
+
+    .snapshot-item strong{
+
+      display:
+        block;
+
+      font-family:
+        var(--font-display);
+
+      font-size:
+        25px;
+
+      line-height:
+        1;
+
+      margin-bottom:
+        8px;
+
+    }
+
+
+    .snapshot-item span{
+
+      display:
+        block;
+
+      font-size:
+        11px;
+
+      opacity:
+        .7;
+
+      letter-spacing:
+        .04em;
+
+    }
+
+
+    @media(max-width:600px){
+
+      .snapshot-grid{
+
+        grid-template-columns:
+          repeat(2,1fr);
+
+      }
+
+
+      .snapshot-title{
+
+        align-items:
+          flex-start;
+
+        flex-direction:
+          column;
+
+        gap:
+          5px;
+
+      }
+
+    }
+
+  `;
+
+  document.head.appendChild(style);
+
+}
+
+
+/* =========================================
+   INITIALIZE SNAPSHOT
+   ========================================= */
+
+function initDashboardSnapshot(){
+
+  addSnapshotStyles();
+
+  createDashboardSnapshot();
+
+}
+
+
+if(
+  document.readyState ===
+  "loading"
+){
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    initDashboardSnapshot
+  );
+
+}else{
+
+  initDashboardSnapshot();
+
+}
+
+
+/* =========================================
+   LIVE SNAPSHOT REFRESH
+   ========================================= */
+
+setInterval(
+  function(){
+
+    if(
+      document.visibilityState ===
+      "visible"
+    ){
+
+      updateDashboardSnapshot();
+
+    }
+
+  },
+  3000
+);
+  
+</script>
+  
 </body>
 </html>

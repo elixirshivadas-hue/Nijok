@@ -20750,6 +20750,42 @@ console.log(
   "🌿 NIJOK Batch 34 — Quiz completion connected."
 );
 
+  // =====================================
+// PART 35 — QUIZ SESSION RESET
+// =====================================
+
+function resetNijokQuizSession(){
+
+  nijokQuizIndex = 0;
+
+  nijokQuizScore = 0;
+
+  nijokQuizCorrect = 0;
+
+}
+
+
+// -------------------------------------
+// QUIZ START HOOK
+// -------------------------------------
+
+const originalOpenNijokDailyQuiz =
+  openNijokDailyQuiz;
+
+
+openNijokDailyQuiz = function(){
+
+  resetNijokQuizSession();
+
+  originalOpenNijokDailyQuiz();
+
+};
+
+
+console.log(
+  "🌿 NIJOK Batch 35 — Quiz session reset ready."
+);
+
   
 </script>
   

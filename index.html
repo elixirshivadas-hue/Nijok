@@ -6664,7 +6664,475 @@ if(
   initCommunitySection();
 
 }
-    
+  
+    /* =========================================
+   NIJOK PROFILE — BATCH 9 PART 1
+   ========================================= */
+
+const NIJOK_PROFILE_KEY =
+  "NIJOK_PROFILE_V1";
+
+function getNIJOKProfile(){
+
+  try{
+
+    return JSON.parse(
+      localStorage.getItem(NIJOK_PROFILE_KEY)
+    ) || {};
+
+  }catch(e){
+
+    return {};
+
+  }
+
+}
+
+function saveNIJOKProfile(profile){
+
+  localStorage.setItem(
+    NIJOK_PROFILE_KEY,
+    JSON.stringify(profile)
+  );
+
+}
+
+function getNIJOKScore(){
+
+  const state = nijokState || {};
+
+  return Number(
+    state.totalScore || 0
+  );
+
+}
+
+function getNIJOKBestScore(){
+
+  const profile =
+    getNIJOKProfile();
+
+  return Number(
+    profile.bestScore || 0
+  );
+
+}
+
+function updateNIJOKBestScore(){
+
+  const profile =
+    getNIJOKProfile();
+
+  const score =
+    getNIJOKScore();
+
+  if(score > Number(profile.bestScore || 0)){
+
+    profile.bestScore = score;
+
+    saveNIJOKProfile(profile);
+
+  }
+
+}
+
+function getNIJOKStreak(){
+
+  return Number(
+    nijokState.streak || 0
+  );
+
+}
+  /* =========================================
+   NIJOK PROFILE — BATCH 9 PART 2
+   PROFILE CARD
+   ========================================= */
+
+function createProfileSection(){
+
+  const about =
+    document.getElementById("about");
+
+  if(!about) return;
+
+  const profile =
+    getNIJOKProfile();
+
+  const name =
+    profile.name || "NIJOK Explorer";
+
+  const email =
+    profile.email || "";
+
+  const score =
+    getNIJOKScore();
+
+  const best =
+    getNIJOKBestScore();
+
+  const streak =
+    getNIJOKStreak();
+
+  about.innerHTML = `
+
+    <section class="nijok-profile-section">
+
+      <div class="profile-heading">
+
+        <span class="section-kicker">
+          YOUR NIJOK JOURNEY
+        </span>
+
+        <h2>
+          Learn.
+          <span>Grow.</span>
+          Discover.
+        </h2>
+
+        <p>
+          Your food-learning journey,
+          all in one place.
+        </p>
+
+      </div>
+
+      <div class="profile-card">
+
+        <div class="profile-top">
+
+          <div class="profile-avatar">
+            ${escapeHTML(
+              name.charAt(0).toUpperCase()
+            )}
+          </div>
+
+          <div class="profile-identity">
+
+            <span>NIJOK EXPLORER</span>
+
+            <h3>
+              ${escapeHTML(name)}
+            </h3>
+
+            ${
+              email
+              ? `<p>${escapeHTML(email)}</p>`
+              : ""
+            }
+
+          </div>
+
+        </div>
+
+        <div class="profile-stats">
+
+          <div class="profile-stat">
+            <strong>${score}</strong>
+            <span>NIJOK SCORE</span>
+          </div>
+
+          <div class="profile-stat">
+            <strong>${best}</strong>
+            <span>BEST SCORE</span>
+          </div>
+
+          <div class="profile-stat">
+            <strong>${streak}</strong>
+            <span>DAY STREAK</span>
+          </div>
+
+        </div>
+
+        <div class="profile-message">
+
+          <span>🌿</span>
+
+          <p>
+            Keep learning.
+            Keep questioning.
+            Keep discovering food.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  `;
+
+  addProfileStyles();
+
+}
+
+
+/* =========================================
+   PROFILE REFRESH
+   ========================================= */
+
+function refreshProfile(){
+
+  createProfileSection();
+
+}
+
+
+/* =========================================
+   PROFILE STARTUP
+   ========================================= */
+
+function initProfileSection(){
+
+  createProfileSection();
+
+}
+  /* =========================================
+   NIJOK PROFILE — BATCH 9 PART 3
+   PROFILE DESIGN
+   ========================================= */
+
+function addProfileStyles(){
+
+  if(document.getElementById(
+    "nijok-profile-styles"
+  )) return;
+
+  const style =
+    document.createElement("style");
+
+  style.id =
+    "nijok-profile-styles";
+
+  style.textContent = `
+
+    .nijok-profile-section{
+      max-width:900px;
+      margin:0 auto;
+      padding:80px 24px 100px;
+    }
+
+    .profile-heading{
+      text-align:center;
+      margin-bottom:38px;
+    }
+
+    .profile-heading .section-kicker{
+      color:var(--orange);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:2px;
+    }
+
+    .profile-heading h2{
+      margin:14px 0;
+      color:var(--green);
+      font-family:var(--font-display);
+      font-size:clamp(42px,6vw,68px);
+      line-height:1;
+    }
+
+    .profile-heading h2 span{
+      color:var(--orange);
+      font-family:var(--font-script);
+      font-weight:500;
+    }
+
+    .profile-heading p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .profile-card{
+      padding:32px;
+      border-radius:30px;
+      background:var(--green);
+      box-shadow:0 24px 60px rgba(4,59,43,.18);
+    }
+
+    .profile-top{
+      display:flex;
+      align-items:center;
+      gap:18px;
+    }
+
+    .profile-avatar{
+      width:72px;
+      height:72px;
+      display:grid;
+      place-items:center;
+      flex-shrink:0;
+      border-radius:50%;
+      background:var(--gold);
+      color:var(--green-deep);
+      font-family:var(--font-display);
+      font-size:34px;
+      font-weight:800;
+    }
+
+    .profile-identity span{
+      color:var(--gold);
+      font-size:10px;
+      font-weight:800;
+      letter-spacing:1.6px;
+    }
+
+    .profile-identity h3{
+      margin:5px 0;
+      color:var(--white);
+      font-family:var(--font-display);
+      font-size:30px;
+    }
+
+    .profile-identity p{
+      margin:0;
+      color:#cbd9cf;
+      font-size:13px;
+    }
+
+    .profile-stats{
+      display:grid;
+      grid-template-columns:
+        repeat(3,1fr);
+      gap:12px;
+      margin-top:30px;
+    }
+
+    .profile-stat{
+      padding:20px 12px;
+      text-align:center;
+      border-radius:18px;
+      background:rgba(255,255,255,.09);
+    }
+
+    .profile-stat strong{
+      display:block;
+      color:var(--white);
+      font-family:var(--font-display);
+      font-size:32px;
+    }
+
+    .profile-stat span{
+      color:#cbd9cf;
+      font-size:9px;
+      font-weight:800;
+      letter-spacing:1px;
+    }
+
+    .profile-message{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-top:24px;
+      padding:17px;
+      border-radius:18px;
+      background:var(--green-dark);
+    }
+
+    .profile-message span{
+      font-size:24px;
+    }
+
+    .profile-message p{
+      margin:0;
+      color:var(--paper);
+      font-family:var(--font-script);
+      font-size:20px;
+    }
+
+    @media(max-width:600px){
+
+      .nijok-profile-section{
+        padding:60px 17px 75px;
+      }
+
+      .profile-card{
+        padding:22px;
+        border-radius:24px;
+      }
+
+      .profile-avatar{
+        width:60px;
+        height:60px;
+        font-size:28px;
+      }
+
+      .profile-identity h3{
+        font-size:25px;
+      }
+
+      .profile-stats{
+        gap:8px;
+      }
+
+      .profile-stat{
+        padding:16px 6px;
+      }
+
+      .profile-stat strong{
+        font-size:26px;
+      }
+
+      .profile-stat span{
+        font-size:8px;
+      }
+
+    }
+
+  `;
+
+  document.head.appendChild(style);
+
+}
+  /* =========================================
+   NIJOK PROFILE — BATCH 9 PART 4
+   STARTUP CONNECTION
+   ========================================= */
+
+function initNIJOKProfile(){
+
+  createProfileSection();
+
+  updateHeaderLogin();
+
+}
+
+
+/* =========================================
+   PROFILE AFTER LOGIN
+   ========================================= */
+
+function refreshNIJOKProfile(){
+
+  createProfileSection();
+
+  updateHeaderLogin();
+
+}
+
+
+/* =========================================
+   PROFILE WHEN PAGE LOADS
+   ========================================= */
+
+function startNIJOKProfile(){
+
+  if(document.readyState === "loading"){
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      initNIJOKProfile
+    );
+
+  }else{
+
+    initNIJOKProfile();
+
+  }
+
+}
+
+startNIJOKProfile();
 </script>
 
 </body>

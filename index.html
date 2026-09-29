@@ -18158,7 +18158,1499 @@ function reportQuestionBankPart20(){
 
 addExpandedQuestionsPart20();
 reportQuestionBankPart20();
+  // PART 21
+// IDs 1501 - 1525
+// =====================================
 
+const nijokExpandedQuestions21 = [
+
+  {
+    id: 1501,
+    category: "Food Science",
+    difficulty: "easy",
+    q: "Which process removes water from food to help preserve it?",
+    options: ["Dehydration", "Fermentation", "Emulsification", "Caramelization"],
+    answer: 0,
+    fact: "Dehydration reduces the water available in food, helping slow the growth of many microorganisms."
+  },
+
+  {
+    id: 1502,
+    category: "Food Science",
+    difficulty: "medium",
+    q: "Why does refrigeration generally help slow food spoilage?",
+    options: [
+      "Lower temperatures slow many microbial and chemical processes",
+      "It removes every microorganism",
+      "It converts bacteria into nutrients",
+      "It increases the food's sugar content"
+    ],
+    answer: 0,
+    fact: "Refrigeration slows many microbial growth and chemical reactions, although it does not make food permanently safe."
+  },
+
+  {
+    id: 1503,
+    category: "Food Science",
+    difficulty: "easy",
+    q: "What happens when water reaches its boiling point under normal atmospheric pressure?",
+    options: [
+      "It changes rapidly into vapor",
+      "It becomes solid",
+      "It turns into oil",
+      "It becomes sugar"
+    ],
+    answer: 0,
+    fact: "At its boiling point, liquid water changes rapidly into water vapor."
+  },
+
+  {
+    id: 1504,
+    category: "Food Science",
+    difficulty: "medium",
+    q: "Which process is responsible for the browning of bread crust during baking?",
+    options: ["Maillard reaction and caramelization", "Freezing", "Filtration", "Distillation"],
+    answer: 0,
+    fact: "Bread browning involves several reactions, including Maillard reactions and caramelization."
+  },
+
+  {
+    id: 1505,
+    category: "Food Science",
+    difficulty: "medium",
+    q: "What is an antioxidant?",
+    options: [
+      "A substance that can help limit oxidation reactions",
+      "A type of carbohydrate only",
+      "A food coloring",
+      "A mineral that always prevents spoilage"
+    ],
+    answer: 0,
+    fact: "Antioxidants can help inhibit or slow certain oxidation reactions."
+  },
+
+  {
+    id: 1506,
+    category: "Food Safety",
+    difficulty: "easy",
+    q: "What does cross-contamination mean in food safety?",
+    options: [
+      "Transfer of harmful microorganisms from one source to another",
+      "Adding spices to cooked food",
+      "Mixing two safe beverages",
+      "Changing a food's color"
+    ],
+    answer: 0,
+    fact: "Cross-contamination occurs when microorganisms or other contaminants are transferred between foods, surfaces, hands, or equipment."
+  },
+
+  {
+    id: 1507,
+    category: "Food Safety",
+    difficulty: "easy",
+    q: "Why should damaged or leaking food packages be checked carefully?",
+    options: [
+      "Damage can compromise the package's protection",
+      "Damage always improves freshness",
+      "Leaks increase nutritional value",
+      "Damaged packages always contain more food"
+    ],
+    answer: 0,
+    fact: "Damaged packaging can compromise protection from contamination or environmental exposure."
+  },
+
+  {
+    id: 1508,
+    category: "Food Safety",
+    difficulty: "medium",
+    q: "Why is proper cooking important for many foods?",
+    options: [
+      "It can reduce harmful microorganisms to safer levels",
+      "It removes every chemical in food",
+      "It guarantees unlimited shelf life",
+      "It increases every nutrient"
+    ],
+    answer: 0,
+    fact: "Adequate cooking can destroy or reduce many harmful microorganisms, depending on the food and process."
+  },
+
+  {
+    id: 1509,
+    category: "Food Safety",
+    difficulty: "easy",
+    q: "Which practice helps maintain kitchen hygiene?",
+    options: [
+      "Cleaning food-contact surfaces regularly",
+      "Using the same dirty cloth all day",
+      "Leaving raw food uncovered",
+      "Storing cooked food beside raw meat"
+    ],
+    answer: 0,
+    fact: "Regular cleaning of food-contact surfaces helps reduce contamination risks."
+  },
+
+  {
+    id: 1510,
+    category: "Food Safety",
+    difficulty: "medium",
+    q: "Why should perishable foods generally not be left at room temperature for long periods?",
+    options: [
+      "Many microorganisms can multiply under suitable conditions",
+      "They automatically lose all vitamins",
+      "They become frozen",
+      "They turn into carbohydrates"
+    ],
+    answer: 0,
+    fact: "Time spent at temperatures favorable to microbial growth can increase food-safety risks."
+  },
+
+  {
+    id: 1511,
+    category: "Food Labels",
+    difficulty: "easy",
+    q: "What is an ingredient list used for on a packaged food?",
+    options: [
+      "To show the ingredients used in the product",
+      "To show the customer's favorite flavor",
+      "To show the weather during production",
+      "To show the cooking temperature at home"
+    ],
+    answer: 0,
+    fact: "An ingredient list identifies the ingredients used to make a packaged food."
+  },
+
+  {
+    id: 1512,
+    category: "Food Labels",
+    difficulty: "medium",
+    q: "Why can serving size be important when reading nutrition information?",
+    options: [
+      "Nutrient amounts are often stated relative to a specified serving",
+      "It tells you exactly how much food your body needs",
+      "It determines the food's expiry date",
+      "It identifies the manufacturer"
+    ],
+    answer: 0,
+    fact: "Nutrition information is commonly presented per serving or per 100 g/ml, so the reference amount matters when comparing products."
+  },
+
+  {
+    id: 1513,
+    category: "Food Labels",
+    difficulty: "easy",
+    q: "What does an expiry or use-by date help communicate?",
+    options: [
+      "A date related to the product's intended shelf life or safety",
+      "The exact number of calories burned by the consumer",
+      "The customer's preferred portion",
+      "The food's country of origin only"
+    ],
+    answer: 0,
+    fact: "Date markings communicate information about a product's shelf life; the exact meaning depends on the labeling system and product."
+  },
+
+  {
+    id: 1514,
+    category: "Food Labels",
+    difficulty: "medium",
+    q: "Why should consumers compare nutrition information using the same reference amount?",
+    options: [
+      "It makes comparisons more meaningful",
+      "It changes the food's ingredients",
+      "It removes all serving-size differences automatically",
+      "It guarantees one product is healthier"
+    ],
+    answer: 0,
+    fact: "Using the same reference amount, such as per 100 g, can make nutrient comparisons between products more direct."
+  },
+
+  {
+    id: 1515,
+    category: "Food Labels",
+    difficulty: "easy",
+    q: "What does the term 'allergen' refer to in food labeling?",
+    options: [
+      "A substance that can trigger an allergic reaction in susceptible people",
+      "Any ingredient that contains sugar",
+      "A type of food preservative",
+      "A food with a strong smell"
+    ],
+    answer: 0,
+    fact: "A food allergen is a substance capable of triggering an immune-mediated allergic reaction in susceptible individuals."
+  },
+
+  {
+    id: 1516,
+    category: "Nutrition",
+    difficulty: "easy",
+    q: "Which nutrient provides 4 kilocalories per gram in standard nutrition calculations?",
+    options: ["Protein", "Fat", "Alcohol", "Water"],
+    answer: 0,
+    fact: "Protein is commonly assigned 4 kcal per gram in standard Atwater energy calculations."
+  },
+
+  {
+    id: 1517,
+    category: "Nutrition",
+    difficulty: "easy",
+    q: "Which nutrient provides about 9 kilocalories per gram?",
+    options: ["Fat", "Protein", "Carbohydrate", "Fiber"],
+    answer: 0,
+    fact: "Dietary fat provides about 9 kcal per gram in standard nutrition calculations."
+  },
+
+  {
+    id: 1518,
+    category: "Nutrition",
+    difficulty: "medium",
+    q: "Which nutrient helps add bulk to the diet and supports normal bowel function?",
+    options: ["Dietary fiber", "Cholesterol", "Added sugar", "Sodium"],
+    answer: 0,
+    fact: "Dietary fiber contributes bulk and can support normal digestive and bowel function."
+  },
+
+  {
+    id: 1519,
+    category: "Nutrition",
+    difficulty: "easy",
+    q: "Which nutrient is essential for maintaining body fluids and hydration?",
+    options: ["Water", "Protein", "Iron", "Vitamin C"],
+    answer: 0,
+    fact: "Water is essential for maintaining fluid balance and supporting many physiological processes."
+  },
+
+  {
+    id: 1520,
+    category: "Nutrition",
+    difficulty: "medium",
+    q: "Which mineral is commonly associated with strong bones and teeth?",
+    options: ["Calcium", "Sodium", "Potassium", "Iodine"],
+    answer: 0,
+    fact: "Calcium is an important structural mineral in bones and teeth."
+  },
+
+  {
+    id: 1521,
+    category: "Beverages",
+    difficulty: "easy",
+    q: "Which plant is used to produce traditional black tea?",
+    options: ["Camellia sinensis", "Coffea arabica", "Theobroma cacao", "Mentha piperita"],
+    answer: 0,
+    fact: "Black tea is made from the leaves of Camellia sinensis."
+  },
+
+  {
+    id: 1522,
+    category: "Beverages",
+    difficulty: "easy",
+    q: "Which plant produces coffee beans?",
+    options: ["Coffee plant", "Tea plant", "Cacao tree", "Vanilla orchid"],
+    answer: 0,
+    fact: "Coffee beans are the seeds found inside the fruits of coffee plants."
+  },
+
+  {
+    id: 1523,
+    category: "Beverages",
+    difficulty: "medium",
+    q: "Which compound is naturally present in tea and coffee and has stimulant effects?",
+    options: ["Caffeine", "Lactose", "Gluten", "Pectin"],
+    answer: 0,
+    fact: "Caffeine is a naturally occurring stimulant found in coffee, tea, and several other plants."
+  },
+
+  {
+    id: 1524,
+    category: "Food Origins",
+    difficulty: "easy",
+    q: "Which country is traditionally associated with couscous?",
+    options: ["Morocco", "Japan", "Brazil", "Norway"],
+    answer: 0,
+    fact: "Couscous is a traditional North African food, strongly associated with countries including Morocco."
+  },
+
+  {
+    id: 1525,
+    category: "Food Origins",
+    difficulty: "medium",
+    q: "Which country is traditionally associated with pho?",
+    options: ["Vietnam", "Italy", "Greece", "Mexico"],
+    answer: 0,
+    fact: "Pho is a Vietnamese noodle soup traditionally made with broth, rice noodles, and various toppings."
+  }
+
+];
+
+function addExpandedQuestionsPart21(){
+  if(!Array.isArray(nijokExpandedQuestions21)) return;
+
+  const existingIds = new Set(
+    fullFoodQuestionBank.map(function(question){
+      return question.id;
+    })
+  );
+
+  nijokExpandedQuestions21.forEach(function(question){
+    if(!existingIds.has(question.id)){
+      fullFoodQuestionBank.push(question);
+    }
+  });
+}
+
+function reportQuestionBankPart21(){
+  const stats = getQuestionBankStats();
+
+  console.log(
+    "🌿 NIJOK Bank:",
+    stats.total,
+    "questions |",
+    stats.categories,
+    "categories"
+  );
+}
+
+addExpandedQuestionsPart21();
+reportQuestionBankPart21();
+  // PART 22
+// IDs 1526 - 1550
+// =====================================
+
+const nijokExpandedQuestions22 = [
+
+  {
+    id: 1526,
+    category: "Food Science",
+    difficulty: "easy",
+    q: "What is pasteurization mainly used for in foods such as milk?",
+    options: [
+      "Reducing harmful microorganisms through controlled heating",
+      "Removing all water from the food",
+      "Turning milk into sugar",
+      "Increasing the fat content"
+    ],
+    answer: 0,
+    fact: "Pasteurization uses controlled heat to reduce harmful microorganisms while preserving much of the food's quality."
+  },
+
+  {
+    id: 1527,
+    category: "Food Science",
+    difficulty: "medium",
+    q: "What is oxidation in food commonly associated with?",
+    options: [
+      "Chemical reactions involving oxygen or electron transfer",
+      "Only freezing food",
+      "Adding dietary fiber",
+      "Removing all minerals"
+    ],
+    answer: 0,
+    fact: "Oxidation involves chemical reactions that can contribute to changes such as rancidity and browning in foods."
+  },
+
+  {
+    id: 1528,
+    category: "Food Science",
+    difficulty: "easy",
+    q: "Why can cut fruits turn brown after exposure to air?",
+    options: [
+      "Enzymatic oxidation can occur",
+      "The fruit instantly becomes cooked",
+      "All water leaves the fruit",
+      "The fruit turns into sugar"
+    ],
+    answer: 0,
+    fact: "Enzymatic browning can occur when plant tissues are cut and exposed to oxygen."
+  },
+
+  {
+    id: 1529,
+    category: "Food Science",
+    difficulty: "medium",
+    q: "What is an emulsion?",
+    options: [
+      "A mixture of two liquids that normally do not mix, with one dispersed in the other",
+      "A completely dry powder",
+      "A frozen crystal",
+      "A pure mineral solution"
+    ],
+    answer: 0,
+    fact: "An emulsion contains droplets of one immiscible liquid dispersed throughout another."
+  },
+
+  {
+    id: 1530,
+    category: "Food Science",
+    difficulty: "medium",
+    q: "Which substance can act as an emulsifier in mayonnaise?",
+    options: ["Egg yolk", "Table salt only", "Water only", "Sugar crystals"],
+    answer: 0,
+    fact: "Egg yolk contains lecithin and other compounds that help stabilize the oil-water emulsion in mayonnaise."
+  },
+
+  {
+    id: 1531,
+    category: "Food Safety",
+    difficulty: "easy",
+    q: "Why should food handlers avoid preparing food when they have certain contagious illnesses?",
+    options: [
+      "They may transfer infectious microorganisms to food",
+      "Illness always changes the food's calories",
+      "It makes food cook faster",
+      "It increases the food's protein content"
+    ],
+    answer: 0,
+    fact: "Some illnesses can be transmitted through food if an infected person contaminates food or food-contact surfaces."
+  },
+
+  {
+    id: 1532,
+    category: "Food Safety",
+    difficulty: "easy",
+    q: "What is one purpose of keeping food covered during storage?",
+    options: [
+      "To help protect it from contamination",
+      "To increase its vitamin content",
+      "To make it sweeter",
+      "To remove all microorganisms"
+    ],
+    answer: 0,
+    fact: "Covering food helps protect it from environmental contamination and contact with other foods."
+  },
+
+  {
+    id: 1533,
+    category: "Food Safety",
+    difficulty: "medium",
+    q: "Why should refrigerator temperatures be monitored?",
+    options: [
+      "To help keep perishable foods at appropriate temperatures",
+      "To increase food sweetness",
+      "To remove all bacteria",
+      "To increase the package size"
+    ],
+    answer: 0,
+    fact: "Monitoring refrigerator temperature helps keep perishable foods under appropriate storage conditions."
+  },
+
+  {
+    id: 1534,
+    category: "Food Safety",
+    difficulty: "easy",
+    q: "Which practice helps prevent contamination from dirty hands?",
+    options: [
+      "Washing hands properly before handling food",
+      "Touching food after handling waste",
+      "Using the same gloves indefinitely",
+      "Leaving hands unwashed after handling raw food"
+    ],
+    answer: 0,
+    fact: "Proper handwashing is a basic food-safety practice that reduces the transfer of microorganisms."
+  },
+
+  {
+    id: 1535,
+    category: "Food Safety",
+    difficulty: "medium",
+    q: "Why should cleaning chemicals be stored away from food?",
+    options: [
+      "To prevent accidental chemical contamination",
+      "To increase food flavor",
+      "To improve food color",
+      "To increase nutritional value"
+    ],
+    answer: 0,
+    fact: "Separating chemicals from food helps prevent accidental contamination and exposure."
+  },
+
+  {
+    id: 1536,
+    category: "Food Labels",
+    difficulty: "easy",
+    q: "What does the word 'ingredients' on a food package refer to?",
+    options: [
+      "The substances used to make the product",
+      "The number of packages sold",
+      "The color of the package",
+      "The temperature of the store"
+    ],
+    answer: 0,
+    fact: "The ingredient list identifies the substances used in making the packaged food."
+  },
+
+  {
+    id: 1537,
+    category: "Food Labels",
+    difficulty: "medium",
+    q: "Why can the order of ingredients on a packaged food label be useful?",
+    options: [
+      "It can indicate their relative amount according to applicable labeling rules",
+      "It shows which ingredient tastes best",
+      "It gives the cooking temperature",
+      "It identifies the customer's preferred ingredient"
+    ],
+    answer: 0,
+    fact: "In many labeling systems, ingredients are listed in descending order by weight, subject to applicable rules and exceptions."
+  },
+
+  {
+    id: 1538,
+    category: "Food Labels",
+    difficulty: "easy",
+    q: "What is the purpose of allergen information on food packaging?",
+    options: [
+      "To help susceptible consumers identify relevant allergens",
+      "To show the product's cooking time",
+      "To identify the package color",
+      "To measure sweetness"
+    ],
+    answer: 0,
+    fact: "Allergen labeling helps people with food allergies identify ingredients or allergens of concern."
+  },
+
+  {
+    id: 1539,
+    category: "Food Labels",
+    difficulty: "medium",
+    q: "Why can 'per 100 g' nutrition information help compare products?",
+    options: [
+      "It provides a common reference amount",
+      "It automatically identifies the healthier product",
+      "It removes all differences between foods",
+      "It tells you the exact portion you should eat"
+    ],
+    answer: 0,
+    fact: "A common reference such as 100 g allows nutrient amounts to be compared more directly across products."
+  },
+
+  {
+    id: 1540,
+    category: "Food Labels",
+    difficulty: "easy",
+    q: "What does a barcode primarily help identify in retail systems?",
+    options: [
+      "A product",
+      "Its taste",
+      "Its nutritional effect on each person",
+      "Its cooking temperature"
+    ],
+    answer: 0,
+    fact: "Barcodes are commonly used to identify products for retail, inventory, and checkout systems."
+  },
+
+  {
+    id: 1541,
+    category: "Nutrition",
+    difficulty: "easy",
+    q: "Which nutrient is made up of amino acids?",
+    options: ["Protein", "Fat", "Starch", "Water"],
+    answer: 0,
+    fact: "Proteins are polymers made from chains of amino acids."
+  },
+
+  {
+    id: 1542,
+    category: "Nutrition",
+    difficulty: "medium",
+    q: "Which nutrient is the body's main structural material for muscles?",
+    options: ["Protein", "Water", "Sodium", "Simple sugar"],
+    answer: 0,
+    fact: "Muscle tissue contains substantial amounts of protein, which provides amino acids needed for maintenance and repair."
+  },
+
+  {
+    id: 1543,
+    category: "Nutrition",
+    difficulty: "easy",
+    q: "Which vitamin is commonly found in citrus fruits?",
+    options: ["Vitamin C", "Vitamin B12", "Vitamin D", "Vitamin K2 only"],
+    answer: 0,
+    fact: "Citrus fruits such as oranges provide vitamin C."
+  },
+
+  {
+    id: 1544,
+    category: "Nutrition",
+    difficulty: "medium",
+    q: "Which mineral is a major electrolyte involved in fluid balance?",
+    options: ["Sodium", "Iron", "Iodine", "Zinc"],
+    answer: 0,
+    fact: "Sodium is an important electrolyte involved in fluid balance and nerve and muscle function."
+  },
+
+  {
+    id: 1545,
+    category: "Nutrition",
+    difficulty: "easy",
+    q: "Which food is naturally rich in dietary fiber?",
+    options: ["Lentils", "Table sugar", "Butter", "Refined salt"],
+    answer: 0,
+    fact: "Lentils are a good source of dietary fiber as well as plant protein."
+  },
+
+  {
+    id: 1546,
+    category: "Beverages",
+    difficulty: "easy",
+    q: "Which plant is used to make green tea?",
+    options: ["Camellia sinensis", "Coffea arabica", "Cacao tree", "Sugarcane"],
+    answer: 0,
+    fact: "Green tea is made from Camellia sinensis leaves that are processed to limit oxidation."
+  },
+
+  {
+    id: 1547,
+    category: "Beverages",
+    difficulty: "medium",
+    q: "What gives coffee much of its characteristic aroma after roasting?",
+    options: [
+      "Many volatile compounds formed or released during roasting",
+      "Only table sugar",
+      "Vitamin C",
+      "Sodium chloride"
+    ],
+    answer: 0,
+    fact: "Coffee aroma comes from a complex mixture of volatile compounds produced or released during processing and roasting."
+  },
+
+  {
+    id: 1548,
+    category: "Food Origins",
+    difficulty: "easy",
+    q: "Which country is traditionally associated with ramen?",
+    options: ["Japan", "Brazil", "Greece", "Morocco"],
+    answer: 0,
+    fact: "Ramen is a major part of modern Japanese food culture, with many regional styles."
+  },
+
+  {
+    id: 1549,
+    category: "Food Origins",
+    difficulty: "medium",
+    q: "Which region is traditionally associated with couscous?",
+    options: ["North Africa", "Northern Europe", "South America", "East Asia"],
+    answer: 0,
+    fact: "Couscous has deep culinary roots in North Africa and is especially associated with Maghrebi cuisines."
+  },
+
+  {
+    id: 1550,
+    category: "Food Culture",
+    difficulty: "easy",
+    q: "Which ingredient is central to traditional Japanese sushi rice?",
+    options: ["Short-grain rice", "Wheat flour", "Cornmeal", "Oatmeal"],
+    answer: 0,
+    fact: "Sushi commonly uses specially prepared short- or medium-grain rice seasoned with vinegar, sugar, and salt."
+  }
+
+];
+
+function addExpandedQuestionsPart22(){
+  if(!Array.isArray(nijokExpandedQuestions22)) return;
+
+  const existingIds = new Set(
+    fullFoodQuestionBank.map(function(question){
+      return question.id;
+    })
+  );
+
+  nijokExpandedQuestions22.forEach(function(question){
+    if(!existingIds.has(question.id)){
+      fullFoodQuestionBank.push(question);
+    }
+  });
+}
+
+function reportQuestionBankPart22(){
+  const stats = getQuestionBankStats();
+
+  console.log(
+    "🌿 NIJOK Bank:",
+    stats.total,
+    "questions |",
+    stats.categories,
+    "categories"
+  );
+}
+
+addExpandedQuestionsPart22();
+reportQuestionBankPart22();
+  // PART 23
+// IDs 1551 - 1575
+// =====================================
+
+const nijokExpandedQuestions23 = [
+
+  {
+    id: 1551,
+    category: "Food Science",
+    difficulty: "easy",
+    q: "What is freezing mainly used for in food preservation?",
+    options: [
+      "Slowing microbial growth and chemical reactions",
+      "Removing all nutrients",
+      "Increasing the food's sugar content",
+      "Turning food directly into protein"
+    ],
+    answer: 0,
+    fact: "Freezing slows microbial growth and many chemical reactions, helping preserve food."
+  },
+
+  {
+    id: 1552,
+    category: "Food Science",
+    difficulty: "medium",
+    q: "Why can adding sugar help preserve some foods?",
+    options: [
+      "It can reduce the water available to microorganisms",
+      "It removes every microorganism",
+      "It converts bacteria into vitamins",
+      "It increases the food's water content"
+    ],
+    answer: 0,
+    fact: "High concentrations of sugar can lower water activity, making conditions less favorable for many microorganisms."
+  },
+
+  {
+    id: 1553,
+    category: "Food Science",
+    difficulty: "medium",
+    q: "Why is salt traditionally used in some food preservation methods?",
+    options: [
+      "It can reduce water availability for microorganisms",
+      "It creates protein automatically",
+      "It removes all oxygen permanently",
+      "It makes every food sterile"
+    ],
+    answer: 0,
+    fact: "Salt can reduce water activity and create conditions that inhibit the growth of many microorganisms."
+  },
+
+  {
+    id: 1554,
+    category: "Food Science",
+    difficulty: "easy",
+    q: "What is the main purpose of kneading bread dough?",
+    options: [
+      "Developing the dough's gluten structure",
+      "Removing all carbohydrates",
+      "Turning flour into oil",
+      "Making water evaporate instantly"
+    ],
+    answer: 0,
+    fact: "Kneading helps develop gluten networks in wheat-based dough, contributing to its structure and elasticity."
+  },
+
+  {
+    id: 1555,
+    category: "Food Science",
+    difficulty: "medium",
+    q: "Why does baking powder help some baked foods rise?",
+    options: [
+      "It releases carbon dioxide gas during the reaction",
+      "It removes all moisture",
+      "It turns flour into fat",
+      "It creates oxygen bubbles only"
+    ],
+    answer: 0,
+    fact: "Baking powder produces carbon dioxide gas, which can expand during baking and help leaven the food."
+  },
+
+  {
+    id: 1556,
+    category: "Food Safety",
+    difficulty: "easy",
+    q: "Why should raw poultry be handled carefully?",
+    options: [
+      "It can carry harmful microorganisms",
+      "It always contains extra sugar",
+      "It is naturally sterile",
+      "It cannot spoil"
+    ],
+    answer: 0,
+    fact: "Raw poultry can carry pathogenic microorganisms, so careful handling and proper cooking are important."
+  },
+
+  {
+    id: 1557,
+    category: "Food Safety",
+    difficulty: "medium",
+    q: "Why is it important to use clean water when washing ingredients that are intended to be eaten raw?",
+    options: [
+      "It helps reduce contamination from unsafe water",
+      "It increases the food's protein",
+      "It makes vegetables sweeter",
+      "It removes every pesticide automatically"
+    ],
+    answer: 0,
+    fact: "Using safe water for food preparation helps reduce the risk of introducing harmful microorganisms or contaminants."
+  },
+
+  {
+    id: 1558,
+    category: "Food Safety",
+    difficulty: "easy",
+    q: "What is one reason leftovers should be stored properly after a meal?",
+    options: [
+      "To reduce the risk of microbial growth",
+      "To increase their calorie content",
+      "To make them permanently safe",
+      "To remove all allergens"
+    ],
+    answer: 0,
+    fact: "Prompt and appropriate storage of leftovers helps limit conditions that support microbial growth."
+  },
+
+  {
+    id: 1559,
+    category: "Food Safety",
+    difficulty: "medium",
+    q: "Why should food-contact utensils be cleaned between different food-preparation tasks?",
+    options: [
+      "To reduce transfer of contaminants",
+      "To increase the food's sweetness",
+      "To add vitamins",
+      "To change its natural color"
+    ],
+    answer: 0,
+    fact: "Cleaning utensils between tasks helps reduce the transfer of microorganisms and other contaminants."
+  },
+
+  {
+    id: 1560,
+    category: "Food Safety",
+    difficulty: "easy",
+    q: "Which condition can encourage the growth of many microorganisms in food?",
+    options: [
+      "Suitable warmth and moisture",
+      "Complete dryness only",
+      "Extreme freezing only",
+      "Absence of all nutrients"
+    ],
+    answer: 0,
+    fact: "Many microorganisms grow well when temperature, moisture, nutrients, and other environmental conditions are suitable."
+  },
+
+  {
+    id: 1561,
+    category: "Food Labels",
+    difficulty: "easy",
+    q: "What is the main purpose of a food label?",
+    options: [
+      "To provide information about the packaged food",
+      "To guarantee that everyone will like the taste",
+      "To determine the consumer's diet",
+      "To show the weather during manufacturing"
+    ],
+    answer: 0,
+    fact: "Food labels provide information that can help consumers understand and identify a packaged food."
+  },
+
+  {
+    id: 1562,
+    category: "Food Labels",
+    difficulty: "medium",
+    q: "Why can the declared serving size affect how you interpret nutrition information?",
+    options: [
+      "The listed nutrient amounts may correspond to that serving",
+      "It changes the ingredients inside the package",
+      "It automatically reduces calories",
+      "It determines the product's brand"
+    ],
+    answer: 0,
+    fact: "Nutrition values may be declared per serving, so the stated serving size affects how those numbers are interpreted."
+  },
+
+  {
+    id: 1563,
+    category: "Food Labels",
+    difficulty: "easy",
+    q: "Which part of a packaged food label can help identify added flavoring substances?",
+    options: [
+      "Ingredient list",
+      "Barcode alone",
+      "Package weight alone",
+      "Logo"
+    ],
+    answer: 0,
+    fact: "Flavoring substances and other ingredients are generally identified through the ingredient information, subject to labeling rules."
+  },
+
+  {
+    id: 1564,
+    category: "Food Labels",
+    difficulty: "medium",
+    q: "Why is it useful to check the label before buying a packaged food?",
+    options: [
+      "It can provide information about ingredients and nutrition",
+      "It guarantees the food is suitable for every person",
+      "It tells exactly how the food will taste",
+      "It removes the need to consider portion size"
+    ],
+    answer: 0,
+    fact: "Checking labels can provide useful information about ingredients, nutrition, quantity, and other product details."
+  },
+
+  {
+    id: 1565,
+    category: "Food Labels",
+    difficulty: "easy",
+    q: "Which information is most directly useful for identifying the quantity of food inside a package?",
+    options: [
+      "Net quantity",
+      "Brand slogan",
+      "Package artwork",
+      "Product color"
+    ],
+    answer: 0,
+    fact: "Net quantity indicates the amount of product contained in the package."
+  },
+
+  {
+    id: 1566,
+    category: "Nutrition",
+    difficulty: "easy",
+    q: "Which nutrient is important for maintaining and repairing body tissues?",
+    options: ["Protein", "Water only", "Sodium only", "Sugar only"],
+    answer: 0,
+    fact: "Protein provides amino acids needed for tissue maintenance and repair."
+  },
+
+  {
+    id: 1567,
+    category: "Nutrition",
+    difficulty: "medium",
+    q: "Which nutrient category includes starches and sugars?",
+    options: ["Carbohydrates", "Proteins", "Minerals", "Vitamins"],
+    answer: 0,
+    fact: "Starches and sugars are types of carbohydrates."
+  },
+
+  {
+    id: 1568,
+    category: "Nutrition",
+    difficulty: "easy",
+    q: "Which food is a common source of healthy unsaturated fats?",
+    options: ["Almonds", "Table sugar", "Salt", "Refined starch"],
+    answer: 0,
+    fact: "Almonds contain predominantly unsaturated fats along with protein, fiber, and other nutrients."
+  },
+
+  {
+    id: 1569,
+    category: "Nutrition",
+    difficulty: "medium",
+    q: "Which nutrient helps the body absorb fat-soluble vitamins?",
+    options: ["Dietary fat", "Water only", "Fiber only", "Sodium only"],
+    answer: 0,
+    fact: "Dietary fat supports the absorption of fat-soluble vitamins such as A, D, E, and K."
+  },
+
+  {
+    id: 1570,
+    category: "Nutrition",
+    difficulty: "easy",
+    q: "Which vitamin is commonly associated with normal vision and immune function?",
+    options: ["Vitamin A", "Vitamin C only", "Vitamin B12 only", "Vitamin K only"],
+    answer: 0,
+    fact: "Vitamin A is important for normal vision, immune function, and other physiological processes."
+  },
+
+  {
+    id: 1571,
+    category: "Beverages",
+    difficulty: "easy",
+    q: "Which beverage is made from fermented milk in many traditional preparations?",
+    options: ["Lassi", "Espresso", "Black tea", "Lemonade"],
+    answer: 0,
+    fact: "Lassi is traditionally a yogurt-based beverage and can be prepared in sweet or savory styles."
+  },
+
+  {
+    id: 1572,
+    category: "Beverages",
+    difficulty: "medium",
+    q: "Which compound gives many teas their characteristic astringent sensation?",
+    options: ["Polyphenols", "Lactose", "Starch", "Sodium chloride"],
+    answer: 0,
+    fact: "Tea polyphenols, including tannin-related compounds, contribute to the astringent sensation of many teas."
+  },
+
+  {
+    id: 1573,
+    category: "Beverages",
+    difficulty: "easy",
+    q: "Which ingredient is commonly added to traditional lemonade?",
+    options: ["Lemon juice", "Coffee beans", "Tea leaves", "Cocoa powder"],
+    answer: 0,
+    fact: "Traditional lemonade commonly contains lemon juice, water, and a sweetener."
+  },
+
+  {
+    id: 1574,
+    category: "Food Origins",
+    difficulty: "easy",
+    q: "Which country is traditionally associated with tacos?",
+    options: ["Mexico", "Italy", "Japan", "Egypt"],
+    answer: 0,
+    fact: "Tacos are a traditional Mexican food with many regional varieties."
+  },
+
+  {
+    id: 1575,
+    category: "Food Origins",
+    difficulty: "medium",
+    q: "Which country is traditionally associated with kimchi?",
+    options: ["South Korea", "Spain", "Brazil", "Greece"],
+    answer: 0,
+    fact: "Kimchi is a traditional Korean fermented food with many regional and ingredient variations."
+  }
+
+];
+
+function addExpandedQuestionsPart23(){
+  if(!Array.isArray(nijokExpandedQuestions23)) return;
+
+  const existingIds = new Set(
+    fullFoodQuestionBank.map(function(question){
+      return question.id;
+    })
+  );
+
+  nijokExpandedQuestions23.forEach(function(question){
+    if(!existingIds.has(question.id)){
+      fullFoodQuestionBank.push(question);
+    }
+  });
+}
+
+function reportQuestionBankPart23(){
+  const stats = getQuestionBankStats();
+
+  console.log(
+    "🌿 NIJOK Bank:",
+    stats.total,
+    "questions |",
+    stats.categories,
+    "categories"
+  );
+}
+
+addExpandedQuestionsPart23();
+reportQuestionBankPart23();
+// PART 24 — FINAL QUESTION BATCH
+// IDs 1576 - 1600
+// =====================================
+
+const nijokExpandedQuestions24 = [
+
+  {
+    id: 1576,
+    category: "Food Science",
+    difficulty: "easy",
+    q: "What is the main purpose of drying food?",
+    options: [
+      "To reduce moisture",
+      "To increase water content",
+      "To add protein",
+      "To remove all minerals"
+    ],
+    answer: 0,
+    fact: "Drying reduces moisture and can help slow the growth of many microorganisms."
+  },
+
+  {
+    id: 1577,
+    category: "Food Science",
+    difficulty: "medium",
+    q: "What happens when yeast ferments sugars in dough?",
+    options: [
+      "Carbon dioxide and other fermentation products are produced",
+      "All water becomes oil",
+      "Protein becomes salt",
+      "The dough becomes completely sterile"
+    ],
+    answer: 0,
+    fact: "Yeast fermentation produces carbon dioxide and other compounds, helping bread dough rise."
+  },
+
+  {
+    id: 1578,
+    category: "Food Science",
+    difficulty: "easy",
+    q: "Which process uses microorganisms to transform certain foods?",
+    options: [
+      "Fermentation",
+      "Freezing",
+      "Grinding",
+      "Filtering"
+    ],
+    answer: 0,
+    fact: "Fermentation uses microorganisms or their enzymes to transform food components."
+  },
+
+  {
+    id: 1579,
+    category: "Food Science",
+    difficulty: "medium",
+    q: "Why can vinegar help preserve some foods?",
+    options: [
+      "Its acidity can make conditions less favorable for many microorganisms",
+      "It removes all nutrients",
+      "It turns food into protein",
+      "It freezes the food"
+    ],
+    answer: 0,
+    fact: "The acidity of vinegar can inhibit the growth of many microorganisms."
+  },
+
+  {
+    id: 1580,
+    category: "Food Science",
+    difficulty: "easy",
+    q: "What is caramelization?",
+    options: [
+      "Chemical browning that occurs when sugars are heated",
+      "Freezing of water",
+      "Fermentation of protein",
+      "Removal of dietary fiber"
+    ],
+    answer: 0,
+    fact: "Caramelization involves thermal decomposition and browning reactions of sugars during heating."
+  },
+
+  {
+    id: 1581,
+    category: "Food Safety",
+    difficulty: "easy",
+    q: "Why should cooked food be protected from raw food?",
+    options: [
+      "To reduce cross-contamination",
+      "To increase its sugar content",
+      "To improve its color",
+      "To make it ferment"
+    ],
+    answer: 0,
+    fact: "Separating cooked and raw foods helps prevent microorganisms from raw foods transferring to ready-to-eat foods."
+  },
+
+  {
+    id: 1582,
+    category: "Food Safety",
+    difficulty: "medium",
+    q: "Why is clean kitchen equipment important?",
+    options: [
+      "It helps reduce contamination",
+      "It increases calories",
+      "It adds vitamins",
+      "It changes the food's natural ingredients"
+    ],
+    answer: 0,
+    fact: "Clean equipment helps reduce the transfer of microorganisms and other contaminants to food."
+  },
+
+  {
+    id: 1583,
+    category: "Food Safety",
+    difficulty: "easy",
+    q: "What should generally be done before eating food with dirty hands?",
+    options: [
+      "Wash hands properly",
+      "Add salt",
+      "Freeze the hands",
+      "Add sugar"
+    ],
+    answer: 0,
+    fact: "Proper handwashing before eating helps reduce the transfer of microorganisms."
+  },
+
+  {
+    id: 1584,
+    category: "Food Safety",
+    difficulty: "medium",
+    q: "Why should food be protected from insects during storage?",
+    options: [
+      "Insects can introduce contamination",
+      "Insects increase nutrition",
+      "Insects improve freshness",
+      "Insects reduce all bacteria"
+    ],
+    answer: 0,
+    fact: "Insects can carry microorganisms and other contaminants, so protecting food from them is important."
+  },
+
+  {
+    id: 1585,
+    category: "Food Safety",
+    difficulty: "easy",
+    q: "What is one benefit of keeping a refrigerator clean?",
+    options: [
+      "It helps reduce contamination",
+      "It makes food sweeter",
+      "It increases food quantity",
+      "It removes all allergens"
+    ],
+    answer: 0,
+    fact: "Regular refrigerator cleaning helps reduce buildup of food residues and potential contamination."
+  },
+
+  {
+    id: 1586,
+    category: "Food Labels",
+    difficulty: "easy",
+    q: "Which part of a food package lists the ingredients?",
+    options: [
+      "Ingredient list",
+      "Brand logo",
+      "Barcode only",
+      "Package artwork"
+    ],
+    answer: 0,
+    fact: "The ingredient list provides information about the substances used in the product."
+  },
+
+  {
+    id: 1587,
+    category: "Food Labels",
+    difficulty: "medium",
+    q: "Why is nutrition information useful when comparing packaged foods?",
+    options: [
+      "It provides information about nutrients and energy",
+      "It guarantees taste",
+      "It determines the customer's diet",
+      "It shows the weather during manufacturing"
+    ],
+    answer: 0,
+    fact: "Nutrition information allows consumers to examine declared energy and nutrient amounts."
+  },
+
+  {
+    id: 1588,
+    category: "Food Labels",
+    difficulty: "easy",
+    q: "What does net quantity describe?",
+    options: [
+      "The amount of product in the package",
+      "The number of ingredients",
+      "The package color",
+      "The food's taste"
+    ],
+    answer: 0,
+    fact: "Net quantity indicates the amount of product contained in the package."
+  },
+
+  {
+    id: 1589,
+    category: "Food Labels",
+    difficulty: "medium",
+    q: "Why can checking the ingredient list be useful for someone avoiding a particular ingredient?",
+    options: [
+      "It can show whether that ingredient is declared in the product",
+      "It guarantees the product contains no allergens",
+      "It tells the exact amount eaten",
+      "It changes the product's recipe"
+    ],
+    answer: 0,
+    fact: "Ingredient lists can help consumers identify declared ingredients relevant to their dietary needs."
+  },
+
+  {
+    id: 1590,
+    category: "Food Labels",
+    difficulty: "easy",
+    q: "What does a barcode commonly help retailers do?",
+    options: [
+      "Identify products",
+      "Measure sweetness",
+      "Determine freshness by smell",
+      "Calculate personal nutrition needs"
+    ],
+    answer: 0,
+    fact: "Barcodes are widely used to identify products in retail and inventory systems."
+  },
+
+  {
+    id: 1591,
+    category: "Nutrition",
+    difficulty: "easy",
+    q: "Which nutrient is a major component of muscles and many body tissues?",
+    options: [
+      "Protein",
+      "Sodium",
+      "Water only",
+      "Sugar only"
+    ],
+    answer: 0,
+    fact: "Protein is an important structural and functional component of muscles and many other tissues."
+  },
+
+  {
+    id: 1592,
+    category: "Nutrition",
+    difficulty: "medium",
+    q: "Which nutrient provides about 9 kilocalories per gram?",
+    options: [
+      "Fat",
+      "Protein",
+      "Carbohydrate",
+      "Water"
+    ],
+    answer: 0,
+    fact: "Dietary fat provides approximately 9 kilocalories per gram."
+  },
+
+  {
+    id: 1593,
+    category: "Nutrition",
+    difficulty: "easy",
+    q: "Which nutrient provides about 4 kilocalories per gram?",
+    options: [
+      "Carbohydrate",
+      "Fat",
+      "Water",
+      "Minerals"
+    ],
+    answer: 0,
+    fact: "Carbohydrates provide approximately 4 kilocalories per gram."
+  },
+
+  {
+    id: 1594,
+    category: "Nutrition",
+    difficulty: "medium",
+    q: "Which vitamin is fat-soluble?",
+    options: [
+      "Vitamin D",
+      "Vitamin C",
+      "Vitamin B1",
+      "Vitamin B12"
+    ],
+    answer: 0,
+    fact: "Vitamin D is one of the fat-soluble vitamins, along with vitamins A, E, and K."
+  },
+
+  {
+    id: 1595,
+    category: "Nutrition",
+    difficulty: "easy",
+    q: "Which food is a common source of plant protein?",
+    options: [
+      "Lentils",
+      "Table sugar",
+      "Cooking oil",
+      "Salt"
+    ],
+    answer: 0,
+    fact: "Lentils are an important source of plant-based protein."
+  },
+
+  {
+    id: 1596,
+    category: "Beverages",
+    difficulty: "easy",
+    q: "Which plant provides the leaves used to make traditional tea?",
+    options: [
+      "Camellia sinensis",
+      "Coffea arabica",
+      "Cacao tree",
+      "Sugarcane"
+    ],
+    answer: 0,
+    fact: "Traditional tea comes from the leaves and buds of Camellia sinensis."
+  },
+
+  {
+    id: 1597,
+    category: "Beverages",
+    difficulty: "medium",
+    q: "Which compound is responsible for much of coffee's stimulating effect?",
+    options: [
+      "Caffeine",
+      "Lactose",
+      "Pectin",
+      "Gluten"
+    ],
+    answer: 0,
+    fact: "Caffeine is the primary stimulant naturally present in coffee."
+  },
+
+  {
+    id: 1598,
+    category: "Food Origins",
+    difficulty: "easy",
+    q: "Which country is traditionally associated with sushi?",
+    options: [
+      "Japan",
+      "Mexico",
+      "Italy",
+      "Morocco"
+    ],
+    answer: 0,
+    fact: "Sushi is a traditional Japanese food with many different regional and modern styles."
+  },
+
+  {
+    id: 1599,
+    category: "Food Origins",
+    difficulty: "medium",
+    q: "Which country is traditionally associated with falafel?",
+    options: [
+      "Egypt and the wider Middle East",
+      "Japan",
+      "Italy",
+      "Canada"
+    ],
+    answer: 0,
+    fact: "Falafel has deep roots in Middle Eastern cuisine, with Egypt often cited in discussions of its origins."
+  },
+
+  {
+    id: 1600,
+    category: "Food Culture",
+    difficulty: "easy",
+    q: "Which grain is the main staple in many traditional Indian meals?",
+    options: [
+      "Rice",
+      "Cocoa",
+      "Coffee",
+      "Almond"
+    ],
+    answer: 0,
+    fact: "Rice is a major staple food across many regions of India, alongside other grains such as wheat and millets."
+  }
+
+];
+
+function addExpandedQuestionsPart24(){
+  if(!Array.isArray(nijokExpandedQuestions24)) return;
+
+  const existingIds = new Set(
+    fullFoodQuestionBank.map(function(question){
+      return question.id;
+    })
+  );
+
+  nijokExpandedQuestions24.forEach(function(question){
+    if(!existingIds.has(question.id)){
+      fullFoodQuestionBank.push(question);
+    }
+  });
+}
+
+function reportQuestionBankPart24(){
+  const stats = getQuestionBankStats();
+
+  console.log(
+    "🌿 NIJOK Bank:",
+    stats.total,
+    "questions |",
+    stats.categories,
+    "categories"
+  );
+}
+
+addExpandedQuestionsPart24();
+reportQuestionBankPart24();
+  
   
 </script>
   
